@@ -911,9 +911,10 @@ body {
   height: 30px;
   top: 50%;
   font-size: 1.2em;
-  color:white;
   letter-spacing: 1px;
   margin-right: 20px;
+  z-index: 5;
+  color: black;
 }
 #back {
   position: relative;
@@ -921,6 +922,8 @@ body {
   height: 20px;
   top: 50%;
   margin-left: 20px;
+  z-index: 5;
+
 
 }
 
@@ -937,6 +940,7 @@ body {
 
   color: black;
   font-size: 1.3em;
+
 
 }
 
@@ -977,9 +981,6 @@ body {
 
 }
 
-#done{
-  color: black;
-}
 
 #private:checked{
   -webkit-appearance: none;
