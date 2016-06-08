@@ -914,7 +914,6 @@ body {
   color:white;
   letter-spacing: 1px;
   margin-right: 20px;
-  z-index: 4;
 }
 #back {
   position: relative;
@@ -922,8 +921,6 @@ body {
   height: 20px;
   top: 50%;
   margin-left: 20px;
-  z-index: 4;
-
 
 }
 
