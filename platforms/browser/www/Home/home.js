@@ -45,7 +45,7 @@ $(".tab3").click(function(){
 
 
 $("#send").click(function(){
-  window.location = 'Send/Send.html'
+  window.location = '../Send/Send.html'
 
 
 })
