@@ -1,7 +1,13 @@
 $(function(){
 	$('#done').click(finalize);
+	$('#back').click(function(){
+
+		alert("d")
+	});
+
   //$('#files').hide();
 	function finalize(){
+		alert("why");
 	    var user = firebase.auth().currentUser;
 	    alert('here');
 			var file = document.getElementById('selectphoto').files[0];
@@ -56,11 +62,11 @@ $(function(){
 						reposts: 0,
 						comments: null,
 						members: null,
-	          date : dateattr,
+	          date : "June 2013",
 	          lastModifiedDate : file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'
 	        });
 	        alert('uploaded image!');
-					window.location = "../Home/Home.html";
+					window.location = "../Home/home.html";
 
 	  });
 	};
