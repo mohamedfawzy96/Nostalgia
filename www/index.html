@@ -27,7 +27,8 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!--THIS LINE WAS A PROBLEM!!
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />-->
     <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
@@ -39,8 +40,23 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Hello World</title>
+    <title>Nostalgia</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script type="text/javascript">
+    var config = {
+      apiKey: "AIzaSyBJ8EWFL7H4wdN6NPJnm4Np3C0Ez5Y1gf0",
+      authDomain: "login-c37b8.firebaseapp.com",
+      databaseURL: "https://login-c37b8.firebaseio.com",
+      storageBucket: "login-c37b8.appspot.com",
+    };
+    var app= firebase.initializeApp(config);
+    var database = app.database();
+    var auth = app.auth();
+    var storage = app.storage();
+    var rootRef = firebase.database().ref();
+    var usersRef = database.ref().child('users');
+    </script>
 
 </head>
 
@@ -53,7 +69,7 @@
 
             </div>
             <div class="Subtitle">
-              <h1>Share memories with your friends</h1>
+              <!--<h1>Share memories with your friends</h1>-->
 
             </div>
 
@@ -79,12 +95,12 @@
 
             <div class="inputs">
               <div class="first">
-                <input type="text"  name="name" value=""  placeholder="Username" class="username">
+                <input type="text"  name="name" value=""  placeholder="Username" class="username" id="emailin">
 
 
               </div>
               <div class="second">
-                <input type="password" name="name" value="" class="password" placeholder="Password"  >
+                <input type="password" name="name" value="" class="password" placeholder="Password" id="passwordin">
 
 
               </div>
@@ -93,18 +109,18 @@
           <div class="RightDiv">
             <div class="inputs">
               <div class="first">
-                <input type="Email" name="name" value=""  placeholder="Email" class="email" >
+                <input type="Email" name="name" value=""  placeholder="Email" class="email" id="emailup">
 
 
 
               </div>
               <div class="second">
-                <input type="text"  name="name" value=""  placeholder="Username" class="username1">
+                <input type="text"  name="name" value=""  placeholder="Username" class="username1" id="usernameup">
 
 
               </div>
               <div class="third">
-                <input type="password" name="name" value="" placeholder="Password" class="password1" >
+                <input type="password" name="name" value="" placeholder="Password" class="password1" id="passwordup">
 
 
 
@@ -124,26 +140,30 @@
               </p>
 
             </div>
-            <br>
             <div class="go">
-              <button type="button" name="button" id="signin">Login</button>
+              <img src="img/go.svg" alt="" class="go1" id="signin" />
 
 
 
             </div>
+            <div class="feel">
+              Feel Nostalgic
 
+            </div>
 
 
           </div>
 
           <div class="RightFooter">
             <div class="go1">
-              <img src="img/go.svg" alt="" class="go1" id="signup" />
+              <img src="img/go.svg" alt="" class="go1" id="signup"/>
 
             </div>
             <br>
 
-
+            <div class="Facebook" id="facebookbtn">
+              Or login With Facebook
+            </div>
 
 
 
@@ -156,11 +176,9 @@
 
       </div>
 
+
       <script src="js/jquery-2.1.3.min.js"></script>
-
       <script src="js/index.js"></script>
-
-
 </body>
 
 </html>
