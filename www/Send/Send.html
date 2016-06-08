@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <link rel="stylesheet" type="text/css" href="Send.css" />
+    <title>Hello World</title>
+
+</head>
+
+<body>
+  <div class="full">
+
+        <div class="head">
+          <div id="back">
+            X
+
+
+          </div>
+
+
+          <div id="done">
+            Done
+
+          </div>
+
+        </div>
+         <br>
+        <div class="first sector">
+          <div class="sub">
+            Private
+
+          </div>
+          <div class="private" >
+            <input type="checkbox" name="name" value="" id="private">
+
+          </div>
+          <div id="description">
+
+          </div>
+
+        </div>
+        <hr>
+        <div class="second sector">
+          <div class="sub">
+            Effects
+
+          </div>
+          <div class="dates">
+            <div id="normal " class="time">
+              <img src="img/circle.svg" alt="" />
+
+              <p>
+                normal
+              </p>
+            </div>
+            <div id="1970" class="time">
+              <img src="img/circle.svg" alt="" />
+              <p>
+                1970
+              </p>
+            </div>
+            <div id="1980" class="time">
+              <img src="img/circle.svg" alt="" />
+              <p>
+                1980
+              </p>
+
+            </div>
+            <div id="1990" class="time">
+              <img src="img/circle.svg" alt="" />
+
+              <p>
+                1990
+              </p>
+            </div>
+            <div id="2000" class="time">
+              <img src="img/circle.svg" alt="" />
+              <p>
+                2000
+              </p>
+            </div>
+
+
+
+          </div>
+
+
+
+        </div>
+        <hr>
+
+        <div class="third sector">
+          <div class="sub">
+            Date
+
+          </div>
+          <br>
+          <div id="drop">
+            Add Date
+
+          </div>
+
+
+        </div>
+        <hr>
+        <div class="fourth sector">
+
+          <textarea name="name" rows="8" cols="40" placeholder="Make them remeber it ..." id="caption"></textarea>
+
+        </div>
+        <hr>
+        <div class="fifth sector">
+        <div class="sub">
+          Add Members
+        </div>
+        <div class="">
+          <img src="img/add.svg" alt="" />
+
+
+        </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <script src="../js/jquery-2.1.3.min.js"></script>
+
+      <script src="send.js"></script>
+
+
+</body>
+
+</html>
