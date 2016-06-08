@@ -1,8 +1,10 @@
 $(function(){
 
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         getImages();
+        aler(user)
       } else {
         // No user is signed in.
       }
@@ -44,28 +46,32 @@ $(function(){
   });
 
   function handleFileSelect(evt) {
-    window.location = "../Send/send.html";
+    window.location = "../Send/Send.html";
   };
 
   function getImages(){
-      var div = $('#body1');
-      newhtml = "";
+
       var user = firebase.auth().currentUser;
-      var imagesRef = database.ref().child('memoriespic/'+user.uid);
+      var imagesRef = database.ref().child('memories/'+user.uid);
       imagesRef.once('value',function(snapshot){
       snapshot.forEach(function (imageObj){
+
         var st = imageObj.child("name").val();
         var string = 'memories/'+user.uid + st;
         var image = storageRef.child(string);
+        var date = imageObj.child("date").val();
+        alert(user.email);
+
         //imageObj.forEach(function (child){
           //alert(child.val);
         //});
         //alert(imageObj.child("url").val());
         var url = imageObj.child("url").val();
-        newhtml += "<img src="+url+" class=\"memoriespic\">";
+        add2Memories(user.username,date,"closed",url,user.username,date,"closed",url)
+
 
       });
-      div.html(newhtml);
+      //div.html(newhtml);
       //alert('done');
     });
   };
