@@ -1091,7 +1091,17 @@ input{
 
 
 }
+#signin{
+  position: relative;
+  height: 40px;
+  width: 100px;
+  color: #ec4b57;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 3px solid #ec4b57;
+  left: 50%;
+  margin-left: -50px;
 
+}
 
 /* Portrait layout (default) */
 .app {
