@@ -1,14 +1,10 @@
 $(function(){
-	var file;
 	$('#done').click(finalize);
-  function handleFileSelect(evt) {
-    file = evt.target.files[0];
-  };
-  $("#selectphoto").click(handleFileSelect);
   //$('#files').hide();
 	function finalize(){
 	    var user = firebase.auth().currentUser;
 	    alert('here');
+			var file = document.getElementById('selectphoto').files[0];
 	    var imageRef = storageRef.child('memories/'+user.uid+'/'+file.name);
 	    var uploadTask = imageRef.put(file);
 	    uploadTask.on('state_changed', function(snapshot){
@@ -64,7 +60,8 @@ $(function(){
 	          lastModifiedDate : file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'
 	        });
 	        alert('uploaded image!');
-	        $('#body1').prepend("<img src="+uploadTask.snapshot.downloadURL+" class=\"memoriespic\">");
+					window.location = "../Home/Home.html";
+
 	  });
 	};
 });

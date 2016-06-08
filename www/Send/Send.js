@@ -60,7 +60,8 @@ $(function(){
 	          lastModifiedDate : file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'
 	        });
 	        alert('uploaded image!');
-	        $('#body1').prepend("<img src="+uploadTask.snapshot.downloadURL+" class=\"memoriespic\">");
+					window.location = "../Home/Home.html";
+
 	  });
 	};
 });
