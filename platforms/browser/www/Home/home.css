@@ -17,7 +17,8 @@ html {
  * Remove default margin.
  */
 body {
-  margin: 0; }
+  margin: 0;
+  }
 
 /* HTML5 display definitions
    ========================================================================== */
@@ -966,11 +967,15 @@ body {
   height: 4%;
   background-color: white;
 }
-
+.memoriespic{
+  height: auto;
+  width: 50%;
+}
 #body1{
   position: relative;
   width: 100%;
   height: 70%;
+  overflow: auto;
   display: block;
 }
 #body2{
@@ -1000,6 +1005,7 @@ body {
   width: 50%;
   height: 100%;
 }
+
 #send img{
   position: relative;
   width: 50px;
@@ -1009,6 +1015,15 @@ body {
   top:50%;
   margin-top: -25px;
 
+}
+#imglabel{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  left : 50%;
+  margin-left: -25px;
+  top:50%;
+  margin-top: -25px;
 }
 #TV img{
   position: relative;
@@ -1038,4 +1053,11 @@ body {
 
 #connect{
   border-left: 0.5px solid rgba(255, 255, 255, 0.1);;
+}
+
+#files{
+  display: block;
+  visibility: hidden;
+  height: 0;
+  width: 0;
 }
