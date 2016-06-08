@@ -44,7 +44,6 @@ $(function(){
   });
 
   function handleFileSelect(evt) {
-    file = evt.target.files[0]; // FileList object
     window.location = "../Send/send.html";
   };
 
@@ -71,8 +70,8 @@ $(function(){
     });
   };
 
-  $("#files").click(handleFileSelect);
-  $('#files').hide();
+  $("#sendimg").click(handleFileSelect);
+  //$('#files').hide();
   //alert('loading images now!');
   //$('#body1').remove();
 });

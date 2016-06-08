@@ -1,5 +1,11 @@
 $(function(){
+	var file;
 	$('#done').click(finalize);
+  function handleFileSelect(evt) {
+    file = evt.target.files[0];
+  };
+  $("#selectphoto").click(handleFileSelect);
+  //$('#files').hide();
 	function finalize(){
 	    var user = firebase.auth().currentUser;
 	    alert('here');
@@ -51,6 +57,9 @@ $(function(){
 	          effect : effectattr,
 	          private : privateattr,
 	          caption : captionattr,
+						reposts: 0,
+						comments: null,
+						members: null,
 	          date : dateattr,
 	          lastModifiedDate : file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'
 	        });
