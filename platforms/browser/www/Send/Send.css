@@ -1110,3 +1110,111 @@ textarea{
   height: 40px;
 
 }
+.filter{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 5;
+  display: none;
+}
+
+.effects{
+  position: absolute;
+  width: 300px;
+  height: 400px;
+  top: 50%;
+  margin-top: -200px;
+  left: 50%;
+  margin-left: -150px;
+  background-color:white;
+  z-index: 30;
+  box-shadow: 0px 0px 50px #888888;
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
+
+}
+.Orginaldate1{
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  top: 50%;
+  margin-top: -125px;
+  left: 50%;
+  margin-left: -125px;
+  background-color:white;
+  z-index: 40;
+  box-shadow: 0px 0px 50px #888888;
+  border-radius: 10px;
+  overflow-y:  scroll;
+  -webkit-overflow-scrolling: touch;
+
+  display: none;
+
+}
+
+.relative{
+
+}
+.listOfDates{
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow-y: scroll;
+  text-align: center;
+
+}
+.Orginaldate1 .sub{
+  position: relative;
+  width: 250px;
+  height: 50px;
+  background-color: white;
+  font-size: 1.6em;
+  margin-top: 0;
+  padding-top: 10px;
+  box-shadow: 0px 0px 50px #888888;
+  z-index:30;
+  border-radius: 10px;
+
+
+}
+
+li{
+
+  list-style: none;
+  font-size: 1.3em;
+  font-weight: 200;
+  letter-spacing: 2px;
+  padding-top: 10px;
+  color: #ec4b57;
+  padding-bottom: 10px;
+  border-bottom: 0.01px solid rgba(0, 0, 0, 0.3); !important;
+}
+
+.theImage{
+  position: relative;
+  width: 100%;
+  height: 50%;
+
+}
+.theImage img{
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+}
+.listOfeffects{
+  position: relative;
+  display: flex;
+  margin-top: 30px;
+
+}
+#doneEffects{
+  position: relative;
+  display: block;
+  margin: 0 auto;
+
+}
