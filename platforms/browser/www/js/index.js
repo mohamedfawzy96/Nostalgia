@@ -63,7 +63,7 @@ $(function(){
           var user = firebase.auth().currentUser;
           if (user) {
             alert('user exists and signed in '+user.email);
-            usersRef.push().set({
+            usersRef.child(user.uid).set({
               email: user.email,
               uid: user.uid,
               username: currusername
