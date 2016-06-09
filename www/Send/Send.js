@@ -1,4 +1,6 @@
 $(function(){
+	$('#selectphoto').click();
+
 	$('#done').click(finalize);
 	$('#back').click(function(){
 
@@ -31,6 +33,7 @@ $(function(){
 	  }, function(error) {
 	      alert(error);
 	  }, function() {
+
 	  		var privateattr = document.getElementById('private').checked;
 	  		var effectid = $('.effectselected').attr('id');
 	  		var effectattr;
@@ -46,10 +49,12 @@ $(function(){
 	  			case '2000effect' : effectattr = '2000';
 	  			break;
 	  		};
+
 	  		var captionattr = $('#caption').val();
 	  		var dateattr = null;
 	        var imagesRef = database.ref().child('memories');
 	        var userImagesRef = imagesRef.child(user.uid);
+
 	        userImagesRef.push().set({
 	          name: file.name,
 	          size: file.size,
@@ -63,6 +68,7 @@ $(function(){
 						comments: null,
 						members: null,
 	          date : "June 2013",
+						//owner : database.ref().child('users').child(user.uid).username,
 	          lastModifiedDate : file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'
 	        });
 	        alert('uploaded image!');
