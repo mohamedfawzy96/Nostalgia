@@ -6,16 +6,20 @@ $(function(){
     while(counter<length1){
       var url1 = listOfImages[counter]
       var date1= listOfimagesAttr[counter].child("date").val()
+      var owner1= listOfimagesAttr[counter].child("owner").val()
+
 
       if((counter+1)<length1){
         var url2 = listOfImages[counter+1]
         var date2= listOfimagesAttr[counter+1].child("date").val()
-        add2Memories("ahmed",date1,"closed",url1,"sherif",date2,"closed",url2)
+        var owner2= listOfimagesAttr[counter+1].child("owner").val()
+
+        add2Memories(owner1,date1,"closed",url1,owner2,date2,"closed",url2)
         counter++;
 
       }
       else{
-        add1Memories("@ahmed",date1,"closed",url1);
+        add1Memories(owner1,date1,"closed",url1);
       }
       counter++;
 

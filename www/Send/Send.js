@@ -1,4 +1,24 @@
 $(function(){
+	var effectid = $('.effectselected1')
+	var effectattr;
+
+	$("#private").click(function(){
+		$("#description input").click();
+
+
+	})
+
+	effectid.click(function(){
+		var id = $(this).attr("id")
+		effectattr = id
+		$(".effectselected1").removeClass("addedClasToeffect")
+		$("."+id).addClass("addedClasToeffect")
+
+
+
+
+	})
+
 	$('#selectphoto').click();
 
 	$('#done').click(finalize);
@@ -11,7 +31,14 @@ $(function(){
 	function finalize(){
 		alert("why");
 	    var user = firebase.auth().currentUser;
-	    alert('here');
+			var username ;
+
+	    alert(user.uid);
+			var users = database.ref().child("users");
+			var userInDatabase = users.child(user.uid).child("username")
+      userInDatabase.once('value',function(snapshot){
+				username = snapshot.val()
+			})
 			var file = document.getElementById('selectphoto').files[0];
 	    var imageRef = storageRef.child('memories/'+user.uid+'/'+file.name);
 	    var uploadTask = imageRef.put(file);
@@ -35,25 +62,13 @@ $(function(){
 	  }, function() {
 
 	  		var privateattr = document.getElementById('private').checked;
-	  		var effectid = $('.effectselected').attr('id');
-	  		var effectattr;
-	  		switch(effectid){
-	  			case 'normaleffect' : effectattr = 'normal';
-	  			break;
-	  			case '1970effect' : effectattr = '1970';
-	  			break;
-	  			case '1980effect' : effectattr = '1980';
-	  			break;
-	  			case '1990effect' : effectattr = '1990';
-	  			break;
-	  			case '2000effect' : effectattr = '2000';
-	  			break;
-	  		};
+
 
 	  		var captionattr = $('#caption').val();
 	  		var dateattr = null;
 	        var imagesRef = database.ref().child('memories');
 	        var userImagesRef = imagesRef.child(user.uid);
+					var date   = $("#drop").html()
 
 	        userImagesRef.push().set({
 	          name: file.name,
@@ -67,7 +82,8 @@ $(function(){
 						reposts: 0,
 						comments: null,
 						members: null,
-	          date : "June 2013",
+	          date : date,
+						owner : username,
 						//owner : database.ref().child('users').child(user.uid).username,
 	          lastModifiedDate : file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'
 	        });
