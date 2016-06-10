@@ -11,13 +11,11 @@ $(function(){
         var url2 = listOfImages[counter+1]
         var date2= listOfimagesAttr[counter+1].child("date").val()
         add2Memories("ahmed",date1,"closed",url1,"sherif",date2,"closed",url2)
+        counter++;
 
       }
       else{
         add1Memories("@ahmed",date1,"closed",url1);
-
-        break;
-
       }
       counter++;
 
