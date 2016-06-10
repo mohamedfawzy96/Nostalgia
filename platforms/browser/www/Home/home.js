@@ -1,5 +1,42 @@
 $(function(){
 
+  function fillMemoriesPanel(listOfImages,listOfimagesAttr){
+    var length1 = listOfImages.length;
+    var counter = 0;
+    while(counter<length1){
+      var url1 = listOfImages[counter]
+      var date1= listOfimagesAttr[counter].child("date").val()
+
+      if((counter+1)<length1){
+        var url2 = listOfImages[counter+1]
+        var date2= listOfimagesAttr[counter+1].child("date").val()
+        add2Memories("ahmed",date1,"closed",url1,"sherif",date2,"closed",url2)
+
+      }
+      else{
+        add1Memories("@ahmed",date1,"closed",url1);
+
+        break;
+
+      }
+      counter++;
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+  }
+    var listOfimagesAttr = new Array();
+    var listOfImages = new Array();
+
 
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -60,17 +97,20 @@ $(function(){
         var string = 'memories/'+user.uid + st;
         var image = storageRef.child(string);
         var date = imageObj.child("date").val();
-        alert(user.email);
 
         //imageObj.forEach(function (child){
           //alert(child.val);
         //});
         //alert(imageObj.child("url").val());
         var url = imageObj.child("url").val();
-        add2Memories(user.username,date,"closed",url,user.username,date,"closed",url)
+        listOfimagesAttr.push(imageObj);
+        listOfImages.push(url);
+        alert(user.email)
+
 
 
       });
+      fillMemoriesPanel(listOfImages,listOfimagesAttr)
       //div.html(newhtml);
       //alert('done');
     });
