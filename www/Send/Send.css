@@ -949,9 +949,13 @@ body {
   position: relative;
   width: 100%;
   height: 16%;
-  margin-top: 10px;
-  
 
+}
+.first{
+  height: 13%;
+}
+.second{
+  height: 19%;
 }
 .sub{
   position: relative;
