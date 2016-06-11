@@ -2,14 +2,28 @@ $("#doneEffects").click(function(){
   $(".effects").fadeOut();
   $(".filter").fadeOut();
 
-})
 
+})
+$("#doneMembers").click(function(){
+  $(".members").fadeOut();
+  $(".filter").fadeOut();
+
+
+})
 $(".filter").click(function(){
   $(".effects").fadeOut();
   $(".Orginaldate1").fadeOut();
+  $(".members").fadeOut();
+
 
 
   $(".filter").fadeOut();
+
+
+})
+$("#addMember").click(function(){
+  $(".members").fadeIn();
+  $(".filter").fadeIn();
 
 })
 
@@ -25,7 +39,7 @@ $("#drop").click(function(){
   $(".filter").fadeIn();
 
 })
-$("li").click(function(){
+$(".listOfDates li").click(function(){
   $(".Orginaldate1").fadeOut();
   $(".filter").fadeOut();
   $("#drop").html($(this).html())
