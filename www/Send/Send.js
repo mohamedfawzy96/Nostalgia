@@ -68,9 +68,8 @@ $(function(){
 	  		var dateattr = null;
 	        var imagesRef = database.ref().child('memories');
 	        var userImagesRef = imagesRef.child(user.uid);
-					var date   = $("#drop").html()
-
-	        userImagesRef.push().set({
+					var date   = $("#drop").html();
+	        /*userImagesRef.push().set({
 	          name: file.name,
 	          size: file.size,
 	          type: file.type || 'n/a',
@@ -86,8 +85,12 @@ $(function(){
 						owner : username,
 						//owner : database.ref().child('users').child(user.uid).username,
 	          lastModifiedDate : file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'
-	        });
-	        alert('uploaded image!');
+	        });*/
+					var newmemory = new Memory(file.name, file.size, file.type, 'image',
+					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
+					null, null, date, username, (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
+					userImagesRef.push().set(newmemory);
+					alert('uploaded image!');
 					window.location = "../Home/home.html";
 
 	  });

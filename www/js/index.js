@@ -63,11 +63,13 @@ $(function(){
           var user = firebase.auth().currentUser;
           if (user) {
             alert('user exists and signed in '+user.email);
-            usersRef.child(user.uid).set({
+            /*usersRef.child(user.uid).set({
               email: user.email,
               uid: user.uid,
               username: currusername
-            });
+            });*/
+            var newuser = new User(user.email, user.uid, currusername, [], [], [], [], [], [], null);
+            usersRef.child(user.uid).set(newuser);
           } else {
             alert('null user!!');
           }
