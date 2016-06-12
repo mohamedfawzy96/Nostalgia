@@ -25,6 +25,14 @@
     // 'load', 'deviceready', 'offline', and 'online'.
 
 $(function(){
+    if(firebase.auth().currentUser){
+      window.location = "Home/home.html";
+      alert(firebase.auth().currentUser.email);
+    }
+    else {
+      alert(firebase.auth().currentUser);
+      alert('null user');
+    }
 
    document.addEventListener('deviceready', this.onDeviceReady, false);
     $(".Signup").click(function(){
@@ -63,13 +71,12 @@ $(function(){
           var user = firebase.auth().currentUser;
           if (user) {
             alert('user exists and signed in '+user.email);
-            /*usersRef.child(user.uid).set({
-              email: user.email,
-              uid: user.uid,
-              username: currusername
-            });*/
             var newuser = new User(user.email, user.uid, currusername, [], [], [], [], [], [], null);
+
             usersRef.child(user.uid).set(newuser);
+            usersRef.child(user.uid).child("posted").child("0").set("hello");
+            usersRef.child(user.uid).child("member").child("0").set("hello");
+            window.location = "Home/home.html"
           } else {
             alert('null user!!');
           }

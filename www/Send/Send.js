@@ -1,23 +1,27 @@
+$(window).load(function(){
+		$('#selectphoto').trigger('click');
+});
 $(function(){
+	alert('ready');
+
+	$('#selectphoto').trigger('click');
+	$('#selectphoto').click();
+	$("#description input").click();
+	$('#description input').trigger("click");
 	var effectid = $('.effectselected1')
-	var effectattr;
+	var effectattr="normal";
 
 	$("#private").click(function(){
-		$("#description input").click();
+		$('#selectphoto').trigger('click');
 
-
-	})
+	});
 
 	effectid.click(function(){
 		var id = $(this).attr("id")
 		effectattr = id
 		$(".effectselected1").removeClass("addedClasToeffect")
 		$("."+id).addClass("addedClasToeffect")
-
-
-
-
-	})
+	});
 
 	$('#selectphoto').click();
 
@@ -27,20 +31,56 @@ $(function(){
 		alert("d")
 	});
 
-  //$('#files').hide();
-	function finalize(){
-		alert("why");
-	    var user = firebase.auth().currentUser;
-			var username ;
+	function addmembers(user, id){
+	  var html = "<li rel="+id+">"+
+	    "<div id=\"user\"  >"+
+	      "<p>"+
+	        user
+	        +
+	      "</p>"
+	      +
+	    "</div>"
+	    +
+	    "<div class=\"checking\">"
+	    +  "<input type=\"checkbox\" name=\"name\" id=\"added\" >"
+	    +
+	    "</div>"
+	    +
 
-	    alert(user.uid);
+	  "</li>"
+
+	  $(".content").append(html);
+	};
+
+	$("#addMember").click(function(){
+		if($(this).attr("class")=="notonce"){
+			$(this).attr("class","once");
+			getMembers();
+			//alert($(this).attr("class"));
+		}
+	});
+	var membersArray = new Array();
+
+	function getMembers(){
+		var users = database.ref().child("users");
+		users.once('value', function(usersSnap){
+			usersSnap.forEach(function(user){
+				//alert(user.child("email").val());
+				addmembers(user.child("username").val(), user.child("uid").val());
+			});
+		});
+	};
+
+	function finalize(){
+	    var user = firebase.auth().currentUser;
+			var username;
 			var users = database.ref().child("users");
-			var userInDatabase = users.child(user.uid).child("username")
+			var userInDatabase = users.child(user.uid).child("username");
       userInDatabase.once('value',function(snapshot){
-				username = snapshot.val()
-			})
+				username = snapshot.val();
+			});
 			var file = document.getElementById('selectphoto').files[0];
-	    var imageRef = storageRef.child('memories/'+user.uid+'/'+file.name);
+	    var imageRef = storageRef.child('memories/'+file.name);
 	    var uploadTask = imageRef.put(file);
 	    uploadTask.on('state_changed', function(snapshot){
 	        switch (snapshot.state) {
@@ -60,39 +100,77 @@ $(function(){
 	  }, function(error) {
 	      alert(error);
 	  }, function() {
-
 	  		var privateattr = document.getElementById('private').checked;
-
-
 	  		var captionattr = $('#caption').val();
 	  		var dateattr = null;
 	        var imagesRef = database.ref().child('memories');
 	        var userImagesRef = imagesRef.child(user.uid);
 					var date   = $("#drop").html();
-	        /*userImagesRef.push().set({
-	          name: file.name,
-	          size: file.size,
-	          type: file.type || 'n/a',
-	          filetype: 'image',
-	          url: uploadTask.snapshot.downloadURL,
-	          effect : effectattr,
-	          private : privateattr,
-	          caption : captionattr,
-						reposts: 0,
-						comments: null,
-						members: null,
-	          date : date,
-						owner : username,
-						//owner : database.ref().child('users').child(user.uid).username,
-	          lastModifiedDate : file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'
-	        });*/
+
+					$( ".content li" ).each(function( index ) {
+						//console.log( index + ": " + $( this ).text() );
+						var chkbx = $(this).find("input:checkbox");
+						//alert(chkbx.prop("checked"));
+						if(chkbx.prop("checked")){
+							//alert($(this).attr('rel'));
+							membersArray.push($(this).attr('rel'));
+						}
+					});
+					//alert(membersArray);
+
 					var newmemory = new Memory(file.name, file.size, file.type, 'image',
 					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
 					null, null, date, username, (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
-					userImagesRef.push().set(newmemory);
-					alert('uploaded image!');
-					window.location = "../Home/home.html";
+					var key = imagesRef.push();
+					alert(membersArray.length);
+
+					key.set(newmemory);
+					//alert(key);
+
+					for (var i = 0; i < membersArray.length; i++) {
+						//alert(membersArray[i]);
+						key.child("members").child(i).set(membersArray[i]);
+						var index = membersArray[i];
+						var ref = database.ref().child("users").child(membersArray[i]).once('value',
+					function(memberToSnap){
+						var key3 = key +'';
+						database.ref().child("users").child(index).child("member").once('value',function(snapshot){
+							alert(memberToSnap.child("email").val());
+							alert(snapshot.numChildren());
+							key3 = key +'';
+								var num = snapshot.numChildren();
+								//database.ref().child("users").child(index).child("member").push().set(key3);
+								if(snapshot.child("0").val()=="hello"){
+									database.ref().child("users").child(index).child("member").child(0).set(key3);
+								}
+									else{
+									database.ref().child("users").child(index).child("member").child(num).set(key3);
+								}
+						});
+
+
+					}).then(function(){
+						alert("success");
+
+					});
+					};
+					users.child(user.uid).child("posted").once('value',function(snapshot){
+						alert(snapshot.numChildren());
+						key2 = key +'';
+							var num = snapshot.numChildren();
+							if(snapshot.child("0").val()=="hello"){
+								users.child(user.uid).child("posted").child(0).set(key2);
+							}
+							else{
+								users.child(user.uid).child("posted").child(num).set(key2);
+							}
+					}).then(function(){
+						window.location = "../Home/home.html";
+					});
+
 
 	  });
 	};
+
+
 });
