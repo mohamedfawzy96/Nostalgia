@@ -177,6 +177,8 @@ function add1Memories(firstName,firstDate,firstIcon,image1,uid){
 
 
     }
+  
+
 
 
 
