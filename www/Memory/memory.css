@@ -17,7 +17,8 @@ html {
  * Remove default margin.
  */
 body {
-  margin: 0; }
+  margin: 0;
+  }
 
 /* HTML5 display definitions
    ========================================================================== */
@@ -889,469 +890,244 @@ body {
     padding:0px;
     width:100%;
 }
-.full{
+.fullScreen{
   position: fixed;
-  top:0;
+  top: 0;
   bottom: 0;
   right: 0;
   left: 0;
 }
-#title{
-  position: relative;
-  width: 70%;
-  height: 100%;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  font-size: 1.3em;
-}
-
-#done{
-  position: relative;
-  height: 30px;
-  top: 50%;
-  font-size: 1.2em;
-  letter-spacing: 1px;
-  margin-right: 20px;
-  z-index: 5;
-  color: black;
-}
-#back {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  top: 50%;
-  margin-left: 20px;
-  z-index: 5;
-
-
-}
-
-
 
 .head{
   position: relative;
-  width:100%;
-  height: 12%;
-  display: flex;
-  justify-content: space-Between;
-  border-bottom: 0.2px solid rgba(0, 0, 0, 0.1);;
-  box-shadow: 0px -16px 50px #888888;
+  height: 9%;
 
-  color: black;
+  width: 100%;
+  box-shadow: 0px 0px 20px #888888;
+  text-align: center;
+
+}
+#title{
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+#title p{
   font-size: 1.3em;
-
+  padding-top: 3px;
 
 }
 
+.card{
+  position: relative;
+  width: 100%;
+  height: 18%;
+  margin-top: 20px;
+  display: flex;
+  box-shadow: 0px 0px 20px #888888;
+  overflow: hidden;
+
+}
+#numMembers{
+  display: block;
+}
+#numReposts{
+  display: block;
+
+
+}
+.imgMemory{
+  position: relative;
+  width: 35%;
+  height: 100%;
+=}
+.imgMemory img{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.info{
+  position: relative;
+  width: 75%;
+  height: 100%;
+}
 
 .sector{
   position: relative;
+  display: flex;
   width: 100%;
-  height: 16%;
+  height: 15%;
+  border-bottom: 0.2px solid rgba(0, 0, 0, 0.1);
+  padding: 3px;
+}
+.caption1{
+  height: auto;
+  border: 0;
+}
+.caption1 .text{
+  width: 80%;
+}
+.caption1 .icon{
+}
+
+.icon{
+  position: relative;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
 
 }
-.first{
-  height: 13%;
+.icon2{
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  background-color: #EC4B57;
+  border-radius: 50%;
+  top: 50%;
+  margin-top: -2px;
+  margin-left: 2px;
+
 }
-.second{
-  height: 19%;
+.icon img{
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+}
+
+.interactions{
+  position: relative;
+  display: flex;
+  text-align: center;
+  margin-top: 25px;
+  width: 100%;
+  height: 40px;
+
+  box-shadow: 0px 0px 20px #888888;
+
+
 }
 .sub{
   position: relative;
-  text-align: center;
-  color: #4d4d4d;
-  font-size: 1.2em;
-  font-weight: 100;
-
+  display: block;
+  margin-top: -3px;
 }
- #private{
-   -webkit-appearance: none;
-   background-image: url("img/private2.svg");
-   background-repeat: no-repeat;
-   background-size: contain;
- 	padding: 9px;
- 	display: inline-block;
- 	position: relative;
-  width: 60px;
-  height: 60px;
-  left: 50%;
-  margin-left: -25px;
-  outline:0px !important;
-  border: 0;
-  margin-bottom: 0;
-
-
-
-
-
-}
-
-
-#private:checked{
-  -webkit-appearance: none;
-  background-image: url("img/public2.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
- padding: 9px;
- display: inline-block;
- position: relative;
- width: 60px;
- height: 60px;
- left: 50%;
- margin-left: -33px;
- outline:0px !important;
- border: 0;
- background-color: white;
- margin-bottom: 0;
-
-
-
-
-
-}
-#description{
-  text-align: center;
-}
-hr{
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.dates{
+.sector2{
   position: relative;
-  height: 70%;
-  display: flex;
-}
-.timeline{
-  position: absolute;
-  width: 80%;
-  top: 20%;
-  margin: 0 auto;
-
-}
- p{
-  text-align: center;
-  color: #808080;
-
-
-}
-.time{
-  width: 20%;
+  width: 33%;
   height: 100%;
-}
-.time img{
-  position: relative;
-  display: block;
-  width: 20px;
-  height: 20px;
-  margin: 0 auto;
-  top: 70%;
-  margin-top: -10px;
-  transition: all 0.5s ease-in-out;
-
-}
-
-
-.addedClasToeffect{
-  width: 40px !important;
-  height: 40px !important;
-  margin: 0 auto;
-  top: 70% !important;
-  margin-top: -20px !important;
-
-}
-.img2{
-  position: relative;
-  width: 100%;
-
-  background-color: green;
-}
-.img2 img{
-  position: absolute;
-  display: block;
-  width: 40px;
-  height: 40px;
-
-  border-radius: 50%;
-  left: 50%;
-  margin-left: -20px;
-  top: 50%;
-  margin-top: -20px;
-
-
-}
-
-#drop{
-  position: relative;
-  width: 120px;
-  height: 25px;
-  border: 3px solid #649a8f;
-  left: 50%;
-  margin-left: -60px;
-  border-radius: 5px;
+  color: #EC4B57;
   text-align: center;
-  line-height: 25px;
-  font-size: 1.3em;
-  color: #ec4b57;
+
 }
-textarea{
+
+.sector2 img{
   position: relative;
-  display: block;
-  width: 70%;
-  height: 70px;
-  margin: 0 auto;
+  height: 20px;
+  width: 20px;
   margin-top: 10px;
-  resize: none;
-  border: 0.5px solid #649a8f;
+  box-shadow: 0px 0px 2px #888888;
 
 
 }
-.fifth{
-  position: fixed;
-  bottom: 0;
-  top: 87%;
-  left: 0;
-  right: 0;
-
-
-
-
-}
-
- .fifth img{
+.verticalLine {
   position: relative;
-  display: block;
-  margin: 0 auto;
-  width: 40px;
-  height: 40px;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    height: 40px;
 
 }
-.filter{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 5;
-  display: none;
-}
-
-.effects{
-  position: absolute;
-  width: 300px;
-  height: 400px;
-  top: 50%;
-  margin-top: -200px;
-  left: 50%;
-  margin-left: -150px;
-  background-color:white;
-  z-index: 30;
-  box-shadow: 0px 0px 50px #888888;
-  border-radius: 10px;
-  overflow: hidden;
-  display: none;
-
-}
-.Orginaldate1{
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  top: 50%;
-  margin-top: -125px;
-  left: 50%;
-  margin-left: -125px;
-  background-color:white;
-  z-index: 40;
-  box-shadow: 0px 0px 50px #888888;
-  border-radius: 10px;
-  overflow-y:  scroll;
-  -webkit-overflow-scrolling: touch;
-
-  display: none;
-
-}
-
-.relative{
-
-}
-.listOfDates{
-  position: relative;
+.chat{
   width: 100%;
   height: auto;
+  margin-top: 10px;
+  box-shadow: 0px 0px 5px #888888;
+
+
+}
+.messaging{
+  position: relative;
+  height: 75%;
+  width: 100%;
   overflow-y: scroll;
-  text-align: center;
-
-}
-.Orginaldate1 .sub{
-  position: relative;
-  width: 250px;
-  height: 50px;
-  background-color: white;
-  font-size: 1.6em;
-  margin-top: 0;
-  padding-top: 10px;
-  box-shadow: 0px 0px 50px #888888;
-  z-index:30;
-  border-radius: 10px;
-
-
-}
-
-li{
-
-  list-style: none;
-  font-size: 1.3em;
-  font-weight: 200;
-  letter-spacing: 2px;
-  padding-top: 10px;
-  color: #ec4b57;
-  padding-bottom: 10px;
-  border-bottom: 0.01px solid rgba(0, 0, 0, 0.3); !important;
-}
-
-.theImage{
-  position: relative;
-  width: 100%;
-  height: 50%;
-
-}
-.theImage img{
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-}
-.listOfeffects{
-  position: relative;
-  display: flex;
-  margin-top: 30px;
-
-}
-#doneEffects{
-  position: relative;
-  display: block;
-  margin: 0 auto;
-
-}
-
-.members{
-  position: fixed;
-  width: 100%;
-  height: 400px;
-  top: 50%;
-  margin-top: -200px;
-  background-color:white;
-  z-index: 30;
-  box-shadow: 0px 0px 50px #888888;
-  border-radius: 3px;
-  display: none;
-
-}
-
-.search{
-  position: relative;
-  width: 100%;
-  height: 12%;
-  background-color: rgba(0, 0, 0, 0.05);
-
-
-}
-.search input{
-  position: relative;
-  display: block;
-  height: 30px;
-  width: 90%;
-  top: 20%;
-  margin: 0 auto;
-  border-radius: 20px;
-
-
-
-
-
-}
-.content{
-  position: relative;
-  width: 100%;
-  height: 88%;
-  overflow-y: scroll;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 
+
 }
-.content li{
+.subtitle{
+  width: 100%;
+  height: 10%;
   position: relative;
-  color: black;
-  height: 30px;
-  font-size: 1em;
-  font-weight: bold !important;
+  text-align: center;
+  color: #666666;
+  padding-top: 10px;
+  font-size: 1.2em;
+  font-weight: 100;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);;
+
+}
+.inputs{
+  position: relative;
   display: flex;
-  justify-content: space-between;
-  box-sizing: padding-box;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-
-
-}
-.content p{
-  color: black;
-  font-size: 1.3em;
-  font-weight: 400 !important;
-  margin-left: 20px;
-  line-height: 30px;
-
-}
-#added{
-  position: relative;
-  -webkit-appearance: none;
-  background-image: url("img/add.svg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  display: inline-block;
- position: relative;
- width: 30px;
- height: 30px;
- outline:0px !important;
- border: 0;
- margin-bottom: 0;
- margin-right:15px;
-
-
-
-
-
-
-}
-
-
-
-#added:checked{
- -webkit-appearance: none;
- background-image: url("img/added1.svg");
- background-repeat: no-repeat;
- background-size: 100% 100%;
- display: inline-block;
-
-position: relative;
-width: 20px;
-height: 20px;
-margin-top: 7px;
-
-outline:0px !important;
-border: 0;
-background-color: white;
-border-radius: 5px;
-margin-bottom: 0;
-
-
-
-
-
-}
-.finish button{
+  width: 100%;
+  height: 25%;
+  justify-content: space-around;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   background-color: white;
-  display: block;
-  margin: 0 auto;
-  box-shadow: 0px 8px 50px #888888;
 
+
+}
+.message1{
+  position: relative;
+  height: 100%;
+  width: 70%;
+
+}
+ input{
+   position: relative;
+   transform: scaleY(0.8);
+   width: 90%;
+   margin-left: 5px;
+   border-radius: 20px !important;
+
+
+
+
+
+}
+.send1{
+  position: relative;
+  height: 100%;
+  width: 20%;
+  color: #EC4B57;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+}
+li{
+  position: relative;
+  height: auto;
+  width: 100%;
+  list-style: none;
+
+  padding-top: 10px;
+  padding-left: 10px;
+
+
+
+}
+#userInChat{
+  font-weight: bold;
+}
+
+button{
+  transform: scale(0.8);
+  color: #EC4B57;
+
+
+}
+.margintop{
+  position: relative;
+  height: 15px;
 }

@@ -1,25 +1,44 @@
 $(function(){
+  memoriesArray = new Array();
+  urlArray = new Array();
 
-  function fillMemoriesPanel(listOfImages,listOfimagesAttr){
+  function fillMemoriesPanel(listOfImages){
     var length1 = listOfImages.length;
+
+    alert(length1)
     var counter = 0;
     while(counter<length1){
-      var url1 = listOfImages[counter]
-      var date1= listOfimagesAttr[counter].child("date").val()
-      var owner1= listOfimagesAttr[counter].child("owner").val()
-      if((counter+1)<length1){
-        var url2 = listOfImages[counter+1]
-        var date2= listOfimagesAttr[counter+1].child("date").val()
-        var owner2= listOfimagesAttr[counter+1].child("owner").val()
+      listOfImages[counter].once('value', function(data){
+        var url1 = data.child("url").val()
+        var date1= data.child("date").val()
+        var owner1= data.child("owner").val()
+        alert(counter + " counter")
+        /*if((counter+1)<length1){
+          alert("hi bye ")
 
-        add2Memories(owner1,date1,"closed",url1,owner2,date2,"closed",url2)
+          listOfImages[counter+1].once('value', function(data){
+            var url2 = data.child("url").val()
+            var date2= data.child("date").val()
+            var owner2= data.child("owner").val()
+            add2Memories(owner1,date1,"closed",url1,owner2,date2,"closed",url2)
+
+
+            })
+
+
+        }
+        else{
+          add1Memories(owner1,date1,"closed",url1);
+        }*/
+        add1Memories(owner1,date1,"closed",url1);
+
+
+
+        })
+
         counter++;
 
-      }
-      else{
-        add1Memories(owner1,date1,"closed",url1);
-      }
-      counter++;
+
 
     }
   };
@@ -72,33 +91,40 @@ $(function(){
       var userInDatabase = users.child(user.uid);
       var imagesRef = userInDatabase.child("posted");
       imagesRef.once('value',function(snapshot){
-        memoriesArray = new Array();
-        urlArray = new Array();
+
         memorySnap = snapshot.val();
-        //alert(snapshot);
-        //console.log(memorySnap);
-        alert(memorySnap);
+        alert(memorySnap + " memorySnap");
+        console.log(memorySnap);
+        if(memorySnap != "hello"){
         memorySnap.forEach(function(memorySnapshot){
           alert(memorySnapshot);
           var res = memorySnapshot.split("/");
           var memory = res.pop();
-          //alert(memory);
+          alert(memory +" di memory");
               var url ="";
               var imagesRef = database.ref().child('memories');
               var imageRef = imagesRef.child(memory);
-              imageRef.child("url").once('value', function(data){
-                url = data.val();
-                //alert(url);
-                while (!url) {
-                  console.log('wait');
-                }
+            /*  imageRef.once('value', function(data){
+                url = data.child("url").val()
+                memoriesArray.push(data);
                 urlArray.push(url);
-                memoriesArray.push(snapshot);
+
               });
+                  */
+                  if(imageRef != null){
+                  memoriesArray.push(imageRef);
+                }
+
+
+
+
         });
-        alert(urlArray.length);
-        alert(memoriesArray.length);
-        fillMemoriesPanel(urlArray, memoriesArray);
+      }
+        alert(memoriesArray.length + " s")
+        fillMemoriesPanel(memoriesArray)
+
+
+
       });
   };
 
