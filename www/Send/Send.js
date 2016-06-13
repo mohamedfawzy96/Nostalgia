@@ -125,6 +125,7 @@ $(function(){
 					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
 					null, null, date, username, (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
 					var key = imagesRef.push();
+					key.child("comments").child("0").set("hello");
 					alert(membersArray.length);
 
 					key.set(newmemory);
@@ -157,23 +158,27 @@ $(function(){
 
 					});
 					};
-					users.child(user.uid).child("posted").once('value',function(snapshot){
-						alert(snapshot.numChildren());
-						key2 = key +'';
-							var num = snapshot.numChildren();
-							if(snapshot.child("0").val()=="hello"){
-								users.child(user.uid).child("posted").child(0).set(key2);
-							}
-							else{
-								users.child(user.uid).child("posted").child(num).set(key2);
-							}
+					users.child(user.uid).once('value', function(usersnap){
+						var num = usersnap.child("memberposted").numChildren();
+						users.child(user.uid).child("memberposted").child(num).set(key+'');
 					}).then(function(){
-						window.location = "../Home/home.html";
+						users.child(user.uid).child("posted").once('value',function(snapshot){
+							alert(snapshot.numChildren());
+							key2 = key +'';
+								var num = snapshot.numChildren();
+								if(snapshot.child("0").val()=="hello"){
+									users.child(user.uid).child("posted").child(0).set(key2);
+								}
+								else{
+									users.child(user.uid).child("posted").child(num).set(key2);
+								}
+						}).then(function(){
+							window.location = "../Home/home.html";
+						});
 					});
 
 
 	  });
 	};
-
 
 });
