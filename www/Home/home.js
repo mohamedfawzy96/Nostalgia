@@ -1,12 +1,11 @@
 
 
 $(function(){
-
-$(document).on('click', '.box', function() {
-  window.location = '../Memory/memory.html?somval=' + $(this).attr('rel')
-
-
-})
+  var selectedimg;
+  $(document).on('click', '.box', function() {
+    selectedimg = $(this).attr('rel');
+    window.location = '../Memory/memory.html?somval=' + $(this).attr('rel');
+  });
 
   memoriesArray = new Array();
   urlArray = new Array();
