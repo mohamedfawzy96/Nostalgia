@@ -5,14 +5,14 @@ $(function(){
   function fillMemoriesPanel(listOfImages){
     var length1 = listOfImages.length;
 
-    alert(length1)
     var counter = 0;
-    while(counter<length1){
+        while(counter<length1){
       listOfImages[counter].once('value', function(data){
+        console.log(data.key);
+        var uid = data.key
         var url1 = data.child("url").val()
         var date1= data.child("date").val()
         var owner1= data.child("owner").val()
-        alert(counter + " counter")
         /*if((counter+1)<length1){
           alert("hi bye ")
 
@@ -30,7 +30,7 @@ $(function(){
         else{
           add1Memories(owner1,date1,"closed",url1);
         }*/
-        add1Memories(owner1,date1,"closed",url1);
+        add1Memories(owner1,date1,"closed",url1,uid);
 
 
 
@@ -85,7 +85,6 @@ $(function(){
   var memoriesArray = new Array();
   var urlArray = new Array();
   function getImages(){
-      alert("get");
       var user = firebase.auth().currentUser;
       var users = database.ref().child("users");
       var userInDatabase = users.child(user.uid);
@@ -93,14 +92,11 @@ $(function(){
       imagesRef.once('value',function(snapshot){
 
         memorySnap = snapshot.val();
-        alert(memorySnap + " memorySnap");
         console.log(memorySnap);
         if(memorySnap != "hello"){
         memorySnap.forEach(function(memorySnapshot){
-          alert(memorySnapshot);
           var res = memorySnapshot.split("/");
           var memory = res.pop();
-          alert(memory +" di memory");
               var url ="";
               var imagesRef = database.ref().child('memories');
               var imageRef = imagesRef.child(memory);
@@ -120,7 +116,6 @@ $(function(){
 
         });
       }
-        alert(memoriesArray.length + " s")
         fillMemoriesPanel(memoriesArray)
 
 

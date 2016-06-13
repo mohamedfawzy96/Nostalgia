@@ -74,9 +74,9 @@ function add2Memories(firstName,firstDate,firstIcon,image1,secondName,secondDate
 }
 
 
-function add1Memories(firstName,firstDate,firstIcon,image1){
+function add1Memories(firstName,firstDate,firstIcon,image1,uid){
   var divs ="<li>"+
-    "<div id=\"box1\" class=\"box\" style='background-image:url("+image1+")' rel=\"first-child\">"
+    "<div id=\"box1\" class=\"box\" style='background-image:url("+image1+")' rel="+uid+">"
     +
       "<div class=\"filter\">"
       +
@@ -151,7 +151,6 @@ function add1Memories(firstName,firstDate,firstIcon,image1){
 
     var li = $("li")
     var length = li.length
-    alert(length)
     if(length>0){
       var lastLi = li.eq(length-1)
       var child =lastLi.children(".box2")
@@ -160,8 +159,9 @@ function add1Memories(firstName,firstDate,firstIcon,image1){
         child.css({"opacity":"1"})
 
         child.css({"background-image":"url("+image1+")"})
-        child.children(".inside").children("#sender2").html(firstName)
+        child.children(".inside").children("#sender2").html("@"+firstName)
         child.children(".inside").children(".date").html(firstDate)
+        child.attr('rel',uid)
 
 
 
