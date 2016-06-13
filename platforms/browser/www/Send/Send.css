@@ -1278,7 +1278,6 @@ li{
   height: 88%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  margin-bottom: 10px;
 
 }
 .content li{
@@ -1353,4 +1352,6 @@ margin-bottom: 0;
   background-color: white;
   display: block;
   margin: 0 auto;
+  box-shadow: 0px 8px 50px #888888;
+
 }

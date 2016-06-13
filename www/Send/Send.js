@@ -11,6 +11,9 @@ $(function(){
 	var effectid = $('.effectselected1')
 	var effectattr="normal";
 
+	var effectattr = "normal";
+	addmembers("sherif","akslj2jk3l12jklqwqel");
+	addmembers("ahmed","akslj2jk3l12jklqwqel");
 	$("#private").click(function(){
 		$('#selectphoto').trigger('click');
 
