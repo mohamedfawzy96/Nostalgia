@@ -979,6 +979,7 @@ body {
   overflow-x: hidden;
   display: block;
   -webkit-overflow-scrolling: touch;
+  z-index: 20;
 
 }
 #body2{

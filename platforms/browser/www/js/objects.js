@@ -16,7 +16,7 @@ function Memory (name, size, type, filetype, url, effect, privateattr, caption, 
   this.lastModifiedDate = lastModifiedDate;
 };
 
-function comment(user, data){
+function Comment(user, data){
   this.user = user;
   this.data = data;
 };

@@ -2,10 +2,13 @@
 
 $(function(){
   var selectedimg;
-  $(document).on('click', '.box', function() {
+
+  $(document).on('click touchend', '.box', function() {
     selectedimg = $(this).attr('rel');
     window.location = '../Memory/memory.html?somval=' + $(this).attr('rel');
   });
+
+
 
   memoriesArray = new Array();
   urlArray = new Array();
