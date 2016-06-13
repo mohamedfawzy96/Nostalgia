@@ -11,6 +11,9 @@ $(function(){
 	var effectid = $('.effectselected1')
 	var effectattr="normal";
 
+	var effectattr = "normal";
+	addmembers("sherif","akslj2jk3l12jklqwqel");
+	addmembers("ahmed","akslj2jk3l12jklqwqel");
 	$("#private").click(function(){
 		$('#selectphoto').trigger('click');
 
@@ -53,22 +56,13 @@ $(function(){
 	};
 
 	$("#addMember").click(function(){
-		getMembers();
-	  $(".members").fadeIn();
-	  $(".filter").fadeIn();
+		if($(this).attr("class")=="notonce"){
+			$(this).attr("class","once");
+			getMembers();
+			//alert($(this).attr("class"));
+		}
 	});
-	$("#doneMembers").click(function(){
-	  $(".members").fadeOut();
-	  $(".filter").fadeOut();
-		$( ".content li" ).each(function( index ) {
-		  console.log( index + ": " + $( this ).text() );
-			var chkbx = $(this).find("input");
-			alert(chkbx.val());
-		});
-		$('li:checked').each(function(li){
-		});
-	});
-
+	var membersArray = new Array();
 
 	function getMembers(){
 		var users = database.ref().child("users");
@@ -115,29 +109,76 @@ $(function(){
 	        var imagesRef = database.ref().child('memories');
 	        var userImagesRef = imagesRef.child(user.uid);
 					var date   = $("#drop").html();
+
+					$( ".content li" ).each(function( index ) {
+						//console.log( index + ": " + $( this ).text() );
+						var chkbx = $(this).find("input:checkbox");
+						//alert(chkbx.prop("checked"));
+						if(chkbx.prop("checked")){
+							//alert($(this).attr('rel'));
+							membersArray.push($(this).attr('rel'));
+						}
+					});
+					//alert(membersArray);
+
 					var newmemory = new Memory(file.name, file.size, file.type, 'image',
 					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
 					null, null, date, username, (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
 					var key = imagesRef.push();
+					key.child("comments").child("0").set("hello");
+					alert(membersArray.length);
+
 					key.set(newmemory);
-					alert(key);
+					//alert(key);
 
-					users.child(user.uid).child("posted").once('value',function(snapshot){
+					for (var i = 0; i < membersArray.length; i++) {
+						//alert(membersArray[i]);
+						key.child("members").child(i).set(membersArray[i]);
+						var index = membersArray[i];
+						var ref = database.ref().child("users").child(membersArray[i]).once('value',
+					function(memberToSnap){
+						var key3 = key +'';
+						database.ref().child("users").child(index).child("member").once('value',function(snapshot){
+							alert(memberToSnap.child("email").val());
+							alert(snapshot.numChildren());
+							key3 = key +'';
+								var num = snapshot.numChildren();
+								//database.ref().child("users").child(index).child("member").push().set(key3);
+								if(snapshot.child("0").val()=="hello"){
+									database.ref().child("users").child(index).child("member").child(0).set(key3);
+								}
+									else{
+									database.ref().child("users").child(index).child("member").child(num).set(key3);
+								}
+						});
 
-						alert(snapshot.numChildren());
-						key2 = key +'';
-							var num = snapshot.numChildren();
-							if(snapshot.child("0").val()=="hello"){
-								users.child(user.uid).child("posted").child(0).set(key2);
-							}
-							else{
-								users.child(user.uid).child("posted").child(num).set(key2);
-							}
+
 					}).then(function(){
-						window.location = "../Home/home.html";
+						alert("success");
+
 					});
+					};
+					users.child(user.uid).once('value', function(usersnap){
+						var num = usersnap.child("memberposted").numChildren();
+						users.child(user.uid).child("memberposted").child(num).set(key+'');
+					}).then(function(){
+						users.child(user.uid).child("posted").once('value',function(snapshot){
+							alert(snapshot.numChildren());
+							key2 = key +'';
+								var num = snapshot.numChildren();
+								if(snapshot.child("0").val()=="hello"){
+									users.child(user.uid).child("posted").child(0).set(key2);
+								}
+								else{
+									users.child(user.uid).child("posted").child(num).set(key2);
+								}
+						}).then(function(){
+							window.location = "../Home/home.html";
+						});
+					});
+
+
 	  });
 	};
-
 
 });

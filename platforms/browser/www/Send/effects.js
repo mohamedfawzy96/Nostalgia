@@ -23,14 +23,10 @@ $("#addMember").click(function(){
 $(".time").click(function(){
   $(".effects").fadeIn();
   $(".filter").fadeIn();
-<<<<<<< Updated upstream
 });
-=======
-  $("#addMember").attr("disabled", true);
 
 
-})
->>>>>>> Stashed changes
+
 
 
 $("#drop").click(function(){
