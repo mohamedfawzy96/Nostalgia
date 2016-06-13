@@ -1,3 +1,6 @@
+
+
+
 var height = $(".card").height() + $(".head").height() + $(".interactions").height() + 25 + 20 + 10
 var fullheight = $(window).height();
 var chatHeight = fullheight - height;
@@ -9,4 +12,7 @@ $(".send1").click(function(){
 
 })
 
+$(function(){
+  
+});
 //$("input").css({"margin-top":widthHeight+"px"});

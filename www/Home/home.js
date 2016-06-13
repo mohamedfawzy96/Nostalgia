@@ -1,4 +1,13 @@
+
+
 $(function(){
+
+$(document).on('click', '.box', function() {
+  window.location = '../Memory/memory.html?somval=' + $(this).attr('rel')
+
+
+})
+
   memoriesArray = new Array();
   urlArray = new Array();
 
