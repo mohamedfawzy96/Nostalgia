@@ -143,13 +143,7 @@ $(function(){
 							alert(snapshot.numChildren());
 							key3 = key +'';
 								var num = snapshot.numChildren();
-								//database.ref().child("users").child(index).child("member").push().set(key3);
-								if(snapshot.child("0").val()=="hello"){
-									database.ref().child("users").child(index).child("member").child(0).set(key3);
-								}
-									else{
-									database.ref().child("users").child(index).child("member").child(num).set(key3);
-								}
+								database.ref().child("users").child(index).child("member").child(num).set(key3);
 						});
 
 
@@ -166,12 +160,8 @@ $(function(){
 							alert(snapshot.numChildren());
 							key2 = key +'';
 								var num = snapshot.numChildren();
-								if(snapshot.child("0").val()=="hello"){
-									users.child(user.uid).child("posted").child(0).set(key2);
-								}
-								else{
-									users.child(user.uid).child("posted").child(num).set(key2);
-								}
+								users.child(user.uid).child("posted").child(num).set(key2);
+
 						}).then(function(){
 							window.location = "../Home/home.html";
 						});

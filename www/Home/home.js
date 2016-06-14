@@ -2,7 +2,7 @@
 
 $(function(){
   var selectedimg;
-  
+
 
   $(document).on('click tap', '.box', function() {
     selectedimg = $(this).attr('rel');
@@ -128,13 +128,19 @@ $(function(){
 
         });
       }
-        fillMemoriesPanel(memoriesArray)
-
-
+        fillMemoriesPanel(memoriesArray);
 
       });
   };
 
   $("#sendimg").click(handleFileSelect);
-
+  $('#menu').click(function(){
+    firebase.auth().signOut().then(function() {
+      console.log('Signed Out');
+      alert(firebase.auth().currentUser);
+      window.location = "../index.html";
+    }, function(error) {
+      console.error('Sign Out Error', error);
+    });
+  });
 });
