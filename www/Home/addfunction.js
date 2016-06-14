@@ -149,7 +149,7 @@ function add1Memories(firstName,firstDate,firstIcon,image1,uid){
   "</li>"
 
 
-    var li = $("li")
+    var li = $("#body1 li")
     var length = li.length
     if(length>0){
       var lastLi = li.eq(length-1)
@@ -177,7 +177,7 @@ function add1Memories(firstName,firstDate,firstIcon,image1,uid){
 
 
     }
-  
+
 
 
 
