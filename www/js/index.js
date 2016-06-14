@@ -23,17 +23,22 @@
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
+$(window).load(function(){
+  var user = firebase.auth().currentUser;
+  if(user){
+    var users = database.ref().child("users");
+    var username;
+    var userInDatabase = users.child(user.uid).child("username");
+    userInDatabase.once('value',function(snapshot){
+      username = snapshot.val();
+    }).then(function(){
+      alert(username);
+      window.location = "Home/home.html";
+    });
+  };
+});
 
 $(function(){
-    if(firebase.auth().currentUser){
-      window.location = "Home/home.html";
-      alert(firebase.auth().currentUser.email);
-    }
-    else {
-      alert(firebase.auth().currentUser);
-      alert('null user');
-    }
-
    document.addEventListener('deviceready', this.onDeviceReady, false);
     $(".Signup").click(function(){
       $('#sigin').id = "signup";

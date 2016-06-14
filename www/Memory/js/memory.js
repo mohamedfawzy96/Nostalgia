@@ -9,7 +9,16 @@ var widthHeight = -($("input").height()/2);
 $(".send1").css({"line-height":($(".send1").height()/2)+"px"});
 
 
-
+$(window).load(function(){
+  alert('loaded');
+  var user = firebase.auth().currentUser;
+  var users = database.ref().child("users");
+  var username;
+  var userInDatabase = users.child(user.uid).child("username");
+  userInDatabase.once('value',function(snapshot){
+    username = snapshot.val();
+  });
+});
 $(function(){
   $('#message').val('');
   var currurl = document.URL;
@@ -30,7 +39,6 @@ $(function(){
       $('#caption').text("no caption");
     }else{
       $('#caption').text(memorysnap.child('caption').val());
-
     }
   }).then(function(){
     $('#image').attr('src',imgurl);
@@ -83,23 +91,47 @@ $(function(){
       };*/
     });
   });
-  var qsParm = new Array() ;
+  var qsParm = new Array();
   var ImageUid;
-function qs() {
-    var query = window.location.search.substring(1);
-    var parms = query.split('&');
-    for (var i=0; i < parms.length; i++) {
-        var pos = parms[i].indexOf('=');
-        if (pos > 0) {
-            var key = parms[i].substring(0, pos);
-            var val = parms[i].substring(pos + 1);
-            qsParm[key] = val;
-            ImageUid = qsParm[key]
+  function qs() {
+      var query = window.location.search.substring(1);
+      var parms = query.split('&');
+      for (var i=0; i < parms.length; i++) {
+          var pos = parms[i].indexOf('=');
+          if (pos > 0) {
+              var key = parms[i].substring(0, pos);
+              var val = parms[i].substring(pos + 1);
+              qsParm[key] = val;
+              ImageUid = qsParm[key];
 
-        }
-    }
-}
-qs()
+          }
+      }
+  };
+  qs();
+
+  $('#repost').click(function(){
+    var user = firebase.auth().currentUser;
+    var users = database.ref().child("users");
+    var username;
+    var userInDatabase = users.child(user.uid).child("username");
+    userInDatabase.once('value',function(snapshot){
+      username = snapshot.val();
+    });
+    var repostsnum;
+    database.ref().child("memories").child(imguid).once('value', function(memorysnap){
+      repostsnum = memorysnap.child("reposts").val();
+    }).then(function(){
+      var newrepostsnum = repostsnum + 1;
+      database.ref().child("memories").child(imguid).child("reposts").set(newrepostsnum);
+      $('#numReposts').text(newrepostsnum);
+      var repostednum;
+      users.child(user.uid).child("reposted").once('value', function(repostedsnap){
+        repostednum = repostedsnap.numChildren();
+      }).then(function(){
+        users.child(user.uid).child("reposted").child(repostednum).set(imguid);
+      });
+    });
+  });
 
 
 
