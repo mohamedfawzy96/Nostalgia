@@ -985,8 +985,13 @@ body {
 #body2{
   position: relative;
   width: 100%;
-  height: 70%;
+  height: 100%;
   display: none;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background-color:rgba(0, 0, 0, 0.1);;
 
 }
 .active{
@@ -1129,4 +1134,82 @@ li{
 {
   text-align: center;
   font-size: 0.9em;
+}
+.card{
+  position: relative;
+  width: 100%;
+  height: 120px;
+  margin-top: 20px;
+  display: flex;
+  box-shadow: 0px 0px 20px #888888;
+  overflow: hidden;
+  background-color: white;
+
+}
+.imgMemory{
+  position: relative;
+  width: 35%;
+  height: 100%;
+}
+.imgMemory img{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  top: 50%;
+  margin-top: -50px;
+  margin-left: 5px;
+}
+.info{
+  position: relative;
+  width: 60%;
+  height: 70px;
+  margin-left: 4px;
+  top:50%;
+  margin-top: -35px;
+
+}
+
+.sector{
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 25%;
+  border-bottom: 0.2px solid rgba(0, 0, 0, 0.1);
+  padding: 3px;
+}
+.caption1{
+  height: auto;
+  border: 0;
+}
+.caption1 .text{
+  width: 80%;
+}
+.caption1 .icon{
+}
+
+.icon{
+  position: relative;
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+
+}
+.icon2{
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  background-color: #EC4B57;
+  border-radius: 50%;
+  top: 50%;
+  margin-top: -2px;
+  margin-left: 2px;
+
+}
+.icon img{
+  position: relative;
+  width: 100%;
+  height: 100%;
+
 }
