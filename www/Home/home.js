@@ -2,8 +2,9 @@
 
 $(function(){
   var selectedimg;
+  
 
-  $(document).on('click touchend', '.box', function() {
+  $(document).on('click tap', '.box', function() {
     selectedimg = $(this).attr('rel');
     window.location = '../Memory/memory.html?somval=' + $(this).attr('rel');
   });
