@@ -1213,3 +1213,6 @@ li{
   height: 100%;
 
 }
+.clickableimg{
+  z-index:100;
+}

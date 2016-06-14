@@ -12,8 +12,6 @@ $(function(){
 	var effectattr="normal";
 
 	var effectattr = "normal";
-	addmembers("sherif","akslj2jk3l12jklqwqel");
-	addmembers("ahmed","akslj2jk3l12jklqwqel");
 	$("#private").click(function(){
 		$('#selectphoto').trigger('click');
 
@@ -137,7 +135,7 @@ $(function(){
 						var index = membersArray[i];
 						var ref = database.ref().child("users").child(membersArray[i]).once('value',
 					function(memberToSnap){
-						var key3 = key +'';
+						var key3 = (key +'').split("/").pop();
 						database.ref().child("users").child(index).child("member").once('value',function(snapshot){
 							alert(memberToSnap.child("email").val());
 							alert(snapshot.numChildren());
@@ -154,11 +152,11 @@ $(function(){
 					};
 					users.child(user.uid).once('value', function(usersnap){
 						var num = usersnap.child("memberposted").numChildren();
-						users.child(user.uid).child("memberposted").child(num).set(key+'');
+						users.child(user.uid).child("memberposted").child(num).set(((key +'').split("/").pop()));
 					}).then(function(){
 						users.child(user.uid).child("posted").once('value',function(snapshot){
 							alert(snapshot.numChildren());
-							key2 = key +'';
+							key2 = (key +'').split("/").pop();
 								var num = snapshot.numChildren();
 								users.child(user.uid).child("posted").child(num).set(key2);
 
