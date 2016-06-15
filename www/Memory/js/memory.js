@@ -10,14 +10,14 @@ $(".send1").css({"line-height":($(".send1").height()/2)+"px"});
 
 
 $(window).load(function(){
-  alert('loaded');
+  /*alert('loaded');
   var user = firebase.auth().currentUser;
   var users = database.ref().child("users");
   var username;
   var userInDatabase = users.child(user.uid).child("username");
   userInDatabase.once('value',function(snapshot){
     username = snapshot.val();
-  });
+  });*/
 });
 $(function(){
   $('#message').val('');

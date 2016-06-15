@@ -2,13 +2,17 @@
 
 $(function(){
   var selectedimg;
-  
+
 
   $(document).on('click tap', '.box', function() {
     selectedimg = $(this).attr('rel');
     window.location = '../Memory/memory.html?somval=' + $(this).attr('rel');
   });
 
+  $(document).on('click tap', '.clickableimg', function() {
+    alert($(this));
+    window.location = '../Memory/memory.html?somval=' + $(this).attr('id');
+  });
 
 
   memoriesArray = new Array();
@@ -21,7 +25,8 @@ $(function(){
         while(counter<length1){
       listOfImages[counter].once('value', function(data){
         console.log(data.key);
-        var uid = data.key
+        var uid = data.key;
+        //alert(uid);
         var url1 = data.child("url").val()
         var date1= data.child("date").val()
         var owner1= data.child("owner").val()
@@ -43,15 +48,8 @@ $(function(){
           add1Memories(owner1,date1,"closed",url1);
         }*/
         add1Memories(owner1,date1,"closed",url1,uid);
-
-
-
-        })
-
+      });
         counter++;
-
-
-
     }
   };
 
@@ -66,20 +64,26 @@ $(function(){
     });
 
     $(".tab1").click(function(){
+      $("#body2").css({"display":"none"});
+
     $("#body1").css({"display":"block"});
-    $("#body2").css({"display":"none"});
     $(this).css({"border-bottom":"7px solid white"});
     $(".tab2").css({"border":"0"});
     $(".tab3").css({"border":"0"});
   });
 
   $(".tab2").click(function(){
-    $("#body2").css({"display":"block"});
     $("#body1").css({"display":"none"});
+
+    $("#body2").css({"display":"block"});
     $("tab").css({"border":"0"});
     $(this).css({"border-bottom":"7px solid white"});
     $(".tab1").css({"border":"0"});
     $(".tab3").css({"border":"0"});
+    if($('#body2').attr('class')=="notevenonce"){
+      getFeelIt();
+      $('#body2').attr('class','once');
+    }
   });
 
   $(".tab3").click(function(){
@@ -90,6 +94,30 @@ $(function(){
     $(".tab1").css({"border":"0"});
     $(".tab2").css({"border":"0"});
   });
+
+  function getFeelIt(){
+    var memoriesIDs = new Array();
+    database.ref().child('users').on('child_added', function(userSnap){
+      //alert(userSnap.key);
+      database.ref().child("users").child(userSnap.key).child("posted").on('child_added', function(memoryKeySnap){
+        var memoryID = (memoryKeySnap.val()+'').split("/").pop();
+        //should change this after cleaning the databse
+        //alert(memoryID);
+        database.ref().child("memories").child(memoryID).on('value',function(memorySnap){
+          //alert(memorySnap.child("url").val());
+          var url = memorySnap.child("url").val();
+          var owner = memorySnap.child("owner").val();
+          var date = memorySnap.child("date").val();
+          var caption = memorySnap.child("caption").val();
+          if(caption==""){
+            caption = "no caption";
+          }
+          var str = "<li><div class=\"card\"><div class=\"imgMemory \"><img class=\"clickableimg\" src=\""+url+"\" alt=\"\" id=\""+memoryID+"\"/></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
+          $('#body2').append(str);
+        });
+      });
+    });
+  };
 
   function handleFileSelect(evt) {
     window.location = "../Send/Send.html";
@@ -107,6 +135,10 @@ $(function(){
         console.log(memorySnap);
         if(memorySnap != "hello"){
         memorySnap.forEach(function(memorySnapshot){
+          <!-- NOTE -->
+          //you should delet the split and pop because I already fixed it in Send
+          //but it doesn't make a difference if you son't because the key
+          //doesn't have "/" in it, so no biggie
           var res = memorySnapshot.split("/");
           var memory = res.pop();
               var url ="";
@@ -122,19 +154,21 @@ $(function(){
                   if(imageRef != null){
                   memoriesArray.push(imageRef);
                 }
-
-
-
-
         });
       }
-        fillMemoriesPanel(memoriesArray)
-
-
+        fillMemoriesPanel(memoriesArray);
 
       });
   };
 
   $("#sendimg").click(handleFileSelect);
-
+  $('#menu').click(function(){
+    firebase.auth().signOut().then(function() {
+      console.log('Signed Out');
+      alert(firebase.auth().currentUser);
+      window.location = "../index.html";
+    }, function(error) {
+      console.error('Sign Out Error', error);
+    });
+  });
 });
