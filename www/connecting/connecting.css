@@ -17,7 +17,8 @@ html {
  * Remove default margin.
  */
 body {
-  margin: 0; }
+  margin: 0;
+  }
 
 /* HTML5 display definitions
    ========================================================================== */
@@ -889,374 +890,311 @@ body {
     padding:0px;
     width:100%;
 }
-.full{
+.fullScreen{
   position: fixed;
-  top:0;
+  top: 0;
   bottom: 0;
   right: 0;
   left: 0;
 }
-#title{
-  position: relative;
-  width: 70%;
-  height: 100%;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  font-size: 1.3em;
-}
-
-#done{
-  position: relative;
-  height: 30px;
-  top: 50%;
-  font-size: 1.2em;
-  letter-spacing: 1px;
-  margin-right: 20px;
-  z-index: 5;
-  color: black;
-}
-#back {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  top: 50%;
-  margin-left: 20px;
-  z-index: 5;
-
-
-}
-
-
-
 .head{
   position: relative;
-  width:100%;
   height: 12%;
-  display: flex;
-  justify-content: space-Between;
-  border-bottom: 0.2px solid rgba(0, 0, 0, 0.1);;
-  box-shadow: 0px -16px 50px #888888;
 
-  color: black;
-  font-size: 1.3em;
-
+  width: 100%;
+  box-shadow: 0px 0px 20px #888888;
+  text-align: center;
+  background-color: #649a8f;
+  color: white;
+  font-weight: bold;
 
 }
+.margintop{
+  position: relative;
+  height: 20%;
+  background-color: white;
 
-
-.sector{
+}
+.rest{
   position: relative;
   width: 100%;
-  height: 16%;
+  height: 80%;
+}
+.btn{
+  position: relative;
+  width: 100%;
+  height: 20px;
+  display: flex;
+  text-align: center;
 
 }
-.first{
-  height: 13%;
+#title{
+  position: relative;
+  width: 200px;
+  height: 20px;
+  left: 50%;
+  margin-left: -130px;
+  text-align: center;
+  top:50%;
+  margin-top: 10px;
+  font-size: 1.3em;
 }
-.second{
-  height: 19%;
+
+
+.back {
+  position: relative;
+
+
+  height: 20px;
+  width: 20px;
+  top: 50%;
+  margin-top: 10px;
+  margin-left: 10px;
+
+}
+.back  img{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+
+}
+.info{
+  position: relative;
+  width: 100%;
+  height: 15%;
+  background-color: white;
+  margin-top: 20px;
+  box-shadow: 0px 0px 20px #888888;
+  display: flex;
+  justify-content: space-around;
+
+}
+.photo{
+  position: relative;
+  height: 20vw;
+  width: 20vw;
+  background-color: green;
+  border-radius: 50%;
+  top: 50%;
+  margin-top: -10vw;
+  margin-left: 10px;
+
+
+}
+.photo img{
+  position: relative;
+  height: 20vw;
+  width: 20vw;
+  border-radius: 50%;
+}
+.name{
+  position: relative;
+  height: 10vw;
+  width: 70%;
+  top: 50%;
+  margin-top: -5vw;
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: -5vw;
+
+}
+.buttonspnl{
+  position: relative;
+  height: 12%;
+  width: 100%;
+  box-shadow: 0px 0px 20px #888888;
+  background-color: white;
+  margin-top: 20px;
+  display: flex;
+}
+.button1{
+  position: relative;
+  height: 100%;
+  width: 33.333%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+
+}
+.button1 img{
+  position: relative;
+  height: 8vw;
+  width: 8vw;
+  text-align: center;
+  left: 50%;
+  margin-left: -2vh;
+
+}
+.type{
+  position: relative;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  font-weight: bold;
+  color: #EC4B57;
+  font-size: 1.2em;
+
+
+}
+.YouMayKnow{
+  position: relative;
+  width: 100%;
+  height: 25%;
+  box-shadow: 0px 0px 20px #888888;
+  background-color: white;
+  margin-top: 20px;
+
 }
 .sub{
+
   position: relative;
+  height: 15%;
+  width: 100%;
   text-align: center;
   color: #4d4d4d;
   font-size: 1.2em;
   font-weight: 100;
-
-}
- #private{
-   -webkit-appearance: none;
-   background-image: url("img/private2.svg");
-   background-repeat: no-repeat;
-   background-size: contain;
- 	padding: 9px;
- 	display: inline-block;
- 	position: relative;
-  width: 60px;
-  height: 60px;
-  left: 50%;
-  margin-left: -25px;
-  outline:0px !important;
-  border: 0;
-  margin-bottom: 0;
-
-
-
-
-
-}
-
-
-#private:checked{
-  -webkit-appearance: none;
-  background-image: url("img/public2.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
- padding: 9px;
- display: inline-block;
- position: relative;
- width: 60px;
- height: 60px;
- left: 50%;
- margin-left: -33px;
- outline:0px !important;
- border: 0;
- background-color: white;
- margin-bottom: 0;
-
-
-
-
-
-}
-#description{
-  text-align: center;
+  padding-top: 5px;
 }
 hr{
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 0;
+  width: 50%;
 }
-
-.dates{
+.people{
   position: relative;
-  height: 70%;
-  display: flex;
-}
-.timeline{
-  position: absolute;
-  width: 80%;
-  top: 20%;
-  margin: 0 auto;
-
-}
- p{
-  text-align: center;
-  color: #808080;
-
-
-}
-.time{
-  width: 20%;
-  height: 100%;
-}
-.time img{
-  position: relative;
-  display: block;
-  width: 20px;
-  height: 20px;
-  margin: 0 auto;
-  top: 70%;
-  margin-top: -10px;
-  transition: all 0.5s ease-in-out;
-
-}
-
-
-.addedClasToeffect{
-  width: 40px !important;
-  height: 40px !important;
-  margin: 0 auto;
-  top: 70% !important;
-  margin-top: -20px !important;
-
-}
-.img2{
-  position: relative;
+  height: 30vw;
   width: 100%;
-
-  background-color: green;
-}
-.img2 img{
-  position: absolute;
-  display: block;
-  width: 40px;
-  height: 40px;
-
-  border-radius: 50%;
-  left: 50%;
-  margin-left: -20px;
   top: 50%;
-  margin-top: -20px;
-
+  margin-top: -15vw;
+  display: flex;
+  justify-content:
+}
+.person{
+  position: relative;
+  height: 100%;
+  width: 25%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  overflow-x: scroll;
 
 }
-
-#drop{
+.person img{
   position: relative;
-  width: 120px;
-  height: 25px;
-  border: 3px solid #649a8f;
-  left: 50%;
-  margin-left: -60px;
-  border-radius: 5px;
+  height: 15vw;
+  width: 15vw;
   text-align: center;
-  line-height: 25px;
-  font-size: 1.3em;
-  color: #ec4b57;
-}
-textarea{
-  position: relative;
-  display: block;
-  width: 70%;
-  height: 70px;
-  margin: 0 auto;
-  margin-top: 10px;
-  resize: none;
-  border: 0.5px solid #649a8f;
-
-
-}
-.fifth{
-  position: fixed;
-  bottom: 0;
-  top: 87%;
-  left: 0;
-  right: 0;
-
-
-
-
-}
-
- .fifth img{
-  position: relative;
-  display: block;
-  margin: 0 auto;
-  width: 40px;
-  height: 40px;
-
-}
-.filter{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 5;
-  display: none;
-}
-
-.effects{
-  position: absolute;
-  width: 300px;
-  height: 400px;
-  top: 50%;
-  margin-top: -200px;
   left: 50%;
-  margin-left: -150px;
-  background-color:white;
-  z-index: 30;
-  box-shadow: 0px 0px 50px #888888;
-  border-radius: 10px;
-  overflow: hidden;
-  display: none;
+  border-radius: 50%;
+  margin-left: -4vh;
 
 }
-.Orginaldate1{
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  top: 50%;
-  margin-top: -125px;
-  left: 50%;
-  margin-left: -125px;
-  background-color:white;
-  z-index: 40;
-  box-shadow: 0px 0px 50px #888888;
-  border-radius: 10px;
-  overflow-y:  scroll;
-  -webkit-overflow-scrolling: touch;
-
-  display: none;
-
-}
-
-.relative{
-
-}
-.listOfDates{
+#nameOfperson{
   position: relative;
   width: 100%;
   height: auto;
-  overflow-y: scroll;
   text-align: center;
+  font-weight: bold;
+  color: #EC4B57;
+  font-size: 1.2em;
+
 
 }
-.Orginaldate1 .sub{
+.user{
   position: relative;
-  width: 250px;
-  height: 50px;
-  background-color: white;
-  font-size: 1.6em;
-  margin-top: 0;
-  padding-top: 10px;
-  box-shadow: 0px 0px 50px #888888;
-  z-index:30;
-  border-radius: 10px;
-
-
-}
-
-li{
-
-  list-style: none;
-  font-size: 1.3em;
-  font-weight: 200;
-  letter-spacing: 2px;
-  padding-top: 10px;
-  color: #ec4b57;
-  padding-bottom: 10px;
-  border-bottom: 0.01px solid rgba(0, 0, 0, 0.3); !important;
-}
-
-.theImage{
-  position: relative;
-  width: 100%;
-  height: 50%;
-
-}
-.theImage img{
-  position: relative;
-  width: 100%;
+  background-color: green;
+  width: 25%;
   height: 100%;
 
 }
-.listOfeffects{
+
+.request{
   position: relative;
-  display: flex;
-  margin-top: 30px;
-
-}
-#doneEffects{
-  position: relative;
-  display: block;
-  margin: 0 auto;
-
-}
-
-.members{
-  position: fixed;
   width: 100%;
-  height: 400px;
+  height: 8%;
+  box-shadow: 0px 0px 20px #888888;
+  background-color: white;
+  margin-top: 20px;
+  display: flex;
+
+}
+.request .icon{
+  position: relative;
+  height: 8vw;
+  width: 8vw;
+  border-radius: 50%;
+  background-color: #EC4B57;
   top: 50%;
-  margin-top: -200px;
-  background-color:white;
-  z-index: 30;
-  box-shadow: 0px 0px 50px #888888;
-  border-radius: 3px;
+  margin-top: -4vw;
+  margin-left: 10px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.text{
+  font-weight: bold;
+  color: #EC4B57;
+  font-size: 1.2em;
+  position: relative;
+  height: 100%;
+  margin-left: 10px;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.view{
+  position: absolute;
+  top: 12%;
+  bottom: 0;
+  left:0;
+  right: 0;
+  z-index: 100;
   display: none;
 
-}
+  transform: translateX(800px);
+  transition: all 0.7s ease-in-out;
+  box-shadow: 0px 0px 20px #888888;
 
+
+
+
+}
+.settingsView{
+  background-color: white;
+
+}
+.requestsView{
+  background-color: white;
+
+
+}
+.friendsView{
+  background-color: white;
+
+
+
+}
+.searchView{
+  background-color: white;
+
+
+}
 .search{
   position: relative;
   width: 100%;
   height: 12%;
   background-color: rgba(0, 0, 0, 0.05);
   display: flex;
-  jus
+  justify-content: space-between;
 
 
 }
@@ -1264,96 +1202,97 @@ li{
   position: relative;
   display: block;
   height: 30px;
-  width: 70%;
-  top: 20%;
-  margin: 0 auto;
+  width: 95%;
+  margin-top: 0;
+  margin-bottom: 0;
+
   border-radius: 20px;
 
 
 
 
 
-}
-.content{
-  position: relative;
-  width: 100%;
-  height: 88%;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+
 
 }
-.content li{
+.cancel{
   position: relative;
-  color: black;
-  height: 30px;
-  font-size: 1em;
-  font-weight: bold !important;
+  height: 100%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  color: #EC4B57;
+
+}
+.box{
+  position: relative;
+  height: 100%;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+li{
+  position: relative;
+  height: 8%;
+
+  list-style: none;
+  font-weight: 200;
+  letter-spacing: 2px;
+  padding-top: 10px;
+  color: #ec4b57;
+  padding-bottom: 10px;
+  border-bottom: 0.01px solid rgba(0, 0, 0, 0.3); !important;
   display: flex;
   justify-content: space-between;
-  box-sizing: padding-box;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-
-
 }
-.content p{
-  color: black;
-  font-size: 1.3em;
-  font-weight: 400 !important;
-  margin-left: 20px;
-  line-height: 30px;
 
-}
-#added{
+li img{
   position: relative;
-  -webkit-appearance: none;
-  background-image: url("img/add.svg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  display: inline-block;
- position: relative;
- width: 30px;
- height: 30px;
- outline:0px !important;
- border: 0;
- margin-bottom: 0;
- margin-right:15px;
-
-
-
-
-
+  height: 8vh;
+  width: 8vh;
+  border-radius: 50%;
+}
+.theUser{
+  display: flex;
+}
+.userImage{
+  position: relative;
+  height: 8vh;
+  width: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+.usernameOfuser{
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  color: black;
+  font-weight: bold;
 
 }
-
-
-
-#added:checked{
- -webkit-appearance: none;
- background-image: url("img/added1.svg");
- background-repeat: no-repeat;
- background-size: 100% 100%;
- display: inline-block;
-
-position: relative;
-width: 20px;
-height: 20px;
-margin-top: 7px;
-
-outline:0px !important;
-border: 0;
-background-color: white;
-border-radius: 5px;
-margin-bottom: 0;
-
-
-
-
-
-}
-.finish button{
-  background-color: white;
-  display: block;
-  margin: 0 auto;
-  box-shadow: 0px 8px 50px #888888;
+.AddFriend{
+  position: relative;
+  border: 3px solid;
+  color: #Ec4b57;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vw;
+  width: 15vw;
+  box-sizing: border-box;
+  top: 50%;
+  margin-top: -5vw;
+  margin-right: 10px;
+  font-weight: bold;
 
 }
