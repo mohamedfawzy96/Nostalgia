@@ -2,6 +2,11 @@
 
 $(function(){
   var selectedimg;
+  $("#connect").click(function(){
+    window.location = '../connecting/connecting.html'
+
+
+  })
 
 
   $(document).on('click tap', '.box', function() {
