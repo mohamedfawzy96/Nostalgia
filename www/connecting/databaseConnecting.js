@@ -10,7 +10,16 @@ var uid1 = 0;
 
 
 
+firebase.auth().onAuthStateChanged(function(user) {
 
+  var userID = firebase.auth().currentUser.uid
+  database.ref().child('users').child(userID).on("value",function(user){
+    $("#num").html(user.child("RecivedRequests").numChildren())
+
+  })
+
+
+})
 
 
 
