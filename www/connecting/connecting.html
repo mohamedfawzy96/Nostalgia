@@ -23,6 +23,7 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script type="text/javascript">
+
     var config = {
       apiKey: "AIzaSyCT0GktUYHJeLcHnzeo3vJ99ONULSxdglY",
       authDomain: "nostalgia-79c70.firebaseapp.com",
@@ -38,6 +39,7 @@
     var storage = firebase.storage();
     var storageRef = storage.ref();
     var imagesRef = storageRef.child('images');
+    
     // Check for the various File API support.
     if (window.File && window.FileReader && window.FileList && window.Blob) {
       // Great success! All the File APIs are supported.
@@ -45,6 +47,8 @@
       alert('The File APIs are not fully supported in this browser.');
     }
     </script>
+    <script src="../js/objects.js"></script>
+
     <link rel="stylesheet" type="text/css" href="connecting.css" />
     <title>Home</title>
 
@@ -66,26 +70,7 @@
 
       </div>
       <div class="content">
-        <li >
-          <div class="theUser">
-            <div class="userImage">
-              <img src="../home/img/test.jpg" alt="" />
 
-            </div>
-            <div class="usernameOfuser">
-              Ahmed
-
-            </div>
-
-          </div>
-          <div class="AddFriend" uid = ''>
-            Add
-
-          </div>
-
-
-
-        </li>
 
 
       </div>
@@ -288,7 +273,12 @@
 
 
     </div>
+
+
     <script src="connecting.js"></script>
+    <script src="databaseConnecting.js"></script>
+
+
 
 
 

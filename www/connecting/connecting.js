@@ -33,3 +33,10 @@ $(".cancel").click(function(){
 
 
 })
+$(document).on('click tap', '.k', function(){
+  $(this).removeClass("AddFriend")
+  $(this).html("Requested")
+
+  $(this).addClass("requested")
+
+})
