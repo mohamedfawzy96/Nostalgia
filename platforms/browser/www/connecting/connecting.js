@@ -9,11 +9,22 @@ $("#find").click(function(){
 
 
 })
+$("#friends").click(function(){
+  $(".friendsView").css({"display":"block"});
+  setTimeout(function(){
+    $(".friendsView").css({"transform":"translateX(0)"});
+
+  },100)
+
+
+
+
+})
 $(".cancel").click(function(){
-  $(".searchView").css({"transform":"translateX(800px)"});
+  $(".view").css({"transform":"translateX(800px)"});
 
   setTimeout(function(){
-    $(".searchView").css({"display":"none"});
+    $(".view").css({"display":"none"});
 
 
   },800)
