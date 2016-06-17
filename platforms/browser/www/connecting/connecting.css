@@ -1296,6 +1296,24 @@ li img{
   font-weight: bold;
 
 }
+.requested{
+  position: relative;
+  border: 3px solid grey;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vw;
+  width: 30vw;
+  box-sizing: border-box;
+  top: 50%;
+  margin-top: -5vw;
+  margin-right: 10px;
+  font-weight: bold;
+  background-color: grey;
+
+}
 .theFriend{
   display: flex;
 }
@@ -1318,4 +1336,7 @@ li img{
   color: black;
   font-weight: bold;
 
+}
+.k{
+  transition: all 0.5s ease-in-out;
 }
