@@ -2,14 +2,11 @@
 
 $(function(){
   var selectedimg;
-<<<<<<< HEAD
-=======
   $("#connect").click(function(){
     window.location = '../connecting/connecting.html'
 
 
   })
->>>>>>> origin/master
 
 
   $(document).on('click tap', '.box', function() {
@@ -107,7 +104,7 @@ $(function(){
     var memoriesIDs = new Array();
     database.ref().child('users').on('child_added', function(userSnap){
       //alert(userSnap.key);
-      database.ref().child("users").child(userSnap.key).child("posted").on('child_added', function(memoryKeySnap){
+      database.ref().child("users").child(userSnap.key).child("memberposted").on('child_added', function(memoryKeySnap){
         var memoryID = (memoryKeySnap.val()+'').split("/").pop();
         //should change this after cleaning the databse
         //alert(memoryID);
