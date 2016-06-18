@@ -141,7 +141,8 @@ $(function(){
 							alert(snapshot.numChildren());
 							key3 = key +'';
 								var num = snapshot.numChildren();
-								database.ref().child("users").child(index).child("member").child(num).set(key3);
+								database.ref().child("users").child(index).child("memberposted").child(num).set(((key +'').split("/").pop()));
+								database.ref().child("users").child(index).child("member").child(num).set(((key +'').split("/").pop()));
 						});
 
 
@@ -158,7 +159,7 @@ $(function(){
 							alert(snapshot.numChildren());
 							key2 = (key +'').split("/").pop();
 								var num = snapshot.numChildren();
-								
+
 								users.child(user.uid).child("posted").child(num).set(key2);
 
 						}).then(function(){
