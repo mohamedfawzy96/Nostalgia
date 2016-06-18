@@ -33,3 +33,11 @@ function User (email, uid, username, posted, memberposted, member, tagged, follo
   this.following = following;
   this.settings = settings;
 };
+
+
+function Request(From, to,accepted){
+  this.from = From;
+  this.to = to;
+  this.accepted = accepted
+
+};

@@ -897,324 +897,446 @@ body {
   right: 0;
   left: 0;
 }
-
 .head{
   position: relative;
+  height: 12%;
+
   width: 100%;
-  height: 8%;
-  background-color: #649a8f;
-  display: flex;
-  justify-content: space-around;
-  z-index: 1000;
-
-}
-.logo{
-  position: relative;
-  width: 70%;
-  height: 20px;
-  top: 50%;
-  margin-top: -15px;
-  font-size: 1.6em;
-  letter-spacing: 3px;
-
+  box-shadow: 0px 0px 20px #888888;
   text-align: center;
-  color: white;
-}
-#Search{
-  position: relative;
-  width: 21px;
-  height: 21px;
-  top: 50%;
-  margin-top: -10.5px;
-}
-#menu{
-  position: relative;
-  width: 5px;
-  height: 26px;
-  top: 50%;
-  margin-top: -13px;
-}
-.Tabs{
-  position: relative;
-  width: 100%;
-  height: 8%;
   background-color: #649a8f;
-  box-shadow: 0px 7px 15px #888888;
-  display: flex;
-  z-index: 100;
-}
-
-.tab{
-  position: relative;
-  width: 50%;
-  height: 100%;
-  text-align: center;
-  padding-top: 15px;
-  box-sizing:border-box;
-}
-.tab h3{
-  font-size: 1.2em !important;
   color: white;
-  letter-spacing: 2px;
-
-}
-
-.selectedTab{
-  border-bottom: 7px solid white;
   font-weight: bold;
+
 }
-.time{
+.margintop{
   position: relative;
-  height: 4%;
+  height: 20%;
   background-color: white;
+
 }
-.memoriespic{
-  height: auto;
-  width: 50%;
-}
-#body1{
+.rest{
   position: relative;
   width: 100%;
-  height: 70%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  display: block;
-  -webkit-overflow-scrolling: touch;
-  z-index: 20;
-
-}
-#body2{
-  position: relative;
-  width: 100%;
-  height: 70%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  display: block;
-  -webkit-overflow-scrolling: touch;
-  z-index: 20;
-
-}
-.active{
-  display: block;
-}
-
-.buttons{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right:0;
-  top:90%;
-  background-color:#263238;
-  display: flex;
-  box-shadow: 0px -3px 20px #888888;
-  z-index: 30;
-
+  height: 80%;
 }
 .btn{
   position: relative;
-  width: 50%;
+  width: 100%;
+  height: 20px;
+  display: flex;
+  text-align: center;
+
+}
+#title{
+  position: relative;
+  width: 200px;
+  height: 20px;
+  left: 50%;
+  margin-left: -130px;
+  text-align: center;
+  top:50%;
+  margin-top: 10px;
+  font-size: 1.3em;
+}
+
+
+.back {
+  position: relative;
+
+
+  height: 20px;
+  width: 20px;
+  top: 50%;
+  margin-top: 10px;
+  margin-left: 10px;
+
+}
+.back  img{
+  position: relative;
   height: 100%;
-}
+  width: 100%;
+  z-index: 3;
 
-#send img{
+}
+.info{
   position: relative;
-  width: 50px;
-  height: 50px;
-  left : 50%;
-  margin-left: -25px;
-  top:50%;
-  margin-top: -25px;
-
-}
-#imglabel{
-  position: relative;
-  width: 50px;
-  height: 50px;
-  left : 50%;
-  margin-left: -25px;
-  top:50%;
-  margin-top: -25px;
-}
-#TV img{
-  position: relative;
-  width: 50px;
-  height: 50px;
-  left : 50%;
-  margin-left: -25px;
-  top:50%;
-  margin-top: -25px;
-
-}
-
-#TV{
-  border-left: 0.5px solid rgba(255, 255, 255, 0.1);;
-}
-
-#connect img{
-  position: relative;
-  width: 50px;
-  height: 50px;
-  left : 50%;
-  margin-left: -25px;
-  top:50%;
-  margin-top: -25px;
-
-}
-
-#connect{
-  border-left: 0.5px solid rgba(255, 255, 255, 0.1);;
-}
-
-#files{
-  display: block;
-  visibility: hidden;
-  height: 0;
-  width: 0;
-}
-#body1{
-
-
-
-}
-li{
-  position: relative;
+  width: 100%;
+  height: 15%;
+  background-color: white;
+  margin-top: 20px;
+  box-shadow: 0px 0px 20px #888888;
   display: flex;
   justify-content: space-around;
-  height: 150px;
+
+}
+.photo{
+  position: relative;
+  height: 20vw;
+  width: 20vw;
+  background-color: green;
+  border-radius: 50%;
+  top: 50%;
+  margin-top: -10vw;
+  margin-left: 10px;
+
+
+}
+.photo img{
+  position: relative;
+  height: 20vw;
+  width: 20vw;
+  border-radius: 50%;
+}
+.name{
+  position: relative;
+  height: 10vw;
+  width: 70%;
+  top: 50%;
+  margin-top: -5vw;
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: -5vw;
+
+}
+.buttonspnl{
+  position: relative;
+  height: 12%;
   width: 100%;
-  margin-top: 10px;
+  box-shadow: 0px 0px 20px #888888;
+  background-color: white;
+  margin-top: 20px;
+  display: flex;
+}
+.button1{
+  position: relative;
+  height: 100%;
+  width: 33.333%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+
+}
+.button1 img{
+  position: relative;
+  height: 8vw;
+  width: 8vw;
+  text-align: center;
+  left: 50%;
+  margin-left: -2vh;
+
+}
+.type{
+  position: relative;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  font-weight: bold;
+  color: #EC4B57;
+  font-size: 1.2em;
+
+
+}
+.YouMayKnow{
+  position: relative;
+  width: 100%;
+  height: 25%;
+  box-shadow: 0px 0px 20px #888888;
+  background-color: white;
+  margin-top: 20px;
+
+}
+.sub{
+
+  position: relative;
+  height: 15%;
+  width: 100%;
+  text-align: center;
+  color: #4d4d4d;
+  font-size: 1.2em;
+  font-weight: 100;
+  padding-top: 5px;
+}
+hr{
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
+.people{
+  position: relative;
+  height: 30vw;
+  width: 100%;
+  top: 50%;
+  margin-top: -15vw;
+  display: flex;
+  justify-content:
+}
+.person{
+  position: relative;
+  height: 100%;
+  width: 25%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  overflow-x: scroll;
+
+}
+.person img{
+  position: relative;
+  height: 15vw;
+  width: 15vw;
+  text-align: center;
+  left: 50%;
+  border-radius: 50%;
+  margin-left: -4vh;
+
+}
+#nameOfperson{
+  position: relative;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  font-weight: bold;
+  color: #EC4B57;
+  font-size: 1.2em;
+
+
+}
+.user{
+  position: relative;
+  background-color: green;
+  width: 25%;
+  height: 100%;
+
+}
+
+.request{
+  position: relative;
+  width: 100%;
+  height: 8%;
+  box-shadow: 0px 0px 20px #888888;
+  background-color: white;
+  margin-top: 20px;
+  display: flex;
+
+}
+.request .icon{
+  position: relative;
+  height: 8vw;
+  width: 8vw;
+  border-radius: 50%;
+  background-color: #EC4B57;
+  top: 50%;
+  margin-top: -4vw;
+  margin-left: 10px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.text{
+  font-weight: bold;
+  color: #EC4B57;
+  font-size: 1.2em;
+  position: relative;
+  height: 100%;
+  margin-left: 10px;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.view{
+  position: absolute;
+  top: 12%;
+  bottom: 0;
+  left:0;
+  right: 0;
+  z-index: 100;
+  display: none;
+
+  transform: translateX(800px);
+  transition: all 0.7s ease-in-out;
+  box-shadow: 0px 0px 20px #888888;
+
+
+
+
+}
+.settingsView{
+  background-color: white;
+
+}
+.requestsView{
+  background-color: white;
+
+
+}
+.friendsView{
+  background-color: white;
+
+
+
+}
+.searchView{
+  background-color: white;
+
+
+}
+.search{
+  position: relative;
+  width: 100%;
+  height: 12%;
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+
+
+}
+.search input{
+  position: relative;
+  display: block;
+  height: 30px;
+  width: 95%;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  border-radius: 20px;
+
+
+
+
+
+
+
+}
+.cancel{
+  position: relative;
+  height: 100%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  color: #EC4B57;
 
 }
 .box{
   position: relative;
-  width: 140px;
-  height: 140px;
-  top: 50%;
-  margin-top: -50px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  background-image: url("img/test.jpg");
-  background-size: cover;
-  box-shadow: 0px 7px 15px #888888;
-  overflow: hidden !important;
-  margin-bottom: 5px;
-
-
+  height: 100%;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
-.filter{
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);;
-  width: 140px;
-  height: 140px;
-  border-radius: 10px;
-
-}
-
-.inside{
+li{
   position: relative;
-  width: 100px;
-  height:100px;
-  top: 50%;
-  left: 50%;
-  color: white;
-  margin-left: -50px;
-  margin-top: -50px;
-  text-align: center;
-  z-index: 3;
-  font-weight: bold;
+  height: 8%;
+
+  list-style: none;
+  font-weight: 200;
   letter-spacing: 2px;
-}
-.opened img{
-  transform: scale(1.3);
-
-
-}
-
-.date
-{
-  text-align: center;
-  font-size: 0.9em;
-}
-.card{
-  position: relative;
-  width: 100%;
-  height: 120px;
-  margin-top: 20px;
-
+  padding-top: 10px;
+  color: #ec4b57;
+  padding-bottom: 10px;
+  border-bottom: 0.01px solid rgba(0, 0, 0, 0.3); !important;
   display: flex;
-  box-shadow: 0px 0px 20px #888888;
-  overflow: hidden;
-  background-color: white;
-
-}
-.imgMemory{
-  position: relative;
-  width: 35%;
-  height: 100%;
-}
-.imgMemory img{
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  top: 50%;
-  margin-top: -50px;
-  margin-left: 5px;
-}
-.info{
-  position: relative;
-  width: 60%;
-  height: 70px;
-  margin-left: 4px;
-  top:50%;
-  margin-top: -35px;
-
+  justify-content: space-between;
 }
 
-.sector{
+li img{
   position: relative;
-  display: flex;
-  width: 100%;
-  height: 25%;
-  border-bottom: 0.2px solid rgba(0, 0, 0, 0.1);
-  padding: 3px;
-}
-.caption1{
-  height: auto;
-  border: 0;
-}
-.caption1 .text{
-  width: 80%;
-}
-.caption1 .icon{
-}
-
-.icon{
-  position: relative;
-  width: 15px;
-  height: 15px;
-  margin-right: 8px;
-
-}
-.icon2{
-  position: relative;
-  width: 10px;
-  height: 10px;
-  margin-right: 8px;
-  background-color: #EC4B57;
+  height: 8vh;
+  width: 8vh;
   border-radius: 50%;
-  top: 50%;
-  margin-top: -2px;
-  margin-left: 2px;
-
 }
-.icon img{
+.theUser{
+  display: flex;
+}
+.userImage{
   position: relative;
-  width: 100%;
+  height: 8vh;
+  width: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+.usernameOfuser{
+  position: relative;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  color: black;
+  font-weight: bold;
 
 }
-.clickableimg{
-  z-index:100;
+.AddFriend{
+  position: relative;
+  border: 3px solid;
+  color: #Ec4b57;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vw;
+  width: 15vw;
+  box-sizing: border-box;
+  top: 50%;
+  margin-top: -5vw;
+  margin-right: 10px;
+  font-weight: bold;
+
+}
+.requested{
+  position: relative;
+  border: 3px solid grey;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vw;
+  width: 30vw;
+  box-sizing: border-box;
+  top: 50%;
+  margin-top: -5vw;
+  margin-right: 10px;
+  font-weight: bold;
+  background-color: grey;
+
+}
+.theFriend{
+  display: flex;
+}
+.friendImage{
+  position: relative;
+  height: 8vh;
+  width: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+.friendnameOfuser{
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  color: black;
+  font-weight: bold;
+
+}
+.k{
+  transition: all 0.5s ease-in-out;
 }

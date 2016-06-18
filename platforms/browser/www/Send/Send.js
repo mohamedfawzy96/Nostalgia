@@ -158,6 +158,10 @@ $(function(){
 							alert(snapshot.numChildren());
 							key2 = (key +'').split("/").pop();
 								var num = snapshot.numChildren();
+<<<<<<< HEAD
+=======
+								
+>>>>>>> origin/master
 								users.child(user.uid).child("posted").child(num).set(key2);
 
 						}).then(function(){

@@ -79,7 +79,6 @@ $(function(){
             var newuser = new User(user.email, user.uid, currusername, [], [], [], [], [], [], null);
 
             usersRef.child(user.uid).set(newuser);
-            usersRef.child(user.uid).child("posted").child("0").set("hello");
             usersRef.child(user.uid).child("member").child("0").set("hello");
             window.location = "Home/home.html"
           } else {
