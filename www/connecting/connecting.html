@@ -18,6 +18,15 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
     <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/jquery.mobile-1.4.5.js"></script>
+
+    <script type="text/javascript">
+        $(document).bind('mobileinit',function(){
+            $.mobile.loadingMessage = false;
+        })
+    </script>
+    <script src="../js/jquery.mobile-1.4.5.js"></script>
+
 
     </script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -39,7 +48,7 @@
     var storage = firebase.storage();
     var storageRef = storage.ref();
     var imagesRef = storageRef.child('images');
-    
+
     // Check for the various File API support.
     if (window.File && window.FileReader && window.FileList && window.Blob) {
       // Great success! All the File APIs are supported.
@@ -80,6 +89,14 @@
 
     </div>
     <div class="requestsView view">
+      <div class="Heading">
+        Requests
+
+      </div>
+      <div class="requestsSent">
+    
+
+      </div>
 
     </div>
     <div class="friendsView view">
@@ -99,7 +116,7 @@
         <li >
           <div class="theFriend">
             <div class="friendImage">
-              <img src="../home/img/test.jpg" alt="" />
+              <img src="../Home/img/test.jpg" alt="" />
 
             </div>
             <div class="friendnameOfuser">
@@ -144,7 +161,7 @@
       </div>
       <div class="info">
         <div class="photo">
-          <img src="../home/img/test.jpg" alt="" />
+          <img src="../Home/img/test.jpg" alt="" />
 
         </div>
         <div class="name">
@@ -200,7 +217,7 @@
           <div class="person" id="person">
 
             <div class="icon">
-              <img src="../home/img/test.jpg" alt="" />
+              <img src="../Home/img/test.jpg" alt="" />
 
             </div>
             <div id="nameOfperson">
@@ -213,7 +230,7 @@
         <div class="person" id="person">
 
           <div class="icon">
-            <img src="../home/img/test.jpg" alt="" />
+            <img src="../Home/img/test.jpg" alt="" />
 
           </div>
           <div id="nameOfperson">
@@ -226,7 +243,7 @@
       <div class="person" id="person">
 
         <div class="icon">
-          <img src="../home/img/test.jpg" alt="" />
+          <img src="../Home/img/test.jpg" alt="" />
 
         </div>
         <div id="nameOfperson">
@@ -239,7 +256,7 @@
     <div class="person" id="person">
 
       <div class="icon">
-        <img src="../home/img/test.jpg" alt="" />
+        <img src="../Home/img/test.jpg" alt="" />
 
       </div>
       <div id="nameOfperson">
