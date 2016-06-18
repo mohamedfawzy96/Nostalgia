@@ -1,3 +1,4 @@
+
 $("#find").click(function(){
   $(".searchView").css({"display":"block"});
   setTimeout(function(){
@@ -20,6 +21,19 @@ $("#friends").click(function(){
 
 
 })
+
+$(".request").click(function(){
+  $(".requestsView").css({"display":"block"});
+  setTimeout(function(){
+    $(".requestsView").css({"transform":"translateX(0)"});
+
+  },100)
+
+
+
+
+})
+
 $(".cancel").click(function(){
   $(".view").css({"transform":"translateX(800px)"});
 

@@ -912,7 +912,6 @@ body {
 .margintop{
   position: relative;
   height: 20%;
-  background-color: white;
 
 }
 .rest{
@@ -1176,6 +1175,9 @@ hr{
   background-color: white;
 
 
+
+
+
 }
 .friendsView{
   background-color: white;
@@ -1339,4 +1341,46 @@ li img{
 }
 .k{
   transition: all 0.5s ease-in-out;
+}
+.btnAccept{
+  position: relative;
+  height: 10vw;
+  width: 50vw;
+  display: flex;
+  justify-content: space-around;
+  top: 50%;
+  margin-top: -5vw;
+
+}
+.btnreq{
+  position: relative;
+  width: 20vw;
+  height: 10vw;
+  background-color: #Ec4b57;
+  color: white;
+  font-weight: bold;
+  top: 50%;
+  margin-top: -5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+.reject{
+  background-color: white;
+  border: 3px solid #Ec4b57;
+  color: #Ec4b57;
+  box-sizing: border-box;
+}
+.Heading{
+  position: relative;
+  height: 8%;
+  background-color: rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #4d4d4d;
+  font-size: 1.2em;
+  font-weight: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
