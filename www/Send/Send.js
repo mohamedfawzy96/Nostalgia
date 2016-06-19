@@ -104,72 +104,76 @@ $(function(){
 	  		var privateattr = document.getElementById('private').checked;
 	  		var captionattr = $('#caption').val();
 	  		var dateattr = null;
-	        var imagesRef = database.ref().child('memories');
-	        var userImagesRef = imagesRef.child(user.uid);
-					var date   = $("#drop").html();
+	      var imagesRef = database.ref().child('memories');
+	      var userImagesRef = imagesRef.child(user.uid);
+				var date   = $("#drop").html();
+				$( ".content li" ).each(function( index ) {
+					//console.log( index + ": " + $( this ).text() );
+					var chkbx = $(this).find("input:checkbox");
+					//alert(chkbx.prop("checked"));
+					if(chkbx.prop("checked")){
+						//alert($(this).attr('rel'));
+						membersArray.push($(this).attr('rel'));
+					}
+				});
+				//alert(membersArray);
+				var newmemory = new Memory(file.name, file.size, file.type, 'image',
+				uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
+				null, null, date, username, (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
+				var key = imagesRef.push();
+				key.child("comments").child("0").set("hello");
+				alert(membersArray.length);
+				key.set(newmemory);
+				//alert(key);
 
-					$( ".content li" ).each(function( index ) {
-						//console.log( index + ": " + $( this ).text() );
-						var chkbx = $(this).find("input:checkbox");
-						//alert(chkbx.prop("checked"));
-						if(chkbx.prop("checked")){
-							//alert($(this).attr('rel'));
-							membersArray.push($(this).attr('rel'));
-						}
-					});
-					//alert(membersArray);
-
-					var newmemory = new Memory(file.name, file.size, file.type, 'image',
-					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
-					null, null, date, username, (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
-					var key = imagesRef.push();
-					key.child("comments").child("0").set("hello");
-					alert(membersArray.length);
-
-					key.set(newmemory);
-					//alert(key);
-
-					for (var i = 0; i < membersArray.length; i++) {
-						//alert(membersArray[i]);
-						key.child("members").child(i).set(membersArray[i]);
-						var index = membersArray[i];
-						var ref = database.ref().child("users").child(membersArray[i]).once('value',
+				for (var i = 0; i < membersArray.length; i++) {
+					//alert(membersArray[i]);
+					key.child("members").child(i).set(membersArray[i]);
+					var index = membersArray[i];
+					var ref = database.ref().child("users").child(membersArray[i]).once('value',
 					function(memberToSnap){
 						var key3 = (key +'').split("/").pop();
-						database.ref().child("users").child(index).child("member").once('value',function(snapshot){
-							alert(memberToSnap.child("email").val());
-							alert(snapshot.numChildren());
-							key3 = key +'';
-								var num = snapshot.numChildren();
-
-								database.ref().child("users").child(index).child("memberposted").child(num).set(((key +'').split("/").pop()));
+						database.ref().child("users").child(index).child("member").once('value',function(membersnapshot){
+								var num = membersnapshot.numChildren();
 								database.ref().child("users").child(index).child("member").child(num).set(((key +'').split("/").pop()));
+							});
+						}).then(function(){
+							database.ref().child("users").child(index).child("memberposted").once('value',function(memberpostedsnapshot){
+								var num2 = memberpostedsnapshot.numChildren();
+								database.ref().child("users").child(index).child("memberposted").child(num2).set(((key +'').split("/").pop()));
+							}).then(function(){
+								alert("success");
+							});
 						});
-
-
-					}).then(function(){
-						alert("success");
-
-					});
 					};
+
+					users.child(user.uid).child('friends').on('child_added', function(friendsuidsnap){
+						var frienduid = friendsuidsnap.val();
+						var friendfeelitnum;
+						users.child(frienduid).child('feelit').once('value', function(feelitsnap){
+							friendfeelitnum = feelitsnap.numChildren();
+						}).then(function(){
+							users.child(frienduid).child('feelit').child(friendfeelitnum).set(((key +'').split("/").pop()));
+						});
+					});
+
 					users.child(user.uid).once('value', function(usersnap){
 						var num = usersnap.child("memberposted").numChildren();
 						users.child(user.uid).child("memberposted").child(num).set(((key +'').split("/").pop()));
 					}).then(function(){
+						key2 = (key +'').split("/").pop();
 						users.child(user.uid).child("posted").once('value',function(snapshot){
-							alert(snapshot.numChildren());
-							key2 = (key +'').split("/").pop();
 								var num = snapshot.numChildren();
-								users.child(user.uid).child("member").child(num).set(key2);
-
 								users.child(user.uid).child("posted").child(num).set(key2);
-
 						}).then(function(){
-							window.location = "../Home/home.html";
+							users.child(user.uid).child("member").once('value',function(postedsnapshot){
+								var num2 = postedsnapshot.numChildren();
+								users.child(user.uid).child("member").child(num2).set(key2);
+							}).then(function(){
+								window.location = "../Home/home.html";
+							});
 						});
 					});
-
-
 	  });
 	};
 
