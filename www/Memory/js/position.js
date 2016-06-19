@@ -1,16 +1,16 @@
-$(".photo").addClass("addedClass")
+$(".mphoto").addClass("maddedClass")
 
 setTimeout(function(){
-  $(".filter").click(function(){
-    $(".photo").fadeOut();
-    $(".filter").fadeOut();
-    $(".photo").removeClass("addedClass")
+  $(".mfilter").click(function(){
+    $(".mphoto").fadeOut();
+    $(".mfilter").fadeOut();
+    $(".mphoto").removeClass("maddedClass")
 
   });
 
 },1000)
 
-$(".tagInput input").fadeIn();
+$(".mtagInput input").fadeIn();
 
 
 $("#tag").click(function(){
@@ -20,27 +20,27 @@ $("#tag").click(function(){
 
 
 $("#back3").click(function(){
-  $(".photo").fadeOut();
-  $(".filter").fadeOut();
-  $(".photo").removeClass("addedClass")
+  $(".mphoto").fadeOut();
+  $(".mfilter").fadeOut();
+  $(".mphoto").removeClass("maddedClass")
 
 });
-$(".back").click(function(){
+$(".mback").click(function(){
   window.location  = "../Home/home.html"
 
 });
 
 
-$(".imgMemory").click(function(){
-  $(".photo").fadeIn()
-  $(".photo").addClass("addedClass")
-  $(".filter").fadeIn();
+$(".mimgMemory").click(function(){
+  $(".mphoto").fadeIn()
+  $(".mphoto").addClass("maddedClass")
+  $(".mfilter").fadeIn();
 
 });
 
-$(".view").click(function(){
-  $(".photo").fadeIn()
-  $(".photo").addClass("addedClass")
-  $(".filter").fadeIn();
+$(".mview").click(function(){
+  $(".mphoto").fadeIn()
+  $(".mphoto").addClass("maddedClass")
+  $(".mfilter").fadeIn();
 
 });

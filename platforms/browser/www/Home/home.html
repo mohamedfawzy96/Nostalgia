@@ -47,12 +47,212 @@
       alert('The File APIs are not fully supported in this browser.');
     }
     </script>
+    <link rel="stylesheet" type="text/css" href="../Memory/memory.css" />
+
     <link rel="stylesheet" type="text/css" href="home.css" />
+
     <title>Home</title>
 
 </head>
 
 <body>
+  <div class="mfullScreen">
+
+    <div class="mfilter">
+
+    </div>
+    <div class="mphoto">
+      <div class="mimg">
+          <img src="" alt="" />
+      </div>
+      <div class="mbuttonsPanel">
+        <div  class="mdate2 msector11">
+          <div class="micon3">
+            <img src="../Memory/img/dateicon2.svg" alt="" />
+
+          </div>
+          <div id="dateInFull" class="mtext2">
+            Summer 2010
+
+          </div>
+
+        </div>
+        <div  class="mcaption2 msector11">
+          <div class="micon3">
+            <img src="../Memory/img/captionicon2.svg" alt="" />
+
+          </div>
+          <div id="captionInFull" class="mtext2">
+          ayam gamil walahy
+
+
+          </div>
+
+        </div>
+        <div  class="mtagInput msector11">
+          <input type="text" name="name" value="" placeholder="Tag someone">
+
+        </div>
+        <div  class="mbtn">
+          <div class="mbutton1" id="repost">
+            <img src="../Memory/img/repost.svg" alt="" />
+
+          </div>
+          <div class="mbutton1" id="tag">
+            <img src="../Memory/img/tag.svg" alt="" />
+
+          </div>
+          <div class="mbutton1" id="back3">
+            <img src="../Memory/img/next.svg" alt="" />
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="mhead">
+      <div class="mmargintop">
+
+      </div>
+      <div class="mback" >
+        <img src="../Memory/img/home.svg" alt="" id="home2"/>
+
+      </div>
+      <div id="title">
+      <p>
+        Ahmed
+      </p>
+
+      </div>
+    </div>
+
+
+
+    <div class="mcard">
+      <div class="mimgMemory">
+             <img src="" alt="" id="image"/>
+
+
+
+      </div>
+      <div class="minfo">
+        <div class="maction msector">
+          <div class="micon2">
+
+
+
+          </div>
+
+          <div class="mtext">
+            <p id="owner">
+              Ahmed just shared a memory
+            </p>
+
+          </div>
+
+
+        </div>
+        <div class="mdate1 msector">
+          <div class="micon">
+            <img src="../Memory/img/dateIcon.svg" alt="" />
+
+          </div>
+          <div class="mtext">
+            <p id="date">
+              Summer 2010
+
+            </p>
+
+
+          </div>
+
+        </div>
+        <div class="mcaption1 msector">
+          <div class="micon">
+            <img src="../Memory/img/captionIcon.svg" alt="" />
+
+          </div>
+          <div class="mtext">
+            <p id="caption">
+              Those where the days
+            </p>
+
+
+          </div>
+
+        </div>
+        <!-- NOTE:  -->
+
+      </div>
+
+    </div>
+    <div class="minteractions">
+      <div id="reposts " class="msector2">
+        <p id="reposts">
+          <span id="numReposts">55</span>
+          <span class="msub">Reposts</span>
+
+
+        </p>
+
+
+
+      </div>
+      <div class="mverticalLine">
+
+      </div>
+
+      <div class="mview msector2">
+        <img src="../Memory/img/expand.svg" alt=""  />
+
+      </div>
+      <div class="mverticalLine">
+
+      </div>
+      <div id="members " class="msector2">
+        <p >
+
+
+          <span id="numMembers">55</span>
+        <span class="msub">Members</span>
+
+        </p>
+
+
+      </div>
+
+    </div>
+    <div class="mchat">
+      <div class="msubtitle">
+        Memory Chat
+      </div>
+      <div class="mmessaging" id="chattingbody">
+
+
+      </div>
+      <div class="minputs">
+        <div class="mmessage1">
+          <input type="text" name="name" placeholder="add comment" id="message">
+
+        </div>
+        <div class="msend1">
+          send
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    </div>
+
   <div class="fullScreen">
     <div class="time">
 
@@ -170,9 +370,14 @@
       <script type="text/javascript">
         var file;
       </script>
+      <script src="../js/objects.js"></script>
+
       <script src="addfunction.js"></script>
 
       <script src="home.js"></script>
+      <script src="../Memory/js/memory.js"></script>
+      <script src="../Memory/js/position.js"></script>
+
 
 
 </body>
