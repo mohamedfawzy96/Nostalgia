@@ -16,19 +16,36 @@ firebase.auth().onAuthStateChanged(function(user) {
   // acceptinh the request
   $(document).on('click ', '.accept', function() {
     var uid = $(this).attr("uid");
+    var reqkey = $(this).attr('rel');
+
     database.ref().child('users').child(userID).once("value",function(user){
       var num = user.child("friends").numChildren()
-      database.ref().child('users').child(userID).child("friends").child(num).set(uid)
+      database.ref().child('users').child(userID).child("friends").child(num).set(uid);
+      $("li[uid="+uid+"]").css({"display":"none"});
+      database.ref().child('users').child(userID).child('RecivedRequests').on("child_added", function(requestKeySnap){
+        alert(requestKeySnap.val());
+        database.ref().child('users').child(userID).child('RecivedRequests').child(requestKeySnap.val()+'').remove(function(){
+          alert('removed');
+        });
+      })
 
-    })
+    });
 
 
-  })
+  });
 
 
+  $('#friends').click(function(){
+    var user = firebase.auth().currentUser;
+    database.ref().child('users').child(user.uid).child("friends").on('child_added', function(childSnap){
+      var frienduid = childSnap.val();
+      database.ref().child('users').child(frienduid).once('value', function(userSnap){
+        var name = userSnap.child('username').val();
+        $('.Friendcontent').append("<li uid=\""+frienduid+"\"><div class=\"theFriend\"><div class=\"friendImage\"><img src=\"../Home/img/test.jpg\" alt=\"\" /></div><div class=\"friendnameOfuser\">"+name+"</div></div></li>");
 
-
-
+      });
+    });
+  });
 
 
 
@@ -36,35 +53,34 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   // updating the number of requests
 
-  database.ref().child('users').child(userID).on("value",function(user){
+  database.ref().child('users').child(userID).once("value",function(user){
     $("#num").html(user.child("RecivedRequests").numChildren())
 
-  })
+  });
   // filling the requestsview
-  database.ref().child('users').child(userID).on("value",function(user){
+  database.ref().child('users').child(userID).once("value",function(user){
   var requests = user.child("RecivedRequests").val()
+  var i = 0;
+  if(requests !=null){
   requests.forEach(function(request){
     var Req2 = (request+"").split(" ")[0]
     database.ref().child('request').child(Req2).once("value",function(request2){
       var From = request2.child("from").val()
-      database.ref().child('users').child(From).on("value",function(user3){
+      database.ref().child('users').child(From).once("value",function(user3){
         var username = user3.child("username").val();
-        var uid = user3.child("uid").val()
+        var uid = user3.child("uid").val();
         var url = "../Home/img/test.jpg"
-        AddRequets(username,url,uid)
-
-      })
-
-
-    })
-
+        var num = i
+        AddRequets(username,url,uid,Req2,num);
+      });
+    });
+    i++;
 
 
+  });
+}
 
-
-  })
-
-  })
+});
 
 
 
@@ -84,15 +100,15 @@ firebase.auth().onAuthStateChanged(function(user) {
     users.child(to).once("value",function(snapshot){
       var num = snapshot.child("RecivedRequests").numChildren()
       var ID = (requestID+"").split("/").pop()
-      users.child(to).child("RecivedRequests").child(num).set(ID+" ");
+      users.child(to).child("RecivedRequests").child(num).set(ID+"");
 
 
     })
 
     users.child(From).once("value",function(snapshot){
       var num = snapshot.child("SentRequests").numChildren()
-      var ID = (requestID+"").split("/").pop()
-      users.child(From).child("SentRequests").child(num).set(ID+" ");
+      var ID = (requestID+"").split("/").pop();
+      users.child(From).child("SentRequests").child(num).set(ID+"");
 
 
 
@@ -169,7 +185,8 @@ function requested(){
   var users = database.ref().child('users');
   var bool = false;
   users.child(ID).once("value",function(user){
-    var RequestID = user.child("SentRequests").val()
+    var RequestID = user.child("SentRequests").val();
+    alert(RequestID);
     if(RequestID !=null){
       RequestID.forEach(function(snap){
         var Req2 = (snap+"").split(" ")[0]
@@ -208,8 +225,8 @@ function requested(){
 
 }
 
-function AddRequets(username,url,uid) {
-  var html = "<li uid="+uid+" >"
+function AddRequets(username,url,uid,req,num) {
+  var html = "<li uid="+uid+"  >"
   +
     "<div class=\"theUser\">"
     +
@@ -237,8 +254,8 @@ function AddRequets(username,url,uid) {
     +
     "<div class=\"btnAccept\">"
     +
-      "<div class=\"accept btnreq\" uid="+uid+">"
-+
+      "<div class=\"accept btnreq\" uid="+uid+" rel="+req+""+" num="+num+">"
+        +
         "Accept"
         +
 
