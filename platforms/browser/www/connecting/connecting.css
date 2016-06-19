@@ -940,7 +940,7 @@ body {
 }
 
 
-.back {
+.btnbk {
   position: relative;
 
 
@@ -951,7 +951,7 @@ body {
   margin-left: 10px;
 
 }
-.back  img{
+.btnbk  img{
   position: relative;
   height: 100%;
   width: 100%;
