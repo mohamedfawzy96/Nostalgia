@@ -19,6 +19,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     database.ref().child('users').child(userID).once("value",function(user){
       var num = user.child("friends").numChildren();
       database.ref().child('users').child(userID).child("friends").child(num).set(uid);
+      database.ref().child('users').child(uid).child("friends").child(num).set(userID);
     });
     $("li[uid="+uid+"]").css({"display":"none"});
     database.ref().child('users').child(userID).child('ReceivedRequests').on("child_added", function(requestKeySnap){
@@ -26,6 +27,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').remove(function(){
           //alert('removed');
         });
+        database.ref().child('users').child(uid).child('SentRequests').child(requestKeySnap.key+'').remove();
       }
     });
   });
