@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />-->
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js">
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script type="text/javascript">
+    var config = {
+    apiKey: "AIzaSyCT0GktUYHJeLcHnzeo3vJ99ONULSxdglY",
+    authDomain: "nostalgia-79c70.firebaseapp.com",
+    databaseURL: "https://nostalgia-79c70.firebaseio.com",
+    storageBucket: "nostalgia-79c70.appspot.com",
+
+    };
+    var app= firebase.initializeApp(config);
+    var database = app.database();
+    var auth = app.auth();
+    var storage = app.storage();
+    var rootRef = firebase.database().ref();
+    var usersRef = database.ref().child('users');
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+    var imagesRef = storageRef.child('images');
+    // Check for the various File API support.
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      // Great success! All the File APIs are supported.
+    } else {
+      alert('The File APIs are not fully supported in this browser.');
+    }
+    </script>
+    <link rel="stylesheet" type="text/css" href="Send.css" />
+    <script type="text/javascript" src="../js/objects.js"></script>
+    <title>Hello World</title>
+
+</head>
+
+<body>
+  <div class="full">
+    <div class="filter">
+
+    </div>
+    <div class="Orginaldate1">
+      <div class="relative">
+        <div class="sub">
+          Original Date
+
+        </div>
+
+      </div>
+
+      <br>
+      <div class="listOfDates">
+        <ul>
+          <li>No Date</li>
+
+          <li>Summer 2010</li>
+          <li>winter 2010</li>
+          <li>spring 2010</li>
+          <li>Summer 2009</li>
+          <li>winter 2009</li>
+          <li>spring 2009</li>
+          <li>Summer 2008</li>
+          <li>winter 2008</li>
+          <li>spring 2008</li>
+
+
+        </ul>
+
+
+
+      </div>
+
+
+    </div>
+    <div class="members">
+      <div class="search">
+        <input type="text" name="name" value="" id="search" placeholder="Search">
+
+      </div>
+      <div class="content">
+
+
+      </div>
+      <br>
+      <div class="finish">
+        <button type="button" name="button" id="doneMembers">Done</button>
+
+      </div>
+
+    </div>
+    <div class="effects">
+
+      <div class="theImage">
+        <img src="../Home/img/test.jpg" alt="" />
+
+      </div>
+      <br>
+      <div class="sub">
+        Add Effects
+
+      </div>
+      <div class="listOfeffects">
+        <div id="inNormal " class="time"  >
+          <img src="img/circle.svg" alt="" id="normaleffect2" class="effectselected1 normaleffect2"  />
+<br>
+          <p>
+            normal
+          </p>
+        </div>
+        <div id="in1970" class="time " >
+          <img src="img/circle.svg" alt="" id="1970effect2" class="effectselected1 1970effect2"/>
+          <br>
+          <p>
+            1970
+          </p>
+        </div>
+        <div id="in1980" class="time " >
+          <img src="img/circle.svg" alt="" id="1980effect2" class="effectselected1 1980effect2"/>
+          <br>
+          <p>
+            1980
+          </p>
+
+        </div>
+        <div id="in1990" class="time " >
+          <img src="img/circle.svg" alt="" id="1990effect2" class="effectselected1 1990effect2"/>
+          <br>
+          <p>
+            1990
+          </p>
+        </div>
+        <div id="in2000" class="time " >
+          <img src="img/circle.svg" alt="" id="2000effect2" class="effectselected1 2000effect2"/>
+           <br>
+          <p>
+            2000
+          </p>
+        </div>
+
+
+      </div>
+      <div class="lastthing">
+        <button type="button" name="button" id="doneEffects"> Done</button>
+
+      </div>
+
+    </div>
+
+        <div class="head">
+          <div id="back">
+            X
+
+
+          </div>
+
+
+          <div id="done">
+            Done
+
+          </div>
+
+        </div>
+         <br>
+        <div class="first sector">
+          <div class="sub">
+            Private
+
+          </div>
+          <div class="private" >
+            <input type="checkbox" name="name" value="" id="private">
+
+          </div>
+          <div id="description">
+            <input id="selectphoto" type="file" style="opacity:0"/>
+
+
+          </div>
+
+
+        </div>
+        <hr>
+        <div class="second sector">
+          <div class="sub">
+            Effects
+
+          </div>
+          <div class="dates">
+            <div id="normalSmall " class="time">
+              <img src="img/circle.svg" alt="" id="normaleffect" class="effectselected" />
+
+              <p>
+                normal
+              </p>
+            </div>
+            <div id="1970Small" class="time">
+              <img src="img/circle.svg" alt="" id="1970effect" />
+              <p>
+                1970
+              </p>
+            </div>
+            <div id="1980Small" class="time">
+              <img src="img/circle.svg" alt="" id="1980effect" />
+              <p>
+                1980
+              </p>
+
+            </div>
+            <div id="1990Small" class="time">
+              <img src="img/circle.svg" alt="" id="1990effect" />
+
+              <p>
+                1990
+              </p>
+            </div>
+            <div id="2000Small" class="time">
+              <img src="img/circle.svg" alt="" id="2000effect" />
+              <p>
+                2000
+              </p>
+            </div>
+
+
+
+          </div>
+
+
+
+        </div>
+        <hr>
+
+        <div class="third sector">
+
+          <br>
+          <div id="drop">
+            Add Date
+
+          </div>
+
+
+        </div>
+        <hr>
+        <div class="fourth sector">
+
+          <textarea name="name" rows="8" cols="40" placeholder="Make them remeber it ..." id="caption"></textarea>
+
+        </div>
+        <hr>
+        <div class="fifth sector">
+        <div class="sub">
+          Add Members
+        </div>
+        <div class="">
+          <img src="img/add.svg" alt="" id="addMember" class="notonce"/>
+
+
+        </div>
+
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+      <script src="../js/jquery-2.1.3.min.js"></script>
+      <script src="addmembers.js"></script>
+
+      <script src="effects.js"></script>
+
+      <script src="Send.js"></script>
+
+
+</body>
+
+</html>
