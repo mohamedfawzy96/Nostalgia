@@ -101,26 +101,29 @@ $(function(){
   });
 
   function getFeelIt(){
+    var currentUserId = firebase.auth().currentUser.uid;
     var memoriesIDs = new Array();
-    database.ref().child('users').on('child_added', function(userSnap){
-      //alert(userSnap.key);
-      database.ref().child("users").child(userSnap.key).child("memberposted").on('child_added', function(memoryKeySnap){
-        var memoryID = (memoryKeySnap.val()+'').split("/").pop();
-        //should change this after cleaning the databse
-        //alert(memoryID);
-        database.ref().child("memories").child(memoryID).on('value',function(memorySnap){
-          //alert(memorySnap.child("url").val());
-          var url = memorySnap.child("url").val();
-          var owner = memorySnap.child("owner").val();
-          var date = memorySnap.child("date").val();
-          var caption = memorySnap.child("caption").val();
-          if(caption==""){
-            caption = "no caption";
-          }
-          var str = "<li><div class=\"card\"><div class=\"imgMemory \"><img class=\"clickableimg\" src=\""+url+"\" alt=\"\" id=\""+memoryID+"\"/></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
-          $('#body2').append(str);
+    database.ref().child('users').child(currentUserId).child('friends').on('child_added', function(userKeySnap){
+      database.ref().child('users').child(userKeySnap.val()+'').once('value', function(userSnap){
+        alert(userSnap.key);
+        database.ref().child("users").child(userSnap.key).child("memberposted").on('child_added', function(memoryKeySnap){
+          var memoryID = (memoryKeySnap.val()+'').split("/").pop();
+          //should change this after cleaning the databse
+          //alert(memoryID);
+          database.ref().child("memories").child(memoryID).on('value',function(memorySnap){
+            //alert(memorySnap.child("url").val());
+            var url = memorySnap.child("url").val();
+            var owner = memorySnap.child("owner").val();
+            var date = memorySnap.child("date").val();
+            var caption = memorySnap.child("caption").val();
+            if(caption==""){
+              caption = "no caption";
+            }
+            var str = "<li><div class=\"card\"><div class=\"imgMemory \"><img class=\"clickableimg\" src=\""+url+"\" alt=\"\" id=\""+memoryID+"\"/></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
+            $('#body2').append(str);
+          });
         });
-      });
+      })
     });
   };
 
@@ -138,7 +141,7 @@ $(function(){
 
         memorySnap = snapshot.val();
         console.log(memorySnap);
-        if(memorySnap != "hello"){
+        if(memorySnap != null){
         memorySnap.forEach(function(memorySnapshot){
           <!-- NOTE -->
           //you should delet the split and pop because I already fixed it in Send
