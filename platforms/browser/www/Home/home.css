@@ -966,7 +966,17 @@ body {
 .time{
   position: relative;
   height: 4%;
+  background-color: #649a8f;
+}
+.mfullScreen{
+  position: fixed;
   background-color: white;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  z-index: 10000;
+  transform: translate(1000px);
 }
 .memoriespic{
   height: auto;
@@ -1076,7 +1086,7 @@ body {
 
 
 }
-li{
+.fullScreen li{
   position: relative;
   display: flex;
   justify-content: space-around;

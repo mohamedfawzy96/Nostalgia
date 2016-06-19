@@ -1,12 +1,12 @@
 
 
 
-var height = $(".card").height() + $(".head").height() + $(".interactions").height() + 25 + 20 + 10
+var height = $(".mcard").height() + $(".mhead").height() + $(".minteractions").height() + 25 + 20 + 10
 var fullheight = $(window).height();
 var chatHeight = fullheight - height;
-$(".chat").height(chatHeight)
+$(".mchat").height(chatHeight)
 var widthHeight = -($("input").height()/2);
-$(".send1").css({"line-height":($(".send1").height()/2)+"px"});
+$(".msend1").css({"line-height":($(".msend1").height()/2)+"px"});
 
 
 $(window).load(function(){
@@ -23,7 +23,7 @@ $(function(){
   $('#message').val('');
   var currurl = document.URL;
   var splittingurl = currurl.split("=");
-  var imguid = splittingurl.pop();
+  var imguid = "-KKb4imlGeOcWZ2Mwnb3"
   var imgurl="hello";
   var repostsnum = 0;
   var membersnum = 0;
@@ -31,7 +31,7 @@ $(function(){
     imgurl = memorysnap.child("url").val();
     repostsnum = memorysnap.child("reposts").val();
     membersnum = memorysnap.child("members").numChildren();
-    $(".img img").attr("src",imgurl)
+    $(".mimg img").attr("src",imgurl)
     $('#title p').text(memorysnap.child('owner').val());
     $('#owner').text(memorysnap.child('owner').val()+" just shared a memory");
     $('#date').text(memorysnap.child("date").val());
@@ -53,7 +53,7 @@ $(function(){
         database.ref().child("users").child(useridnow).once('value',function(usersnap){
           var usernamenow = usersnap.child('username').val();
           var cmntdatanow = commentSnap.child("data").val();
-          $('#chattingbody').append("<li id=\"new\"> <div class=\"2\" ID=\"userInChat\">"+usernamenow+
+          $('#chattingbody').append("<li id=\"new\"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+
           " </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
 
           $('#chattingbody').scrollTop(1000000);
@@ -62,7 +62,7 @@ $(function(){
       });
     });
 
-  $(".send1").click(function(){
+  $(".msend1").click(function(){
     var user = firebase.auth().currentUser;
     var users = database.ref().child("users");
     var username;
@@ -71,6 +71,7 @@ $(function(){
       username = snapshot.val();
     });
     var cmntdata = $('#message').val();
+
     var newcomment = new Comment((users.child(user.uid)+"").split("/").pop(), cmntdata);
     var key = database.ref().child("comments").push();
     key.set(newcomment);
