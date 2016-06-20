@@ -11,6 +11,9 @@ $(function(){
 
 firebase.auth().onAuthStateChanged(function(user) {
   var userID = firebase.auth().currentUser.uid
+  database.ref().child('users').child(userID).once("value",function(user1){
+    $("#title p").html(user1.child("username").val())
+  })
   // acceptinh the request reject btnreq
   $(document).on('click ', '.accept', function() {
     var uid = $(this).attr("uid");

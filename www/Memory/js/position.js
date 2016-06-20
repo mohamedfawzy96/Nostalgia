@@ -26,7 +26,7 @@ $("#back3").click(function(){
 
 });
 $(".mback").click(function(){
-  window.location  = "../Home/home.html"
+  $(".mfullScreen").css({"transform":"translateX(800px)"})
 
 });
 

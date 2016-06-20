@@ -1,5 +1,4 @@
-
-
+var imguid
 $(function(){
   var selectedimg;
   $("#connect").click(function(){
@@ -9,15 +8,68 @@ $(function(){
   })
 
 
-  $(document).on('click tap', '.box', function() {
+  $(document).on('tap ', '.box', function() {
     selectedimg = $(this).attr('rel');
-    window.location = '../Memory/memory.html?somval=' + $(this).attr('rel');
+     imguid = $(this).attr('rel');
+     // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
+
+    UpdateImageView(imguid)
+    $(".mphoto").fadeIn()
+    $(".mphoto").addClass("maddedClass")
+    $(".mfilter").fadeIn();
+    $(".mfullScreen").css({"transform":"translateX(0)"})
+
   });
 
-  $(document).on('click tap', '.clickableimg', function() {
+  $(document).on('tap ', '.clickableimg', function(event) {
+    event.stopPropagation();
+    alert('here');
     alert($(this));
-    window.location = '../Memory/memory.html?somval=' + $(this).attr('id');
+    imguid  = $(this).attr('id');
+    alert(imguid)
+    // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
+
+    UpdateImageView(imguid)
+    $(".mphoto").fadeIn()
+    $(".mphoto").addClass("maddedClass")
+    $(".mfilter").fadeIn();
+    $(".mfullScreen").css({"transform":"translateX(0)"})
+
   });
+
+  // moved the send to the home.js
+  $(".msend1").click(function(){
+    alert('tadaa')
+    var user = firebase.auth().currentUser;
+    var users = database.ref().child("users");
+    var username;
+    var userInDatabase = users.child(user.uid).child("username");
+    userInDatabase.once('value',function(snapshot){
+      username = snapshot.val();
+    });
+    var cmntdata = $('#message').val();
+
+    var newcomment = new Comment((users.child(user.uid)+"").split("/").pop(), cmntdata);
+    var key = database.ref().child("comments").push();
+    key.set(newcomment);
+    database.ref().child("memories").child(imguid).once('value', function(usersnap){
+      var num = usersnap.child("comments").numChildren();
+      var keytoadd = (key+'').split("/").pop();
+      database.ref().child("memories").child(imguid).child("comments").child(num).set(keytoadd);
+
+    }).then(function(){
+      //$('#chattingbody').append("<li id=\"new\"> <div class=\"2\" ID=\"userInChat\">"+username+" </div>  <div ID=\"userMessage\">"+cmntdata+" </div> </li>");
+
+      var target = $('#new');
+      $('#message').val('');
+      /*if( target.length ) {
+          $('html, body').animate({
+              scrollTop: target.offset().top
+          }, 1000);
+      };*/
+    });
+  });
+  //////////
 
 
   memoriesArray = new Array();
@@ -60,6 +112,8 @@ $(function(){
 
 
     firebase.auth().onAuthStateChanged(function(user) {
+      getFeelIt();
+
       if (user) {
         getImages();
         aler(user)
@@ -85,8 +139,8 @@ $(function(){
     $(this).css({"border-bottom":"7px solid white"});
     $(".tab1").css({"border":"0"});
     $(".tab3").css({"border":"0"});
+
     if($('#body2').attr('class')=="notevenonce"){
-      getFeelIt();
       $('#body2').attr('class','once');
     }
   });
@@ -105,7 +159,7 @@ $(function(){
       var memoryID = (memoryKeySnap.val()+'').split("/").pop();
       //should change this after cleaning the databse
       //alert(memoryID);
-      database.ref().child("memories").child(memoryID).on('value',function(memorySnap){
+      database.ref().child("memories").child(memoryID).once('value',function(memorySnap){
         //alert(memorySnap.child("url").val());
         var url = memorySnap.child("url").val();
         var owner = memorySnap.child("owner").val();
