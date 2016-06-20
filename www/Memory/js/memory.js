@@ -1,6 +1,5 @@
 
 
-
 var height = $(".mcard").height() + $(".mhead").height() + $(".minteractions").height() + 25 + 20 + 10
 var fullheight = $(window).height();
 var chatHeight = fullheight - height;
@@ -19,11 +18,12 @@ $(window).load(function(){
     username = snapshot.val();
   });*/
 });
-$(function(){
+//turned it into a function so every time the memoryview open it updates the value
+function UpdateImageView(imageuid1){
   $('#message').val('');
   var currurl = document.URL;
   var splittingurl = currurl.split("=");
-  var imguid = "-KKb4imlGeOcWZ2Mwnb3"
+  var imguid = imageuid1
   var imgurl="hello";
   var repostsnum = 0;
   var membersnum = 0;
@@ -45,6 +45,7 @@ $(function(){
     $('#numReposts').text(repostsnum);
     $('#numMembers').text(membersnum);
   });
+  $('#chattingbody').text("");
     database.ref().child("memories").child(imguid).child("comments").on('child_added',function(commentid){
       //alert(commentid.val());
       var cmntid = commentid.val();
@@ -62,36 +63,7 @@ $(function(){
       });
     });
 
-  $(".msend1").click(function(){
-    var user = firebase.auth().currentUser;
-    var users = database.ref().child("users");
-    var username;
-    var userInDatabase = users.child(user.uid).child("username");
-    userInDatabase.once('value',function(snapshot){
-      username = snapshot.val();
-    });
-    var cmntdata = $('#message').val();
 
-    var newcomment = new Comment((users.child(user.uid)+"").split("/").pop(), cmntdata);
-    var key = database.ref().child("comments").push();
-    key.set(newcomment);
-    database.ref().child("memories").child(imguid).once('value', function(usersnap){
-      var num = usersnap.child("comments").numChildren();
-      var keytoadd = (key+'').split("/").pop();
-      database.ref().child("memories").child(imguid).child("comments").child(num).set(keytoadd);
-
-    }).then(function(){
-      //$('#chattingbody').append("<li id=\"new\"> <div class=\"2\" ID=\"userInChat\">"+username+" </div>  <div ID=\"userMessage\">"+cmntdata+" </div> </li>");
-
-      var target = $('#new');
-      $('#message').val('');
-      /*if( target.length ) {
-          $('html, body').animate({
-              scrollTop: target.offset().top
-          }, 1000);
-      };*/
-    });
-  });
   var qsParm = new Array();
   var ImageUid;
   function qs() {
@@ -137,5 +109,5 @@ $(function(){
 
 
 
-});
+};
 //$("input").css({"margin-top":widthHeight+"px"});
