@@ -10,9 +10,11 @@ $(function(){
 
 
 firebase.auth().onAuthStateChanged(function(user) {
-  var userID = firebase.auth().currentUser.uid
+  var userID = firebase.auth().currentUser.uid;
+  var username;
   database.ref().child('users').child(userID).once("value",function(user1){
-    $("#title p").html(user1.child("username").val())
+    username = user1.child('username').val();
+    $("#title p").html(user1.child("username").val());
   })
   // acceptinh the request reject btnreq
   $(document).on('click ', '.accept', function() {
@@ -33,6 +35,24 @@ firebase.auth().onAuthStateChanged(function(user) {
         database.ref().child('users').child(uid).child('SentRequests').child(requestKeySnap.key+'').remove();
       }
     });
+
+
+
+      var notificationkey = database.ref().child('notifications').push();
+      notificationkey.set({
+        subject: user.uid,
+        notified: uid,
+        subjectname: username,
+        type: "accepted"
+      });
+      var notificationsnum;
+      database.ref().child('users').child(uid).child('notifications').once('value', function(notificationsSnap){
+        notificationsnum = notificationsSnap.numChildren();
+      }).then(function(){
+        database.ref().child('users').child(uid).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
+      });
+
+
   });
   $(document).on('click ', '.reject', function() {
     var uid = $(this).attr("uid");

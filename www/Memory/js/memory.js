@@ -86,6 +86,7 @@ function UpdateImageView(imageuid1){
     var user = firebase.auth().currentUser;
     var users = database.ref().child("users");
     var username;
+    var owneruid = "";
     var userInDatabase = users.child(user.uid).child("username");
     userInDatabase.once('value',function(snapshot){
       username = snapshot.val();
@@ -93,6 +94,7 @@ function UpdateImageView(imageuid1){
     var repostsnum;
     database.ref().child("memories").child(imguid).once('value', function(memorysnap){
       repostsnum = memorysnap.child("reposts").val();
+      owneruid += memorysnap.child('owneruid').val();
     }).then(function(){
       var newrepostsnum = repostsnum + 1;
       database.ref().child("memories").child(imguid).child("reposts").set(newrepostsnum);
@@ -103,7 +105,22 @@ function UpdateImageView(imageuid1){
       }).then(function(){
         users.child(user.uid).child("reposted").child(repostednum).set(imguid);
       });
+      var notificationkey = database.ref().child('notifications').push();
+      notificationkey.set({
+        subject: user.uid,
+        subjectname: username,
+        notified: owneruid,
+        memoryid: imguid,
+        type: "reposted"
+      });
+      var notificationsnum;
+      database.ref().child('users').child(owneruid).child('notifications').once('value', function(notificationsSnap){
+        notificationsnum = notificationsSnap.numChildren();
+      }).then(function(){
+        database.ref().child('users').child(owneruid).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
+      });
     });
+
   });
 
 
