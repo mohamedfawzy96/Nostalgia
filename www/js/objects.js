@@ -1,4 +1,4 @@
-function Memory (name, size, type, filetype, url, effect, privateattr, caption, reposts, comments, members, date, owner, lastModifiedDate) {
+function Memory (name, size, type, filetype, url, effect, privateattr, caption, reposts, comments, members, date, owner, owneruid, lastModifiedDate) {
   this.name = name;
   this.size = size;
   this.type = type||'n/a';
@@ -12,6 +12,7 @@ function Memory (name, size, type, filetype, url, effect, privateattr, caption, 
   this.members = members;
   this.date = date;
   this.owner = owner;
+  this.owneruid = owneruid;
   //owner : database.ref().child('users').child(user.uid).username,
   this.lastModifiedDate = lastModifiedDate;
 };

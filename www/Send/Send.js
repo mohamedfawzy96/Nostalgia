@@ -119,13 +119,19 @@ $(function(){
 				//alert(membersArray);
 				var newmemory = new Memory(file.name, file.size, file.type, 'image',
 				uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
-				null, null, date, username, (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
+				null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
 				var key = imagesRef.push();
 				key.child("comments").child("0").set("hello");
 				alert(membersArray.length);
 				key.set(newmemory);
 				//alert(key);
-
+				var notificationkey = database.ref().child('notifications').push();
+				notificationkey.set({
+					subject: user.uid,
+					subjectname: username,
+					memoryid: key,
+					type: "posted"
+				});
 				for (var i = 0; i < membersArray.length; i++) {
 					//alert(membersArray[i]);
 					key.child("members").child(i).set(membersArray[i]);
@@ -133,10 +139,12 @@ $(function(){
 					var ref = database.ref().child("users").child(membersArray[i]).once('value',
 					function(memberToSnap){
 						var key3 = (key +'').split("/").pop();
+						var notificationsnum;
 						database.ref().child("users").child(index).child("member").once('value',function(membersnapshot){
 								var num = membersnapshot.numChildren();
 								database.ref().child("users").child(index).child("member").child(num).set(((key +'').split("/").pop()));
 							});
+							notificationsnum = memberToSnap.child('notifications').numChildren();
 						}).then(function(){
 							database.ref().child("users").child(index).child("memberposted").once('value',function(memberpostedsnapshot){
 								var num2 = memberpostedsnapshot.numChildren();
@@ -144,7 +152,9 @@ $(function(){
 							}).then(function(){
 								alert("success");
 							});
+							database.ref().child('users').child(index).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
 						});
+
 					};
 
 					users.child(user.uid).child('friends').on('child_added', function(friendsuidsnap){

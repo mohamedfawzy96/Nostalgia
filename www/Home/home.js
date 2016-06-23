@@ -1,19 +1,21 @@
-var imguid
 $(function(){
+  var imguid;
   var selectedimg;
   $("#connect").click(function(){
     window.location = '../connecting/connecting.html'
+  });
 
+  $( window ).load(function() {
+    // Handler for .load() called.
 
-  })
-
+  });
 
   $(document).on('tap ', '.box', function() {
     selectedimg = $(this).attr('rel');
      imguid = $(this).attr('rel');
      // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
 
-    UpdateImageView(imguid)
+    UpdateImageView(imguid);
     $(".mphoto").fadeIn()
     $(".mphoto").addClass("maddedClass")
     $(".mfilter").fadeIn();
@@ -33,13 +35,12 @@ $(function(){
     $(".mphoto").fadeIn()
     $(".mphoto").addClass("maddedClass")
     $(".mfilter").fadeIn();
-    $(".mfullScreen").css({"transform":"translateX(0)"})
+    $(".mfullScreen").css({"transform":"translateX(0)"});
 
   });
 
   // moved the send to the home.js
   $(".msend1").click(function(){
-    alert('tadaa')
     var user = firebase.auth().currentUser;
     var users = database.ref().child("users");
     var username;
@@ -56,6 +57,27 @@ $(function(){
       var num = usersnap.child("comments").numChildren();
       var keytoadd = (key+'').split("/").pop();
       database.ref().child("memories").child(imguid).child("comments").child(num).set(keytoadd);
+
+      var owneruid = "";
+      database.ref().child("memories").child(imguid).once('value', function(memorysnap){
+        owneruid += memorysnap.child('owneruid').val();
+      }).then(function() {
+        var notificationkey = database.ref().child('notifications').push();
+        notificationkey.set({
+          subject: user.uid,
+          notified: owneruid,
+          subjectname: username,
+          memoryid: imguid,
+          type: "commented"
+        });
+        var notificationsnum;
+        database.ref().child('users').child(owneruid).child('notifications').once('value', function(notificationsSnap){
+          notificationsnum = notificationsSnap.numChildren();
+        }).then(function(){
+          database.ref().child('users').child(owneruid).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
+        });
+      });
+
 
     }).then(function(){
       //$('#chattingbody').append("<li id=\"new\"> <div class=\"2\" ID=\"userInChat\">"+username+" </div>  <div ID=\"userMessage\">"+cmntdata+" </div> </li>");
@@ -112,8 +134,15 @@ $(function(){
 
 
     firebase.auth().onAuthStateChanged(function(user) {
-      getFeelIt();
+      var user = firebase.auth().currentUser;
+      var username;
+      var userInDatabase = database.ref().child('users').child(user.uid).child("username");
 
+      userInDatabase.once('value',function(snapshot){
+        $('#title p').html(snapshot.val());
+        $('#title2 p').html(snapshot.val());
+      });
+      getFeelIt();
       if (user) {
         getImages();
         aler(user)

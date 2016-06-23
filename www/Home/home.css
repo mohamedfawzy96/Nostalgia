@@ -1232,3 +1232,149 @@ body {
 .clickableimg{
   z-index:100;
 }
+.notifications{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background-color: white;
+  box-shadow: 0px 0px 40px black;
+  z-index: 100000;
+  transition: all 0.7s ease-in-out;
+  display: none;
+  transform: translateX(2000px);
+
+
+}
+.filter3{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: none;
+
+
+}
+.header4{
+  position: relative;
+  width: 100%;
+  height: 10%;
+  background-color: #649a8f;
+  box-shadow: 0px 0px 10px #888888;
+  font-weight: bold;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3em;
+}
+.content li{
+  position: relative;
+  height: 25%;
+  width: 100%;
+  margin-top: 20px;
+
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+  justify-content: space-around;
+  font-size: 1.2em;
+  font-weight: 100;
+  color: #333333;
+  box-shadow: 0px 0px 20px #888888;
+
+
+}
+.whatHappen{
+  position: relative;
+  width: 100%;
+}
+.content li img{
+  position: relative;
+  height: 30px;
+  width: 30px;
+  top: 50%;
+  margin-top: -15px;
+
+}
+.icon5{
+  position: relative;
+  height: 60px;
+  width: 60px;
+  left: 50%;
+  margin-left: -30px;
+  border-radius: 50%;
+  background-size: cover;
+  overflow: hidden;
+
+
+
+}
+
+.content{
+  position: relative;
+  width: 100%;
+  height: 90%;
+  overflow-x: scroll;
+
+
+
+}
+.filter5{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.color{
+  color: #EC4B57;
+  font-weight: bold;
+
+}
+.mmargintop{
+  position: relative;
+  height: 20px;
+  background-color: #649a8f;
+}
+
+.back6 {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  margin-top: -5px;
+
+  height: 20px;
+  width: 20px;
+  z-index: 3;
+
+}
+.back6 img{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.header6{
+  position: relative;
+  height: 12%;
+
+  width: 100%;
+  box-shadow: 0px 0px 20px #888888;
+  text-align: center;
+  background-color: #649a8f;
+  color: white;
+  font-weight: bold;
+
+}
+#title{
+  position: absolute;
+  height: 30px;
+  width: 100%;
+  top: 50%;
+  margin-top: -7px;
+}
+#title p{
+  font-size: 1.3em;
+
+}
