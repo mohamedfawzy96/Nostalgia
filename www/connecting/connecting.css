@@ -1384,3 +1384,9 @@ li img{
   align-items: center;
   justify-content: center;
 }
+.content{
+  overflow-x: scroll;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+
+}

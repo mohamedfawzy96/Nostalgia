@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 $(function() {
   $(".back6").click(function(){
       $(".notifications").css({"transform":"translateX(2000px)"});
@@ -79,3 +80,28 @@ $(function() {
   });
 
 });
+=======
+$(".back6").click(function(){
+    $(".notifications").css({"transform":"translateX(2000px)"});
+
+
+
+
+
+
+})
+$("#Search").click(function(){
+
+
+  $(".notifications").fadeIn();
+  setTimeout(function(){
+    $(".notifications").css({"transform":"translateX(0)"});
+
+
+
+  },50)
+
+
+
+})
+>>>>>>> Stashed changes

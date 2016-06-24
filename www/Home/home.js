@@ -25,10 +25,7 @@ $(function(){
 
   $(document).on('tap ', '.clickableimg', function(event) {
     event.stopPropagation();
-    alert('here');
-    alert($(this));
     imguid  = $(this).attr('id');
-    alert(imguid)
     // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
 
     UpdateImageView(imguid)
@@ -208,7 +205,6 @@ $(function(){
     var memoriesIDs = new Array();
     database.ref().child('users').child(currentUserId).child('friends').on('child_added', function(userKeySnap) {
       database.ref().child('users').child(userKeySnap.val()+'').once('value', function(userSnap){
-        alert(userSnap.key);
         database.ref().child("users").child(userSnap.key).child("memberposted").on('child_added', function(memoryKeySnap){
           var memoryID = (memoryKeySnap.val()+'').split("/").pop();
           //should change this after cleaning the databse
@@ -276,7 +272,6 @@ $(function(){
   $('#menu').click(function(){
     firebase.auth().signOut().then(function() {
       console.log('Signed Out');
-      alert(firebase.auth().currentUser);
       window.location = "../index.html";
     }, function(error) {
       console.error('Sign Out Error', error);
