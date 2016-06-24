@@ -1,4 +1,3 @@
-
 $(function(){
 
 
@@ -60,6 +59,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     var reqkey = $(this).attr('rel');
     $("li[uid="+uid+"]").css({"display":"none"});
     database.ref().child('users').child(userID).child('ReceivedRequests').on("child_added", function(requestKeySnap){
+      alert(requestKeySnap.key);
       if(reqkey==requestKeySnap.val()){
         database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').remove(function(){
           //alert('removed');
