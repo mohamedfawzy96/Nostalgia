@@ -127,9 +127,9 @@ $(function(){
 				//alert(key);
 				var notificationkey = database.ref().child('notifications').push();
 				notificationkey.set({
-					subject: user.uid,
+					subject: user.uid+'',
 					subjectname: username,
-					memoryid: key,
+					memoryid: ((key +'').split("/").pop()),
 					type: "posted"
 				});
 				for (var i = 0; i < membersArray.length; i++) {
