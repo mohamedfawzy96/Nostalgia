@@ -33,7 +33,9 @@ $(window).load(function(){
       username = snapshot.val();
     }).then(function(){
       alert(username);
-      window.location = "Home/home.html";
+      if(username){
+        window.location = "Home/home.html";
+      }
     });
   };
 });
@@ -79,7 +81,24 @@ $(function(){
             var newuser = new User(user.email, user.uid, currusername, [], [], [], [], [], [], null);
 
             usersRef.child(user.uid).set(newuser);
-            window.location = "Home/home.html"
+            usersRef.child('usernames').child(currusername).once('value', function(usernameSnap) {
+              if(usernameSnap.val()){
+                alert(usernameSnap.key)
+                alert('that user name is taken');
+                usersRef.child(user.uid).remove();
+                user.delete().then(function() {
+                  // User deleted.
+                  alert('deleted user')
+                }, function(error) {
+                  // An error happened.
+                  alert(error)
+                });
+
+              } else {
+                usersRef.child('usernames').child(currusername+'').set(user.uid);
+                window.location = "Home/home.html";
+              }
+            });
           } else {
             alert('null user!!');
           }

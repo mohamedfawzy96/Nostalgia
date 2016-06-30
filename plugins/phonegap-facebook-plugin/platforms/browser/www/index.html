@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+            <div class="event listening button" onclick="login();">Login with Facebook</div>
+            <div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
+            <div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
+            <div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
+            <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
+            <div class="event listening button" onclick="logout();">Logout with Facebook</div>
+            <div class="event listening button" onclick="getbirthday();">get birthday</div>
+
+        </div>
+        <div id="fb-root"></div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript">
+            // Load the SDK asynchronously
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            var login = function () {
+                FB.init({
+                appId : '1594582047520422',
+                cookie : true,  // enable cookies to allow the server to access 
+                                // the session
+                xfbml : true,  // parse social plugins on this page
+                version : 'v2.6' // use graph api version 2.5
+                });
+
+                if (window.cordova.platformId == "browser") {
+                    var appId = prompt("Enter FB Application ID", "");
+                    facebookConnectPlugin.browserInit(appId);
+                }
+
+                if (window.cordova.platformId == "browser") {
+                    facebookConnectPlugin.browserInit(appId, 'v2.6');
+                    // version is optional. It refers to the version of API you may want to use.
+                }
+                facebookConnectPlugin.login( ["email"], 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response))
+                });
+            }  
+            var showDialog = function () { 
+                facebookConnectPlugin.showDialog({ method: "feed" }, 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response))
+                });
+            }             
+            var apiTest = function () { 
+                facebookConnectPlugin.api( "me/?fields=id,email", ["user_birthday"],
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) }); 
+            }
+            var getAccessToken = function () { 
+                facebookConnectPlugin.getAccessToken( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            var getStatus = function () { 
+                facebookConnectPlugin.getLoginStatus( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            var getbirthday = function() { 
+                facebookConnectPlugin.api("<user-id>/?fields=id,email", ["user_birthday"],
+                function (result) {
+                    alert("Result: " + JSON.stringify(result));
+                    /* alerts:
+                        {
+                            "id": "000000123456789",
+                            "email": "myemail@example.com"
+                        }
+                    */
+                },
+                function (error) {
+                    alert("Failed: " + error);
+                });
+            }
+            var logout = function () { 
+                facebookConnectPlugin.logout( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+        </script>
+    </body>
+</html>

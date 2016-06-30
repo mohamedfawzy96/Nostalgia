@@ -1,22 +1,29 @@
-$(window).load(function(){
-		$('#selectphoto').trigger('click');
-});
 $(function(){
-	alert('ready');
-
-	$('#selectphoto').trigger('click');
-	$('#selectphoto').click();
 	$("#description input").click();
 	$('#description input').trigger("click");
 	var effectid = $('.effectselected1')
 	var effectattr="normal";
-
+	var file;
 	var effectattr = "normal";
-	$("#private").click(function(){
+	$("#uploadsubmit").click(function(){
 		$('#selectphoto').trigger('click');
-
 	});
 
+	$("input#selectphoto").change(function () {
+		file = document.getElementById('selectphoto').files[0];
+	    //alert(jQuery(this).val());
+	   	//alert(file);
+	   	readURL(this);
+	});
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+				$('.photo').css("background", "url(\""+e.target.result+"\")");
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
 	effectid.click(function(){
 		var id = $(this).attr("id")
 		effectattr = id
@@ -24,43 +31,62 @@ $(function(){
 		$("."+id).addClass("addedClasToeffect")
 	});
 
-	$('#selectphoto').click();
-
 	$('#done').click(finalize);
 	$('#back').click(function(){
-
-		alert("d")
+		alert("d");
 	});
 
 	function addmembers(user, id){
-	  var html = "<li rel="+id+">"+
-	    "<div id=\"user\"  >"+
-	      "<p>"+
-	        user
-	        +
-	      "</p>"
-	      +
-	    "</div>"
-	    +
-	    "<div class=\"checking\">"
+	  var html = "<li rel="+id+">"
+		  +  "<div id=\"user\"  >"
+			+  "<p>"+user +"</p>"
+	    +  "</div>"
+	    +  "<div class=\"checking\">"
 	    +  "<input type=\"checkbox\" name=\"name\" id=\"added\" >"
-	    +
-	    "</div>"
-	    +
-
-	  "</li>"
-
+	    +  "</div>"
+	    +  "</li>";
 	  $(".content").append(html);
 	};
 
+	$('#searchsubmit').click(function() {
+		var usernametosearch = $('#search').val();
+		$(".content").html("");
+		$(".searchView .content").html("");
+		database.ref().child('users').child('usernames').child(usernametosearch).once('value', function(useruidSnap) {
+			var useruid = useruidSnap.val()+'';
+			if(useruid) {
+				addmembers(usernametosearch, useruid);
+			}
+		});
+	});
+
+	$('#cancelsearch').click(function() {
+		$('#search').val("");
+		$(".content").html("");
+		var users = database.ref().child('users');
+		getMembers();
+	});
+
 	$("#addMember").click(function(){
-		if($(this).attr("class")=="notonce"){
+		//if($(this).attr("class")=="notonce"){
 			$(this).attr("class","once");
 			getMembers();
 			//alert($(this).attr("class"));
-		}
+		//}
 	});
+
 	var membersArray = new Array();
+	function addmembers(user, id){
+	  var html = "<li rel="+id+">"
+		  +  "<div id=\"user\"  >"
+			+  "<p>"+user +"</p>"
+	    +  "</div>"
+	    +  "<div class=\"checking\">"
+	    +  "<input type=\"checkbox\" name=\"name\" id=\"added\" >"
+	    +  "</div>"
+	    +  "</li>";
+	  $(".content").append(html);
+	};
 
 	function getMembers(){
 		var users = database.ref().child("users");
@@ -80,7 +106,7 @@ $(function(){
       userInDatabase.once('value',function(snapshot){
 				username = snapshot.val();
 			});
-			var file = document.getElementById('selectphoto').files[0];
+		var file = document.getElementById('selectphoto').files[0];
 	    var imageRef = storageRef.child('memories/'+file.name);
 	    var uploadTask = imageRef.put(file);
 	    uploadTask.on('state_changed', function(snapshot){
@@ -119,13 +145,19 @@ $(function(){
 				//alert(membersArray);
 				var newmemory = new Memory(file.name, file.size, file.type, 'image',
 				uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
-				null, null, date, username, (file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
+				null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
 				var key = imagesRef.push();
 				key.child("comments").child("0").set("hello");
 				alert(membersArray.length);
 				key.set(newmemory);
 				//alert(key);
-
+				var notificationkey = database.ref().child('notifications').push();
+				notificationkey.set({
+					subject: user.uid+'',
+					subjectname: username,
+					memoryid: ((key +'').split("/").pop()),
+					type: "posted"
+				});
 				for (var i = 0; i < membersArray.length; i++) {
 					//alert(membersArray[i]);
 					key.child("members").child(i).set(membersArray[i]);
@@ -133,10 +165,12 @@ $(function(){
 					var ref = database.ref().child("users").child(membersArray[i]).once('value',
 					function(memberToSnap){
 						var key3 = (key +'').split("/").pop();
+						var notificationsnum;
 						database.ref().child("users").child(index).child("member").once('value',function(membersnapshot){
 								var num = membersnapshot.numChildren();
 								database.ref().child("users").child(index).child("member").child(num).set(((key +'').split("/").pop()));
 							});
+							notificationsnum = memberToSnap.child('notifications').numChildren();
 						}).then(function(){
 							database.ref().child("users").child(index).child("memberposted").once('value',function(memberpostedsnapshot){
 								var num2 = memberpostedsnapshot.numChildren();
@@ -144,7 +178,9 @@ $(function(){
 							}).then(function(){
 								alert("success");
 							});
+							database.ref().child('users').child(index).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
 						});
+
 					};
 
 					users.child(user.uid).child('friends').on('child_added', function(friendsuidsnap){

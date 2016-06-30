@@ -1,4 +1,5 @@
-$("#doneEffects").click(function(){
+$(function () {
+  $("#doneEffects").click(function(){
   $(".effects").fadeOut();
   $(".filter").fadeOut();
 });
@@ -9,7 +10,7 @@ $("#doneMembers").click(function(){
 });
 
 $(".filter").click(function(){
-  $(".effects").fadeOut();
+  //$(".effects").fadeOut();
   $(".Orginaldate1").fadeOut();
   $(".members").fadeOut();
   $(".filter").fadeOut();
@@ -39,3 +40,5 @@ $(".listOfDates li").click(function(){
   $(".filter").fadeOut();
   $("#drop").html($(this).html())
 });
+
+})
