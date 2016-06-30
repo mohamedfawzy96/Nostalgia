@@ -1090,7 +1090,7 @@ hr{
   margin-left: -4vh;
 
 }
-#nameOfperson{
+.nameOfperson{
   position: relative;
   width: 100%;
   height: auto;
@@ -1226,8 +1226,8 @@ hr{
   justify-content: center;
   font-size: 1.2em;
   color: #EC4B57;
-
 }
+
 .box{
   position: relative;
   height: 100%;

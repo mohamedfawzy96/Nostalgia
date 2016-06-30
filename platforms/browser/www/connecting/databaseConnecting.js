@@ -1,19 +1,22 @@
 $(function(){
 
 
-  var users = database.ref().child('users');
-  var array = new Array();
-  users.on("child_added",function(user){
-    addToSearchContent(user.child("username").val(),"../Home/img/test.jpg",user.child("uid").val());
-  });
+
   var uid1 = 0;
 
 
 firebase.auth().onAuthStateChanged(function(user) {
-  var userID = firebase.auth().currentUser.uid
+  var userID = firebase.auth().currentUser.uid;
+  var username;
   database.ref().child('users').child(userID).once("value",function(user1){
-    $("#title p").html(user1.child("username").val())
-  })
+    username = user1.child('username').val();
+    $("#title p").html(user1.child("username").val());
+    var users = database.ref().child('users');
+    //database.ref().child('users').child(user.uid).child('friends')
+    users.on("child_added",function(user){
+      addToSearchContent(user.child("username").val(),"../Home/img/test.jpg",user.child("uid").val());
+    });
+  });
   // acceptinh the request reject btnreq
   $(document).on('click ', '.accept', function() {
     var uid = $(this).attr("uid");
@@ -33,7 +36,24 @@ firebase.auth().onAuthStateChanged(function(user) {
         database.ref().child('users').child(uid).child('SentRequests').child(requestKeySnap.key+'').remove();
       }
     });
+
+
+
+      var notificationkey = database.ref().child('notifications').push();
+      notificationkey.set({
+        subject: user.uid,
+        notified: uid,
+        subjectname: username,
+        type: "accepted"
+      });
+      var notificationsnum;
+      database.ref().child('users').child(uid).child('notifications').once('value', function(notificationsSnap){
+        notificationsnum = notificationsSnap.numChildren();
+      }).then(function(){
+        database.ref().child('users').child(uid).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
+      });
   });
+
   $(document).on('click ', '.reject', function() {
     var uid = $(this).attr("uid");
     var reqkey = $(this).attr('rel');
@@ -89,9 +109,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 //sending requests
   $(document).on('click tap', '.AddFriend', function() {
     var requestID = database.ref().child('requests').push();
-    var From = firebase.auth().currentUser.uid
+    var From = firebase.auth().currentUser.uid;
     var to = $(this).attr("uid");
-
+    var users = database.ref().child('users');
     var request = new Request(From,to,false)
     users.child(to).once("value",function(snapshot){
       var num = snapshot.child("ReceivedRequests").numChildren()

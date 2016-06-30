@@ -1,0 +1,21 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "phonegap-facebook-plugin": {
+            "APP_ID": "1594582047520422",
+            "APP_NAME": "Nostalgia",
+            "PACKAGE_NAME": "com.phoneGap.Nostalgia"
+        }
+    },
+    "dependent_plugins": {
+         "ionic": "v1.0.0-beta.13",
+    "ngCordova": "v0.1.7-alpha",
+    "facebook-connect-plugin": "https://raw.githubusercontent.com/Wizcorp/phonegap-facebook-plugin/master/www/js/facebookConnectPlugin.js"
+    }
+}

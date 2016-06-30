@@ -6,8 +6,9 @@ $(function() {
 
   $("#Search").click(function(){
     $('#notificationscontent').html("");
-    database.ref().child('users').child(firebase.auth().currentUser.uid).child('notifications').on('child_added', function(notificationkeySnap) {
+    database.ref().child('users').child(firebase.auth().currentUser.uid).child('notifications').orderByKey().on('child_added', function(notificationkeySnap) {
       var notificationKey = notificationkeySnap.val();
+      //alert(notificationKey)
       //alert(notificationKey)
       var subjectname;
       var action;
@@ -32,7 +33,6 @@ $(function() {
           uidtoadd = notificationsnap.child('subject').val();
           break;
         }
-
         //alert(type);
       }).then(function() {
         database.ref().child('memories').child(uidtoadd).once('value', function(memorySnap){
@@ -41,17 +41,14 @@ $(function() {
           if(action=="accepted"){
             url = "img/test.jpg";
           }
-          $('#notificationscontent').append("<li class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
+          $('#notificationscontent').prepend("<li class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
           +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
           +    "<div class=\"filter5\">"
-
           +    "</div>"
           +    "<img src=\"../Memory/img/repost.svg\" alt=\"\" />"
-
           +  "</div>"
           +  "<div class=\"whatHappen\">"
           +    subjectname+ " <span class=\"color\">"+action+"</span> "+ str
-
           +  "</div>"
           + "</li>");
         });
