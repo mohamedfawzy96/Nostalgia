@@ -2,19 +2,15 @@ $(window).load(function(){
 		$('#selectphoto').trigger('click');
 });
 $(function(){
-	alert('ready');
-
+	var facebook = false;
 	$('#selectphoto').trigger('click');
 	$('#selectphoto').click();
 	$("#description input").click();
 	$('#description input').trigger("click");
-	var effectid = $('.effectselected1')
-	var effectattr="normal";
-
+	var effectid = $('.effectselected1');
 	var effectattr = "normal";
 	$("#private").click(function(){
 		$('#selectphoto').trigger('click');
-
 	});
 
 	effectid.click(function(){
@@ -25,11 +21,9 @@ $(function(){
 	});
 
 	$('#selectphoto').click();
-
 	$('#done').click(finalize);
 	$('#back').click(function(){
-
-		alert("d")
+		alert("d");
 	});
 
 	function addmembers(user, id){
@@ -107,12 +101,12 @@ $(function(){
 	      var imagesRef = database.ref().child('memories');
 	      var userImagesRef = imagesRef.child(user.uid);
 				var date   = $("#drop").html();
-				$( ".content li" ).each(function( index ) {
+				$( ".content li" ).each(function(  ) {
 					//console.log( index + ": " + $( this ).text() );
-					var chkbx = $(this).find("input:checkbox");
 					//alert(chkbx.prop("checked"));
-					if(chkbx.prop("checked")){
-						//alert($(this).attr('rel'));
+					alert($(this).attr('class'))
+					if($(this).attr('class')=="checked"){
+						alert($(this).attr('rel'));
 						membersArray.push($(this).attr('rel'));
 					}
 				});

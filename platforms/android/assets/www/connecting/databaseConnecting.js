@@ -44,7 +44,8 @@ firebase.auth().onAuthStateChanged(function(user) {
         subject: user.uid,
         notified: uid,
         subjectname: username,
-        type: "accepted"
+        type: "accepted",
+        checked: "false"
       });
       var notificationsnum;
       database.ref().child('users').child(uid).child('notifications').once('value', function(notificationsSnap){

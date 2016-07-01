@@ -3,20 +3,29 @@ $(function() {
       $(".notifications").css({"transform":"translateX(2000px)"});
   });
 
+  var useruid;
+  firebase.auth().onAuthStateChanged(function(user) {
+    var user = firebase.auth().currentUser;
+    var username;
+    useruid = user.uid;
+    var userInDatabase = database.ref().child('users').child(user.uid).child("username");
+  });
 
   $("#Search").click(function(){
     $('#notificationscontent').html("");
-    database.ref().child('users').child(firebase.auth().currentUser.uid).child('notifications').orderByKey().on('child_added', function(notificationkeySnap) {
+    database.ref().child('users').child(useruid+'').child('notifications').orderByKey().on('child_added', function(notificationkeySnap) {
       var notificationKey = notificationkeySnap.val();
-      //alert(notificationKey)
+      alert(notificationKey)
       //alert(notificationKey)
       var subjectname;
       var action;
       var uidtoadd;
       var str;
       var url;
+      var checked;
       database.ref().child('notifications').child(notificationKey).once('value', function(notificationsnap) {
         subjectname = notificationsnap.child('subjectname').val();
+        checked = notificationsnap.child('checked').val();
         //alert(subjectname);
         action = notificationsnap.child('type').val();
         switch(action){
@@ -41,7 +50,7 @@ $(function() {
           if(action=="accepted"){
             url = "img/test.jpg";
           }
-          $('#notificationscontent').prepend("<li class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
+          $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
           +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
           +    "<div class=\"filter5\">"
           +    "</div>"
@@ -52,7 +61,6 @@ $(function() {
           +  "</div>"
           + "</li>");
         });
-
       });
     });
 
@@ -63,6 +71,8 @@ $(function() {
   });
 
   $(document).on('click ', '.notificationspecialclass', function() {
+    alert($(this).attr('key'));
+    database.ref().child('notifications').child($(this).attr('key')).child('checked').set("true");
     if($(this).attr('type')=="accepted"){
       alert('view profile!');
     } else {

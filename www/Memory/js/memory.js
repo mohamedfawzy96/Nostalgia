@@ -111,7 +111,8 @@ function UpdateImageView(imageuid1){
         subjectname: username,
         notified: owneruid,
         memoryid: imguid,
-        type: "reposted"
+        type: "reposted",
+        checked: "false"
       });
       var notificationsnum;
       database.ref().child('users').child(owneruid).child('notifications').once('value', function(notificationsSnap){

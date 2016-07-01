@@ -68,7 +68,8 @@ $(function(){
           notified: owneruid,
           subjectname: username,
           memoryid: imguid,
-          type: "commented"
+          type: "commented",
+          checked: "false"
         });
         var notificationsnum;
         database.ref().child('users').child(owneruid).child('notifications').once('value', function(notificationsSnap){

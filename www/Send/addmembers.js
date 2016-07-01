@@ -18,5 +18,5 @@ function addmembers(user, id){
 
   "</li>"
 
-  $(".content").append(html)
+  $(".content").append(html);
 }

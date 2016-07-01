@@ -2,17 +2,15 @@ $(window).load(function(){
 		$('#selectphoto').trigger('click');
 });
 $(function(){
+	var facebook = false;
 	$('#selectphoto').trigger('click');
 	$('#selectphoto').click();
 	$("#description input").click();
 	$('#description input').trigger("click");
-	var effectid = $('.effectselected1')
-	var effectattr="normal";
-
+	var effectid = $('.effectselected1');
 	var effectattr = "normal";
 	$("#private").click(function(){
 		$('#selectphoto').trigger('click');
-
 	});
 
 	effectid.click(function(){
@@ -29,35 +27,25 @@ $(function(){
 	});
 
 	function addmembers(user, id){
-	  var html = "<li rel="+id+">"
-		  +  "<div id=\"user\"  >"
-			+  "<p>"+user +"</p>"
-	    +  "</div>"
-	    +  "<div class=\"checking\">"
+	  var html = "<li rel="+id+">"+
+	    "<div id=\"user\"  >"+
+	      "<p>"+
+	        user
+	        +
+	      "</p>"
+	      +
+	    "</div>"
+	    +
+	    "<div class=\"checking\">"
 	    +  "<input type=\"checkbox\" name=\"name\" id=\"added\" >"
-	    +  "</div>"
-	    +  "</li>";
+	    +
+	    "</div>"
+	    +
+
+	  "</li>"
+
 	  $(".content").append(html);
 	};
-
-	$('#searchsubmit').click(function() {
-		var usernametosearch = $('#search').val();
-		$(".content").html("");
-		$(".searchView .content").html("");
-		database.ref().child('users').child('usernames').child(usernametosearch).once('value', function(useruidSnap) {
-			var useruid = useruidSnap.val()+'';
-			if(useruid) {
-				addmembers(usernametosearch, useruid);
-			}
-		});
-	});
-
-	$('#cancelsearch').click(function() {
-		$('#search').val("");
-		$(".content").html("");
-		var users = database.ref().child('users');
-		getMembers();
-	});
 
 	$("#addMember").click(function(){
 		if($(this).attr("class")=="notonce"){
@@ -66,7 +54,6 @@ $(function(){
 			//alert($(this).attr("class"));
 		}
 	});
-
 	var membersArray = new Array();
 
 	function getMembers(){
@@ -114,12 +101,12 @@ $(function(){
 	      var imagesRef = database.ref().child('memories');
 	      var userImagesRef = imagesRef.child(user.uid);
 				var date   = $("#drop").html();
-				$( ".content li" ).each(function( index ) {
+				$( ".content li" ).each(function(  ) {
 					//console.log( index + ": " + $( this ).text() );
-					var chkbx = $(this).find("input:checkbox");
 					//alert(chkbx.prop("checked"));
-					if(chkbx.prop("checked")){
-						//alert($(this).attr('rel'));
+					alert($(this).attr('class'))
+					if($(this).attr('class')=="checked"){
+						alert($(this).attr('rel'));
 						membersArray.push($(this).attr('rel'));
 					}
 				});
