@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 
 <html>
 
@@ -18,17 +17,27 @@
     * Create your own at http://cspisawesome.com
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).bind('mobileinit',function(){
+            $.mobile.loadingMessage = false;
+        })
+    </script>
+
+
+
+
+
     </script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script type="text/javascript">
-    var config = {
-    apiKey: "AIzaSyCT0GktUYHJeLcHnzeo3vJ99ONULSxdglY",
-    authDomain: "nostalgia-79c70.firebaseapp.com",
-    databaseURL: "https://nostalgia-79c70.firebaseio.com",
-    storageBucket: "nostalgia-79c70.appspot.com",
 
+    var config = {
+      apiKey: "AIzaSyCT0GktUYHJeLcHnzeo3vJ99ONULSxdglY",
+      authDomain: "nostalgia-79c70.firebaseapp.com",
+      databaseURL: "https://nostalgia-79c70.firebaseio.com",
+      storageBucket: "nostalgia-79c70.appspot.com",
     };
     var app= firebase.initializeApp(config);
     var database = app.database();
@@ -39,6 +48,7 @@
     var storage = firebase.storage();
     var storageRef = storage.ref();
     var imagesRef = storageRef.child('images');
+
     // Check for the various File API support.
     if (window.File && window.FileReader && window.FileList && window.Blob) {
       // Great success! All the File APIs are supported.
@@ -46,249 +56,248 @@
       alert('The File APIs are not fully supported in this browser.');
     }
     </script>
+    <script src="../js/objects.js"></script>
+
     <link rel="stylesheet" type="text/css" href="Send.css" />
-    <script type="text/javascript" src="../js/objects.js"></script>
-    <title>Hello World</title>
+    <title>Home</title>
 
 </head>
 
 <body>
-  <div class="full">
-    <div class="filter">
+<div class="fullScreen">
+  <input type="file" name="name" value="" id="file">
+  <div class="bar">
+    <div class="margintop">
 
     </div>
-    <div class="Orginaldate1">
-      <div class="relative">
-        <div class="sub">
-          Original Date
+    <div class="stuff">
+      <div class="back">
+        <img src="img/back.svg" alt="" />
+
+      </div>
+      <div class="text">Next</div>
+
+    </div>
+
+  </div>
+  <div class="choosePhoto">
+    <div class="buttonandqoute">
+      <div class="qoute">
+        Share an old
+    MEMORY
+    <br>
+    Make them Feel
+    <br>
+    NOSTALGIC
+
+      </div>
+      <div id="choosephoto">
+        <div class="choosetext">
+          library
+
+        </div>
+        <img src="img/camera.svg" alt="" />
+
+
+      </div>
+    </div>
+
+    <div class="photo">
+
+    </div>
+    <div class="recomended">
+      <div class="textreco">
+        Recomendation
+
+      </div>
+      <div class="imgrecodiv">
+        <div class="imgreco" style="border:2px solid #EC4B57;  background-image: url('img/test.jpg');">
+
+        </div>
+        <div class="imgreco" style="background-image: url('img/test.jpg');">
+
+        </div>
+        <div class="imgreco" style="background-image: url('img/test.jpg');">
+
+        </div>
+        <div class="imgreco" style="background-image: url('img/test.jpg');">
 
         </div>
 
       </div>
 
-      <br>
-      <div class="listOfDates">
-        <ul>
-          <li>No Date</li>
-
-          <li>Summer 2010</li>
-          <li>winter 2010</li>
-          <li>spring 2010</li>
-          <li>Summer 2009</li>
-          <li>winter 2009</li>
-          <li>spring 2009</li>
-          <li>Summer 2008</li>
-          <li>winter 2008</li>
-          <li>spring 2008</li>
+    </div>
 
 
-        </ul>
+
+  </div>
+  <div class="filterB">
+
+  </div>
+  <div class="date">
+    <div class="Dateoptions">Can't <br>Remeber</div>
+    <div class="Dateoptions">Summer <br>2014</div>
+    <div class="Dateoptions">Summer <br>2013</div>
+    <div class="Dateoptions">Summer <br>2012</div>
+    <div class="Dateoptions">Summer <br>2011</div>
+    <div class="Dateoptions">Summer <br>2010</div>
+    <div class="Dateoptions">Summer <br>2009</div>
 
 
+
+
+  </div>
+  <div class="members">
+    <div class="search">
+      <input type="text" name="name" value="" id="search" placeholder="Search">
+      <div class="searchbtn">
+        Search
 
       </div>
 
 
     </div>
-    <div class="members">
-      <div class="search">
-        <input type="text" name="name" value="" id="search" placeholder="Search">
+    <div class="content">
+      <li rel="id">
+        <div id="user">
+          <div class="profilephoto" style="background-image:url('img/test.jpg')">
+          </div>
+          <div class="name">
+            Ahmed
+          </div>
+        </div>
+        <div class="checking">
+        <input type="checkbox" name="name" id="added" >
+        </div>
+      </li>
 
-      </div>
-      <div class="content">
-
-
-      </div>
-      <br>
-      <div class="finish">
-        <button type="button" name="button" id="doneMembers">Done</button>
-
-      </div>
 
     </div>
+    <br>
+    <div class="finish">
+      <button type="button" name="button" id="doneMembers">Done</button>
+
+    </div>
+
+  </div>
+  <div class="last">
     <div class="effects">
-
-      <div class="theImage">
-        <img src="../Home/img/test.jpg" alt="" />
-
-      </div>
-      <br>
-      <div class="sub">
-        Add Effects
+      <div class="head1">
+        Effects:
 
       </div>
-      <div class="listOfeffects">
-        <div id="inNormal " class="time"  >
-          <img src="img/circle.svg" alt="" id="normaleffect2" class="effectselected1 normaleffect2"  />
-<br>
-          <p>
-            normal
-          </p>
+      <div class=" options">
+        <div class="normal eff">
+          <div class="time">normal</div>
+          <div class="filterEff">
+          </div>
         </div>
-        <div id="in1970" class="time " >
-          <img src="img/circle.svg" alt="" id="1970effect2" class="effectselected1 1970effect2"/>
-          <br>
-          <p>
-            1970
-          </p>
+
+        <div class="s1970 eff">
+          <div class="time">1970</div>
+          <div class="filterEff">
+          </div>
         </div>
-        <div id="in1980" class="time " >
-          <img src="img/circle.svg" alt="" id="1980effect2" class="effectselected1 1980effect2"/>
-          <br>
-          <p>
+
+        <div class="s1980 eff">
+          <div class="time">
             1980
-          </p>
-
+          </div>
+          <div class="filterEff">
+          </div>
         </div>
-        <div id="in1990" class="time " >
-          <img src="img/circle.svg" alt="" id="1990effect2" class="effectselected1 1990effect2"/>
-          <br>
-          <p>
+
+        <div class="s1990 eff">
+          <div class="time">
             1990
-          </p>
+          </div>
+          <div class="filterEff">
+          </div>
         </div>
-        <div id="in2000" class="time " >
-          <img src="img/circle.svg" alt="" id="2000effect2" class="effectselected1 2000effect2"/>
-           <br>
-          <p>
-            2000
-          </p>
-        </div>
+      </div>
+    </div>
 
+    <div class="photo photo1">
+      <div class="filterEffpho">
 
       </div>
-      <div class="lastthing">
-        <button type="button" name="button" id="doneEffects"> Done</button>
+
+
+    </div>
+    <div class="attr">
+      <div class="attr1" id="private">
+        <div class="icon">
+          <img src="img/lock.svg" alt="" />
+
+        </div>
+        <div class="rest">
+          Private
+
+        </div>
+
+      </div>
+      <div class="attr1">
+        <div class="icon">
+          <img src="img/caption.svg" alt="" />
+
+        </div>
+        <div class="rest">
+          <input type="text" name="name" value="">
+
+        </div>
+
+      </div>
+      <div class="attr1" id="addDate">
+        <div class="icon nobk">
+          <img src="img/date.svg" alt="" />
+
+        </div>
+        <div class="rest">
+          Add Date
+
+        </div>
+
+      </div>
+      <div class="attr1" id="addMembers">
+        <div class="icon nobk">
+          <img id="addmembersimg" src="img/add.svg" alt="" />
+
+        </div>
+        <div class="rest">
+          Add Members
+
+        </div>
 
       </div>
 
     </div>
 
-        <div class="head">
-          <div id="back">
-            X
+
+  </div>
 
 
-          </div>
+</div>
+
+<script src="interactions.js"></script>
+<script src="senddatabase.js"></script>
+<script src="js/draggable_background.js"></script>
+<script type="text/javascript">
+$('.photo').backgroundDraggable();
+$('.photo').backgroundDraggable({
+  done: function() {
+    backgroundPosition = $('.photo').css('background-position');
+    $(".photo").css({'background-position':backgroundPosition})
+    console.log(backgroundPosition);
+  }
+});
 
 
-          <div id="done">
-            Done
-
-          </div>
-
-        </div>
-         <br>
-        <div class="first sector">
-          <div class="sub">
-            Private
-
-          </div>
-          <div class="private" >
-            <input type="checkbox" name="name" value="" id="private">
-
-          </div>
-          <div id="description">
-            <input id="selectphoto" type="file" style="opacity:0"/>
-
-
-          </div>
-
-
-        </div>
-        <hr>
-        <div class="second sector">
-          <div class="sub">
-            Effects
-
-          </div>
-          <div class="dates">
-            <div id="normalSmall " class="time">
-              <img src="img/circle.svg" alt="" id="normaleffect" class="effectselected" />
-
-              <p>
-                normal
-              </p>
-            </div>
-            <div id="1970Small" class="time">
-              <img src="img/circle.svg" alt="" id="1970effect" />
-              <p>
-                1970
-              </p>
-            </div>
-            <div id="1980Small" class="time">
-              <img src="img/circle.svg" alt="" id="1980effect" />
-              <p>
-                1980
-              </p>
-
-            </div>
-            <div id="1990Small" class="time">
-              <img src="img/circle.svg" alt="" id="1990effect" />
-
-              <p>
-                1990
-              </p>
-            </div>
-            <div id="2000Small" class="time">
-              <img src="img/circle.svg" alt="" id="2000effect" />
-              <p>
-                2000
-              </p>
-            </div>
-
-
-
-          </div>
-
-
-
-        </div>
-        <hr>
-
-        <div class="third sector">
-
-          <br>
-          <div id="drop">
-            Add Date
-
-          </div>
-
-
-        </div>
-        <hr>
-        <div class="fourth sector">
-
-          <textarea name="name" rows="8" cols="40" placeholder="Make them remeber it ..." id="caption"></textarea>
-
-        </div>
-        <hr>
-        <div class="fifth sector">
-        <div class="sub">
-          Add Members
-        </div>
-        <div class="">
-          <img src="img/add.svg" alt="" id="addMember" class="notonce"/>
-
-
-        </div>
+</script>
 
 
 
 
-        </div>
 
-
-
-      </div>
-
-
-      <script src="../js/jquery-2.1.3.min.js"></script>
-      <script src="addmembers.js"></script>
-
-      <script src="effects.js"></script>
-
-      <script src="Send.js"></script>
 
 
 </body>

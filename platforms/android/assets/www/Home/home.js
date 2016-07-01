@@ -68,7 +68,8 @@ $(function(){
           notified: owneruid,
           subjectname: username,
           memoryid: imguid,
-          type: "commented"
+          type: "commented",
+          checked: "false"
         });
         var notificationsnum;
         database.ref().child('users').child(owneruid).child('notifications').once('value', function(notificationsSnap){
@@ -198,7 +199,7 @@ $(function(){
           caption = "no caption";
         }
         var str = "<li><div class=\"card\"><div class=\"imgMemory \"><img class=\"clickableimg\" src=\""+url+"\" alt=\"\" id=\""+memoryID+"\"/></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
-        $('#body2').append(str);
+        $('#body2').prepend(str);
       });
     });
 
@@ -223,7 +224,7 @@ $(function(){
               caption = "no caption";
             }
             var str = "<li><div class=\"card\"><div class=\"imgMemory \"><img class=\"clickableimg\" src=\""+url+"\" alt=\"\" id=\""+memoryID+"\"/></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
-            $('#body2').append(str);
+            $('#body2').prepend(str);
           });
         });
       })
@@ -240,7 +241,7 @@ $(function(){
       var users = database.ref().child("users");
       var userInDatabase = users.child(user.uid);
       var imagesRef = userInDatabase.child("posted");
-      imagesRef.once('value',function(snapshot){
+      imagesRef.limitToLast(20).once('value',function(snapshot){
 
         memorySnap = snapshot.val();
         console.log(memorySnap);

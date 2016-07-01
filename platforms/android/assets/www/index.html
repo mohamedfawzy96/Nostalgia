@@ -57,37 +57,11 @@
     var rootRef = firebase.database().ref();
     var usersRef = database.ref().child('users');
     </script>
-    <script type="text/javascript" src="cordova.js"></script>
-
-    <script src="js/jquery-2.1.3.min.js"></script>
-    <script src="js/index.js"></script>
-    <script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
-
-    <script src='bower_components/facebook-connect-plugin/index.js'></script>
-
     <script type="text/javascript" src="js/objects.js"></script>
 
 </head>
 
 <body>
-  <div id="fb-root"></div>
-  <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '1594582047520422',
-            xfbml      : true,
-            version    : 'v2.1'
-          });
-        };
-
-        (function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-           js.src = "//connect.facebook.net/en_US/sdk.js";
-           fjs.parentNode.insertBefore(js, fjs);
-         }(document, 'script', 'facebook-jssdk'));
-      </script>
         <div class="fullScreen">
           <div class="Heading1">
             <div class="Title">
@@ -188,6 +162,10 @@
             </div>
 
 
+
+
+
+
           </div>
         </div>
 
@@ -197,6 +175,8 @@
       </div>
 
 
+      <script src="js/jquery-2.1.3.min.js"></script>
+      <script src="js/index.js"></script>
 </body>
 
 </html>
