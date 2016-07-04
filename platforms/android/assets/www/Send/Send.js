@@ -30,7 +30,7 @@ $(function(){
 	  var html = "<li rel="+id+">"+
 	    "<div id=\"user\"  >"+
 	      "<p>"+
-	        user
+	        user+
 	        +
 	      "</p>"
 	      +

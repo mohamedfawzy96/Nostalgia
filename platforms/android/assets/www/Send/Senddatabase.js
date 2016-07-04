@@ -1,11 +1,51 @@
-var facebook = false;
 
-$("#choosephoto").click(function(){
+
+	$(document).on('tap', '.go111', function(){
+	alert("hi");
 	$('#file').trigger('click');
 
 });
+var facebook = false;
+
 $("#file").change(function () {
 		file = document.getElementById('file').files[0];
+		var photo = $('.photo img')
+	EXIF.getData(file, function () {
+		    var ori = this.exifdata.Orientation;
+				var ctx = $(".photo")
+				switch(ori){
+    case 2:
+        //ctx.scale(-1, 1);
+        break;
+    case 3:
+        // 180° rotate left
+        photo.css({"transform":"rotate(-180deg)"})
+        break;
+    case 4:
+        // vertical flip
+        ctx.scale(1, -1);
+        break;
+    case 5:
+        // vertical flip + 90 rotate right
+				photo.css({"transform":"rotate(90deg)"})
+
+        break;
+    case 6:
+        // 90° rotate right
+				photo.css({"transform":"rotate(90deg)"})
+        break;
+    case 7:
+        // horizontal flip + 90 rotate right
+				photo.css({"transform":"rotate(90deg)"})
+
+        break;
+    case 8:
+        // 90° rotate left
+				photo.css({"transform":"rotate(-90deg)"})
+        break;
+}
+
+		});
 	    //alert(jQuery(this).val());
 	   	//alert(file);
 	   	readURL(this);
@@ -14,7 +54,7 @@ $("#file").change(function () {
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
-				$('.photo').css("background-image", "url(\""+e.target.result+"\")");
+				$('.photo img').attr("src", e.target.result);
 	        }
 	        reader.readAsDataURL(input.files[0]);
 	    }

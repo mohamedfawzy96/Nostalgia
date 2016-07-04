@@ -1,298 +1,293 @@
 
 <html>
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <!--<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />-->
-    <!-- Good default declaration:
-    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-        * Enable inline JS: add 'unsafe-inline' to default-src
-        * Enable eval(): add 'unsafe-eval' to default-src
-    * Create your own at http://cspisawesome.com
-    -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-    <script src="js/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript">
-        $(document).bind('mobileinit',function(){
-            $.mobile.loadingMessage = false;
-        })
-    </script>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+        <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />-->
+        <!-- Good default declaration:
+         * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+         * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+         * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+         * Enable inline JS: add 'unsafe-inline' to default-src
+         * Enable eval(): add 'unsafe-eval' to default-src
+         * Create your own at http://cspisawesome.com
+         -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+        <script src="../js/jquery-2.1.3.min.js"></script>
+        <script src="../js/jquery.mobile-1.4.5.js"></script>
+        <!-- NOTE:
+        <script type="text/javascript" src="../cordova.js"></script>
+        <script type="text/javascript" src="../js/facebookConnectPlugin.js"></script>  -->
+
+        <script type="text/javascript" src="facebookSend.js"></script>
+
+
+
+        <script type="text/javascript">
+            $(document).bind('mobileinit',function(){
+                             $.mobile.loadingMessage = false;
+                             })
+            </script>
+        <script src="../js/jquery.mobile-1.4.5.js"></script>
+        <link rel="stylesheet" type="text/css" href="Send.css" />
 
 
 
 
 
-    </script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    <script type="text/javascript">
 
-    var config = {
-      apiKey: "AIzaSyCT0GktUYHJeLcHnzeo3vJ99ONULSxdglY",
-      authDomain: "nostalgia-79c70.firebaseapp.com",
-      databaseURL: "https://nostalgia-79c70.firebaseio.com",
-      storageBucket: "nostalgia-79c70.appspot.com",
-    };
-    var app= firebase.initializeApp(config);
-    var database = app.database();
-    var auth = app.auth();
-    var storage = app.storage();
-    var rootRef = firebase.database().ref();
-    var usersRef = database.ref().child('users');
-    var storage = firebase.storage();
-    var storageRef = storage.ref();
-    var imagesRef = storageRef.child('images');
+        </script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <script type="text/javascript">
 
-    // Check for the various File API support.
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
-      // Great success! All the File APIs are supported.
-    } else {
-      alert('The File APIs are not fully supported in this browser.');
-    }
-    </script>
-    <script src="../js/objects.js"></script>
+            var config = {
+                apiKey: "AIzaSyCT0GktUYHJeLcHnzeo3vJ99ONULSxdglY",
+                authDomain: "nostalgia-79c70.firebaseapp.com",
+                databaseURL: "https://nostalgia-79c70.firebaseio.com",
+                storageBucket: "nostalgia-79c70.appspot.com",
+            };
+        var app= firebase.initializeApp(config);
+        var database = app.database();
+        var auth = app.auth();
+        var storage = app.storage();
+        var rootRef = firebase.database().ref();
+        var usersRef = database.ref().child('users');
+        var storage = firebase.storage();
+        var storageRef = storage.ref();
+        var imagesRef = storageRef.child('images');
 
-    <link rel="stylesheet" type="text/css" href="Send.css" />
-    <title>Home</title>
+        // Check for the various File API support.
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            // Great success! All the File APIs are supported.
+        } else {
+            alert('The File APIs are not fully supported in this browser.');
+        }
+        </script>
+        <script src="../js/objects.js"></script>
 
-</head>
+        <title>Home</title>
 
-<body>
-<div class="fullScreen">
-  <input type="file" name="name" value="" id="file">
-  <div class="bar">
-    <div class="margintop">
+    </head>
 
-    </div>
-    <div class="stuff">
-      <div class="back">
-        <img src="img/back.svg" alt="" />
+    <body>
+        <div class="fullScreen">
+            <input type="file" name="name" value="" id="file">
+                <div class="bar">
+                    <div class="margintop">
 
-      </div>
-      <div class="text">Next</div>
+                    </div>
+                    <div class="stuff">
+                        <div class="back">
+                            <img src="img/back.svg" alt="" />
 
-    </div>
+                        </div>
+                        <div class="text">Next</div>
 
-  </div>
-  <div class="choosePhoto">
-    <div class="buttonandqoute">
-      <div class="qoute">
-        Share an old
-    MEMORY
-    <br>
-    Make them Feel
-    <br>
-    NOSTALGIC
+                    </div>
 
-      </div>
-      <div id="choosephoto">
-        <div class="choosetext">
-          library
+                </div>
+                <div class="choosePhoto">
+                    <div class="buttonandqoute">
+                        <div class="qoute">
+                            Share an old
+                            MEMORY
+                            <br>
+                            Make them Feel
+                            NOSTALGIC
+
+                        </div>
+                        <div id="choosephoto" class="go111">
+                            <div class="choosetext">
+                                library
+
+                            </div>
+                            <img src="img/camera.svg" alt="" />
+
+
+                        </div>
+                    </div>
+
+                    <div class="photo">
+                        <img src="img/test.jpg" alt="" />
+
+                    </div>
+                    <div class="recomended">
+                        <div class="textreco">
+                            Recomendation
+
+                        </div>
+                        <div class="imgrecodiv">
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                <div class="filterB">
+
+                </div>
+                <div class="date">
+                    <div class="Dateoptions">Can't <br>Remeber</div>
+                    <div class="Dateoptions">Summer <br>2014</div>
+                    <div class="Dateoptions">Summer <br>2013</div>
+                    <div class="Dateoptions">Summer <br>2012</div>
+                    <div class="Dateoptions">Summer <br>2011</div>
+                    <div class="Dateoptions">Summer <br>2010</div>
+                    <div class="Dateoptions">Summer <br>2009</div>
+
+
+
+
+                </div>
+                <div class="members">
+                    <div class="search">
+                        <input type="text" name="name" value="" id="search" placeholder="Search">
+                            <div class="searchbtn">
+                                Search
+
+                            </div>
+
+
+                            </div>
+                    <div class="content">
+                        <li rel="id">
+                            <div id="user">
+                                <div class="profilephoto" style="background-image:url('img/test.jpg')">
+                                </div>
+                                <div class="name">
+                                    Ahmed
+                                </div>
+                            </div>
+                            <div class="checking">
+                                <input type="checkbox" name="name" id="added" >
+                                    </div>
+                        </li>
+
+
+                    </div>
+                    <br>
+                    <div class="finish">
+                        <button type="button" name="button" id="doneMembers">Done</button>
+
+                    </div>
+
+                </div>
+                <div class="last">
+                    <div class="effects">
+                        <div class="head1">
+                            Effects:
+
+                        </div>
+                        <div class=" options">
+                            <div class="normal eff">
+                                <div class="time">normal</div>
+                                <div class="filterEff">
+                                </div>
+                            </div>
+
+                            <div class="s1970 eff">
+                                <div class="time">1970</div>
+                                <div class="filterEff">
+                                </div>
+                            </div>
+
+                            <div class="s1980 eff">
+                                <div class="time">
+                                    1980
+                                </div>
+                                <div class="filterEff">
+                                </div>
+                            </div>
+
+                            <div class="s1990 eff">
+                                <div class="time">
+                                    1990
+                                </div>
+                                <div class="filterEff">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo photo1">
+                        <div class="filterEffpho">
+
+                        </div>
+                        <img src="img/test.jpg" alt="" />
+
+
+
+                    </div>
+                    <div class="attr">
+                        <div class="attr1" id="private">
+                            <div class="icon">
+                                <img src="img/lock.svg" alt="" />
+
+                            </div>
+                            <div class="rest">
+                                Private
+
+                            </div>
+
+                        </div>
+                        <div class="attr1">
+                            <div class="icon">
+                                <img src="img/caption.svg" alt="" />
+
+                            </div>
+                            <div class="rest">
+                                <input type="text" name="name" value="">
+
+                                    </div>
+
+                        </div>
+                        <div class="attr1" id="addDate">
+                            <div class="icon nobk">
+                                <img src="img/date.svg" alt="" />
+
+                            </div>
+                            <div class="rest">
+                                Add Date
+
+                            </div>
+
+                        </div>
+                        <div class="attr1" id="addMembers">
+                            <div class="icon nobk">
+                                <img id="addmembersimg" src="img/add.svg" alt="" />
+
+                            </div>
+                            <div class="rest">
+                                Add Members
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
 
         </div>
-        <img src="img/camera.svg" alt="" />
+        <script src="js/exif.js"></script>
+
+        <script src="interactions.js"></script>
+        <script src="Senddatabase.js"></script>
+        <script src="js/draggable_background.js"></script>
+        <script type="text/javascript">
 
 
-      </div>
-    </div>
-
-    <div class="photo">
-
-    </div>
-    <div class="recomended">
-      <div class="textreco">
-        Recomendation
-
-      </div>
-      <div class="imgrecodiv">
-        <div class="imgreco" style="border:2px solid #EC4B57;  background-image: url('img/test.jpg');">
-
-        </div>
-        <div class="imgreco" style="background-image: url('img/test.jpg');">
-
-        </div>
-        <div class="imgreco" style="background-image: url('img/test.jpg');">
-
-        </div>
-        <div class="imgreco" style="background-image: url('img/test.jpg');">
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-
-  </div>
-  <div class="filterB">
-
-  </div>
-  <div class="date">
-    <div class="Dateoptions">Can't <br>Remeber</div>
-    <div class="Dateoptions">Summer <br>2014</div>
-    <div class="Dateoptions">Summer <br>2013</div>
-    <div class="Dateoptions">Summer <br>2012</div>
-    <div class="Dateoptions">Summer <br>2011</div>
-    <div class="Dateoptions">Summer <br>2010</div>
-    <div class="Dateoptions">Summer <br>2009</div>
-
-
-
-
-  </div>
-  <div class="members">
-    <div class="search">
-      <input type="text" name="name" value="" id="search" placeholder="Search">
-      <div class="searchbtn">
-        Search
-
-      </div>
-
-
-    </div>
-    <div class="content">
-      <li rel="id">
-        <div id="user">
-          <div class="profilephoto" style="background-image:url('img/test.jpg')">
-          </div>
-          <div class="name">
-            Ahmed
-          </div>
-        </div>
-        <div class="checking">
-        <input type="checkbox" name="name" id="added" >
-        </div>
-      </li>
-
-
-    </div>
-    <br>
-    <div class="finish">
-      <button type="button" name="button" id="doneMembers">Done</button>
-
-    </div>
-
-  </div>
-  <div class="last">
-    <div class="effects">
-      <div class="head1">
-        Effects:
-
-      </div>
-      <div class=" options">
-        <div class="normal eff">
-          <div class="time">normal</div>
-          <div class="filterEff">
-          </div>
-        </div>
-
-        <div class="s1970 eff">
-          <div class="time">1970</div>
-          <div class="filterEff">
-          </div>
-        </div>
-
-        <div class="s1980 eff">
-          <div class="time">
-            1980
-          </div>
-          <div class="filterEff">
-          </div>
-        </div>
-
-        <div class="s1990 eff">
-          <div class="time">
-            1990
-          </div>
-          <div class="filterEff">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="photo photo1">
-      <div class="filterEffpho">
-
-      </div>
-
-
-    </div>
-    <div class="attr">
-      <div class="attr1" id="private">
-        <div class="icon">
-          <img src="img/lock.svg" alt="" />
-
-        </div>
-        <div class="rest">
-          Private
-
-        </div>
-
-      </div>
-      <div class="attr1">
-        <div class="icon">
-          <img src="img/caption.svg" alt="" />
-
-        </div>
-        <div class="rest">
-          <input type="text" name="name" value="">
-
-        </div>
-
-      </div>
-      <div class="attr1" id="addDate">
-        <div class="icon nobk">
-          <img src="img/date.svg" alt="" />
-
-        </div>
-        <div class="rest">
-          Add Date
-
-        </div>
-
-      </div>
-      <div class="attr1" id="addMembers">
-        <div class="icon nobk">
-          <img id="addmembersimg" src="img/add.svg" alt="" />
-
-        </div>
-        <div class="rest">
-          Add Members
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-</div>
-
-<script src="interactions.js"></script>
-<script src="senddatabase.js"></script>
-<script src="js/draggable_background.js"></script>
-<script type="text/javascript">
-$('.photo').backgroundDraggable();
-$('.photo').backgroundDraggable({
-  done: function() {
-    backgroundPosition = $('.photo').css('background-position');
-    $(".photo").css({'background-position':backgroundPosition})
-    console.log(backgroundPosition);
-  }
-});
-
-
-</script>
+            </script>
 
 
 
@@ -300,6 +295,6 @@ $('.photo').backgroundDraggable({
 
 
 
-</body>
+    </body>
 
 </html>
