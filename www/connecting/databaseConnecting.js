@@ -14,6 +14,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     var users = database.ref().child('users');
     //database.ref().child('users').child(user.uid).child('friends')
     users.on("child_added",function(user){
+      if(user.key!="usernames")
       addToSearchContent(user.child("username").val(),"../Home/img/test.jpg",user.child("uid").val());
     });
   });
