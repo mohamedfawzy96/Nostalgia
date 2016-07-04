@@ -47,7 +47,7 @@ $(".text").click(function(){
 
                           function addmembers(user, id){
                           var html = "<li rel=\""+id+"\">"
-                          +  "<div class=\"user\">"
+                          +  "<div id=\"user\">"
                           +    "<div class=\"profilephoto\" style=\"background-image:url(\'img/test.jpg\')\">"
                           +    "</div>"
                           +    "<div class=\"name\"> "
@@ -127,6 +127,7 @@ $(".text").click(function(){
                                            $(".text").html("Next")
 
                                            }else {
+                                             window.location = "../Home/Home.html"
 
                                            }
 
