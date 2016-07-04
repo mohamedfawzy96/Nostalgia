@@ -965,7 +965,6 @@ body {
   position: relative;
   height: 23vh;
   padding: 5px;
-  padding-bottom: 0;
   font-size: 5.5vw;
   font-family: Futura;
   box-sizing: border-box;
@@ -988,10 +987,7 @@ body {
   display: flex;
   flex-flow: column;
   justify-content: center;
-
-
-
-
+  z-index: 1000;
 }
 #choosephoto img{
   position: relative;
@@ -1007,14 +1003,22 @@ body {
   position: relative;
   width: auto;
   height: 36vh;
-  background-image: url("img/test.jpg");
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center ;
   transition: all 0.3s ease-in-out;
   background-color: #333333;
   box-shadow: 0px 0px 10px #888888;
+  overflow: hidden;
 
+
+}
+.photo img{
+  position: relative;
+  height: 100%;
+  width: auto;
+  display: flex;
+  margin: 0 auto;
 
 }
 .recomended{
@@ -1316,7 +1320,7 @@ body {
 
 
 }
-.user{
+#user{
   position: relative;
   height: 100%;
   width: 35%;

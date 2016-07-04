@@ -78,10 +78,20 @@ $("#addDate").click(function(){
   $(".date").css({"transform":"translateX(0)"})
   $(".filterB").fadeIn()
 });
+function myReplaceMethod(str,find,replace_with){
+    while (str.indexOf(find) !== -1 ){
+        from = str.indexOf(find);
+        to = from + find.length;
+        str = str.substr(0,from)+replace_with+str.substr(to, str.length-to);
+    }
+    return str;
+}
 $(".Dateoptions").click(function(){
   $(".date").css({"transform":"translateX(1000px)"})
   $(".filterB").fadeOut()
-  alert(date)
+  date = $(this).html()+""
+  var date1 = myReplaceMethod(date,"<br>","")
+  alert(date1)
 
 
 

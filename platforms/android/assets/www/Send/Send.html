@@ -17,12 +17,17 @@
     * Create your own at http://cspisawesome.com
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="../js/jquery-2.1.3.min.js"></script>
+    <script src="../js/jquery.mobile-1.4.5.js"></script>
+
     <script type="text/javascript">
         $(document).bind('mobileinit',function(){
             $.mobile.loadingMessage = false;
         })
     </script>
+    <script src="../js/jquery.mobile-1.4.5.js"></script>
+        <link rel="stylesheet" type="text/css" href="Send.css" />
+
 
 
 
@@ -58,7 +63,6 @@
     </script>
     <script src="../js/objects.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="Send.css" />
     <title>Home</title>
 
 </head>
@@ -87,11 +91,10 @@
     MEMORY
     <br>
     Make them Feel
-    <br>
     NOSTALGIC
 
       </div>
-      <div id="choosephoto">
+      <div id="choosephoto" class="go111">
         <div class="choosetext">
           library
 
@@ -103,6 +106,7 @@
     </div>
 
     <div class="photo">
+      <img src="img/test.jpg" alt="" />
 
     </div>
     <div class="recomended">
@@ -277,19 +281,12 @@
 
 
 </div>
+<script src="js/exif.js"></script>
 
 <script src="interactions.js"></script>
-<script src="senddatabase.js"></script>
+<script src="Senddatabase.js"></script>
 <script src="js/draggable_background.js"></script>
 <script type="text/javascript">
-$('.photo').backgroundDraggable();
-$('.photo').backgroundDraggable({
-  done: function() {
-    backgroundPosition = $('.photo').css('background-position');
-    $(".photo").css({'background-position':backgroundPosition})
-    console.log(backgroundPosition);
-  }
-});
 
 
 </script>

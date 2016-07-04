@@ -1479,6 +1479,6 @@ body {
 .TheMemory{
   height: 90vh;
   margin-top: -45vh;
-  transform: translateX(1000px)
+  transform: translateX(1000px);
 
 }
