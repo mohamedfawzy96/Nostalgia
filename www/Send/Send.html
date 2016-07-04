@@ -17,7 +17,16 @@
          * Create your own at http://cspisawesome.com
          -->
         <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+
+
         <script src="../js/jquery-2.1.3.min.js"></script>
+        <script src="../js/jquery.mobile-1.4.5.js"></script>
+        <script type="text/javascript">
+            $(document).bind('mobileinit',function(){
+                             $.mobile.loadingMessage = false;
+                             })
+            </script>
         <script src="../js/jquery.mobile-1.4.5.js"></script>
         <!-- NOTE:
         <script type="text/javascript" src="../cordova.js"></script>
@@ -25,14 +34,6 @@
 
         <script type="text/javascript" src="facebookSend.js"></script>
 
-
-
-        <script type="text/javascript">
-            $(document).bind('mobileinit',function(){
-                             $.mobile.loadingMessage = false;
-                             })
-            </script>
-        <script src="../js/jquery.mobile-1.4.5.js"></script>
         <link rel="stylesheet" type="text/css" href="Send.css" />
 
 
@@ -149,7 +150,11 @@
                 </div>
                 <div class="members">
                     <div class="search">
+                      <div class="in">
                         <input type="text" name="name" value="" id="search" placeholder="Search">
+
+
+                      </div>
                             <div class="searchbtn">
                                 Search
 
