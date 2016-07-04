@@ -24,8 +24,7 @@
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
 $(window).load(function(){
-  window.location = "Home/home.html";
-  
+  //window.location = "Home/home.html";
   var user = firebase.auth().currentUser;
   if(user){
     var users = database.ref().child("users");
@@ -35,7 +34,7 @@ $(window).load(function(){
       username = snapshot.val();
     }).then(function(){
       alert(username);
-      if(username){
+      if(username!=null){
         window.location = "Home/home.html";
       }
     });

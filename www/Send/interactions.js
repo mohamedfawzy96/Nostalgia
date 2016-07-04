@@ -5,54 +5,45 @@ var effectattr= "normal"
 var membersArray = new Array();
 var img = new Image;
 //document.addEventListener("deviceready", function(){
-                          $(document).on('tap', '.imgreco', function(){
-                                         $(document).on('tap', '.imgreco', function(){
-                                                        $(".photo img").attr("src",$(this).attr("rel"))
 
-                                                        });
-                                         });
-
-
-                          setTimeout(function(){
-
-                                     getfb(1)
+$(document).on('tap', '.imgreco', function(){
+$(".photo img").attr("src",$(this).attr("rel"))
+});
 
 
 
-                                     },100)
+setTimeout(function(){
+getfb(1)
+},100)
 
 
-                          $(".text").click(function(){
-                                           if($(this).html()=="Next"){
+$(".text").click(function(){
+        if($(this).html()=="Next"){
 
+ $(".choosePhoto").css({"transform":"translateX(-1000px)"})
+ $(".last").css({"transform":"translateX(0)"})
+ $(this).html("Post")
 
+            } else if ($(".text").html()=="Done") {
+              $(".members").css({"transform":"translateY(10000px)"})
+               $(".back").css({"opacity":"1"})
+           $(this).html("Post");
 
-                                           $(".choosePhoto").css({"transform":"translateX(-1000px)"})
-                                           $(".last").css({"transform":"translateX(0)"})
-                                           $(this).html("Post")
+           } else if ($(".text").html()=="Post") {
+               finalize();
+               }
+     });
 
-                                           } else if ($(".text").html()=="Done") {
-                                           $(".members").css({"transform":"translateY(10000px)"})
-                                           $(".back").css({"opacity":"1"})
-
-                                           $(this).html("Post");
-
-
-                                           } else if ($(".text").html()=="Post") {
-                                           finalize();
-                                           }
-                                           });
-
-                          function getMembers(){
-                          var users = database.ref().child("users");
-                          users.once('value', function(usersSnap){
-                                     usersSnap.forEach(function(user){
-                                                       if(user.key!="usernames") {
-                                                       addmembers(user.child("username").val(), user.child("uid").val());
-                                                       }
-                                                       });
-                                     });
-                          };
+    function getMembers(){
+        var curruser = firebase.auth().currentUser;
+        var users = database.ref().child("users").child(curruser.uid).child('friends');
+        users.on('child_added', function(friendidSnap){
+        var friendid = friendidSnap.val();
+            database.ref().child('users').child(friendid).once('value', function(friend) {
+              addmembers(friend.child("username").val(), friend.child("uid").val());
+            });
+    });
+    };
 
                           function addmembers(user, id){
                           var html = "<li rel=\""+id+"\">"
