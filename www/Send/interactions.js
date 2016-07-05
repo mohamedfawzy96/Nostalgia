@@ -7,6 +7,7 @@ var img = new Image;
 //document.addEventListener("deviceready", function(){
 
 $(document).on('tap', '.imgreco', function(){
+facebook = true;
 $(".photo img").attr("src",$(this).attr("rel"))
 });
 
@@ -99,6 +100,7 @@ $(".text").click(function(){
                                                   $(".filterB").fadeOut()
                                                   date = $(this).html()+""
                                                   var date1 = myReplaceMethod(date,"<br>","")
+                                                  date = date1
 
 
 

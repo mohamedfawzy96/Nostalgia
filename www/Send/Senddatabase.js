@@ -7,6 +7,8 @@
 var facebook = false;
 
 $("#file").change(function () {
+	facebook = false;
+
 		file = document.getElementById('file').files[0];
 		var photo = $('.photo img')
 	EXIF.getData(file, function () {
@@ -103,6 +105,7 @@ $("#file").change(function () {
 					}
 				});
 					//alert(membersArray);
+					captionattr = $("#caption3").text()
 					var newmemory = new Memory(file.name, file.size, file.type, 'image',
 					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
 					null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
@@ -183,10 +186,9 @@ $("#file").change(function () {
 					}
 				});
 					//alert(membersArray);
-					<!--NOTE what about these details?-->
-					var newmemory = new Memory(file.name, file.size, file.type, 'image',
-					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
-					null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
+					var newmemory = new Memory("", "", "", '',
+					$(".photo img").attr("src"), effectattr, privateattr, captionattr, 0,
+					null, null, date, username, user.uid,"");
 					var key = imagesRef.push();
 					//alert(membersArray.length);
 					key.set(newmemory);
