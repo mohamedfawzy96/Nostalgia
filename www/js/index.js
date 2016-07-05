@@ -82,7 +82,7 @@ $(function(){
             var newuser = new User(user.email, user.uid, currusername, [], [], [], [], [], [], null);
 
             usersRef.child(user.uid).set(newuser);
-            usersRef.child('usernames').child(currusername).once('value', function(usernameSnap) {
+            databse.ref().child('usernames').child(currusername).once('value', function(usernameSnap) {
               if(usernameSnap.val()){
                 alert(usernameSnap.key)
                 alert('that user name is taken');
@@ -96,7 +96,7 @@ $(function(){
                 });
 
               } else {
-                usersRef.child('usernames').child(currusername+'').set(user.uid);
+                database.ref().child('usernames').child(currusername+'').set(user.uid);
                 window.location = "Home/home.html";
               }
             });
