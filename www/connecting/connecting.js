@@ -20,6 +20,9 @@ $(function () {
     }, 100);
   });
 
+  //// settings area
+  
+
   $(".request").click(function(){
     $(".requestsView").css({"display":"block"});
     setTimeout(function(){
