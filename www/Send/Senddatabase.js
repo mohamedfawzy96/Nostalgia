@@ -65,7 +65,8 @@ $("#file").change(function () {
 	}
 
 	function finalize(){
-		aptionattr = $(".rest input").text()
+		 facebook = true;
+
 	    var user = firebase.auth().currentUser;
 			var username;
 			var users = database.ref().child("users");
@@ -74,6 +75,7 @@ $("#file").change(function () {
 				username = snapshot.val();
 			});
 			if(facebook==false) {
+
 				var file = document.getElementById('file').files[0];
 				var imageRef = storageRef.child('memories/'+file.name);
 				var uploadTask = imageRef.put(file);
@@ -105,7 +107,9 @@ $("#file").change(function () {
 					}
 				});
 					//alert(membersArray);
-					captionattr = $("#caption3").text()
+					alert(username)
+
+					captionattr = $("#caption3").val()
 					var newmemory = new Memory(file.name, file.size, file.type, 'image',
 					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
 					null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
@@ -176,6 +180,9 @@ $("#file").change(function () {
 					});
 
 			} else {
+				userInDatabase.once('value',function(snapshot){
+					username = snapshot.val();
+
 
 				var imagesRef = database.ref().child('memories');
 				var userImagesRef = imagesRef.child(user.uid);
@@ -186,12 +193,18 @@ $("#file").change(function () {
 					}
 				});
 					//alert(membersArray);
-					var newmemory = new Memory("", "", "", '',
-					$(".photo img").attr("src"), effectattr, privateattr, captionattr, 0,
-					null, null, date, username, user.uid,"");
+					userInDatabase.once('value',function(snapshot){
+						username = snapshot.val();
+					});
+					//alert(username)
+					var url = $(".photo img").attr("src")+"";
+					var newmemory = new Memory("null", null, null, 'image',url, effectattr, privateattr, captionattr, 0,null, null, date, username, user.uid,null);
 					var key = imagesRef.push();
 					//alert(membersArray.length);
+					alert(key)
+
 					key.set(newmemory);
+
 					//alert(key);
 					var notificationkey = database.ref().child('notifications').push();
 					notificationkey.set({
@@ -252,6 +265,10 @@ $("#file").change(function () {
 								});
 							});
 					});
+				});
+
 			}
+
+
 
 	};
