@@ -1,6 +1,7 @@
 var height2 = $(".memorychat").height()- $(".headOfMemory").height()
 $(".memchat").height(height2+"px")
 
+
 $(".mphoto").addClass("maddedClass")
 
 setTimeout(function(){
