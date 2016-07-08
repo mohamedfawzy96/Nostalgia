@@ -40,7 +40,7 @@ $(function(){
   });
 
   // moved the send to the home.js
-  $(".msend1").click(function(){
+  $(".msend12").click(function(){
     var user = firebase.auth().currentUser;
     var users = database.ref().child("users");
     var username;

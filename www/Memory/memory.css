@@ -1105,7 +1105,7 @@ body {
    margin-left: 5px;
    border-radius: 20px !important;
 }
-.msend1{
+.msend12{
   position: relative;
   height: 100%;
   width: 20%;
@@ -1121,9 +1121,8 @@ body {
   height: auto;
   width: 100%;
   list-style: none;
-
-  padding-top: 10px;
-  padding-left: 10px;
+  padding: 10px;
+  box-sizing: border-box;
 
 
 
