@@ -13,6 +13,11 @@ $(function(){
   $(document).on('tap', '.box', function() {
     selectedimg = $(this).attr('rel');
      imguid = $(this).attr('rel');
+     $(".photo").css({"height":"36vh"})
+     $(".memorychat").css({"top":"75vh"})
+     $(".expand img").css({"transform":"rotate(0)"})
+     $(".memchat").height(height2+"px")
+     $(".input22").css({"transform":"translateX(1000px)"})
      // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
 
     UpdateImageView(imguid);
