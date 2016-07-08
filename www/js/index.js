@@ -81,7 +81,7 @@ $(function(){
             var newuser = new User(user.email, user.uid, currusername, [], [], [], [], [], [], null);
 
             usersRef.child(user.uid).set(newuser);
-            databse.ref().child('usernames').child(currusername).once('value', function(usernameSnap) {
+            database.ref().child('usernames').child(currusername).once('value', function(usernameSnap) {
               if(usernameSnap.val()){
                 alert(usernameSnap.key)
                 alert('that user name is taken');
