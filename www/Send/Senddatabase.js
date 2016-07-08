@@ -65,7 +65,6 @@ $("#file").change(function () {
 	}
 
 	function finalize(){
-		 facebook = true;
 
 	    var user = firebase.auth().currentUser;
 			var username;

@@ -971,6 +971,7 @@ body {
   height: 25%;
   border-bottom: 0.2px solid rgba(0, 0, 0, 0.1);
   padding: 3px;
+  font-size: 3.5vw;
 }
 .mcaption1{
   height: auto;
@@ -1109,9 +1110,11 @@ body {
   height: 100%;
   width: 20%;
   color: #EC4B57;
-  font-size: 1.2em;
+  font-size: 4.5vw;
   font-weight: bold;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .mfullScreen li{
   position: relative;
@@ -1282,4 +1285,13 @@ button{
   display: flex;
     align-items: center;
     justify-content: center;
+  }
+.textarea111{
+    width: 100%;
+    height: 10px;
+    border: 2px solid black;
+    border-radius: 0;
+    font-size: 1.2em;
+    padding-top: 5px;
+    box-sizing: border-box;
   }

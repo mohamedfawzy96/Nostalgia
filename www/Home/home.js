@@ -10,7 +10,7 @@ $(function(){
 
   });
 
-  $(document).on('tap ', '.box', function() {
+  $(document).on('tap', '.box', function() {
     selectedimg = $(this).attr('rel');
      imguid = $(this).attr('rel');
      // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
