@@ -52,6 +52,11 @@ $("#back3").click(function(){
 });
 $(".newback").click(function(){
   $(".mfullScreen").css({"transform":"translateX(800px)"})
+  $(".photo img").attr("src","")
+
+  $(".photo filterpho2").css({"background-color":"rgba(0,0,0,0)"})
+
+
 
 });
 

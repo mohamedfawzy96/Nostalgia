@@ -152,6 +152,7 @@ $(".text").click(function(){
                                           $(".photo1").css({"filter":"grayscale(0)"})
                                           $(".photo1").css({"-webkit-filter":"grayscale(0)"})
                                           var filter = $(this).children(".filterEff").css("background-color")
+                                          alert(filter)
                                           $(".filterEffpho").css({"background-color":filter})
 
                                           }

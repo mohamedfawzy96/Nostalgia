@@ -31,8 +31,30 @@ function UpdateImageView(imageuid1){
     imgurl = memorysnap.child("url").val();
     repostsnum = memorysnap.child("reposts").val();
     membersnum = memorysnap.child("members").numChildren();
+    var effect2 = memorysnap.child("effect").val();
+    var eff0 = effect2.indexOf("1990")
+    var eff1 = effect2.indexOf("1980")
+    var eff2 = effect2.indexOf("1970")
+    $(".photo").css({"-webkit-filter":"grayscale(0)"})
+    $(".photo .filterpho2").css({"background-color":"rgba(0,0,0,0)"})
+
+
+
+    if(eff1 != -1){
+      $(".photo .filterpho2").css({"background-color":"#FBB03B"})
+    }
+    if(eff0 != -1){
+      $(".photo .filterpho2").css({"background-color":"#ED1E79"})
+    }
+    if(eff2 != -1){
+      $(".photo").css({"filter":"grayscale(100%)"})
+      $(".photo").css({"-webkit-filter":"grayscale(100%)"})
+        }
+
     var ori = memorysnap.child("ori").val()
     var photo = $('.photo img')
+    photo.css({"transform":"rotate(0)"})
+
     switch(ori){
 case 2:
     //ctx.scale(-1, 1);

@@ -67,6 +67,9 @@ $("#file").change(function () {
 
 	function finalize(){
 		alert(ori)
+		if(ori == null){
+			ori = "none"
+		}
 
 	    var user = firebase.auth().currentUser;
 			var username;
