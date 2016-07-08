@@ -5,6 +5,7 @@
 
 });
 var facebook = false;
+var ori = "none"
 
 $("#file").change(function () {
 	facebook = false;
@@ -12,7 +13,7 @@ $("#file").change(function () {
 		file = document.getElementById('file').files[0];
 		var photo = $('.photo img')
 	EXIF.getData(file, function () {
-		    var ori = this.exifdata.Orientation;
+		    ori = this.exifdata.Orientation;
 				var ctx = $(".photo")
 				alert(ori)
 				switch(ori){
@@ -65,6 +66,7 @@ $("#file").change(function () {
 	}
 
 	function finalize(){
+		alert(ori)
 
 	    var user = firebase.auth().currentUser;
 			var username;
@@ -111,7 +113,7 @@ $("#file").change(function () {
 					captionattr = $("#caption3").val()
 					var newmemory = new Memory(file.name, file.size, file.type, 'image',
 					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
-					null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
+					null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'),ori);
 					var key = imagesRef.push();
 					key.child("comments").child("0").set("hello");
 					//alert(membersArray.length);
@@ -197,7 +199,7 @@ $("#file").change(function () {
 					});
 					//alert(username)
 					var url = $(".photo img").attr("src")+"";
-					var newmemory = new Memory("null", null, null, 'image',url, effectattr, privateattr, captionattr, 0,null, null, date, username, user.uid,null);
+					var newmemory = new Memory("null", null, null, 'image',url, effectattr, privateattr, captionattr, 0,null, null, date, username, user.uid,null,ori);
 					var key = imagesRef.push();
 					//alert(membersArray.length);
 					alert(key)

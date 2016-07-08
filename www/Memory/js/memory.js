@@ -31,6 +31,41 @@ function UpdateImageView(imageuid1){
     imgurl = memorysnap.child("url").val();
     repostsnum = memorysnap.child("reposts").val();
     membersnum = memorysnap.child("members").numChildren();
+    var ori = memorysnap.child("ori").val()
+    var photo = $('.photo img')
+    switch(ori){
+case 2:
+    //ctx.scale(-1, 1);
+    break;
+case 3:
+    // 180° rotate left
+    photo.css({"transform":"rotate(-180deg)"})
+    break;
+case 4:
+    // vertical flip
+    ctx.scale(1, -1);
+    break;
+case 5:
+    // vertical flip + 90 rotate right
+    //photo.css({"width":"rotate(90deg)"})
+
+    photo.css({"transform":"rotate(90deg)"})
+
+    break;
+case 6:
+    // 90° rotate right
+    photo.css({"transform":"rotate(90deg)"})
+    break;
+case 7:
+    // horizontal flip + 90 rotate right
+    photo.css({"transform":"rotate(90deg)"})
+
+    break;
+case 8:
+    // 90° rotate left
+    photo.css({"transform":"rotate(-90deg)"})
+    break;
+}
     $(".mimg img").attr("src",imgurl)
     $('#title p').text(memorysnap.child('owner').val());
     $('#owner').text(memorysnap.child('owner').val()+" just shared a memory");
