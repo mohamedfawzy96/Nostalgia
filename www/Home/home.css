@@ -976,11 +976,14 @@ body {
   left:0;
   right:0;
   z-index: 10000;
-  transform: translate(800px);
-  transition: all 0.7s ease-in-out;
+  transition: all 0.3s ease-in-out;
   box-shadow: 0px -3px 20px #888888;
+  transform: translate(800px);
 
 
+}
+.none{
+  display: none;
 }
 .memoriespic{
   height: auto;
@@ -1390,6 +1393,7 @@ body {
   z-index: 1000000;
   box-shadow: 0px 0px 50px black;
   transition: all 0.7s ease-in-out;
+
 }
 .ConnectFacebook{
   position: relative;

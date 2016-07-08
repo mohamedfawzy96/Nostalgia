@@ -41,11 +41,11 @@ function UpdateImageView(imageuid1){
       $('#caption').text(memorysnap.child('caption').val());
     }
   }).then(function(){
-    $('#image').attr('src',imgurl);
+    $('.photo img').attr('src',imgurl);
     $('#numReposts').text(repostsnum);
     $('#numMembers').text(membersnum);
   });
-  $('#chattingbody').text("");
+  $('#chattingbody2').text("");
     database.ref().child("memories").child(imguid).child("comments").on('child_added',function(commentid){
       //alert(commentid.val());
       var cmntid = commentid.val();
@@ -54,10 +54,10 @@ function UpdateImageView(imageuid1){
         database.ref().child("users").child(useridnow).once('value',function(usersnap){
           var usernamenow = usersnap.child('username').val();
           var cmntdatanow = commentSnap.child("data").val();
-          $('#chattingbody').append("<li id=\"new\"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+
+          $('#chattingbody2').append("<li id=\"new\"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+
           " </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
 
-          $('#chattingbody').scrollTop(1000000);
+          $('#chattingbody2').scrollTop(1000000);
 
         });
       });
