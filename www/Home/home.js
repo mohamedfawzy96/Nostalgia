@@ -76,6 +76,8 @@ $(function(){
           type: "commented",
           checked: "false"
         });
+        $('#chattingbody2').append("<li id=\"new\"> <div class=\"m2\" ID=\"userInChat\">"+username+" </div>  <div ID=\"userMessage\">"+cmntdata+" </div> </li>");
+        $('#chattingbody2').scrollTop(1000000);
         var notificationsnum;
         database.ref().child('users').child(owneruid).child('notifications').once('value', function(notificationsSnap){
           notificationsnum = notificationsSnap.numChildren();
