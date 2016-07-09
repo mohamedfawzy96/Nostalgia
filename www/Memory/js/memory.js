@@ -104,6 +104,23 @@ case 8:
   });
   $('#chattingbody2').text("");
   database.ref().child("memories").child(imguid).child("comments").once('value', function(commentsSnap) {
+    commentsSnap.forEach(function(comment) {
+      alert(comment.val())
+      var cmntid = comment.val();
+      database.ref().child("comments").child(cmntid).once('value',function(commentSnap){
+        var useridnow = commentSnap.child("user").val();
+        database.ref().child("users").child(useridnow).once('value',function(usersnap){
+          var usernamenow = usersnap.child('username').val();
+          var cmntdatanow = commentSnap.child("data").val();
+          $('#chattingbody2').prepend("<li id=\"new\"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+" </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
+
+          $('#chattingbody2').scrollTop(1000000);
+
+        });
+      });
+    })
+  });
+  /*database.ref().child("memories").child(imguid).child("comments").once('value', function(commentsSnap) {
     totalnum = commentsSnap.numChildren();
   }).then(function() {
     var i =0;
@@ -128,7 +145,7 @@ case 8:
         i++;
       }
     });
-  })
+  })*/
 
 
 
