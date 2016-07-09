@@ -18,9 +18,10 @@ function Memory (name, size, type, filetype, url, effect, privateattr, caption, 
   this.lastModifiedDate = lastModifiedDate;
 };
 
-function Comment(user, data){
+function Comment(user, data, username){
   this.user = user;
   this.data = data;
+  this.username = username;
 };
 
 function User (email, uid, username, posted, memberposted, member, tagged, followers, following, settings){

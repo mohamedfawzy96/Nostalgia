@@ -19,7 +19,7 @@ $(window).load(function(){
   });*/
 });
 //turned it into a function so every time the memoryview open it updates the value
-function UpdateImageView(imageuid1){
+function UpdateImageView(imageuid1,oneTime){
   $('#message').val('');
   var currurl = document.URL;
   var splittingurl = currurl.split("=");
@@ -37,9 +37,6 @@ function UpdateImageView(imageuid1){
     var eff2 = effect2.indexOf("1970")
     $(".photo").css({"-webkit-filter":"grayscale(0)"})
     $(".photo .filterpho2").css({"background-color":"rgba(0,0,0,0)"})
-
-
-
     if(eff1 != -1){
       $(".photo .filterpho2").css({"background-color":"#FBB03B"})
     }
@@ -101,34 +98,26 @@ case 8:
     $('.photo img').attr('src',imgurl);
     //$('#numReposts').text(repostsnum);
     //$('#numMembers').text(membersnum);
-  });
-  $('#chattingbody2').text("");
-  database.ref().child("memories").child(imguid).child("comments").once('value', function(commentsSnap) {
-    totalnum = commentsSnap.numChildren();
-  }).then(function() {
-    var i =0;
-    database.ref().child("memories").child(imguid).child("comments").on('child_added',function(commentid) {
+    $('#chattingbody2').text("");
+    database.ref().child("memories").child(imguid).child("comments").on('child_added',function(commentid){
+        //alert(commentid.val());
+        var cmntid = commentid.val();
 
-      //alert(commentid.val());
-      var cmntid = commentid.val();
-      database.ref().child("comments").child(cmntid).once('value',function(commentSnap){
-        var useridnow = commentSnap.child("user").val();
-        database.ref().child("users").child(useridnow).once('value',function(usersnap){
-          var usernamenow = usersnap.child('username').val();
+        database.ref().child("comments").child(cmntid).once('value',function(commentSnap){
+          var useridnow = commentSnap.child("user").val();
           var cmntdatanow = commentSnap.child("data").val();
-          $('#chattingbody2').prepend("<li id=\"new\"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+" </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
+          var usernamenow = commentSnap.child("username").val() ;
 
+
+
+          $('#chattingbody2').append("<li id=\"new\" rel="+useridnow+"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+" </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
           $('#chattingbody2').scrollTop(1000000);
-
         });
       });
-      if((i+1)==totalnum) {
-        database.ref().child("memories").child(imguid).child("comments").off();
-      } else {
-        i++;
-      }
-    });
-  })
+
+
+
+  });
 
 
 
