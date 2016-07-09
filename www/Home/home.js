@@ -35,6 +35,7 @@ $(function(){
     alert('here');
     alert($(this));
     imguid  = $(this).attr('id');
+    
     alert(imguid)
     // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
 
@@ -45,6 +46,7 @@ $(function(){
     $(".mfullScreen").css({"transform":"translateX(0)"});
 
   });
+
 
   // moved the send to the home.js
   $(".msend12").click(function(){

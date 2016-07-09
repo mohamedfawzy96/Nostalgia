@@ -107,10 +107,12 @@ case 8:
           var useridnow = commentSnap.child("user").val();
           var cmntdatanow = commentSnap.child("data").val();
           var usernamenow = commentSnap.child("username").val() ;
+          var lastchild = $(".memchat li:last-child").attr("cmt")
+          //alert(lastchild)
 
-
-
-          $('#chattingbody2').append("<li id=\"new\" rel="+useridnow+"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+" </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
+          if(lastchild != cmntid ){
+          $('#chattingbody2').append("<li id=\"new\" rel="+useridnow+" cmt="+cmntid+"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+" </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
+        }
           $('#chattingbody2').scrollTop(1000000);
         });
       });
@@ -180,7 +182,6 @@ case 8:
     });
 
   });
-
 
 
 
