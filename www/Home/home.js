@@ -9,6 +9,7 @@ $(function(){
     // Handler for .load() called.
 
   });
+  var oneTime = true
 
   $(document).on('tap', '.box', function() {
     selectedimg = $(this).attr('rel');
@@ -20,11 +21,12 @@ $(function(){
      $(".input22").css({"transform":"translateX(1000px)"})
      // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
 
-    UpdateImageView(imguid);
+    UpdateImageView(imguid,oneTime);
     $(".mphoto").fadeIn()
     $(".mphoto").addClass("maddedClass")
     $(".mfilter").fadeIn();
     $(".mfullScreen").css({"transform":"translateX(0)"})
+    oneTime = false;
 
   });
 
@@ -52,10 +54,8 @@ $(function(){
     var userInDatabase = users.child(user.uid).child("username");
     userInDatabase.once('value',function(snapshot){
       username = snapshot.val();
-    });
     var cmntdata = $('#message').val();
-
-    var newcomment = new Comment((users.child(user.uid)+"").split("/").pop(), cmntdata);
+    var newcomment = new Comment((users.child(user.uid)+"").split("/").pop(), cmntdata,username);
     var key = database.ref().child("comments").push();
     key.set(newcomment);
     database.ref().child("memories").child(imguid).once('value', function(usersnap){
@@ -84,6 +84,7 @@ $(function(){
         });
       });
 
+    });
 
     }).then(function(){
       //$('#chattingbody').append("<li id=\"new\"> <div class=\"2\" ID=\"userInChat\">"+username+" </div>  <div ID=\"userMessage\">"+cmntdata+" </div> </li>");
