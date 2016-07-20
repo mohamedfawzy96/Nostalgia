@@ -19,6 +19,53 @@ $(window).load(function(){
   });*/
 });
 //turned it into a function so every time the memoryview open it updates the value
+function updateprof(id) {
+  database.ref().child("users").child(id).once("value",function(userprof){
+    var user = firebase.auth().currentUser;
+    var curridu = user.uid
+    $(".profname").html(userprof.child("email").val())
+    $(".profuser").html(userprof.child("username").val())
+    $(".prof img").attr("src",userprof.child("profilephoto").val())
+    database.ref().child("users").child(curridu).once("value",function(userprof2){
+      var req = userprof2.child("SentRequests").val()
+      if(req != null){
+
+
+      req.forEach(function(first){
+        database.ref().child("requests").child(first).once("value",function(reque){
+          if(reque.child("to").val()==id){
+            $(".k").removeClass("AddFriend")
+            $(".k").addClass("requested")
+            $(".k").html("Requested")
+
+          }
+
+        })
+
+
+      })
+      }
+
+
+
+      if(jQuery.inArray(id,userprof2.child("friends").val())!=-1){
+        $(".k").removeClass("AddFriend")
+        $(".k").addClass("friends2")
+        $(".k").html("Friends")
+      }
+
+
+    })
+
+
+
+
+
+
+
+  })
+
+}
 function UpdateImageView(imageuid1,oneTime){
   $('#message').val('');
   var currurl = document.URL;

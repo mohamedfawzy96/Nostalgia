@@ -89,3 +89,45 @@ $(".mview").click(function(){
   $(".mfilter").fadeIn();
 
 });
+$(".profcancel").click(function(){
+  $(".prof").css({"transform":"translateY(1000px)"})
+  $(".ff33").fadeOut()
+
+
+});
+var idu;
+$(document).on('tap', '#chattingbody2 li', function() {
+  $(".prof").css({"transform":"translateY(0)"})
+   idu = $(this).attr("rel");
+  updateprof(idu)
+  $(".ff33").fadeIn()
+
+
+})
+$(document).on('tap', '.AddFriend', function() {
+  $(".k").removeClass("AddFriend")
+  $(".k").addClass("requested")
+  $(".k").html("Requested")
+  var requestID = database.ref().child('requests').push();
+  var From = firebase.auth().currentUser.uid;
+  var to = idu;
+  var users = database.ref().child('users');
+  var request = new Request(From,to,false)
+  users.child(to).once("value",function(snapshot){
+    var num = snapshot.child("ReceivedRequests").numChildren()
+    var ID = (requestID+"").split("/").pop();
+    users.child(to).child("ReceivedRequests").child(num).set(ID+"");
+
+  });
+
+  users.child(From).once("value",function(snapshot){
+    var num = snapshot.child("SentRequests").numChildren();
+    var ID = (requestID+"").split("/").pop();
+    users.child(From).child("SentRequests").child(num).set(ID+"");
+
+  });
+
+  requestID.set(request);
+
+
+})
