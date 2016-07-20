@@ -47,8 +47,9 @@ function UpdateImageView(imageuid1,oneTime){
       $(".photo").css({"filter":"grayscale(100%)"})
       $(".photo").css({"-webkit-filter":"grayscale(100%)"})
         }
-
     var ori = memorysnap.child("ori").val()
+    alert(ori)
+
     var photo = $('.photo img')
     photo.css({"transform":"rotate(0)"})
 

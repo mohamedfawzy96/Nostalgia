@@ -7,6 +7,7 @@
 var facebook = false;
 var ori = "none"
 
+
 $("#file").change(function () {
 	facebook = false;
 
@@ -15,7 +16,6 @@ $("#file").change(function () {
 	EXIF.getData(file, function () {
 		    ori = this.exifdata.Orientation;
 				var ctx = $(".photo")
-				alert(ori)
 				switch(ori){
     case 2:
         //ctx.scale(-1, 1);
@@ -66,7 +66,8 @@ $("#file").change(function () {
 	}
 
 	function finalize(){
-		alert(ori)
+		$(".filterspin").css({"display":"flex"})
+
 		if(ori == null){
 			ori = "none"
 		}
@@ -95,6 +96,7 @@ $("#file").change(function () {
 								{
 									var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 									console.log('Upload is ' + progress + '% done');
+									$(".filterspin").fadeOut()
 								}
 								break;
 						}
@@ -111,7 +113,6 @@ $("#file").change(function () {
 					}
 				});
 					//alert(membersArray);
-					alert(username)
 
 					captionattr = $("#caption3").val()
 					var newmemory = new Memory(file.name, file.size, file.type, 'image',
@@ -205,7 +206,6 @@ $("#file").change(function () {
 					var newmemory = new Memory("null", null, null, 'image',url, effectattr, privateattr, captionattr, 0,null, null, date, username, user.uid,null,ori);
 					var key = imagesRef.push();
 					//alert(membersArray.length);
-					alert(key)
 
 					key.set(newmemory);
 

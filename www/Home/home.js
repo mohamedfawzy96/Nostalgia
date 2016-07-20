@@ -1,4 +1,5 @@
 $(function(){
+  $(".filterspin").css({"display":"flex"})
   var imguid;
   var selectedimg;
   $("#connect").click(function(){
@@ -35,7 +36,7 @@ $(function(){
     alert('here');
     alert($(this));
     imguid  = $(this).attr('id');
-    
+
     alert(imguid)
     // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
 
@@ -139,6 +140,7 @@ $(function(){
       });
         counter++;
     }
+    $(".filterspin").fadeOut()
   };
 
 

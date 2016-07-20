@@ -1265,6 +1265,7 @@ body {
     flex-flow: column;
     justify-content: center;
     font-size: 4vw;
+    transition: all 0.1s ease-in-out;
 }
 .rest input{
     margin: 0;

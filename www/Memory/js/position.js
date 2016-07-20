@@ -4,6 +4,14 @@ $(".memchat").height(height2+"px")
 
 $(".mphoto").addClass("maddedClass")
 
+$(".Tit").click(function(){
+  $(".mem2").css({"display":"block"})
+  $(".mem2").css({"transform":"translateX(0)"})
+  $(".Tit").css({"opacity":"0"})
+  $(".bet").html("Members")
+
+})
+
 setTimeout(function(){
   $(".mfilter").click(function(){
     $(".mphoto").fadeOut();
@@ -51,10 +59,17 @@ $("#back3").click(function(){
 
 });
 $(".newback").click(function(){
-  $(".mfullScreen").css({"transform":"translateX(800px)"})
-  $(".photo img").attr("src","")
+  if($(".bet").html() !="Members"){
+    $(".mfullScreen").css({"transform":"translateX(800px)"})
+    $(".photo img").attr("src","")
+    $(".photo filterpho2").css({"background-color":"rgba(0,0,0,0)"})
+  }else{
+    $(".mem2").css({"transform":"translateX(1000px)"})
+    $(".Tit").css({"opacity":"1"})
+    $(".bet").html("Memory")
 
-  $(".photo filterpho2").css({"background-color":"rgba(0,0,0,0)"})
+  }
+
 
 
 

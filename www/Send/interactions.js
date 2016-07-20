@@ -13,6 +13,27 @@ $(".photo img").attr("src",$(this).attr("rel"))
 
 
 
+$("#private").click(function(){
+  $("#private .rest").css({"transform":"translateY(50px)"})
+  $("#private .rest").css({"opacity":"0"})
+  setTimeout(function(){
+    if(privateattr){
+      $("#private .rest").html("Public")
+      privateattr  = false;
+    }else{
+      $("#private .rest").html("Private")
+      privateattr = true;
+    }
+    $("#private .rest").css({"transform":"translateY(0)"})
+    $("#private .rest").css({"opacity":"1"})
+
+  },100)
+
+
+})
+
+
+
 setTimeout(function(){
 getfb(1)
 },100)
@@ -31,6 +52,7 @@ $(".text").click(function(){
            $(this).html("Post");
 
            } else if ($(".text").html()=="Post") {
+                
                finalize();
                }
      });
@@ -152,7 +174,6 @@ $(".text").click(function(){
                                           $(".photo1").css({"filter":"grayscale(0)"})
                                           $(".photo1").css({"-webkit-filter":"grayscale(0)"})
                                           var filter = $(this).children(".filterEff").css("background-color")
-                                          alert(filter)
                                           $(".filterEffpho").css({"background-color":filter})
 
                                           }
