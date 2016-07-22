@@ -21,7 +21,7 @@ $(function () {
   });
 
   //// settings area
-  
+
 
   $(".request").click(function(){
     $(".requestsView").css({"display":"block"});
@@ -60,6 +60,7 @@ $(function () {
     var users = database.ref().child('users');
     var bool = false;
     users.child(ID).once("value",function(user){
+
       var RequestID = user.child("SentRequests").val();
       //alert(RequestID);
       if(RequestID !=null){

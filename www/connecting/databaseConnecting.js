@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     });
   });
   // acceptinh the request reject btnreq
-  $(document).on('click ', '.accept', function() {
+  $(document).on('tap ', '.accept', function() {
     var uid = $(this).attr("uid");
     var reqkey = $(this).attr('rel');
 
@@ -28,7 +28,15 @@ firebase.auth().onAuthStateChanged(function(user) {
       database.ref().child('users').child(userID).child("friends").child(num).set(uid);
       database.ref().child('users').child(uid).child("friends").child(num).set(userID);
     });
-    $("li[uid="+uid+"]").css({"display":"none"});
+    $("li[uid="+uid+"] .reject").css({"display":"none"})
+    $("li[uid="+uid+"] .accept").css({"background-color":"#009688"});
+    $("li[uid="+uid+"] .accept").html("Friends")
+    $("li[uid="+uid+"] .btnreq").removeClass("accept")
+    $(".btnAccept").prepend("<div class='btnreq' style='opacity:0'></div>")
+
+
+
+
     database.ref().child('users').child(userID).child('ReceivedRequests').on("child_added", function(requestKeySnap){
       if(reqkey==requestKeySnap.val()){
         database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').remove(function(){
@@ -169,6 +177,16 @@ firebase.auth().onAuthStateChanged(function(user) {
     "</li>"
 
     $(".searchView .content").append(FindHtml);
+    var ID = firebase.auth().currentUser.uid;
+    var users = database.ref().child('users');
+    var bool = false;
+    users.child(ID).once("value",function(user){
+    if(jQuery.inArray(uid,user.child("friends").val())!=-1){
+      $(".k[uid*="+uid+"]").removeClass("AddFriend")
+      $(".k[uid*="+uid+"]").html("Friends")
+      $(".k[uid*="+uid+"]").addClass("friends2")
+    }
+  })
     requested();
   }
 });

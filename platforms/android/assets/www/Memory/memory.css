@@ -940,19 +940,18 @@ body {
 
 
 }
-.mimgMemory{
-  position: relative;
-  width: 35%;
-  height: 100%;
-=}
-.mimgMemory img{
+
+.mimgMemory {
   position: relative;
   width: 100px;
   height: 100px;
-  border-radius: 100%;
+  border-radius: 50%;
   top: 50%;
   margin-top: -50px;
   margin-left: 5px;
+  background-color: green;
+  background-size: cover;
+  background-image: url("../Home/img/test.jpg");
 }
 .minfo{
   position: relative;
@@ -971,6 +970,7 @@ body {
   height: 25%;
   border-bottom: 0.2px solid rgba(0, 0, 0, 0.1);
   padding: 3px;
+  font-size: 3.5vw;
 }
 .mcaption1{
   height: auto;
@@ -1067,6 +1067,13 @@ body {
 
 
 }
+.ff{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
 .msubtitle{
   width: 100%;
   height: 10%;
@@ -1104,23 +1111,24 @@ body {
    margin-left: 5px;
    border-radius: 20px !important;
 }
-.msend1{
+.msend12{
   position: relative;
   height: 100%;
   width: 20%;
   color: #EC4B57;
-  font-size: 1.2em;
+  font-size: 4.5vw;
   font-weight: bold;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .mfullScreen li{
   position: relative;
   height: auto;
   width: 100%;
   list-style: none;
-
-  padding-top: 10px;
-  padding-left: 10px;
+  padding: 10px;
+  box-sizing: border-box;
 
 
 
@@ -1282,4 +1290,13 @@ button{
   display: flex;
     align-items: center;
     justify-content: center;
+  }
+.textarea111{
+    width: 100%;
+    height: 10px;
+    border: 2px solid black;
+    border-radius: 0;
+    font-size: 1.2em;
+    padding-top: 5px;
+    box-sizing: border-box;
   }

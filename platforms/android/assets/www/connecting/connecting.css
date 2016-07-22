@@ -936,7 +936,7 @@ body {
   text-align: center;
   top:50%;
   margin-top: 10px;
-  font-size: 1.3em;
+  font-size: 5vw;
 }
 
 
@@ -1162,6 +1162,7 @@ hr{
   transform: translateX(800px);
   transition: all 0.7s ease-in-out;
   box-shadow: 0px 0px 20px #888888;
+  overflow-y: scroll;
 
 
 
@@ -1199,6 +1200,117 @@ hr{
   justify-content: space-between;
 
 
+}
+.ui-input-text{
+  width: 80%;
+}
+.changePhoto{
+  position: relative;
+  height: 30vh;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+}
+.cc{
+  position: relative;
+  height: 7vh;
+  width: 100%;
+  box-shadow: 0px 0px 5px #888888;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.cc .ui-input-text{
+  width: 100%;
+  height: 100%;
+}
+.inputset{
+  height: 100%;
+  width: 40%;
+
+}
+.facebookC{
+  position: relative;
+  height: 100%;
+  width: 40%;
+padding: 10px;
+box-sizing: border-box;
+  font-size: 4vw;
+  font-weight: bold;
+
+
+
+}
+.Save{
+  position: relative;
+  height:
+}
+.save{
+  position: relative;
+  background-color: #EC4B57;
+
+  height: 5vh;
+  width: 25vw;
+  left: 50%;
+  margin-left: -12.5vw;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1em;
+  border-radius: 20px;
+  margin-top: 30px;
+
+}
+.cc input{
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  border: 0 !important;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 4vw;
+
+}
+.title10{
+  position: relative;
+  height: 100%;
+  width: 30%;
+  font-size: 4.5vw;
+  font-family: Futura;
+  color: #888888;
+  padding: 10px;
+  box-sizing: border-box;
+
+}
+.change{
+  position: relative;
+  height: 8vh;
+  width: 100%;
+  font-size: 4vw;
+  font-weight: bold;
+  color: #EC4B57;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.fot{
+  position: relative;
+  display: block;
+  height: 15vh;
+  width: 15vh;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("../Home/img/test.jpg");
+  margin: 0 auto;
 }
 .search input{
   position: relative;
@@ -1298,6 +1410,27 @@ li img{
   font-weight: bold;
 
 }
+.friends2{
+  border: 3px solid #009688;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vw;
+  width: 25vw;
+  margin-left: -12.5vw;
+  box-sizing: border-box;
+  font-weight: bold;
+  background-color: #009688;
+  position: relative;
+  border: 3px solid;
+  top: 50%;
+  margin-top: -5vw;
+  margin-right: 10px;
+  font-weight: bold;
+
+}
 .requested{
   position: relative;
   border: 3px solid grey;
@@ -1365,6 +1498,8 @@ li img{
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+
 }
 .reject{
   background-color: white;

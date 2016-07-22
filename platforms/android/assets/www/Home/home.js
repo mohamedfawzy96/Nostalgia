@@ -1,4 +1,5 @@
 $(function(){
+  $(".filterspin").css({"display":"flex"})
   var imguid;
   var selectedimg;
   $("#connect").click(function(){
@@ -9,25 +10,33 @@ $(function(){
     // Handler for .load() called.
 
   });
+  var oneTime = true
 
-  $(document).on('tap ', '.box', function() {
+  $(document).on('tap', '.box', function() {
     selectedimg = $(this).attr('rel');
      imguid = $(this).attr('rel');
+     $(".photo").css({"height":"36vh"})
+     $(".memorychat").css({"top":"75vh"})
+     $(".expand img").css({"transform":"rotate(0)"})
+     $(".memchat").height(height2+"px")
+     $(".input22").css({"transform":"translateX(1000px)"})
      // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
 
-    UpdateImageView(imguid);
+    UpdateImageView(imguid,oneTime);
     $(".mphoto").fadeIn()
     $(".mphoto").addClass("maddedClass")
     $(".mfilter").fadeIn();
     $(".mfullScreen").css({"transform":"translateX(0)"})
+    oneTime = false;
 
   });
 
-  $(document).on('tap ', '.clickableimg', function(event) {
+  $(document).on('tap', '.clickableimg', function(event) {
     event.stopPropagation();
     alert('here');
     alert($(this));
     imguid  = $(this).attr('id');
+
     alert(imguid)
     // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)
 
@@ -39,18 +48,17 @@ $(function(){
 
   });
 
+
   // moved the send to the home.js
-  $(".msend1").click(function(){
+  $(".msend12").click(function(){
     var user = firebase.auth().currentUser;
     var users = database.ref().child("users");
     var username;
     var userInDatabase = users.child(user.uid).child("username");
     userInDatabase.once('value',function(snapshot){
       username = snapshot.val();
-    });
     var cmntdata = $('#message').val();
-
-    var newcomment = new Comment((users.child(user.uid)+"").split("/").pop(), cmntdata);
+    var newcomment = new Comment((users.child(user.uid)+"").split("/").pop(), cmntdata,username);
     var key = database.ref().child("comments").push();
     key.set(newcomment);
     database.ref().child("memories").child(imguid).once('value', function(usersnap){
@@ -79,6 +87,7 @@ $(function(){
         });
       });
 
+    });
 
     }).then(function(){
       //$('#chattingbody').append("<li id=\"new\"> <div class=\"2\" ID=\"userInChat\">"+username+" </div>  <div ID=\"userMessage\">"+cmntdata+" </div> </li>");
@@ -92,7 +101,12 @@ $(function(){
       };*/
     });
   });
-  //////////
+  //////////new request
+
+
+
+
+  //////
 
 
   memoriesArray = new Array();
@@ -131,10 +145,38 @@ $(function(){
       });
         counter++;
     }
+    $(".filterspin").fadeOut()
   };
 
 
     firebase.auth().onAuthStateChanged(function(user) {
+      function request(){
+        var user55 = firebase.auth().currentUser;
+
+
+        database.ref().child("users").child(user55.uid).on("value",function(user){
+          var reqnum = user.child("ReceivedRequests").val();
+          if(reqnum != null){
+          if(reqnum.length>0){
+            $(".notif").css({"opacity":"1"});
+
+            if(reqnum.length>9){
+              $(".notif").html("9+")
+
+
+            }else{
+              $(".notif").html(reqnum.length)
+
+            }
+
+
+          }
+        }
+
+        })
+      }
+      request()
+
       var user = firebase.auth().currentUser;
       var username;
       var userInDatabase = database.ref().child('users').child(user.uid).child("username");
@@ -198,7 +240,8 @@ $(function(){
         if(caption==""){
           caption = "no caption";
         }
-        var str = "<li><div class=\"card\"><div class=\"imgMemory \"><img class=\"clickableimg\" src=\""+url+"\" alt=\"\" id=\""+memoryID+"\"/></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
+
+        var str = "<li class=\"clickableimg\" id=\""+memoryID+"\"><div class=\"card\"><div class=\"imgMemory \" style='background-image:url("+url+")'></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
         $('#body2').prepend(str);
       });
     });
@@ -210,7 +253,7 @@ $(function(){
     database.ref().child('users').child(currentUserId).child('friends').on('child_added', function(userKeySnap) {
       database.ref().child('users').child(userKeySnap.val()+'').once('value', function(userSnap){
         alert(userSnap.key);
-        database.ref().child("users").child(userSnap.key).child("memberposted").on('child_added', function(memoryKeySnap){
+        database.ref().child("users").child(userSnap.key).child("feelit").on('child_added', function(memoryKeySnap){
           var memoryID = (memoryKeySnap.val()+'').split("/").pop();
           //should change this after cleaning the databse
           //alert(memoryID);
@@ -223,7 +266,7 @@ $(function(){
             if(caption==""){
               caption = "no caption";
             }
-            var str = "<li><div class=\"card\"><div class=\"imgMemory \"><img class=\"clickableimg\" src=\""+url+"\" alt=\"\" id=\""+memoryID+"\"/></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
+            var str = "<li><div class=\"card\"><div class=\"imgMemory \" style='background-image:url("+url+")'></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
             $('#body2').prepend(str);
           });
         });
@@ -240,7 +283,7 @@ $(function(){
       var user = firebase.auth().currentUser;
       var users = database.ref().child("users");
       var userInDatabase = users.child(user.uid);
-      var imagesRef = userInDatabase.child("posted");
+      var imagesRef = userInDatabase.child("memberposted");
       imagesRef.limitToLast(20).once('value',function(snapshot){
 
         memorySnap = snapshot.val();
@@ -284,6 +327,7 @@ $(function(){
     });
   });
 
+  //$(".notif").position(positionconnec);
   $('.facebook').hide();
   $('.filter3').hide();
 });

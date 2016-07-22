@@ -16,7 +16,7 @@ $("#file").change(function () {
 	EXIF.getData(file, function () {
 		    ori = this.exifdata.Orientation;
 				var ctx = $(".photo")
-				switch(ori){
+			/*switch(ori){
     case 2:
         //ctx.scale(-1, 1);
         break;
@@ -48,7 +48,7 @@ $("#file").change(function () {
         // 90° rotate left
 				photo.css({"transform":"rotate(-90deg)"})
         break;
-}
+}*/
 
 		});
 	    //alert(jQuery(this).val());
@@ -80,9 +80,12 @@ $("#file").change(function () {
 				username = snapshot.val();
 			});
 			if(facebook==false) {
+				var keyss = database.ref().child('keys');
+				var imagekeydif = keyss.push()
+
 
 				var file = document.getElementById('file').files[0];
-				var imageRef = storageRef.child('memories/'+file.name);
+				var imageRef = storageRef.child('memories/'+imagekeydif);
 				var uploadTask = imageRef.put(file);
 				uploadTask.on('state_changed', function(snapshot) {
 						switch (snapshot.state) {

@@ -48,6 +48,7 @@ $(function(){
 	};
 
 	$("#addMember").click(function(){
+		alert('d')
 		if($(this).attr("class")=="notonce"){
 			$(this).attr("class","once");
 			getMembers();
@@ -57,7 +58,7 @@ $(function(){
 	var membersArray = new Array();
 
 	function getMembers(){
-		var users = database.ref().child("users");
+		var users = database.ref().child("users").child(user.uid).child('friends');
 		users.once('value', function(usersSnap){
 			usersSnap.forEach(function(user){
 				//alert(user.child("email").val());

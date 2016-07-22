@@ -1410,6 +1410,27 @@ li img{
   font-weight: bold;
 
 }
+.friends2{
+  border: 3px solid #009688;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vw;
+  width: 25vw;
+  margin-left: -12.5vw;
+  box-sizing: border-box;
+  font-weight: bold;
+  background-color: #009688;
+  position: relative;
+  border: 3px solid;
+  top: 50%;
+  margin-top: -5vw;
+  margin-right: 10px;
+  font-weight: bold;
+
+}
 .requested{
   position: relative;
   border: 3px solid grey;
@@ -1477,6 +1498,8 @@ li img{
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+
 }
 .reject{
   background-color: white;

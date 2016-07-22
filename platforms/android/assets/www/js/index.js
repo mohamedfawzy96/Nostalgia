@@ -23,10 +23,9 @@
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-$(window).load(function(){
-  window.location = "Home/home.html";
-  
+  //window.location = "Home/home.html";
   var user = firebase.auth().currentUser;
+  alert(user)
   if(user){
     var users = database.ref().child("users");
     var username;
@@ -35,14 +34,15 @@ $(window).load(function(){
       username = snapshot.val();
     }).then(function(){
       alert(username);
-      if(username){
+      if(username!=null){
         window.location = "Home/home.html";
       }
     });
   };
-});
 
 $(function(){
+  //window.location = "Home/home.html";
+
    document.addEventListener('deviceready', this.onDeviceReady, false);
     $(".Signup").click(function(){
       $('#sigin').id = "signup";
@@ -83,7 +83,7 @@ $(function(){
             var newuser = new User(user.email, user.uid, currusername, [], [], [], [], [], [], null);
 
             usersRef.child(user.uid).set(newuser);
-            usersRef.child('usernames').child(currusername).once('value', function(usernameSnap) {
+            database.ref().child('usernames').child(currusername).once('value', function(usernameSnap) {
               if(usernameSnap.val()){
                 alert(usernameSnap.key)
                 alert('that user name is taken');
@@ -97,7 +97,7 @@ $(function(){
                 });
 
               } else {
-                usersRef.child('usernames').child(currusername+'').set(user.uid);
+                database.ref().child('usernames').child(currusername+'').set(user.uid);
                 window.location = "Home/home.html";
               }
             });

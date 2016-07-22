@@ -19,7 +19,54 @@ $(window).load(function(){
   });*/
 });
 //turned it into a function so every time the memoryview open it updates the value
-function UpdateImageView(imageuid1){
+function updateprof(id) {
+  database.ref().child("users").child(id).once("value",function(userprof){
+    var user = firebase.auth().currentUser;
+    var curridu = user.uid
+    $(".profname").html(userprof.child("email").val())
+    $(".profuser").html(userprof.child("username").val())
+    $(".prof img").attr("src",userprof.child("profilephoto").val())
+    database.ref().child("users").child(curridu).once("value",function(userprof2){
+      var req = userprof2.child("SentRequests").val()
+      if(req != null){
+
+
+      req.forEach(function(first){
+        database.ref().child("requests").child(first).once("value",function(reque){
+          if(reque.child("to").val()==id){
+            $(".k").removeClass("AddFriend")
+            $(".k").addClass("requested")
+            $(".k").html("Requested")
+
+          }
+
+        })
+
+
+      })
+      }
+
+
+
+      if(jQuery.inArray(id,userprof2.child("friends").val())!=-1){
+        $(".k").removeClass("AddFriend")
+        $(".k").addClass("friends2")
+        $(".k").html("Friends")
+      }
+
+
+    })
+
+
+
+
+
+
+
+  })
+
+}
+function UpdateImageView(imageuid1,oneTime){
   $('#message').val('');
   var currurl = document.URL;
   var splittingurl = currurl.split("=");
@@ -31,6 +78,70 @@ function UpdateImageView(imageuid1){
     imgurl = memorysnap.child("url").val();
     repostsnum = memorysnap.child("reposts").val();
     membersnum = memorysnap.child("members").numChildren();
+    var effect2 = memorysnap.child("effect").val();
+    var eff0 = effect2.indexOf("1990")
+    var eff1 = effect2.indexOf("1980")
+    var eff2 = effect2.indexOf("1970")
+    $(".photo").css({"-webkit-filter":"grayscale(0)"})
+    $(".photo .filterpho2").css({"background-color":"rgba(0,0,0,0)"})
+    if(eff1 != -1){
+      $(".photo .filterpho2").css({"background-color":"#FBB03B"})
+    }
+    if(eff0 != -1){
+      $(".photo .filterpho2").css({"background-color":"#ED1E79"})
+    }
+    if(eff2 != -1){
+      $(".photo").css({"filter":"grayscale(100%)"})
+      $(".photo").css({"-webkit-filter":"grayscale(100%)"})
+        }
+    var ori = memorysnap.child("ori").val()
+
+    var photo = $('.photo img')
+    photo.css({"transform":"rotate(0)"})
+    alert("hi")
+    //$(".expand img").css({"transform":"rotate(180deg)"})
+
+    //$('.photo img').css({"transform":"rotate(180deg)"})
+
+
+
+
+    /*switch(ori){
+case 2:
+    //ctx.scale(-1, 1);
+    break;
+case 3:
+    // 180° rotate left
+    photo.css({"transform":"rotate(-180deg)"})
+    break;
+case 4:
+    // vertical flip
+    break;
+case 5:
+    // vertical flip + 90 rotate right
+    //photo.css({"width":"rotate(90deg)"})
+    photo.css({"transform":"rotate(90deg)"})
+
+    break;
+case 6:
+    // 90° rotate right
+    $('.photo img').css({"transform":"rotate(-90deg)"})
+
+
+    break;
+case 7:
+    // horizontal flip + 90 rotate right
+
+    photo.css({"transform":"rotate(90deg)"})
+
+    break;
+case 8:
+    // 90° rotate left
+
+    photo.css({"transform":"rotate(-90deg)"})
+    break;
+}*/
+
     $(".mimg img").attr("src",imgurl)
     $('#title p').text(memorysnap.child('owner').val());
     $('#owner').text(memorysnap.child('owner').val()+" just shared a memory");
@@ -41,27 +152,34 @@ function UpdateImageView(imageuid1){
       $('#caption').text(memorysnap.child('caption').val());
     }
   }).then(function(){
-    $('#image').attr('src',imgurl);
-    $('#numReposts').text(repostsnum);
-    $('#numMembers').text(membersnum);
-  });
-  $('#chattingbody').text("");
+    $('.photo img').attr('src',imgurl);
+    $(".photo img").css({"display":"block"})
+
+    //$('#numReposts').text(repostsnum);
+    //$('#numMembers').text(membersnum);
+    $('#chattingbody2').text("");
     database.ref().child("memories").child(imguid).child("comments").on('child_added',function(commentid){
-      //alert(commentid.val());
-      var cmntid = commentid.val();
-      database.ref().child("comments").child(cmntid).once('value',function(commentSnap){
-        var useridnow = commentSnap.child("user").val();
-        database.ref().child("users").child(useridnow).once('value',function(usersnap){
-          var usernamenow = usersnap.child('username').val();
+        //alert(commentid.val());
+        var cmntid = commentid.val();
+
+        database.ref().child("comments").child(cmntid).once('value',function(commentSnap){
+          var useridnow = commentSnap.child("user").val();
           var cmntdatanow = commentSnap.child("data").val();
-          $('#chattingbody').append("<li id=\"new\"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+
-          " </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
+          var usernamenow = commentSnap.child("username").val() ;
+          var lastchild = $(".memchat li:last-child").attr("cmt")
+          //alert(lastchild)
 
-          $('#chattingbody').scrollTop(1000000);
-
+          if(lastchild != cmntid ){
+          $('#chattingbody2').append("<li id=\"new\" rel="+useridnow+" cmt="+cmntid+"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+" </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
+        }
+          $('#chattingbody2').scrollTop(1000000);
         });
       });
-    });
+
+
+
+  });
+
 
 
   var qsParm = new Array();
@@ -123,7 +241,6 @@ function UpdateImageView(imageuid1){
     });
 
   });
-
 
 
 

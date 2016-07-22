@@ -95,12 +95,18 @@ function UpdateImageView(imageuid1,oneTime){
       $(".photo").css({"-webkit-filter":"grayscale(100%)"})
         }
     var ori = memorysnap.child("ori").val()
-    alert(ori)
 
     var photo = $('.photo img')
     photo.css({"transform":"rotate(0)"})
+    alert("hi")
+    //$(".expand img").css({"transform":"rotate(180deg)"})
 
-    switch(ori){
+    //$('.photo img').css({"transform":"rotate(180deg)"})
+
+
+
+
+    /*switch(ori){
 case 2:
     //ctx.scale(-1, 1);
     break;
@@ -110,29 +116,32 @@ case 3:
     break;
 case 4:
     // vertical flip
-    ctx.scale(1, -1);
     break;
 case 5:
     // vertical flip + 90 rotate right
     //photo.css({"width":"rotate(90deg)"})
-
     photo.css({"transform":"rotate(90deg)"})
 
     break;
 case 6:
     // 90° rotate right
-    photo.css({"transform":"rotate(90deg)"})
+    $('.photo img').css({"transform":"rotate(-90deg)"})
+
+
     break;
 case 7:
     // horizontal flip + 90 rotate right
+
     photo.css({"transform":"rotate(90deg)"})
 
     break;
 case 8:
     // 90° rotate left
+
     photo.css({"transform":"rotate(-90deg)"})
     break;
-}
+}*/
+
     $(".mimg img").attr("src",imgurl)
     $('#title p').text(memorysnap.child('owner').val());
     $('#owner').text(memorysnap.child('owner').val()+" just shared a memory");
@@ -144,6 +153,8 @@ case 8:
     }
   }).then(function(){
     $('.photo img').attr('src',imgurl);
+    $(".photo img").css({"display":"block"})
+
     //$('#numReposts').text(repostsnum);
     //$('#numMembers').text(membersnum);
     $('#chattingbody2').text("");

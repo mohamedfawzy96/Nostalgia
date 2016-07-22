@@ -62,6 +62,8 @@ $(".newback").click(function(){
   if($(".bet").html() !="Members"){
     $(".mfullScreen").css({"transform":"translateX(800px)"})
     $(".photo img").attr("src","")
+    $(".photo img").css({"display":"none"})
+
     $(".photo filterpho2").css({"background-color":"rgba(0,0,0,0)"})
   }else{
     $(".mem2").css({"transform":"translateX(1000px)"})

@@ -41,6 +41,8 @@
   };
 
 $(function(){
+  //window.location = "Home/home.html";
+
    document.addEventListener('deviceready', this.onDeviceReady, false);
     $(".Signup").click(function(){
       $('#sigin').id = "signup";
