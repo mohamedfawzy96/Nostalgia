@@ -1440,3 +1440,21 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.go111 img:active{
+opacity: 0.7;
+}
+.text:active{
+  opacity: 0.7;
+
+
+}
+.back:active{
+  opacity: 0.7;
+
+
+}
+.attr1:active{
+background-color: #999;
+
+}

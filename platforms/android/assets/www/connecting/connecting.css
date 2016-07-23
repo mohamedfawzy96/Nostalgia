@@ -1014,6 +1014,7 @@ body {
   display: flex;
   flex-flow: column;
   justify-content: space-around;
+  transition: all 0.2s ease-in-out;
 
 }
 .button1 img{
@@ -1117,6 +1118,7 @@ hr{
   background-color: white;
   margin-top: 20px;
   display: flex;
+  transition: all 0.2s ease-in-out;
 
 }
 .request .icon{
@@ -1519,3 +1521,9 @@ li img{
   align-items: center;
   justify-content: center;
 }
+.button1:active{
+  opacity: 0.7;
+}
+
+.request:active{
+background-color: #999}

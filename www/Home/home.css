@@ -1031,6 +1031,8 @@ body {
   position: relative;
   width: 50%;
   height: 100%;
+  transition: all 0.2s ease-in-out;
+
 }
 
 #send img{
@@ -1162,6 +1164,7 @@ body {
   box-shadow: 0px 0px 20px #888888;
   overflow: hidden;
   background-color: white;
+  transition: all 0.2s ease-in-out;
 
 }
 .imgMemory{
@@ -1514,5 +1517,16 @@ body {
   justify-content: center;
   box-shadow: 0px 0px 5px black;
 opacity: 0;
+
+}
+
+.box:active .filter{
+  opacity: 0.7;
+}
+.btn:active{
+  opacity: 0.7;
+}
+.card:active {
+  background-color: #999
 
 }

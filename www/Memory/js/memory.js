@@ -98,7 +98,7 @@ function UpdateImageView(imageuid1,oneTime){
 
     var photo = $('.photo img')
     photo.css({"transform":"rotate(0)"})
-    alert("hi")
+    //alert("hi")
     //$(".expand img").css({"transform":"rotate(180deg)"})
 
     //$('.photo img').css({"transform":"rotate(180deg)"})

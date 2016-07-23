@@ -24,6 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 .newback img{
     position: relative;
@@ -137,6 +138,11 @@
     height: 100%;
     width: auto;
 }
+.newback:active{
+  opacity: 0.5;
+}
+
+
 
 .memorychat{
   position: fixed;
