@@ -1,12 +1,23 @@
 $(function () {
   $username = $("#usernameSet input");
-  $name = $("#nameSet input");
+  $firstname = $("#firstnameSet input");
+  $lastname = $("#lastnameSet input");
+  $profilephoto = $(".changePhoto img");
+
+
   $save = $(".save");
   $changephoto = $(".change");
+  var user1 ;
+  var firstname1;
+  var Lastname1;
+  var connected;
+
 
   $("#settings").click(function(){
     $(".settingsView").css({"display":"block"});
     setTimeout(function(){
+      $("#title").html("Settings");
+
       $(".settingsView").css({"transform":"translateX(0)"});
       $(".btnbk img").attr("src","img/back.svg")
       $(".btnbk ").removeClass("back")
@@ -21,7 +32,11 @@ $(function () {
 
     userInDatabase.once('value',function(snapshot) {
       $username.val(snapshot.child('username').val());
-      $name.val(snapshot.child('name').val());
+      $firstname.val(snapshot.child('firstName').val());
+      $lastname.val(snapshot.child('lastName').val());
+      $profilephoto.attr("src",snapshot.child('profilephoto').val());
+
+
       if(snapshot.child('facebook').val()=="true"){
         $('.facebookC').html("Connected");
       } else {
@@ -31,23 +46,86 @@ $(function () {
   });
 
   $save.click(function() {
-    database.ref().child('usernames').child($username.val()+'').once('value', function(usernameSnap) {
-      if(usernameSnap.val()!=null) {
-        alert('this usernamealready exists'+usernameSnap.val());
-      } else {
-        userInDatabase.child('username').once('value', function(oldusernameSnap) {
-          database.ref().child('usernames').child(oldusernameSnap.val()).remove(function() {
-            userInDatabase.child('username').set($username.val());
-            user = firebase.auth().currentUser;
+    userInDatabase.once("value",function(user2){
+      if(user2.child("username").val() != $username.val() ){
 
-            database.ref().child('usernames').child($username.val()).set(user.uid+'');
+
+
+      database.ref().child('usernames').child($username.val()+'').once('value', function(usernameSnap) {
+        if(usernameSnap.val()!=null) {
+          alert('this usernamealready exists'+usernameSnap.val());
+        } else {
+          userInDatabase.child('username').once('value', function(oldusernameSnap) {
+            database.ref().child('usernames').child(oldusernameSnap.val()).remove(function() {
+              userInDatabase.child('username').set($username.val());
+              user = firebase.auth().currentUser;
+
+              database.ref().child('usernames').child($username.val()).set(user.uid+'');
+            });
           });
-        });
 
 
-      }
+        }
+      })}
+
+      if(user2.child("firstName").val() != $firstname.val() ){
+        userInDatabase.child('firstName').set($firstname.val());
+        }
+
+        if(user2.child("lastName").val() != $lastname.val() ){
+          userInDatabase.child('lastName').set($lastname.val());
+
+          }
+          if(user2.child("profilephoto").val() != $profilephoto.attr("src") ){
+            var keyss = database.ref().child('keys');
+    				var imagekeydif = keyss.push()
+            var file = document.getElementById('changepho').files[0];
+            var imageRef = storageRef.child('memories/'+imagekeydif);
+            var uploadTask = imageRef.put(file);
+            uploadTask.on('state_changed', function(snapshot) {
+                switch (snapshot.state) {
+                  case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    console.log('Upload is paused');
+                    break;
+                  case firebase.storage.TaskState.RUNNING: // or 'running'
+                    console.log('Upload is running');
+                    break;
+                  case firebase.storage.TaskState.PROGRESS: // or 'progress'
+                    {
+                      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                      console.log('Upload is ' + progress + '% done');
+                      //$(".filterspin").fadeOut()
+                    }
+                    break;
+                }
+          }, function(error) {
+              alert(error);
+          }, function() {
+            alert("saved")
+            userInDatabase.child('profilephoto').set(uploadTask.snapshot.downloadURL);
+
+          }
+        )
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+          alert("Saved")
     })
-    userInDatabase.child('name').set($name.val());
+
+
   });
 
 

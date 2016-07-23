@@ -233,6 +233,12 @@
   position: relative;
   width: 100%;
 }
+#message{
+  font-size: 3.5vw;
+}
+.memchat li{
+  font-size:3.5vw; 
+}
 .prof{
   position: absolute;
   height: 55vh;

@@ -10,7 +10,9 @@ firebase.auth().onAuthStateChanged(function(user) {
   var username;
   database.ref().child('users').child(userID).once("value",function(user1){
     username = user1.child('username').val();
-    $("#title p").html(user1.child("username").val());
+    var fullname = user1.child('firstName').val()+" "+user1.child('lastName').val();
+    $(".name").html(fullname)
+    $("#title ").html(user1.child("username").val());
     var users = database.ref().child('users');
     //database.ref().child('users').child(user.uid).child('friends')
     users.on("child_added",function(user){
