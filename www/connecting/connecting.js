@@ -3,6 +3,8 @@ $(function () {
   $("#find").click(function(){
     $(".searchView").css({"display":"block"});
     setTimeout(function(){
+      $("#title").html("Find");
+
       $(".searchView").css({"transform":"translateX(0)"});
       $(".btnbk img").attr("src","img/back.svg");
       $(".btnbk ").removeClass("back");
@@ -14,14 +16,42 @@ $(function () {
     $(".friendsView").css({"display":"block"});
     setTimeout(function(){
       $(".friendsView").css({"transform":"translateX(0)"});
+      $("#title").html("Friends");
+
       $(".btnbk img").attr("src","img/back.svg")
       $(".btnbk ").removeClass("back")
       $(".btnbk ").addClass("cancel2")
+
     }, 100);
   });
 
+  $(".change").click(function(){
+    $("#changepho").trigger("click")
+  })
+var file;
+  $("#changepho").change(function () {
+
+  		var photo = $('.fot img')
+
+  	    //alert(jQuery(this).val());
+  	   	//alert(file);
+  	   	readURL(this);
+  	});
+  	function readURL(input) {
+  	    if (input.files && input.files[0]) {
+  	        var reader = new FileReader();
+  	        reader.onload = function (e) {
+  				$('.changePhoto img').attr("src", e.target.result);
+  	        }
+  	        reader.readAsDataURL(input.files[0]);
+  	    }
+  	}
+
+
+
+
   //// settings area
-  
+
 
   $(".request").click(function(){
     $(".requestsView").css({"display":"block"});
@@ -34,12 +64,13 @@ $(function () {
   });
 
   $(".btnbk").click(function(){
-      var x = $(this).attr("class")+""
-      var y = x.split(" ")[1]
-      if(y==("cancel2")){
+      var x = $(".btnbk img").attr("src")
+      if(x!=("../Memory/img/home.svg")){
+        $(".Friendcontent ").html("")
+
       $(".view").css({"transform":"translateX(800px)"});
       setTimeout(function(){
-        $(".view").css({"display":"none"});
+        //$(".view").css({"display":"none"});
         $(".btnbk ").addClass("back");
         $(".btnbk ").removeClass("cancel2");
       }, 800);
@@ -60,6 +91,7 @@ $(function () {
     var users = database.ref().child('users');
     var bool = false;
     users.child(ID).once("value",function(user){
+
       var RequestID = user.child("SentRequests").val();
       //alert(RequestID);
       if(RequestID !=null){
@@ -128,7 +160,7 @@ $(function () {
     var username;
     var userInDatabase = database.ref().child('users').child(user.uid).child("username");
     userInDatabase.once('value',function(snapshot){
-      $('#title p').html(snapshot.val());
+      $('#title').html(snapshot.val());
       database.ref().child('users').child(user.uid).child('friends').on('child_added', function(friendSnap) {
         //alert(friendSnap.val());
         database.ref().child('users').child(friendSnap.val()).child('friends').on('child_added', function(ffriendSnap) {

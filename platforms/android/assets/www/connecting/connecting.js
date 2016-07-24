@@ -3,6 +3,8 @@ $(function () {
   $("#find").click(function(){
     $(".searchView").css({"display":"block"});
     setTimeout(function(){
+      $("#title").html("Find");
+
       $(".searchView").css({"transform":"translateX(0)"});
       $(".btnbk img").attr("src","img/back.svg");
       $(".btnbk ").removeClass("back");
@@ -14,11 +16,42 @@ $(function () {
     $(".friendsView").css({"display":"block"});
     setTimeout(function(){
       $(".friendsView").css({"transform":"translateX(0)"});
+      $("#title").html("Friends");
+
       $(".btnbk img").attr("src","img/back.svg")
       $(".btnbk ").removeClass("back")
       $(".btnbk ").addClass("cancel2")
+
     }, 100);
   });
+
+  $(".change").click(function(){
+    $("#changepho").trigger("click")
+  })
+var file;
+  $("#changepho").change(function () {
+
+  		var photo = $('.fot img')
+
+  	    //alert(jQuery(this).val());
+  	   	//alert(file);
+  	   	readURL(this);
+  	});
+  	function readURL(input) {
+  	    if (input.files && input.files[0]) {
+  	        var reader = new FileReader();
+  	        reader.onload = function (e) {
+  				$('.changePhoto img').attr("src", e.target.result);
+  	        }
+  	        reader.readAsDataURL(input.files[0]);
+  	    }
+  	}
+
+
+
+
+  //// settings area
+
 
   $(".request").click(function(){
     $(".requestsView").css({"display":"block"});
@@ -31,12 +64,13 @@ $(function () {
   });
 
   $(".btnbk").click(function(){
-      var x = $(this).attr("class")+""
-      var y = x.split(" ")[1]
-      if(y==("cancel2")){
+      var x = $(".btnbk img").attr("src")
+      if(x!=("../Memory/img/home.svg")){
+        $(".Friendcontent ").html("")
+
       $(".view").css({"transform":"translateX(800px)"});
       setTimeout(function(){
-        $(".view").css({"display":"none"});
+        //$(".view").css({"display":"none"});
         $(".btnbk ").addClass("back");
         $(".btnbk ").removeClass("cancel2");
       }, 800);
@@ -57,6 +91,7 @@ $(function () {
     var users = database.ref().child('users');
     var bool = false;
     users.child(ID).once("value",function(user){
+
       var RequestID = user.child("SentRequests").val();
       //alert(RequestID);
       if(RequestID !=null){
@@ -98,7 +133,7 @@ $(function () {
     $(this).addClass("requested");
   });
 
-  firebase.auth().onAuthStateChanged(function(user) {
+  /*firebase.auth().onAuthStateChanged(function(user) {
     var user = firebase.auth().currentUser;
     var username;
     var userInDatabase = database.ref().child('users').child(user.uid).child("username");
@@ -114,6 +149,44 @@ $(function () {
           });
         });
       });
+    });
+  });*/
+  function isInArray(value, array) {
+    return array.indexOf(value) > -1;
+  }
+  var people = new Array();
+  firebase.auth().onAuthStateChanged(function(user) {
+    var user = firebase.auth().currentUser;
+    var username;
+    var userInDatabase = database.ref().child('users').child(user.uid).child("username");
+    userInDatabase.once('value',function(snapshot){
+      $('#title').html(snapshot.val());
+      database.ref().child('users').child(user.uid).child('friends').on('child_added', function(friendSnap) {
+        //alert(friendSnap.val());
+        database.ref().child('users').child(friendSnap.val()).child('friends').on('child_added', function(ffriendSnap) {
+          database.ref().child('users').child(ffriendSnap.val()).once('value', function(userSnap) {
+            people.push({key:userSnap.key, name:userSnap.child('username').val() });
+          });
+        });
+      });
+      var repeated = new Array();
+      var limit;
+      if(people.length>4) {
+        limit = 4;
+      } else {
+        limit = people.length;
+      }
+      for (i = 0; i < limit;) {
+          var pos = Math.floor(Math.random() * people.length);
+
+          if(isInArray(people[pos].key, repeated)==false) {
+            $('.people').append("<div class=\"person\" id=\""+people[pos].key+"\">  <div class=\"icon\">"
+                + "<img src=\"../Home/img/test.jpg\" alt=\"\" />"
+                + "</div><div class=\"nameOfperson\">"+people[pos].name+"</div></div>");
+            repeated.push(people[pos].key);
+            i++;
+          }
+      }
     });
   });
 

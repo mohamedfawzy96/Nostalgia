@@ -15,7 +15,6 @@ $(function() {
     $('#notificationscontent').html("");
     database.ref().child('users').child(useruid+'').child('notifications').orderByKey().on('child_added', function(notificationkeySnap) {
       var notificationKey = notificationkeySnap.val();
-      alert(notificationKey)
       //alert(notificationKey)
       var subjectname;
       var action;
@@ -71,7 +70,6 @@ $(function() {
   });
 
   $(document).on('click ', '.notificationspecialclass', function() {
-    alert($(this).attr('key'));
     database.ref().child('notifications').child($(this).attr('key')).child('checked').set("true");
     if($(this).attr('type')=="accepted"){
       alert('view profile!');

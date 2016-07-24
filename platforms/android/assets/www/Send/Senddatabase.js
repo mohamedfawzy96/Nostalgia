@@ -1,19 +1,22 @@
 
 
 	$(document).on('tap', '.go111', function(){
-	alert("hi");
 	$('#file').trigger('click');
 
 });
 var facebook = false;
+var ori = "none"
+
 
 $("#file").change(function () {
+	facebook = false;
+
 		file = document.getElementById('file').files[0];
 		var photo = $('.photo img')
 	EXIF.getData(file, function () {
-		    var ori = this.exifdata.Orientation;
+		    ori = this.exifdata.Orientation;
 				var ctx = $(".photo")
-				switch(ori){
+			/*switch(ori){
     case 2:
         //ctx.scale(-1, 1);
         break;
@@ -27,6 +30,8 @@ $("#file").change(function () {
         break;
     case 5:
         // vertical flip + 90 rotate right
+				//photo.css({"width":"rotate(90deg)"})
+
 				photo.css({"transform":"rotate(90deg)"})
 
         break;
@@ -43,7 +48,7 @@ $("#file").change(function () {
         // 90° rotate left
 				photo.css({"transform":"rotate(-90deg)"})
         break;
-}
+}*/
 
 		});
 	    //alert(jQuery(this).val());
@@ -61,8 +66,12 @@ $("#file").change(function () {
 	}
 
 	function finalize(){
-		alert($('.photo').css('background-position'))
-		aptionattr = $(".rest input").text()
+		$(".filterspin").css({"display":"flex"})
+
+		if(ori == null){
+			ori = "none"
+		}
+
 	    var user = firebase.auth().currentUser;
 			var username;
 			var users = database.ref().child("users");
@@ -71,8 +80,12 @@ $("#file").change(function () {
 				username = snapshot.val();
 			});
 			if(facebook==false) {
+				var keyss = database.ref().child('keys');
+				var imagekeydif = keyss.push()
+
+
 				var file = document.getElementById('file').files[0];
-				var imageRef = storageRef.child('memories/'+file.name);
+				var imageRef = storageRef.child('memories/'+imagekeydif);
 				var uploadTask = imageRef.put(file);
 				uploadTask.on('state_changed', function(snapshot) {
 						switch (snapshot.state) {
@@ -86,6 +99,7 @@ $("#file").change(function () {
 								{
 									var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 									console.log('Upload is ' + progress + '% done');
+									$(".filterspin").fadeOut()
 								}
 								break;
 						}
@@ -102,9 +116,11 @@ $("#file").change(function () {
 					}
 				});
 					//alert(membersArray);
+
+					captionattr = $("#caption3").val()
 					var newmemory = new Memory(file.name, file.size, file.type, 'image',
 					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
-					null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
+					null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'),ori);
 					var key = imagesRef.push();
 					key.child("comments").child("0").set("hello");
 					//alert(membersArray.length);
@@ -172,6 +188,9 @@ $("#file").change(function () {
 					});
 
 			} else {
+				userInDatabase.once('value',function(snapshot){
+					username = snapshot.val();
+
 
 				var imagesRef = database.ref().child('memories');
 				var userImagesRef = imagesRef.child(user.uid);
@@ -182,13 +201,17 @@ $("#file").change(function () {
 					}
 				});
 					//alert(membersArray);
-					<!--NOTE what about these details?-->
-					var newmemory = new Memory(file.name, file.size, file.type, 'image',
-					uploadTask.snapshot.downloadURL, effectattr, privateattr, captionattr, 0,
-					null, null, date, username, user.uid,(file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a'));
+					userInDatabase.once('value',function(snapshot){
+						username = snapshot.val();
+					});
+					//alert(username)
+					var url = $(".photo img").attr("src")+"";
+					var newmemory = new Memory("null", null, null, 'image',url, effectattr, privateattr, captionattr, 0,null, null, date, username, user.uid,null,ori);
 					var key = imagesRef.push();
 					//alert(membersArray.length);
+
 					key.set(newmemory);
+
 					//alert(key);
 					var notificationkey = database.ref().child('notifications').push();
 					notificationkey.set({
@@ -249,6 +272,10 @@ $("#file").change(function () {
 								});
 							});
 					});
+				});
+
 			}
+
+
 
 	};

@@ -51,6 +51,7 @@
 
     <link rel="stylesheet" type="text/css" href="home.css" />
     <link rel="stylesheet" type="text/css" href="newmem.css" />
+    <link rel="stylesheet" type="text/css" href="../spinner.css" />
 
 
     <title>Home</title>
@@ -59,6 +60,27 @@
 
 <body>
   <div class="newfullScreen mfullScreen">
+    <div class="ff33">
+
+    </div>
+    <div class="prof">
+      <div class="profphoto">
+        <img src="" alt="" />
+
+      </div>
+      <div class="profname">
+
+
+      </div>
+      <div class="profuser">
+
+      </div>
+      <div class="profstat AddFriend k">Add</div>
+      <div class="profcancel">
+        Done
+      </div>
+
+    </div>
     <div class="head12">
       <div class="margintop2">
 
@@ -67,7 +89,14 @@
         <div class="newback">
           <img src="../Send/img/back.svg" alt="" />
         </div>
+        <div class="bet">
+          Memory
+
+        </div>
         <div class="Tit">
+          <img src="../Memory/img/members.svg" alt="" />
+
+
 
 
         </div>
@@ -76,8 +105,24 @@
 
 
     </div>
+    <div class="mem2">
+          <li rel="id">
+              <div id="user">
+                  <div class="profilephoto" style="background-image:url('../Home/img/test.jpg')">
+                  </div>
+                  <div class="name">
+                      Ahmed
+                  </div>
+              </div>
+
+          </li>
+
+
+
+    </div>
 
         <div class="mcard">
+
           <div class="mimgMemory">
 
 
@@ -139,7 +184,7 @@
 
           </div>
 
-          <img src="" alt="" />
+          <img src="" alt="" id="photorot" />
 
         </div>
         <div class="memorychat">
@@ -487,6 +532,12 @@
 
       <div id="body1">
         <!-- NOTE: this where the tagged memories are -->
+        <div class="filterspin">
+          <div class="spinner">
+
+          </div>
+
+        </div>
 
 
       </div>
@@ -536,27 +587,31 @@
       <div class="buttons">
         <!-- NOTE: Send -->
         <div id="send" class="btn">
-          <label for="files" id="imglabel">
             <img src="img/Send.svg" alt="" id="sendimg" />
-          </label>
 
           <!--<input type="file" id="files" name="files[]" />-->
         </div>
 
 
-        <!-- NOTE: Nostalgic TV -->
-
+        <!-- NOTE:
         <div id="TV" class="btn">
           <img src="img/TV.svg" alt="" class="btn" />
 
         </div>
 
 
+         Nostalgic TV -->
+
+
+
         <!-- NOTE: Connecting friends -->
 
         <div id="connect" class="btn">
           <img src="img/Connect.svg" alt="" class="btn" />
+          <div class="notif">
 
+
+          </div>
         </div>
 
       </div>
@@ -574,7 +629,10 @@
       <script src="../Memory/js/memory.js"></script>
       <script src="../Memory/js/position.js"></script>
       <script src="notification.js"></script>
-      <script src="facebook.js"></script>
+      <!-- NOTE:    <script type="text/javascript" src="../cordova.js"></script>
+         <script type="text/javascript" src="../js/facebookConnectPlugin.js"></script>
+         <script src="facebook.js"></script>  -->
+
 
 
 

@@ -25,7 +25,7 @@ $(function() {
                      facebookConnectPlugin.browserInit(appId);
                  }
                  facebookConnectPlugin.login( ["user_photos"],
-                     function (response) { alert(JSON.stringify(response));
+                     function (response) { alert(JSON.stringify("response"));
                        $(".facebook").css({"transform":"translateX(-1000px)"});
                        $(".TheMemory").css({"transform":"translateX(0)"});
                        apiTest();
@@ -33,19 +33,22 @@ $(function() {
                      function (response) { alert(JSON.stringify(response)) });
              }
 
-   var apiTest = function () {
-                    facebookConnectPlugin.api( "me?fields=photos", ["user_photos"],
-                    function (response) { alert(JSON.stringify(response));
-                    var length = response.photos.data.length;
-                    facebookConnectPlugin.api( response.photos.data[length-1].id+"?fields=picture", ["user_photos"],
-                    function (response) { alert(JSON.stringify(response));
-                    alert(response.picture);
-                    $(".PhotoMemory").css({"background-image":"url("+response.picture+")"});
-                    },
-                    function (response) { alert(JSON.stringify(response)) });
-                    },
-                    function (response) { alert(JSON.stringify(response)) });
-                  }
+             var apiTest = function () {
+                                       facebookConnectPlugin.api( "me?fields=photos", ["user_photos"],
+                                           function (response) {
+                                                                 var length = response.photos.data.length
+                                                                 facebookConnectPlugin.api( response.photos.data[length-2].id+"?fields=images", ["user_photos"],
+                                                                                           function (response) {
+                                                                                           $(".PhotoMemory").css({"background-image":"url("+response.images[0].source+")"})
+
+
+
+                                                                                           },
+                                                                                           function (response) { alert(JSON.stringify(response)) });
+
+
+                                                                 },
+                                           function (response) { alert(JSON.stringify(response)) }); }
 
   var logout = function () {
                   facebookConnectPlugin.logout(function (response) {
