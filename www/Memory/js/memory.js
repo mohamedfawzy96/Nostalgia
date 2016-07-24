@@ -157,39 +157,6 @@ case 8:
 
     //$('#numReposts').text(repostsnum);
     //$('#numMembers').text(membersnum);
-<<<<<<< HEAD
-  });
-  $('#chattingbody2').text("");
-  database.ref().child("memories").child(imguid).child("comments").once('value', function(commentsSnap) {
-    commentsSnap.forEach(function(comment) {
-      alert(comment.val())
-      var cmntid = comment.val();
-      database.ref().child("comments").child(cmntid).once('value',function(commentSnap){
-        var useridnow = commentSnap.child("user").val();
-        database.ref().child("users").child(useridnow).once('value',function(usersnap){
-          var usernamenow = usersnap.child('username').val();
-          var cmntdatanow = commentSnap.child("data").val();
-          $('#chattingbody2').prepend("<li id=\"new\"> <div class=\"m2\" ID=\"userInChat\">"+usernamenow+" </div>  <div ID=\"userMessage\">"+cmntdatanow+" </div> </li>");
-
-          $('#chattingbody2').scrollTop(1000000);
-
-        });
-      });
-    })
-  });
-  /*database.ref().child("memories").child(imguid).child("comments").once('value', function(commentsSnap) {
-    totalnum = commentsSnap.numChildren();
-  }).then(function() {
-    var i =0;
-    database.ref().child("memories").child(imguid).child("comments").on('child_added',function(commentid) {
-
-      //alert(commentid.val());
-      var cmntid = commentid.val();
-      database.ref().child("comments").child(cmntid).once('value',function(commentSnap){
-        var useridnow = commentSnap.child("user").val();
-        database.ref().child("users").child(useridnow).once('value',function(usersnap){
-          var usernamenow = usersnap.child('username').val();
-=======
     $('#chattingbody2').text("");
     database.ref().child("memories").child(imguid).child("comments").on('child_added',function(commentid){
         //alert(commentid.val());
@@ -197,7 +164,6 @@ case 8:
 
         database.ref().child("comments").child(cmntid).once('value',function(commentSnap){
           var useridnow = commentSnap.child("user").val();
->>>>>>> origin/master
           var cmntdatanow = commentSnap.child("data").val();
           var usernamenow = commentSnap.child("username").val() ;
           var lastchild = $(".memchat li:last-child").attr("cmt")
@@ -209,20 +175,10 @@ case 8:
           $('#chattingbody2').scrollTop(1000000);
         });
       });
-<<<<<<< HEAD
-      if((i+1)==totalnum) {
-        database.ref().child("memories").child(imguid).child("comments").off();
-      } else {
-        i++;
-      }
-    });
-  })*/
-=======
 
 
 
   });
->>>>>>> origin/master
 
 
 
