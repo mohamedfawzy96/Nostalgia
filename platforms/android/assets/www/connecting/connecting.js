@@ -110,11 +110,22 @@ var file;
   $('#searchsubmit').click(function() {
     var usernametosearch = $('#search').val();
     $(".searchView .content").html("");
-    database.ref().child('users').child('usernames').child(usernametosearch).once('value', function(useruidSnap) {
+    database.ref().child('usernames').child(usernametosearch).once('value', function(useruidSnap) {
       var useruid = useruidSnap.val()+'';
-      if(useruid) {
-        addToSearchContent(usernametosearch,"../Home/img/test.jpg", useruid);
-      }
+      var photourl;
+      database.ref().child('users').child(useruid).child('profilephoto').once('value', function(photourlSnap) {
+        photourl = photourlSnap.val();
+        if(photourl==null) {
+          photourl = "../Home/img/test.jpg";
+        }
+      }).then(function() {
+        if(useruid!="null") {
+          addToSearchContent(usernametosearch, photourl, useruid);
+        } else {
+          <!--NOTE no user found!-->
+          alert('no user found!');
+        }
+      });
     });
   });
 
@@ -165,7 +176,7 @@ var file;
         //alert(friendSnap.val());
         database.ref().child('users').child(friendSnap.val()).child('friends').on('child_added', function(ffriendSnap) {
           database.ref().child('users').child(ffriendSnap.val()).once('value', function(userSnap) {
-            people.push({key:userSnap.key, name:userSnap.child('username').val() });
+            people.push({key:userSnap.key, name:userSnap.child('username').val(), picurl:userSnap.child('profilephoto').val()});
           });
         });
       });
@@ -181,7 +192,7 @@ var file;
 
           if(isInArray(people[pos].key, repeated)==false) {
             $('.people').append("<div class=\"person\" id=\""+people[pos].key+"\">  <div class=\"icon\">"
-                + "<img src=\"../Home/img/test.jpg\" alt=\"\" />"
+                + "<img src=\""+people[pos].picurl+"\" alt=\"\" />"
                 + "</div><div class=\"nameOfperson\">"+people[pos].name+"</div></div>");
             repeated.push(people[pos].key);
             i++;

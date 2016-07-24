@@ -1,5 +1,4 @@
 
-
 var height = $(".mcard").height() + $(".mhead").height() + $(".minteractions").height() + 25 + 20 + 10
 var fullheight = $(window).height();
 var chatHeight = fullheight - height;
@@ -17,12 +16,13 @@ $(window).load(function(){
   userInDatabase.once('value',function(snapshot){
     username = snapshot.val();
   });*/
+
 });
 //turned it into a function so every time the memoryview open it updates the value
 function updateprof(id) {
   database.ref().child("users").child(id).once("value",function(userprof){
     var user = firebase.auth().currentUser;
-    var curridu = user.uid
+    var curridu = user.uid;
     $(".profname").html(userprof.child("email").val())
     $(".profuser").html(userprof.child("username").val())
     $(".prof img").attr("src",userprof.child("profilephoto").val())
@@ -146,6 +146,12 @@ case 8:
     $('#title p').text(memorysnap.child('owner').val());
     $('#owner').text(memorysnap.child('owner').val()+" just shared a memory");
     $('#date').text(memorysnap.child("date").val());
+    database.ref().child('usernames').child(memorysnap.child('owner').val()).once('value', function(useruidnow) {
+      var useruidstr = useruidnow.val();
+      database.ref().child('users').child(useruidstr+'').once('value', function(userSnap) {
+        $('.mimgMemory').css('background-image',"url(\""+userSnap.child('profilephoto').val()+"\")")
+      })
+    })
     if(memorysnap.child('caption').val()==""){
       $('#caption').text("no caption");
     }else{
