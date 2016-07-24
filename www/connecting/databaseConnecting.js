@@ -88,7 +88,8 @@ firebase.auth().onAuthStateChanged(function(user) {
       var frienduid = childSnap.val();
       database.ref().child('users').child(frienduid).once('value', function(userSnap){
         var name = userSnap.child('username').val();
-        $('.Friendcontent').append("<li uid=\""+frienduid+"\"><div class=\"theFriend\"><div class=\"friendImage\"><img src=\"../Home/img/test.jpg\" alt=\"\" /></div><div class=\"friendnameOfuser\">"+name+"</div></div></li>");
+        var photourlprofile = userSnap.child('profilephoto').val();
+        $('.Friendcontent').append("<li uid=\""+frienduid+"\"><div class=\"theFriend\"><div class=\"friendImage\"><img src=\""+photourlprofile+"\" alt=\"\" /></div><div class=\"friendnameOfuser\">"+name+"</div></div></li>");
       });
     });
   });

@@ -176,7 +176,7 @@ var file;
         //alert(friendSnap.val());
         database.ref().child('users').child(friendSnap.val()).child('friends').on('child_added', function(ffriendSnap) {
           database.ref().child('users').child(ffriendSnap.val()).once('value', function(userSnap) {
-            people.push({key:userSnap.key, name:userSnap.child('username').val() });
+            people.push({key:userSnap.key, name:userSnap.child('username').val(), picurl:userSnap.child('profilephoto').val()});
           });
         });
       });
@@ -192,7 +192,7 @@ var file;
 
           if(isInArray(people[pos].key, repeated)==false) {
             $('.people').append("<div class=\"person\" id=\""+people[pos].key+"\">  <div class=\"icon\">"
-                + "<img src=\"../Home/img/test.jpg\" alt=\"\" />"
+                + "<img src=\""+people[pos].picurl+"\" alt=\"\" />"
                 + "</div><div class=\"nameOfperson\">"+people[pos].name+"</div></div>");
             repeated.push(people[pos].key);
             i++;
