@@ -8,17 +8,20 @@ $(function(){
 firebase.auth().onAuthStateChanged(function(user) {
   var userID = firebase.auth().currentUser.uid;
   var username;
-  database.ref().child('users').child(userID).once("value",function(user1){
+  database.ref().child('users').child(userID).once("value",function(user1) {
     username = user1.child('username').val();
     var fullname = user1.child('firstName').val()+" "+user1.child('lastName').val();
-    $(".name").html(fullname)
+    $(".name").html(fullname);
     $("#title ").html(user1.child("username").val());
+    //alert(user1.child('profilephoto').val());
+    $('.info .photo img').attr('src',user1.child('profilephoto').val());
     var users = database.ref().child('users');
     //database.ref().child('users').child(user.uid).child('friends')
-    users.on("child_added",function(user){
+    <!--NOTE to add useres in find!!-->
+    /*users.on("child_added",function(user){
       if(user.key!="usernames")
       addToSearchContent(user.child("username").val(),"../Home/img/test.jpg",user.child("uid").val());
-    });
+    });*/
   });
   // acceptinh the request reject btnreq
   $(document).on('tap ', '.accept', function() {
@@ -32,9 +35,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     });
     $("li[uid="+uid+"] .reject").css({"display":"none"})
     $("li[uid="+uid+"] .accept").css({"background-color":"#009688"});
-    $("li[uid="+uid+"] .accept").html("Friends")
-    $("li[uid="+uid+"] .btnreq").removeClass("accept")
-    $(".btnAccept").prepend("<div class='btnreq' style='opacity:0'></div>")
+    $("li[uid="+uid+"] .accept").html("Friends");
+    $("li[uid="+uid+"] .btnreq").removeClass("accept");
+    $(".btnAccept").prepend("<div class='btnreq' style='opacity:0'></div>");
 
 
 

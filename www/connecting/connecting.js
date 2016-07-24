@@ -110,11 +110,22 @@ var file;
   $('#searchsubmit').click(function() {
     var usernametosearch = $('#search').val();
     $(".searchView .content").html("");
-    database.ref().child('users').child('usernames').child(usernametosearch).once('value', function(useruidSnap) {
+    database.ref().child('usernames').child(usernametosearch).once('value', function(useruidSnap) {
       var useruid = useruidSnap.val()+'';
-      if(useruid) {
-        addToSearchContent(usernametosearch,"../Home/img/test.jpg", useruid);
-      }
+      var photourl;
+      database.ref().child('users').child(useruid).child('profilephoto').once('value', function(photourlSnap) {
+        photourl = photourlSnap.val();
+        if(photourl==null) {
+          photourl = "../Home/img/test.jpg";
+        }
+      }).then(function() {
+        if(useruid!="null") {
+          addToSearchContent(usernametosearch, photourl, useruid);
+        } else {
+          <!--NOTE no user found!-->
+          alert('no user found!');
+        }
+      });
     });
   });
 
