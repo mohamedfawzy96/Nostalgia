@@ -1,14 +1,78 @@
+var qsParm = new Array();
+var fromwhere;
+function qs() {
+    var query = window.location.search.substring(1);
+    var parms = query.split('&');
+    for (var i=0; i < parms.length; i++) {
+        var pos = parms[i].indexOf('=');
+        if (pos > 0) {
+            var key = parms[i].substring(0, pos);
+            var val = parms[i].substring(pos + 1);
+            qsParm[key] = val;
+            fromwhere = qsParm[key];
+            //alert(fromwhere)
 
+        }
+    }
+};
+function firstFb(){
+  var currentUserId = firebase.auth().currentUser.uid;
+  database.ref().child("users").child(currentUserId).once("value",function(user){
+    if(user.child("facebook").val()==true){
+      qs();
+
+      if(fromwhere == "true"){
+        //login2()
+      }
+
+    }
+
+
+
+
+  })
+
+}
 function addreco(url,url){
     var html =   "<div rel="+url+" class='imgreco' style='background-image: url("+url+");'>     </div>"
     $(".imgrecodiv").append(html)
-    
-    
-    
+
+
+
 }
+function checkconnect(){
+  var curruser = firebase.auth().currentUser;
+  database.ref().child("users").child(curruser).once("value",function(user){
+    if(user.child("facebook").val()==false){
+      $(".connect").css({"display":"flex"})
+    }
 
 
+  })
 
+}
+$(".connect").click(function(){
+  login2()
+
+})
+
+var login2 = function () {
+
+               if (!window.cordova) {
+                   var appId = prompt("Enter FB Application ID", "");
+                   facebookConnectPlugin.browserInit(appId);
+               }
+               facebookConnectPlugin.login( ["user_photos"],
+                   function (response) { alert(JSON.stringify("response"));
+                     //$(".facebook").css({"transform":"translateX(-1000px)"});
+                     //$(".TheMemory").css({"transform":"translateX(0)"});
+                     //apiTest();
+
+                     $(".connect").hide()
+                     getfb(4)
+                    },
+                   function (response) { alert(JSON.stringify(response)) });
+           }
 
 var getfb = function (i) {
     if(i == 5){
@@ -26,13 +90,13 @@ var getfb = function (i) {
                                                         addreco(response.images[0].source,response.images[0].source)
                                                         i++;
                                                         getfb(i)
-                                                        
-                                                        
-                                                        
-                                                        
+
+
+
+
                                                         },
                                                         function (response) { alert(JSON.stringify(response)) });
-                              
-                              
+
+
                               },
                               function (response) { alert(JSON.stringify(response)) }); }

@@ -17,7 +17,22 @@ $(function() {
 
 
 
+  var login2 = function () {
 
+                 if (!window.cordova) {
+                     var appId = prompt("Enter FB Application ID", "");
+                     facebookConnectPlugin.browserInit(appId);
+                 }
+                 facebookConnectPlugin.login( ["user_photos"],
+                     function (response) { alert(JSON.stringify("response"));
+                       //$(".facebook").css({"transform":"translateX(-1000px)"});
+                       //$(".TheMemory").css({"transform":"translateX(0)"});
+                       //apiTest();
+
+
+                      },
+                     function (response) { alert(JSON.stringify(response)) });
+             }
   var login = function () {
 
                  if (!window.cordova) {
@@ -28,9 +43,12 @@ $(function() {
                      function (response) { alert(JSON.stringify("response"));
                        $(".facebook").css({"transform":"translateX(-1000px)"});
                        $(".TheMemory").css({"transform":"translateX(0)"});
+                       changefacestate(true)
                        apiTest();
                       },
-                     function (response) { alert(JSON.stringify(response)) });
+                     function (response) { alert(JSON.stringify(response))
+                       changefacestate(false)
+                     });
              }
 
              var apiTest = function () {

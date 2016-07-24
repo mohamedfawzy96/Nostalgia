@@ -150,6 +150,9 @@ $(function(){
 
 
     firebase.auth().onAuthStateChanged(function(user) {
+
+      hidefacebook()
+      var faceuser
       function request(){
         var user55 = firebase.auth().currentUser;
 
@@ -226,6 +229,7 @@ $(function(){
     $(".tab2").css({"border":"0"});
   });
   function getFeelIt() {
+
     var currentUserId = firebase.auth().currentUser.uid;
     database.ref().child('users').child(currentUserId).child('feelit').on('child_added', function(memoryKeySnap) {
       var memoryID = (memoryKeySnap.val()+'').split("/").pop();
@@ -275,7 +279,7 @@ $(function(){
   };
 
   function handleFileSelect(evt) {
-    window.location = "../Send/Send.html";
+    window.location = "../Send/Send.html?somval="+fromwhere;
   };
   var memoriesArray = new Array();
   var urlArray = new Array();
@@ -328,6 +332,7 @@ $(function(){
   });
 
   //$(".notif").position(positionconnec);
+
   $('.facebook').hide();
-  $('.filter3').hide();
+$('.filter3').hide();
 });

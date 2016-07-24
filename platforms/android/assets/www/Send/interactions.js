@@ -10,8 +10,9 @@ $(document).on('tap', '.imgreco', function(){
 facebook = true;
 $(".photo img").attr("src",$(this).attr("rel"))
 });
-
-
+firebase.auth().onAuthStateChanged(function(user) {
+  firstFb()
+})
 
 $("#private").click(function(){
   $("#private .rest").css({"transform":"translateY(50px)"})
@@ -52,7 +53,7 @@ $(".text").click(function(){
            $(this).html("Post");
 
            } else if ($(".text").html()=="Post") {
-                
+
                finalize();
                }
      });
