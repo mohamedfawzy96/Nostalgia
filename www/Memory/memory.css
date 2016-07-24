@@ -927,6 +927,8 @@ body {
   width: 100%;
   height: 18%;
   margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   box-shadow: 0px 0px 20px #888888;
   overflow: hidden;
@@ -965,6 +967,8 @@ body {
 
 .msector{
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 25%;
@@ -1010,6 +1014,8 @@ body {
 
 .minteractions{
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   text-align: center;
   margin-top: 25px;
@@ -1088,10 +1094,13 @@ body {
 }
 .minputs{
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   height: 25%;
-  justify-content: space-around;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   background-color: white;
 
@@ -1106,7 +1115,8 @@ body {
 }
  .mmessage1 input{
    position: relative;
-   transform: scaleY(0.8);
+   -webkit-transform: scaleY(0.8);
+           transform: scaleY(0.8);
    width: 90%;
    margin-left: 5px;
    border-radius: 20px !important;
@@ -1118,9 +1128,15 @@ body {
   color: #EC4B57;
   font-size: 4.5vw;
   font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 .mfullScreen li{
   position: relative;
@@ -1138,7 +1154,8 @@ body {
 }
 
 button{
-  transform: scale(0.8);
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
   color: #EC4B57;
 
 
@@ -1187,8 +1204,10 @@ button{
   margin-top: -200px;
   left: 50%;
   margin-left: -150px;
-  transform: translateY(1000px);
+  -webkit-transform: translateY(1000px);
+          transform: translateY(1000px);
   opacity: 0;
+  -webkit-transition: 0.7s transform ease-in-out,0.7s opacity ease-in-out;
   transition: 0.7s transform ease-in-out,0.7s opacity ease-in-out;
 
 
@@ -1197,7 +1216,9 @@ button{
 }
 .maddedClass{
   opacity: 1;
-   transform: translateY(0);
+   -webkit-transform: translateY(0);
+           transform: translateY(0);
+   -webkit-transition: 0.7s transform ease-in-out,0.7s opacity ease-in-out;
    transition: 0.7s transform ease-in-out,0.7s opacity ease-in-out;
 }
 .mimg{
@@ -1214,6 +1235,8 @@ button{
   position: relative;
   width: 100%;
   height: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 .mdate2{
@@ -1252,8 +1275,12 @@ button{
   bottom: 0;
   top: 70%;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .mbutton1{
@@ -1287,9 +1314,15 @@ button{
 
 }
 .mtagInput{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-    align-items: center;
-    justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 .textarea111{
     width: 100%;
