@@ -1,8 +1,11 @@
 $(function(){
+  $('body, html, #body1').scrollTop(0);
   $(".filterspin").css({"display":"flex"})
   var imguid;
   var selectedimg;
-  $("#connect").click(function(){
+  var startindex;
+  var endindex;
+  $("#connect").click(function() {
     window.location = '../connecting/connecting.html'
   });
 
@@ -47,7 +50,20 @@ $(function(){
     $(".mfullScreen").css({"transform":"translateX(0)"});
 
   });
-
+  <!--NOTE nw code-->
+  var oncemembers = "false";
+  $('#membersicon').click(function() {
+    if(oncemembers !="true") {
+      database.ref().child('memories').child(imguid).child('members').on('child_added', function(useruid) {
+        database.ref().child('users').child(useruid.val()+'').once('value', function(userSnap) {
+            $('#memberscontent').append("<li rel=\""+useruid.val()+''+"\">"
+            + "<div id=\"user\"><div class=\"profilephoto\" style=\"background-image:url("+userSnap.child('profilephoto').val()+")\">"
+            + "</div><div class=\"name\">"+userSnap.child('username').val()+"</div></div></li>");
+        });
+      });
+      oncemembers = "true";
+    }
+  });
 
   // moved the send to the home.js
   $(".msend12").click(function(){
@@ -111,48 +127,45 @@ $(function(){
 
   memoriesArray = new Array();
   urlArray = new Array();
-
-  function fillMemoriesPanel(listOfImages){
-    var length1 = listOfImages.length;
-
-    var counter = 0;
-        while(counter<length1){
-      listOfImages[counter].once('value', function(data){
+  var funfil = function (x, length1, listOfImages) {
+    if(x==length1) {
+      return;
+    } else {
+      listOfImages[x].once('value', function(data) {
         console.log(data.key);
         var uid = data.key;
         //alert(uid);
         var url1 = data.child("url").val()
         var date1= data.child("date").val()
         var owner1= data.child("owner").val()
-        /*if((counter+1)<length1){
-          alert("hi bye ")
-
-          listOfImages[counter+1].once('value', function(data){
-            var url2 = data.child("url").val()
-            var date2= data.child("date").val()
-            var owner2= data.child("owner").val()
-            add2Memories(owner1,date1,"closed",url1,owner2,date2,"closed",url2)
-
-
-            })
-
-
-        }
-        else{
-          add1Memories(owner1,date1,"closed",url1);
-        }*/
         add1Memories(owner1,date1,"closed",url1,uid);
+      }).then(function() {
+        funfil(++x, length1, listOfImages);
       });
-        counter++;
     }
-    $(".filterspin").fadeOut()
+  }
+  function fillMemoriesPanel(listOfImages) {
+    var length1 = listOfImages.length;
+    funfil(0, length1, listOfImages);
+
+    $(".filterspin").fadeOut();
   };
 
 
-    firebase.auth().onAuthStateChanged(function(user) {
+  jQuery(function($) {
+      $('#body1').on('scroll', function() {
+          if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+              //alert('end reached');
+              if(startindex>=0) {
+                getImages();
 
-      hidefacebook()
-      var faceuser
+              }
+
+          }
+      })
+  });
+
+    firebase.auth().onAuthStateChanged(function(user) {
       function request(){
         var user55 = firebase.auth().currentUser;
 
@@ -178,7 +191,7 @@ $(function(){
 
         })
       }
-      request()
+      request();
 
       var user = firebase.auth().currentUser;
       var username;
@@ -190,8 +203,21 @@ $(function(){
       });
       getFeelIt();
       if (user) {
-        getImages();
-        aler(user)
+        database.ref().child('users').child(user.uid).child('memberposted').once('value', function(memoriesSnap) {
+          //alert(memoriesSnap.numChildren());
+          var num = memoriesSnap.numChildren();
+          if(num>0) {
+            endindex = num-1;
+          }
+          if(num>=6) {
+            startindex = num-6;
+          } else {
+            startindex = 0;
+          }
+        }).then(function() {
+          getImages();
+        });
+        //alert(user)
       } else {
         // No user is signed in.
       }
@@ -229,7 +255,6 @@ $(function(){
     $(".tab2").css({"border":"0"});
   });
   function getFeelIt() {
-
     var currentUserId = firebase.auth().currentUser.uid;
     database.ref().child('users').child(currentUserId).child('feelit').on('child_added', function(memoryKeySnap) {
       var memoryID = (memoryKeySnap.val()+'').split("/").pop();
@@ -279,23 +304,27 @@ $(function(){
   };
 
   function handleFileSelect(evt) {
-    window.location = "../Send/Send.html?somval="+fromwhere;
+    window.location = "../Send/Send.html";
   };
   var memoriesArray = new Array();
   var urlArray = new Array();
   function getImages(){
+    memoriesArray = new Array();
       var user = firebase.auth().currentUser;
       var users = database.ref().child("users");
       var userInDatabase = users.child(user.uid);
       var imagesRef = userInDatabase.child("memberposted");
-      imagesRef.limitToLast(20).once('value',function(snapshot){
-
+      //alert(startindex+'/'+endindex);
+      imagesRef.orderByKey().startAt(startindex+'').endAt(endindex+'').once('value',function(snapshot){
         memorySnap = snapshot.val();
         console.log(memorySnap);
+        console.log(memorySnap[9])
         if(memorySnap != null){
-        memorySnap.forEach(function(memorySnapshot){
+        //memorySnap.forEach(function(memorySnapshot)
+        for(var i=startindex; i<=endindex; i++){
+          var memorySnapshot = memorySnap[i];
           <!-- NOTE -->
-          //you should delet the split and pop because I already fixed it in Send
+          //you should delete the split and pop because I already fixed it in Send
           //but it doesn't make a difference if you son't because the key
           //doesn't have "/" in it, so no biggie
           var res = memorySnapshot.split("/");
@@ -313,11 +342,28 @@ $(function(){
                   if(imageRef != null){
                   memoriesArray.push(imageRef);
                 }
-        });
+        };
       }
+        //console.log(memoriesArray)
+        memoriesArray.reverse();
+        //setTimeout(fillMemoriesPanel(memoriesArray), 5000);
         fillMemoriesPanel(memoriesArray);
 
+
       });
+
+      if(startindex>=6) {
+        endindex = startindex-1;
+        startindex -= 6;
+
+      } else {
+        if(startindex==0) {
+          startindex = -1;
+        } else {
+          endindex = startindex-1;
+          startindex = 0;
+        }
+      }
   };
 
   $("#sendimg").click(handleFileSelect);
@@ -332,7 +378,6 @@ $(function(){
   });
 
   //$(".notif").position(positionconnec);
-
   $('.facebook').hide();
-$('.filter3').hide();
+  $('.filter3').hide();
 });
