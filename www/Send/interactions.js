@@ -69,15 +69,15 @@ $(".text").click(function(){
         users.on('child_added', function(friendidSnap){
         var friendid = friendidSnap.val();
             database.ref().child('users').child(friendid).once('value', function(friend) {
-              addmembers(friend.child("username").val(), friend.child("uid").val());
+              addmembers(friend.child("username").val(), friend.child("uid").val(), friend.child('profilephoto').val());
             });
     });
     };
 
-                          function addmembers(user, id){
+                          function addmembers(user, id, photourl){
                           var html = "<li rel=\""+id+"\">"
                           +  "<div id=\"user\">"
-                          +    "<div class=\"profilephoto\" style=\"background-image:url(\'img/test.jpg\')\">"
+                          +    "<div class=\"profilephoto\" style=\"background-image:url(\'"+photourl+"\')\">"
                           +    "</div>"
                           +    "<div class=\"name\"> "
                           +    user

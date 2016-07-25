@@ -113,7 +113,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       database.ref().child('users').child(From+'').once("value",function(user3){
         var username = user3.child("username").val();
         var uid = user3.child("uid").val();
-        var url = "../Home/img/test.jpg";
+        var url = user3.child('profilephoto').val();
         AddRequets(username,url,uid,id);
       });
     });

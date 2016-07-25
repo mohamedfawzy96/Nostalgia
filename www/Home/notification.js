@@ -47,6 +47,11 @@ $(function() {
           url = memorySnap.child('url').val();
         }).then(function(){
           if(action=="accepted"){
+            /*database.ref().child('users').child(subject).child('profilephoto').once('value', function(photourlSnap) {
+              url = photourlSnap.val();
+            }).then(function() {
+              alert(url)
+            })*/
             url = "img/test.jpg";
           }
           $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
