@@ -35,7 +35,8 @@
     }).then(function(){
       //alert(username);
       if(username!=null){
-        window.location = "Home/home.html";
+
+        window.location = "Home/home.html?somval="+"true";
       }
     });
   };
@@ -100,7 +101,7 @@ $(function(){
 
               } else {
                 database.ref().child('usernames').child(currusername+'').set(user.uid);
-                window.location = "Home/home.html";
+                window.location = "Home/home.html?somval="+"true";
               }
             });
           } else {
@@ -155,7 +156,7 @@ $(function(){
                   }
                 });
               });
-            window.location = "Home/home.html"
+              window.location = "Home/home.html?somval="+"true";
           } else {
             alert('null user!!');
           }

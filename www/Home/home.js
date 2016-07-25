@@ -305,7 +305,7 @@ $(function(){
   };
 
   function handleFileSelect(evt) {
-    window.location = "../Send/Send.html";
+    window.location = "../Send/Send.html?somval="+fromwhere;
   };
   var memoriesArray = new Array();
   var urlArray = new Array();
