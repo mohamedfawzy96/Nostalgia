@@ -11,36 +11,36 @@ function qs() {
             qsParm[key] = val;
             fromwhere = qsParm[key];
             alert(fromwhere)
-
+            
         }
     }
 };
 qs()
 function hidefacebook(){
-
-  var currentUserId = firebase.auth().currentUser.uid;
-  database.ref().child("users").child(currentUserId).once("value",function(user){
-    if(user.child("facebook").val()==null){
-
-      $('.facebook').css({"transform":"translateY(0)"});
-      $('.filter3').show()
-
-
-
-
-    }
-
-
-
-
-  })
-
-
+    
+    var currentUserId = firebase.auth().currentUser.uid;
+    database.ref().child("users").child(currentUserId).once("value",function(user){
+                                                            if(user.child("facebook").val()==null){
+                                                            
+                                                            $('.facebook').css({"transform":"translateY(0)"});
+                                                            $('.filter3').show()
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            }
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            })
+    
+    
 }
 
 
 
 function changefacestate(bool){
-  var currentUserId = firebase.auth().currentUser.uid;
-  database.ref().child("users").child(currentUserId).child("facebook").set(bool)
+    var currentUserId = firebase.auth().currentUser.uid;
+    database.ref().child("users").child(currentUserId).child("facebook").set(bool)
 }

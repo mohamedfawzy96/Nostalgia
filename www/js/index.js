@@ -43,7 +43,7 @@
 $(function(){
   //database.ref().child("users").child(currentUserId).child("firstfb").set(null)
 
-  window.location = "Home/home.html?somval="+"true";
+  //window.location = "Home/home.html?somval="+"true";
 
    document.addEventListener('deviceready', this.onDeviceReady, false);
     $(".Signup").click(function(){

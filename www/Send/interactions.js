@@ -4,15 +4,23 @@ var date = "Can't remember"
 var effectattr= "normal"
 var membersArray = new Array();
 var img = new Image;
-//document.addEventListener("deviceready", function(){
+document.addEventListener("deviceready", function(){
+
+                          //login()
+                     
+                          
+      
 
 $(document).on('tap', '.imgreco', function(){
 facebook = true;
 $(".photo img").attr("src",$(this).attr("rel"))
 });
-firebase.auth().onAuthStateChanged(function(user) {
-  firstFb()
-})
+                          firebase.auth().onAuthStateChanged(function(user) {
+                                                             firstFb()
+                                                             
+                                                           
+                                                             })
+
 
 $("#private").click(function(){
   $("#private .rest").css({"transform":"translateY(50px)"})
@@ -35,9 +43,6 @@ $("#private").click(function(){
 
 
 
-setTimeout(function(){
-getfb(1)
-},100)
 
 
 $(".text").click(function(){
@@ -53,7 +58,7 @@ $(".text").click(function(){
            $(this).html("Post");
 
            } else if ($(".text").html()=="Post") {
-
+                
                finalize();
                }
      });
@@ -152,7 +157,7 @@ $(".text").click(function(){
                                            $(".text").html("Next")
 
                                            }else {
-                                             window.location = "../Home/Home.html"
+                                             window.location = "../Home/home.html"
 
                                            }
 
@@ -184,5 +189,4 @@ $(".text").click(function(){
                                           })
 
 
-
-                          //});
+                          });
