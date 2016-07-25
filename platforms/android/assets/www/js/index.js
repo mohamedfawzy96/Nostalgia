@@ -25,7 +25,7 @@
     // 'load', 'deviceready', 'offline', and 'online'.
   //window.location = "Home/home.html";
   var user = firebase.auth().currentUser;
-  alert(user)
+  //alert(user)
   if(user){
     var users = database.ref().child("users");
     var username;
@@ -33,7 +33,7 @@
     userInDatabase.once('value',function(snapshot){
       username = snapshot.val();
     }).then(function(){
-      alert(username);
+      //alert(username);
       if(username!=null){
         window.location = "Home/home.html";
       }
