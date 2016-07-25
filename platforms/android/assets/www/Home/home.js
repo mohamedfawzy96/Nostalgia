@@ -334,5 +334,5 @@ $(function(){
   //$(".notif").position(positionconnec);
 
   $('.facebook').hide();
-$('.filter3').hide();
+ $('.filter3').hide();
 });

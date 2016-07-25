@@ -4,12 +4,12 @@ var date = "Can't remember"
 var effectattr= "normal"
 var membersArray = new Array();
 var img = new Image;
-document.addEventListener("deviceready", function(){
+//document.addEventListener("deviceready", function(){
 
                           //login()
-                     
-                          
-      
+
+
+
 
 $(document).on('tap', '.imgreco', function(){
 facebook = true;
@@ -17,8 +17,8 @@ $(".photo img").attr("src",$(this).attr("rel"))
 });
                           firebase.auth().onAuthStateChanged(function(user) {
                                                              firstFb()
-                                                             
-                                                           
+
+
                                                              })
 
 
@@ -58,7 +58,7 @@ $(".text").click(function(){
            $(this).html("Post");
 
            } else if ($(".text").html()=="Post") {
-                
+
                finalize();
                }
      });
@@ -189,4 +189,4 @@ $(".text").click(function(){
                                           })
 
 
-                          });
+                        //  });
