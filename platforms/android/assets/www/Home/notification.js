@@ -17,27 +17,34 @@ $(function() {
       var notificationKey = notificationkeySnap.val();
       //alert(notificationKey)
       var subjectname;
+      var subject;
       var action;
       var uidtoadd;
       var str;
       var url;
       var checked;
+      var icontype;
       database.ref().child('notifications').child(notificationKey).once('value', function(notificationsnap) {
         subjectname = notificationsnap.child('subjectname').val();
+        subject = notificationsnap.child('subject').val();
         checked = notificationsnap.child('checked').val();
         //alert(subjectname);
         action = notificationsnap.child('type').val();
         switch(action){
           case "commented": str ="on your memory";
+          icontype = "../Memory/img/tag.svg";
           uidtoadd = notificationsnap.child('memoryid').val();
           break;
           case "posted": str = "an old memory";
+          icontype = "../Memory/img/repost.svg";
           uidtoadd = notificationsnap.child('memoryid').val();
           break;
           case "reposted": str = "your memory";
+          icontype = "../Memory/img/repost.svg";
           uidtoadd = notificationsnap.child('memoryid').val();
           break;
           case "accepted": str = "you as an old friend";
+          icontype = "../Memory/img/accept.svg";
           uidtoadd = notificationsnap.child('subject').val();
           break;
         }
@@ -47,13 +54,18 @@ $(function() {
           url = memorySnap.child('url').val();
         }).then(function(){
           if(action=="accepted"){
-            url = "img/test.jpg";
+            database.ref().child('users').child(subject).child('profilephoto').once('value', function(photourlSnap) {
+              url = photourlSnap.val();
+            }).then(function() {
+              console.log(url);
+            });
+            //url = "img/test.jpg";
           }
           $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
           +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
           +    "<div class=\"filter5\">"
           +    "</div>"
-          +    "<img src=\"../Memory/img/repost.svg\" alt=\"\" />"
+          +    "<img src=\""+icontype+"\" alt=\"\" />"
           +  "</div>"
           +  "<div class=\"whatHappen\">"
           +    subjectname+ " <span class=\"color\">"+action+"</span> "+ str
