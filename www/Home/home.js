@@ -166,6 +166,7 @@ $(function(){
   });
 
     firebase.auth().onAuthStateChanged(function(user) {
+      hidefacebook()
       function request(){
         var user55 = firebase.auth().currentUser;
 
@@ -379,9 +380,5 @@ $(function(){
 
   //$(".notif").position(positionconnec);
   $('.facebook').hide();
-<<<<<<< HEAD
- $('.filter3').hide();
-=======
   $('.filter3').hide();
->>>>>>> origin/master
 });
