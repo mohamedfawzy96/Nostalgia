@@ -951,9 +951,9 @@ body {
   top: 50%;
   margin-top: -50px;
   margin-left: 5px;
-  background-color: green;
+  background-color: #999;
   background-size: cover;
-  background-image: url("../Home/img/test.jpg");
+  
 }
 .minfo{
   position: relative;

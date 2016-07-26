@@ -128,6 +128,7 @@ $(".text").click(function(){
                                                   date = $(this).html()+""
                                                   var date1 = myReplaceMethod(date,"<br>","")
                                                   date = date1
+                                                  $("#addDate .rest").html(date1)
 
 
 
