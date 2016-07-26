@@ -43,3 +43,18 @@
 
 
 }
+.spinner2{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 6px solid grey;
+  border-left-color: grey;
+  border-bottom-color: grey;
+  border-right-color: transparent;
+  border-radius: 100%;
+  box-sizing: border-box;
+  -webkit-animation: spin 600ms infinite linear;
+          animation: spin 600ms infinite linear;
+        left:50%;
+        margin-left: -20px;
+}

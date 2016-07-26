@@ -11,7 +11,7 @@ function qs() {
             qsParm[key] = val;
             fromwhere = qsParm[key];
             //alert(fromwhere)
-            
+
         }
     }
 };
@@ -20,7 +20,7 @@ function qs() {
 $(document).on('tap', '.Connect', function(){
                alert("hi")
                login2()
-               
+
                });
 
 
@@ -30,7 +30,7 @@ function changefacestate(bool){
 }
 
 var login2 = function () {
-    
+
     if (!window.cordova) {
         var appId = prompt("Enter FB Application ID", "");
         facebookConnectPlugin.browserInit(appId);
@@ -41,7 +41,7 @@ var login2 = function () {
                                 //$(".TheMemory").css({"transform":"translateX(0)"});
                                 //apiTest();
                                 changefacestate(true)
-                                
+
                                 $(".connect").hide()
                                 getfb(1)
                                 },
@@ -53,46 +53,51 @@ function firstFb(){
     database.ref().child("users").child(currentUserId).once("value",function(user){
                                                             if(user.child("facebook").val()==true){
                                                             qs();
-                                                            
+
                                                             if(fromwhere == "true"){
                                                             //alert("hi")
                                                             login()
-                                                            
-                                                            
+
+
                                                             }
-                                                                       getfb(1)
-                                                            
+                                                            getfb(1)
+
                                                             }else{
+                                                            $(".spinner2").hide()
                                                             $(".connect").css({"display":"flex"})
-                                                            
-                                                            
+
+
                                                             }
-                                                            
-                                                            
-                                                            
-                                                            
+
+
+
+
                                                             })
-    
+
 }
 function addreco(url,url){
     var html =   "<div rel="+url+" class='imgreco' style='background-image: url("+url+");'>     </div>"
     $(".imgrecodiv").append(html)
-    
-    
-    
+
+
+
 }
 var login = function () {
-    
+
     if (!window.cordova) {
         var appId = prompt("Enter FB Application ID", "");
         facebookConnectPlugin.browserInit(appId);
     }
     facebookConnectPlugin.login( ["user_photos"],
-                                function (response) { alert(JSON.stringify("response"));
-                               
+                                function (response) { alert(JSON.stringify("Connected"));
+                                $(".spinner2").hide()
+
+
                                 },
                                 function (response) { alert(JSON.stringify(response))
                                 //changefacestate(false)
+                                $(".spinner2").hide()
+
                                 });
 }
 
@@ -100,12 +105,13 @@ var login = function () {
 
 
 var getfb = function (i) {
-    if(i == 5){
-        return
-    }
+
     facebookConnectPlugin.api( "me?fields=photos", ["user_photos"],
                               function (response) { //alert(JSON.stringify(response))
                               var length = response.photos.data.length
+                              if(i > length-1){
+                              return
+                              }
                               facebookConnectPlugin.api( response.photos.data[length-i].id+"?fields=images", ["user_photos"],
                                                         function (response) { //alert(JSON.stringify(response))
                                                         //alert(response.images[0].source)
@@ -115,13 +121,13 @@ var getfb = function (i) {
                                                         addreco(response.images[0].source,response.images[0].source)
                                                         i++;
                                                         getfb(i)
-                                                        
-                                                        
-                                                        
-                                                        
+
+
+
+
                                                         },
                                                         function (response) { alert(JSON.stringify(response)) });
-                              
-                              
+
+
                               },
                               function (response) { alert(JSON.stringify(response)) }); }

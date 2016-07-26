@@ -640,7 +640,22 @@
       <script src="notification.js"></script>
       <!-- NOTE:    <script type="text/javascript" src="../cordova.js"></script>
          <script type="text/javascript" src="../js/facebookConnectPlugin.js"></script>
-         <script src="facebook.js"></script>  -->
+         <script src="facebook.js"></script>
+         document.addEventListener('deviceready', function () {
+           // Enable to debug issues.
+           // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+
+           var notificationOpenedCallback = function(jsonData) {
+           console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+           };
+
+           window.plugins.OneSignal.init("9e5c249d-2999-48ce-b011-35df24cf7b19",
+           {googleProjectNumber: "703322744261"},
+           notificationOpenedCallback);
+
+           // Show an alert box if a notification comes in when the user is in your app.
+           window.plugins.OneSignal.enableInAppAlertNotification(true);
+           }, false);  -->
 
 
 

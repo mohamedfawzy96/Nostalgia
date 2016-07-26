@@ -10,7 +10,6 @@ var img = new Image;
 
 
 
-
 $(document).on('tap', '.imgreco', function(){
 facebook = true;
 $(".photo img").attr("src",$(this).attr("rel"))

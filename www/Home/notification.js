@@ -11,6 +11,7 @@ $(function() {
     var userInDatabase = database.ref().child('users').child(user.uid).child("username");
   });
 
+
   $("#Search").click(function(){
     $('#notificationscontent').html("");
     database.ref().child('users').child(useruid+'').child('notifications').orderByKey().on('child_added', function(notificationkeySnap) {

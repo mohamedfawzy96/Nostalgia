@@ -404,115 +404,115 @@ th {
 @media (min-width: 550px) {
     .container {
         width: 80%; }
-    
+
     .column,
     .columns {
         margin-left: 4%; }
-    
+
     .column:first-child,
     .columns:first-child {
         margin-left: 0; }
-    
+
     .one.column,
     .one.columns {
         width: 4.66666666667%; }
-    
+
     .two.columns {
         width: 13.3333333333%; }
-    
+
     .three.columns {
         width: 22%; }
-    
+
     .four.columns {
         width: 30.6666666667%; }
-    
+
     .five.columns {
         width: 39.3333333333%; }
-    
+
     .six.columns {
         width: 48%; }
-    
+
     .seven.columns {
         width: 56.6666666667%; }
-    
+
     .eight.columns {
         width: 65.3333333333%; }
-    
+
     .nine.columns {
         width: 74.0%; }
-    
+
     .ten.columns {
         width: 82.6666666667%; }
-    
+
     .eleven.columns {
         width: 91.3333333333%; }
-    
+
     .twelve.columns {
         width: 100%;
         margin-left: 0; }
-    
+
     .one-third.column {
         width: 30.6666666667%; }
-    
+
     .two-thirds.column {
         width: 65.3333333333%; }
-    
+
     .one-half.column {
         width: 48%; }
-    
+
     /* Offsets */
     .offset-by-one.column,
     .offset-by-one.columns {
         margin-left: 8.66666666667%; }
-    
+
     .offset-by-two.column,
     .offset-by-two.columns {
         margin-left: 17.3333333333%; }
-    
+
     .offset-by-three.column,
     .offset-by-three.columns {
         margin-left: 26%; }
-    
+
     .offset-by-four.column,
     .offset-by-four.columns {
         margin-left: 34.6666666667%; }
-    
+
     .offset-by-five.column,
     .offset-by-five.columns {
         margin-left: 43.3333333333%; }
-    
+
     .offset-by-six.column,
     .offset-by-six.columns {
         margin-left: 52%; }
-    
+
     .offset-by-seven.column,
     .offset-by-seven.columns {
         margin-left: 60.6666666667%; }
-    
+
     .offset-by-eight.column,
     .offset-by-eight.columns {
         margin-left: 69.3333333333%; }
-    
+
     .offset-by-nine.column,
     .offset-by-nine.columns {
         margin-left: 78.0%; }
-    
+
     .offset-by-ten.column,
     .offset-by-ten.columns {
         margin-left: 86.6666666667%; }
-    
+
     .offset-by-eleven.column,
     .offset-by-eleven.columns {
         margin-left: 95.3333333333%; }
-    
+
     .offset-by-one-third.column,
     .offset-by-one-third.columns {
         margin-left: 34.6666666667%; }
-    
+
     .offset-by-two-thirds.column,
     .offset-by-two-thirds.columns {
         margin-left: 69.3333333333%; }
-    
+
     .offset-by-one-half.column,
     .offset-by-one-half.columns {
         margin-left: 52%; } }
@@ -573,19 +573,19 @@ h6 {
 @media (min-width: 550px) {
     h1 {
         font-size: 5.0rem; }
-    
+
     h2 {
         font-size: 4.2rem; }
-    
+
     h3 {
         font-size: 3.6rem; }
-    
+
     h4 {
         font-size: 3.0rem; }
-    
+
     h5 {
         font-size: 2.4rem; }
-    
+
     h6 {
         font-size: 1.5rem; } }
 p {
@@ -880,10 +880,10 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    
+
     background-attachment:fixed;
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    
+
     font-size:12px;
     height:100%;
     margin:0px;
@@ -919,7 +919,7 @@ body {
     height: 70%;
     display: flex;
     justify-content: space-between;
-    
+
 }
 .back{
     position: relative;
@@ -950,12 +950,12 @@ body {
 .buttonandqoute{
     position: relative;
     width: 100%;
-    
+
     height: 23vh;
     display: flex;
     justify-content: space-around;
-    
-    
+
+
 }
 .choosetext{
     text-align: center;
@@ -969,8 +969,8 @@ body {
     font-family: Futura;
     box-sizing: border-box;
     width: 45vw;
-    
-    
+
+
 }
 .library{
     position: relative;
@@ -995,7 +995,7 @@ body {
     height: 10vh;
     left: 50%;
     margin-left: -5vh;
-    
+
     filter: drop-shadow(0px 0px 2px #888888);
     -webkit-filter:drop-shadow(0px 0px 2px #888888);
 }
@@ -1010,8 +1010,8 @@ body {
     background-color: #333333;
     box-shadow: 0px 0px 10px #888888;
     overflow: hidden;
-    
-    
+
+
 }
 .photo img{
     position: relative;
@@ -1019,7 +1019,7 @@ body {
     width: auto;
     display: flex;
     margin: 0 auto;
-    
+
 }
 .recomended{
     position: relative;
@@ -1038,32 +1038,40 @@ body {
     font-size: 3.5vw;
     font-family: Futura;
     text-align: center;
-    
+
 }
 .imgrecodiv{
     position: relative;
     width: 100%;
     height: 80%;
     display: flex;
-    justify-content: space-around;
     margin-top: 10px;
+    overflow-x: visible;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+
+
 }
 .imgreco{
     position: relative;
     height: 100%;
-    width: 23%;
+    min-width: 23vw;
     background-size: cover;
     box-shadow: 0px 0px 10px #888888;
     box-sizing: border-box;
     border-radius:10px;
-    
-    
-    
+    margin-left: 10px;
+    margin-left: 20px;
+
+
+
+
+
 }
 .choosePhoto{
     position: absolute;
     transition: all 0.7s ease-in-out;
-    
+
 }
 .last{
     position: absolute;
@@ -1071,9 +1079,9 @@ body {
     height: 100%;
     transform: translateX(1000px);
     transition: all 0.7s ease-in-out;
-    
-    
-    
+
+
+
 }
 .effects{
     position: relative;
@@ -1090,10 +1098,10 @@ body {
     font-family: Futura;
     color: #808080;
     font-weight: bold;
-    
-    
-    
-    
+
+
+
+
 }
 .options{
     position: relative;
@@ -1103,9 +1111,9 @@ body {
     display: flex;
     justify-content: space-around;
     box-shadow: 0px 0px 10px #888888
-    
-    
-    
+
+
+
 }
 .eff{
     position: relative;
@@ -1122,9 +1130,9 @@ body {
     font-weight: bold;
     box-sizing: border-box;
     transition: all 0.05s ease-in-out;
-    
-    
-    
+
+
+
 }
 .time{
     position: absolute;
@@ -1135,8 +1143,8 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 1;
-    
-    
+
+
 }
 .filterEff{
     position: absolute;
@@ -1144,9 +1152,9 @@ body {
     height: 100%;
     border-radius: 50%;
     opacity: 0.3;
-    
-    
-    
+
+
+
 }
 .filterEffpho{
     position: absolute;
@@ -1159,12 +1167,12 @@ body {
 
 .normal {
     border:3px solid grey;
-    
+
 }
 .s1970 {
     filter: grayscale(100%);
     -webkit-filter:grayscale(100%);
-    
+
 }
 
 .s1980 .filterEff{
@@ -1187,7 +1195,7 @@ body {
     display: flex;
     justify-content: space-around;
     transition: all 0.3s ease-in-out;
-    
+
 }
 .date{
     position: absolute;
@@ -1202,7 +1210,7 @@ body {
     overflow-y: scroll;
     transform: translateX(1000px);
     transition: all 0.3s ease-in-out;
-    
+
 }
 #file{
     position: absolute;
@@ -1216,7 +1224,7 @@ body {
     margin-left: -12.5vw;
     background-color: #EC4B57;
     box-shadow: 0px 0px 10px #888888;
-    
+
     border-radius: 50%;
     margin-top: 20px;
     font-size: 4vw;
@@ -1237,7 +1245,7 @@ body {
     opacity: 0.5;
     z-index: 10000;
     display: none;
-    
+
 }
 .icon{
     position: relative;
@@ -1274,14 +1282,14 @@ body {
 .nobk{
     background-color: white;
     box-shadow: none;
-    
+
 }
 .nobk img{
     width: 100%;
     height: 100%;
     filter: drop-shadow(0px 0px 0.8px #888888);
     -webkit-filter:drop-shadow(0px 0px 0.8px #888888);
-    
+
 }
 .members{
     position: absolute;
@@ -1293,7 +1301,7 @@ body {
     border-radius: 3px;
     transform: translateY(10000px);
     transition: all 0.7s ease-in-out;
-    
+
 }
 
 .search{
@@ -1303,8 +1311,8 @@ body {
     background-color: rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: space-around;
-    
-    
+
+
 }
 .in{
     position: relative;
@@ -1312,7 +1320,7 @@ body {
     height: 100%;
     padding: 5px;
     box-sizing: border-box;
-    
+
 }
 .search input{
     position: relative;
@@ -1321,7 +1329,7 @@ body {
     border-radius: 20px;
     font-size: 4vw;
     top: 50%;
-    
+
 }
 #user{
     position: relative;
@@ -1336,7 +1344,7 @@ body {
     height: 83vh;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    
+
 }
 .content li{
     position: relative;
@@ -1348,8 +1356,8 @@ body {
     justify-content: space-between;
     box-sizing: padding-box;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    
-    
+
+
 }
 .profilephoto{
     position: relative;
@@ -1357,11 +1365,11 @@ body {
     width: 7vh;
     top: 50%;
     margin-top: -3.5vh;
-    
+
     border-radius: 50%;
     background-size: cover;
     margin-left: 10px;
-    
+
 }
 .name{
     position: relative;
@@ -1370,8 +1378,8 @@ body {
     align-items: center;
     justify-content: center;
     margin-left: 20px;
-    
-    
+
+
 }
 
 
@@ -1389,12 +1397,12 @@ body {
     border: 0;
     margin-bottom: 0;
     margin-right:15px;
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 }
 
 
@@ -1405,22 +1413,22 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     display: inline-block;
-    
+
     position: relative;
     width: 20px;
     height: 20px;
     margin-top: 7px;
-    
+
     outline:0px !important;
     border: 0;
     background-color: white;
     border-radius: 5px;
     margin-bottom: 0;
-    
-    
-    
-    
-    
+
+
+
+
+
 }
 .checking{
     position: relative;
@@ -1435,7 +1443,7 @@ body {
     height: 100%;
     font-size: 4.5vw;
     color: #EC4B57;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1446,17 +1454,17 @@ body {
 }
 .text:active{
     opacity: 0.7;
-    
-    
+
+
 }
 .back:active{
     opacity: 0.7;
-    
-    
+
+
 }
 .attr1:active{
     background-color: #999;
-    
+
 }
 
 .connect{
@@ -1465,6 +1473,8 @@ body {
     height: 5vh;
     width: 25vw;
     color: white;
+    left: 50%;
+    margin-left: -12.5vw;
     font-weight: bold;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1479,5 +1489,5 @@ body {
     font-size: 1.1em;
     border-radius: 20px;
     display: none;
-    
+
 }
