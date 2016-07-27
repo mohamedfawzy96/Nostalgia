@@ -46,10 +46,16 @@ $("#private").click(function(){
 
 $(".text").click(function(){
         if($(this).html()=="Next"){
+          if($(".photo img").attr("src")!=""){
+            $(".choosePhoto").css({"transform":"translateX(-1000px)"})
+            $(".last").css({"transform":"translateX(0)"})
+            $(this).html("Post")
 
- $(".choosePhoto").css({"transform":"translateX(-1000px)"})
- $(".last").css({"transform":"translateX(0)"})
- $(this).html("Post")
+          }else{
+            alert("Please Choose a photo from Library or wait for facebook to connect")
+          }
+
+
 
             } else if ($(".text").html()=="Done") {
               $(".members").css({"transform":"translateY(10000px)"})
