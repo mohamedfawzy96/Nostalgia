@@ -1,5 +1,13 @@
 $(function () {
-
+  var ID;
+  firebase.auth().onAuthStateChanged(function(user) {
+    ID = firebase.auth().currentUser.uid;
+    //alert(ID)
+  });
+  function getRandomIntInclusive(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  var pcounp = 0;
   $("#find").click(function(){
     $(".searchView").css({"display":"block"});
     setTimeout(function(){
@@ -80,18 +88,33 @@ var file;
       }
   });
   function addToSearchContent(username,url,uid){
-    var  FindHtml = "<li><div class=\"theUser\"><div class=\"userImage\"><img src="+url+" />"
-      +  "</div><div class=\"usernameOfuser\">"+ username +"</div></div>"
-      +  "<div class=\"AddFriend k\" uid = '"+uid+"'>Add</div></li>"
-    $(".searchView .content").append(FindHtml);
-    requested();
+
+    var friends;
+    database.ref().child('users').child(ID+'').child('friends').once('value', function(snap) {
+      friends = snap.val();
+    }).then(function() {
+      if(friends.indexOf(uid) >= 0) {
+        var  FindHtml = "<li><div class=\"theUser\"><div class=\"userImage\"><img src="+url+" />"
+          +  "</div><div class=\"usernameOfuser\">"+ username +"</div></div>"
+          +  "<div class=\"friends2\" uid = '"+uid+"'>Friends</div></li>"
+        $(".searchView .content").append(FindHtml);
+        requested();
+      } else {
+        var  FindHtml = "<li><div class=\"theUser\"><div class=\"userImage\"><img src="+url+" />"
+          +  "</div><div class=\"usernameOfuser\">"+ username +"</div></div>"
+          +  "<div class=\"AddFriend k\" uid = '"+uid+"'>Add</div></li>"
+        $(".searchView .content").append(FindHtml);
+        requested();
+      }
+    });
+
+
   }
-  function requested(){
-    var ID = firebase.auth().currentUser.uid;
+  function requested() {
+    ID = firebase.auth().currentUser.uid;
     var users = database.ref().child('users');
     var bool = false;
     users.child(ID).once("value",function(user){
-
       var RequestID = user.child("SentRequests").val();
       //alert(RequestID);
       if(RequestID !=null){
@@ -169,35 +192,85 @@ var file;
   firebase.auth().onAuthStateChanged(function(user) {
     var user = firebase.auth().currentUser;
     var username;
-    var userInDatabase = database.ref().child('users').child(user.uid).child("username");
-    userInDatabase.once('value',function(snapshot){
-      $('#title').html(snapshot.val());
-      database.ref().child('users').child(user.uid).child('friends').on('child_added', function(friendSnap) {
-        //alert(friendSnap.val());
-        database.ref().child('users').child(friendSnap.val()).child('friends').on('child_added', function(ffriendSnap) {
-          database.ref().child('users').child(ffriendSnap.val()).once('value', function(userSnap) {
-            people.push({key:userSnap.key, name:userSnap.child('username').val(), picurl:userSnap.child('profilephoto').val()});
+    var userInDatabase = database.ref().child('users').child(user.uid);
+    userInDatabase.once('value',function(snapshot) {
+      $('#title').html(snapshot.child("username").val());
+      friends = snapshot.child('friends').val();
+
+
+    }).then(function() {
+      var counterf = 0;
+      friends.forEach(function(friend) {
+        var ff;
+        database.ref().child('users').child(friend).child('friends').once('value', function(ffriends) {
+            counterf++;
+            ff = ffriends.val();
+        }).then(function() {
+          ff.forEach(function(fp) {
+            people.push(fp);
           });
+          if(counterf==friends.length) {
+            alert(people);
+            var uniqueArray = new Array();
+            people.forEach(function(person) {
+              if(uniqueArray.length==0) {
+                uniqueArray.push(person);
+              } else {
+                var dup = false;
+                uniqueArray.forEach(function(uniq) {
+                  if(person==uniq) {
+                    dup = true;
+                  }
+                });
+                if(dup!=true) {
+                  uniqueArray.push(person);
+                }
+              }
+            });
+            //alert(uniqueArray);
+            uniqueArray.forEach(function(qq) {
+              var key;
+              var picurl;
+              var name;
+              database.ref().child('users').child(qq).once('value', function(uuu) {
+                key = uuu.key;
+                picurl = uuu.child('profilephoto').val();
+                name = uuu.child('username').val();
+              }).then(function() {
+                var x = getRandomIntInclusive(0,1);
+                if(x==1) {
+                  if(friends.indexOf(qq)<0) {
+                    if(pcounp<4) {
+                      $('.people').append("<div class=\"person\" id=\""+key+"\">  <div class=\"icon\">"
+                          + "<img src=\""+picurl+"\" alt=\"\" />"
+                          + "</div><div class=\"nameOfperson\">"+name+"</div></div>");
+                          pcounp++;
+                    }
+                  }
+                }
+                  });
+
+            });
+            /*var repeated = new Array();
+                 var limit;
+                 if(uniqueArray.length>4) {
+                   limit = 4;
+                 } else {
+                   limit = uniqueArray.length;
+                 }
+                 for (i = 0; i < limit;i++) {
+                     var pos = Math.floor(Math.random() * uniqueArray.length);
+
+                     if(isInArray(uniqueArray[pos].key, repeated)==false) {
+                       $('.people').append("<div class=\"person\" id=\""+uniqueArray[pos].key+"\">  <div class=\"icon\">"
+                           + "<img src=\""+people[pos].picurl+"\" alt=\"\" />"
+                           + "</div><div class=\"nameOfperson\">"+uniqueArray[pos].name+"</div></div>");
+                       repeated.push(uniqueArray[pos].key);
+                     }
+                 }*/
+          }
         });
       });
-      var repeated = new Array();
-      var limit;
-      if(people.length>4) {
-        limit = 4;
-      } else {
-        limit = people.length;
-      }
-      for (i = 0; i < limit;) {
-          var pos = Math.floor(Math.random() * people.length);
-
-          if(isInArray(people[pos].key, repeated)==false) {
-            $('.people').append("<div class=\"person\" id=\""+people[pos].key+"\">  <div class=\"icon\">"
-                + "<img src=\""+people[pos].picurl+"\" alt=\"\" />"
-                + "</div><div class=\"nameOfperson\">"+people[pos].name+"</div></div>");
-            repeated.push(people[pos].key);
-            i++;
-          }
-      }
     });
   });
 
