@@ -10,12 +10,27 @@ function qs() {
             var val = parms[i].substring(pos + 1);
             qsParm[key] = val;
             fromwhere = qsParm[key];
-            alert(fromwhere)
+            //alert(fromwhere)
 
         }
     }
 };
 qs()
+
+$(document).on("tap",".No",function(){
+  changefacestate(false)
+  $('.facebook').css({"transform":"translateY(1000px)"});
+  $('.filter3').hide()
+})
+$(document).on("tap",".Post1",function(){
+  window.location = "../Send/Send.html"
+})
+$(document).on("tap",".No1",function(){
+  $(".TheMemory").css({"transform":"translateY(1000px)"});
+  $(".TheMemory").css({"display":"none"})
+  $(".filter3").fadeOut();
+})
+
 function hidefacebook(){
 
     var currentUserId = firebase.auth().currentUser.uid;
@@ -23,7 +38,7 @@ function hidefacebook(){
                                                             if(user.child("facebook").val()==null){
 
                                                             $('.facebook').css({"transform":"translateY(0)"});
-                                                            //$('.filter3').show()
+                                                            $('.filter3').show()
 
 
 

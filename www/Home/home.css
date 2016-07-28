@@ -1492,9 +1492,9 @@ body {
   position: relative;
   width: 100%;
   height: 40%;
-  background-image: url("img/test.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #999
 }
 .photoandbuttons{
   position: relative;
@@ -1581,8 +1581,8 @@ opacity: 0;
 }
 .notif2{
   position: absolute;
-  height: 3vw;
-  width: 3vw;
+  height: 4vw;
+  width: 4vw;
   border-radius: 100%;
   background-color: #EC4B57;
  color:white;
@@ -1599,6 +1599,7 @@ opacity: 0;
           justify-content: center;
   box-shadow: 0px 0px 5px black;
 opacity: 1;
+display: none;
 
 }
 

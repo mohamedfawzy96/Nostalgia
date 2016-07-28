@@ -167,6 +167,7 @@ $(function(){
 
     firebase.auth().onAuthStateChanged(function(user) {
       hidefacebook()
+      checknotifi()
       function request(){
         var user55 = firebase.auth().currentUser;
 
@@ -369,16 +370,17 @@ $(function(){
 
   $("#sendimg").click(handleFileSelect);
   $('#menu').click(function(){
-    firebase.auth().signOut().then(function() {
+    /*firebase.auth().signOut().then(function() {
       console.log('Signed Out');
       //alert(firebase.auth().currentUser);
       window.location = "../index.html";
     }, function(error) {
       console.error('Sign Out Error', error);
-    });
+    });*/
+    window.location = "home.html"
   });
 
   //$(".notif").position(positionconnec);
-  $('.facebook').hide();
+  //$('.facebook').hide();
   $('.filter3').hide();
 });
