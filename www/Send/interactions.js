@@ -1,4 +1,4 @@
-var privateattr = true
+var privateattr = false
 var captionattr = $(".rest input").text()
 var date = "Can't remember"
 var effectattr= "normal"

@@ -86,21 +86,26 @@ $(function() {
       database.ref().child("memories").child(imguid).once('value', function(memorysnap){
         owneruid += memorysnap.child('owneruid').val();
       }).then(function() {
-        var notificationkey = database.ref().child('notifications').push();
-        notificationkey.set({
-          subject: user.uid,
-          notified: owneruid,
-          subjectname: username,
-          memoryid: imguid,
-          type: "commented",
-          checked: "false"
-        });
-        var notificationsnum;
-        database.ref().child('users').child(owneruid).child('notifications').once('value', function(notificationsSnap){
-          notificationsnum = notificationsSnap.numChildren();
-        }).then(function(){
-          database.ref().child('users').child(owneruid).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
-        });
+        if((user.uid+"")==owneruid) {
+          //do nothing
+         } else {
+          var notificationkey = database.ref().child('notifications').push();
+          notificationkey.set({
+            subject: user.uid,
+            notified: owneruid,
+            subjectname: username,
+            memoryid: imguid,
+            type: "commented",
+            checked: "false"
+          });
+          var notificationsnum;
+          database.ref().child('users').child(owneruid).child('notifications').once('value', function(notificationsSnap){
+            notificationsnum = notificationsSnap.numChildren();
+          }).then(function(){
+            database.ref().child('users').child(owneruid).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
+          });
+        }
+
       });
 
     });
@@ -127,25 +132,60 @@ $(function() {
 
   memoriesArray = new Array();
   urlArray = new Array();
+  var count = 0;
+  var inc = 0;
   var funfil = function (x, length1, listOfImages) {
+    var privonce = false;
     if(x==length1) {
       return;
     } else {
+      var url1;
+      var uid;
+      var date1;
+      var owner1
+      var privateattr;
+      var members;
       listOfImages[x].once('value', function(data) {
+        count++;
         console.log(data.key);
-        var uid = data.key;
-        //alert(uid);
-        var url1 = data.child("url").val()
-        var date1= data.child("date").val()
-        var owner1= data.child("owner").val()
-        add1Memories(owner1,date1,"closed",url1,uid);
+        uid = data.key;
+        url1 = data.child("url").val();
+        date1= data.child("date").val();
+        owner1= data.child("owner").val();
+        privateattr = data.child('private').val();
+        members = data.child('members').val();
       }).then(function() {
+        if(privateattr!=true) {
+          inc++;
+          add1Memories(owner1,date1,"closed",url1,uid);
+        } else {
+          privonce = true;
+          //alert(currentUserId);
+          if(members!=null) {
+            if(members.indexOf(currentUserId+"") >= 0) {
+              inc++;
+              add1Memories(owner1,date1,"closed",url1,uid);
+            }
+          }
+        }
         funfil(++x, length1, listOfImages);
+        if(count==6) {
+          if(privonce==true) {
+            if(inc<6){
+              if(startindex>=0) {
+                getImages();
+              }
+            }
+
+          }
+        }
       });
     }
+
   }
   function fillMemoriesPanel(listOfImages) {
     var length1 = listOfImages.length;
+    count = 0;
     funfil(0, length1, listOfImages);
 
     $(".filterspin").fadeOut();
@@ -273,9 +313,9 @@ $(function() {
   });
   var feelitstart;
   var feelitend;
-
+  var currentUserId;
   function getFeelIt() {
-    var currentUserId = firebase.auth().currentUser.uid;
+    currentUserId = firebase.auth().currentUser.uid;
     var str="";
     database.ref().child('users').child(currentUserId).child('feelit').orderByKey().startAt(feelitstart+'').endAt(feelitend+'').on('child_added', function(memoryKeySnap) {
       var memoryID = (memoryKeySnap.val()+'').split("/").pop();
@@ -346,7 +386,7 @@ $(function() {
   };
   var memoriesArray = new Array();
   var urlArray = new Array();
-  function getImages(){
+  function getImages() {
     memoriesArray = new Array();
       var user = firebase.auth().currentUser;
       var users = database.ref().child("users");
@@ -358,6 +398,7 @@ $(function() {
         console.log(memorySnap);
         if(memorySnap != null){
         //memorySnap.forEach(function(memorySnapshot)
+        var numco =0;
         for(var i=startindex; i<=endindex; i++){
           var memorySnapshot = memorySnap[i];
           <!-- NOTE -->
@@ -369,38 +410,53 @@ $(function() {
               var url ="";
               var imagesRef = database.ref().child('memories');
               var imageRef = imagesRef.child(memory);
-            /*  imageRef.once('value', function(data){
-                url = data.child("url").val()
-                memoriesArray.push(data);
-                urlArray.push(url);
-
-              });
-                  */
-                  if(imageRef != null){
-                  memoriesArray.push(imageRef);
+              var privatt;
+              if(imageRef != null){
+                memoriesArray.push(imageRef);
+              }
+             /*imageRef.once('value', function(data) {
+                privatt = data.child("private").val()
+              }).then(function(){
+                numco++;
+                if(numco==6) {
+                  alert(memoriesArray)
+                  //console.log(memoriesArray)
+                  memoriesArray.reverse();
+                  //setTimeout(fillMemoriesPanel(memoriesArray), 5000);
+                  fillMemoriesPanel(memoriesArray);
+                  if(startindex>=6) {
+                    endindex = startindex-1;
+                    startindex -= 6;
+                  } else {
+                    if(startindex==0) {
+                      startindex = -1;
+                    } else {
+                      endindex = startindex-1;
+                      startindex = 0;
+                    }
+                  }
                 }
+              });*/
         };
       }
+      }).then(function() {
         //console.log(memoriesArray)
         memoriesArray.reverse();
         //setTimeout(fillMemoriesPanel(memoriesArray), 5000);
         fillMemoriesPanel(memoriesArray);
-
-
+        if(startindex>=6) {
+          endindex = startindex-1;
+          startindex -= 6;
+        } else {
+          if(startindex==0) {
+            startindex = -1;
+          } else {
+            endindex = startindex-1;
+            startindex = 0;
+          }
+        }
       });
 
-      if(startindex>=6) {
-        endindex = startindex-1;
-        startindex -= 6;
-
-      } else {
-        if(startindex==0) {
-          startindex = -1;
-        } else {
-          endindex = startindex-1;
-          startindex = 0;
-        }
-      }
   };
 
   $("#sendimg").click(handleFileSelect);

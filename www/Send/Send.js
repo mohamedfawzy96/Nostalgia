@@ -96,7 +96,8 @@ $(function(){
 	  }, function(error) {
 	      alert(error);
 	  }, function() {
-	  		var privateattr = document.getElementById('private').checked;
+	  		var privateattr = $("#private .rest").html();
+				alert(privateattr)
 	  		var captionattr = $('#caption').val();
 	  		var dateattr = null;
 	      var imagesRef = database.ref().child('memories');

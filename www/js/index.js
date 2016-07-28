@@ -181,7 +181,21 @@ $(function(){
             }
           });
     });
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        alert('signed in');
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var refreshToken = user.refreshToken;
+        var providerData = user.providerData;
+        window.location = "Home/home.html?somval="+"true";
 
+      }
+    });
     function initApp() {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
