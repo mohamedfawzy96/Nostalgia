@@ -155,7 +155,10 @@ $(function() {
         privateattr = data.child('private').val();
         members = data.child('members').val();
       }).then(function() {
-        if(privateattr!=true) {
+        add1Memories(owner1,date1,"closed",url1,uid);
+        funfil(++x, length1, listOfImages);
+
+        /*if(privateattr!=true) {
           inc++;
           add1Memories(owner1,date1,"closed",url1,uid);
         } else {
@@ -178,7 +181,7 @@ $(function() {
             }
 
           }
-        }
+        }*/
       });
     }
 
