@@ -150,19 +150,11 @@ case 8:
 
     $(".mimg img").attr("src",imgurl)
     $('#title p').text(memorysnap.child('owner').val());
-    var type1
-    if(memorysnap.child('private').val()){
-      type1 = "private"
-    }else{
-      type1 = "Public"
-
-    }
-    $('#owner').text(memorysnap.child('owner').val()+"shared a "+type1+" memory");
+    $('#owner').text(memorysnap.child('owner').val()+" just shared a memory");
     $('#date').text(memorysnap.child("date").val());
     database.ref().child('usernames').child(memorysnap.child('owner').val()).once('value', function(useruidnow) {
       var useruidstr = useruidnow.val();
       database.ref().child('users').child(useruidstr+'').once('value', function(userSnap) {
-        $('.mimgMemory').attr("id",useruidstr)
         $('.mimgMemory').css('background-image',"url(\""+userSnap.child('profilephoto').val()+"\")")
       })
     })

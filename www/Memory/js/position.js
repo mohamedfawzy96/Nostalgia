@@ -106,26 +106,6 @@ $(document).on('tap', '#chattingbody2 li', function() {
 
 
 })
-$(document).on('tap', '#memberscontent li', function() {
-  $(".prof").css({"transform":"translateY(0)"})
-  idu = $(this).attr("rel");
-
-
-  updateprof(idu)
-  $(".ff33").fadeIn()
-
-})
-$('.mimgMemory')
-$(document).on('tap', '.mimgMemory', function() {
-  $(".prof").css({"transform":"translateY(0)"})
-  idu = $(this).attr("id");
-
-
-  updateprof(idu)
-  $(".ff33").fadeIn()
-
-})
-
 $(document).on('tap', '.AddFriend', function() {
   $(".k").removeClass("AddFriend")
   $(".k").addClass("requested")

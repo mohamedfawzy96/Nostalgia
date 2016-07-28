@@ -1,45 +1,4 @@
-function checknotifi(){
-  var currentUserId = firebase.auth().currentUser.uid;
-
-  database.ref().child("users").child(currentUserId).on("value",function(usernotif){
-    var notifarray = usernotif.child("notifications").val()
-    var check = usernotif.child("notificationCheck").val()
-    if(check!=null){
-      if(notifarray != null){
-        if(notifarray.length !=check ){
-          $(".notif2").css({"display":"flex"})
-          var num = notifarray.length - check
-          if(num>9){
-            $(".notif2").html("9+")
-
-
-          }else{
-            $(".notif2").html(num)
-
-
-          }
-
-        }
-
-      }
-
-    }else{
-      database.ref().child("users").child(currentUserId).child("notificationCheck").set(0)
-
-
-    }
-
-
-
-  })
-
-
-
-}
-
 $(function() {
-
-
   $(".back6").click(function(){
       $(".notifications").css({"transform":"translateX(2000px)"});
   });
@@ -54,26 +13,6 @@ $(function() {
 
 
   $("#Search").click(function(){
-    var currentUserId2 = firebase.auth().currentUser.uid;
-
-    database.ref().child("users").child(currentUserId2).on("value",function(usernotif){
-      var notifarray = usernotif.child("notifications").val()
-      var check = usernotif.child("notificationCheck").val()
-      if(check!=null){
-        if(notifarray != null){
-          if(notifarray.length !=check ){
-            database.ref().child("users").child(currentUserId2).child("notificationCheck").set(notifarray.length)
-            $(".notif2").hide()
-
-          }
-
-        }
-
-      }
-
-
-
-    })
     $('#notificationscontent').html("");
     database.ref().child('users').child(useruid+'').child('notifications').orderByKey().on('child_added', function(notificationkeySnap) {
       var notificationKey = notificationkeySnap.val();
