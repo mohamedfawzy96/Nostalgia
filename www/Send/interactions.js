@@ -92,7 +92,16 @@ $(".text").click(function(){
           };
         });
       }
-
+      if($(this).html()=="Cancel") {
+        $(this).html("Search");
+        $('#search').val("");
+        $('.content li .name').each(function() {
+          $('.content li').show();
+        });
+      } else {
+        if(username!="")
+        $(this).html("Cancel");
+      }
 
     });
 

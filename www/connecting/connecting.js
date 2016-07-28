@@ -133,23 +133,36 @@ var file;
   $('#searchsubmit').click(function() {
     var usernametosearch = $('#search').val();
     $(".searchView .content").html("");
-    database.ref().child('usernames').child(usernametosearch).once('value', function(useruidSnap) {
-      var useruid = useruidSnap.val()+'';
-      var photourl;
-      database.ref().child('users').child(useruid).child('profilephoto').once('value', function(photourlSnap) {
-        photourl = photourlSnap.val();
-        if(photourl==null) {
-          photourl = "../Home/img/test.jpg";
-        }
-      }).then(function() {
-        if(useruid!="null") {
-          addToSearchContent(usernametosearch, photourl, useruid);
-        } else {
-          <!--NOTE no user found!-->
-          alert('no user found!');
-        }
+
+    if($('#searchsubmit').html()=="Cancel") {
+      $('#searchsubmit').html("Search");
+      $('#search').val("");
+      $('.content').text("");
+      //$(".searchView .content").text("");
+      $('.content li').hide();
+    } else {
+      database.ref().child('usernames').child(usernametosearch).once('value', function(useruidSnap) {
+        var useruid = useruidSnap.val()+'';
+        var photourl;
+        database.ref().child('users').child(useruid).child('profilephoto').once('value', function(photourlSnap) {
+          photourl = photourlSnap.val();
+          if(photourl==null) {
+            photourl = "../Home/img/test.jpg";
+          }
+        }).then(function() {
+          if(useruid!="null") {
+            addToSearchContent(usernametosearch, photourl, useruid);
+          } else {
+            <!--NOTE no user found!-->
+            alert('no user found!');
+            $('#searchsubmit').html("Search");
+            $('#search').val("");
+          }
+        });
       });
-    });
+      if(usernametosearch!="")
+      $('#searchsubmit').html("Cancel");
+    }
   });
 
   $('#cancelsearch').click(function() {
@@ -210,7 +223,7 @@ var file;
             people.push(fp);
           });
           if(counterf==friends.length) {
-            alert(people);
+            //alert(people);
             var uniqueArray = new Array();
             people.forEach(function(person) {
               if(uniqueArray.length==0) {
