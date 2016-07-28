@@ -70,32 +70,15 @@ $(".text").click(function(){
             database.ref().child('users').child(friendid).once('value', function(friend) {
               addmembers(friend.child("username").val(), friend.child("uid").val(), friend.child('profilephoto').val());
             });
-          });
-    };
-    $('.searchbtn').click(function() {
-      var username = $('#search').val();
-      //alert(username);
-      //alert($('.content li  .name').html())
-      if(username=="") {
-          $('.content li').show();
-      } else {
-        $('.content li  .name').each(function() {
-          //alert($(this).html())
-          if($(this).html()!=username) {
-            $(this).parent().parent().hide();
-          };
-        });
-      }
-
-
     });
+    };
 
                           function addmembers(user, id, photourl){
                           var html = "<li rel=\""+id+"\">"
                           +  "<div id=\"user\">"
                           +    "<div class=\"profilephoto\" style=\"background-image:url(\'"+photourl+"\')\">"
                           +    "</div>"
-                          +    "<div class=\"name\">"
+                          +    "<div class=\"name\"> "
                           +    user
                           +    "</div>"
                           +  "</div>"
@@ -112,12 +95,8 @@ $(".text").click(function(){
                                                             $(".text").html("Done")
                                                             $(".back").css({"opacity":"0"});
                                                             }, 700);
-                                                 if($(this).attr('clss')!="clickedadd") {
-                                                   $(".content").html("");
-                                                   getMembers();
-                                                   $(this).attr('clss', 'clickedadd');
-                                                 }
-
+                                                 $(".content").html("");
+                                                 getMembers();
                                                  });
 
                           $(document).on('click ', 'input[type="checkbox"]', function(event) {

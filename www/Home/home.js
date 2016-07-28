@@ -1,4 +1,4 @@
-$(function() {
+$(function(){
   $('body, html, #body1').scrollTop(0);
   $(".filterspin").css({"display":"flex"})
   var imguid;
@@ -158,50 +158,51 @@ $(function() {
               //alert('end reached');
               if(startindex>=0) {
                 getImages();
+
               }
-          }
-      });
-  });
-  jQuery(function($) {
-      $('#body2').on('scroll', function() {
-          if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-              //alert('end reached');
-              if(feelitstart>=0)
-              getFeelIt();
-          }
-      });
-  });
 
-
+          }
+      })
+  });
 
     firebase.auth().onAuthStateChanged(function(user) {
       hidefacebook()
       function request(){
         var user55 = firebase.auth().currentUser;
 
+
         database.ref().child("users").child(user55.uid).on("value",function(user){
           var reqnum = user.child("ReceivedRequests").val();
           if(reqnum != null){
           if(reqnum.length>0){
             $(".notif").css({"opacity":"1"});
+
             if(reqnum.length>9){
-              $(".notif").html("9+");
-            } else {
+              $(".notif").html("9+")
+
+
+            }else{
               $(".notif").html(reqnum.length)
+
             }
+
+
           }
         }
-      });
+
+        })
       }
       request();
 
       var user = firebase.auth().currentUser;
       var username;
       var userInDatabase = database.ref().child('users').child(user.uid).child("username");
+
       userInDatabase.once('value',function(snapshot){
         $('#title p').html(snapshot.val());
         $('#title2 p').html(snapshot.val());
       });
+      getFeelIt();
       if (user) {
         database.ref().child('users').child(user.uid).child('memberposted').once('value', function(memoriesSnap) {
           //alert(memoriesSnap.numChildren());
@@ -217,27 +218,11 @@ $(function() {
         }).then(function() {
           getImages();
         });
-
-        database.ref().child('users').child(user.uid).child('feelit').once('value', function(feelitSnap) {
-          var feelitnum = feelitSnap.numChildren();
-          if(feelitnum>0) {
-            feelitend = feelitnum-1;
-          }
-          if(feelitnum>=6) {
-            feelitstart = feelitnum-6;
-          } else {
-            feelitstart = 0;
-          }
-        }).then(function() {
-          getFeelIt();
-        });
         //alert(user)
       } else {
         // No user is signed in.
       }
-
     });
-
 
     $(".tab1").click(function(){
       $("#body2").css({"display":"none"});
@@ -270,13 +255,9 @@ $(function() {
     $(".tab1").css({"border":"0"});
     $(".tab2").css({"border":"0"});
   });
-  var feelitstart;
-  var feelitend;
-
   function getFeelIt() {
     var currentUserId = firebase.auth().currentUser.uid;
-    var str="";
-    database.ref().child('users').child(currentUserId).child('feelit').orderByKey().startAt(feelitstart+'').endAt(feelitend+'').on('child_added', function(memoryKeySnap) {
+    database.ref().child('users').child(currentUserId).child('feelit').on('child_added', function(memoryKeySnap) {
       var memoryID = (memoryKeySnap.val()+'').split("/").pop();
       //should change this after cleaning the databse
       //alert(memoryID);
@@ -286,34 +267,17 @@ $(function() {
         var owner = memorySnap.child("owner").val();
         var date = memorySnap.child("date").val();
         var caption = memorySnap.child("caption").val();
-        if(caption=="") {
+        if(caption==""){
           caption = "no caption";
         }
 
-        str = "<li class=\"clickableimg\" id=\""+memoryID+"\"><div class=\"card\"><div class=\"imgMemory \" style='background-image:url("+url+")'></div>"
-        +"<div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div>"
-        +"</div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div>"
-        +"<div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>" + str;
+        var str = "<li class=\"clickableimg\" id=\""+memoryID+"\"><div class=\"card\"><div class=\"imgMemory \" style='background-image:url("+url+")'></div><div class=\"info\"><div class=\"action sector\"><div class=\"icon2\"></div><div class=\"text\"><p id=\"owner\">"+owner+" just shared a memory</p></div></div><div class=\"date1 sector\"><div class=\"icon\"><img src=\"../Memory/img/dateIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"date\">"+date+"</p></div></div><div class=\"caption1 sector\"><div class=\"icon\"><img src=\"../Memory/img/captionIcon.svg\" alt=\"\" /></div><div class=\"text\"><p id=\"caption\">"+caption+"</p></div></div></div></li>";
+        $('#body2').prepend(str);
       });
-
     });
-    setTimeout(function(){  $('#body2').append(str); }, 1000);
-
-    if(feelitstart>=6) {
-      feelitend = feelitstart-1;
-      feelitstart -= 6;
-
-    } else {
-      if(feelitstart==0) {
-        feelitstart = -1;
-      } else {
-        feelitend = feelitstart-1;
-        feelitstart = 0;
-      }
-    }
 
   }
-  /*function getFeelIt2(){
+  function getFeelIt2(){
     var currentUserId = firebase.auth().currentUser.uid;
     var memoriesIDs = new Array();
     database.ref().child('users').child(currentUserId).child('friends').on('child_added', function(userKeySnap) {
@@ -338,7 +302,7 @@ $(function() {
         });
       })
     });
-  };*/
+  };
 
   function handleFileSelect(evt) {
     window.location = "../Send/Send.html?somval="+fromwhere;
@@ -355,6 +319,7 @@ $(function() {
       imagesRef.orderByKey().startAt(startindex+'').endAt(endindex+'').once('value',function(snapshot){
         memorySnap = snapshot.val();
         console.log(memorySnap);
+        console.log(memorySnap[9])
         if(memorySnap != null){
         //memorySnap.forEach(function(memorySnapshot)
         for(var i=startindex; i<=endindex; i++){
