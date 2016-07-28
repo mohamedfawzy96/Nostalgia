@@ -23,7 +23,13 @@ function updateprof(id) {
   database.ref().child("users").child(id).once("value",function(userprof){
     var user = firebase.auth().currentUser;
     var curridu = user.uid;
-    $(".profname").html(userprof.child("email").val())
+    var profname
+    if(userprof.child("firstName").val() != null && userprof.child("lastName").val()!=null ){
+      profname = userprof.child("firstName").val()+" "+userprof.child("lastName").val()
+    }else{
+      profname = userprof.child("email").val()
+    }
+    $(".profname").html(profname)
     $(".profuser").html(userprof.child("username").val())
     $(".prof img").attr("src",userprof.child("profilephoto").val())
     database.ref().child("users").child(curridu).once("value",function(userprof2){
