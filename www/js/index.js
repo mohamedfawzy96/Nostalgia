@@ -183,7 +183,7 @@ $(function(){
     });
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        alert('signed in');
+        //alert('signed in');
         var displayName = user.displayName;
         var email = user.email;
         var emailVerified = user.emailVerified;
@@ -192,7 +192,7 @@ $(function(){
         var uid = user.uid;
         var refreshToken = user.refreshToken;
         var providerData = user.providerData;
-        window.location = "Home/home.html?somval="+"true";
+        //window.location = "Home/home.html?somval="+"true";
 
       }
     });
