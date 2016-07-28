@@ -10,24 +10,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   var username;
   database.ref().child('users').child(userID).once("value",function(user1) {
     username = user1.child('username').val();
-    var fullname
-    if(user1.child('firstName').val() != null && user1.child('lastName').val()!=null ){
-       fullname = user1.child('firstName').val()+" "+user1.child('lastName').val();
-
-
-    }else if(user1.child('firstName').val() != null){
-      fullname = user1.child('firstName').val();
-
-
-    }else if(user1.child('lastName').val() != null){
-      fullname = user1.child('lastName').val();
-
-
-    }else{
-      fullname=user1.child('email').val();
-
-    }
-
+    var fullname = user1.child('firstName').val()+" "+user1.child('lastName').val();
     $(".name").html(fullname);
     $("#title ").html(user1.child("username").val());
     //alert(user1.child('profilephoto').val());

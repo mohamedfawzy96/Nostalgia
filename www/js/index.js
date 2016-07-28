@@ -86,7 +86,6 @@ $(function(){
             var newuser = new User(user.email, user.uid, currusername, [], [], [], [], [], [], null);
 
             usersRef.child(user.uid).set(newuser);
-            usersRef.child(user.uid).child("profilephoto").set("https://firebasestorage.googleapis.com/v0/b/nostalgia-79c70.appspot.com/o/memories%2Fhttps%3A%2Fnostalgia-79c70.firebaseio.com%2Fkeys%2Fdefaullt.jpg?alt=media&token=2609e826-e96d-429c-8b99-474e8874bb60")
             database.ref().child('usernames').child(currusername).once('value', function(usernameSnap) {
               if(usernameSnap.val()){
                 alert(usernameSnap.key)
