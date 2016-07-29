@@ -158,6 +158,25 @@ var file;
 
 
   $(".request").click(function(){
+    var currentUserId2 = firebase.auth().currentUser.uid;
+
+    database.ref().child("users").child(currentUserId2).on("value",function(usernotif){
+      var notifarray = usernotif.child("ReceivedRequests").val()
+      var check = usernotif.child("requestsCheck").val()
+      if(check!=null){
+        if(notifarray != null){
+          if(notifarray.length !=check ){
+            database.ref().child("users").child(currentUserId2).child("requestsCheck").set(notifarray.length)
+
+          }
+
+        }
+
+      }
+
+
+
+    })
     $(".requestsView").css({"display":"block"});
     setTimeout(function(){
       $(".requestsView").css({"transform":"translateX(0)"});
@@ -226,9 +245,9 @@ var file;
             var Req2 = (snap+"").split(" ")[0]
             database.ref().child('requests').child(Req2).once("value",function(snapshot3){
               var uid2 = snapshot3.child("to").val()
-                $(".k[uid*="+uid2+"]").removeClass("AddFriend")
+                $(".k[uid*="+uid2+"]").removeClass("AddFriend2")
                 $(".k[uid*="+uid2+"]").html("Requested")
-                $(".k[uid*="+uid2+"]").addClass("requested")
+                $(".k[uid*="+uid2+"]").addClass("requested2")
             });
 
           }

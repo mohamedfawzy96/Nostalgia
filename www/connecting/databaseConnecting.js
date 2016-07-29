@@ -115,8 +115,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   // updating the number of requests
 
-  database.ref().child('users').child(userID).once("value",function(user){
-    $("#num").html(user.child("ReceivedRequests").numChildren());
+  database.ref().child('users').child(userID).on("value",function(user){
+    $("#num").html(user.child("ReceivedRequests").numChildren()-user.child("requestsCheck").val());
   });
 
 

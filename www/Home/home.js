@@ -1,3 +1,41 @@
+function checkreq(){
+  var currentUserId = firebase.auth().currentUser.uid;
+
+  database.ref().child("users").child(currentUserId).on("value",function(usernotif){
+    var notifarray = usernotif.child("ReceivedRequests").val()
+    var check = usernotif.child("requestsCheck").val()
+    if(check!=null){
+      if(notifarray != null){
+        if(notifarray.length !=check ){
+          $(".notif").css({"display":"flex"})
+          var num = notifarray.length - check
+          if(num>9){
+            $(".notif").html("9+")
+
+
+          }else{
+            $(".notif").html(num)
+
+
+          }
+
+        }
+
+      }
+
+    }else{
+      database.ref().child("users").child(currentUserId).child("requestsCheck").set(0)
+
+
+    }
+
+
+
+  })
+
+
+
+}
 $(function() {
   $('body, html, #body1').scrollTop(0);
   $(".filterspin").css({"display":"flex"})
@@ -225,24 +263,8 @@ $(function() {
     firebase.auth().onAuthStateChanged(function(user) {
       hidefacebook()
       checknotifi()
-      function request(){
-        var user55 = firebase.auth().currentUser;
+      checkreq()
 
-        database.ref().child("users").child(user55.uid).on("value",function(user){
-          var reqnum = user.child("ReceivedRequests").val();
-          if(reqnum != null){
-          if(reqnum.length>0){
-            $(".notif").css({"opacity":"1"});
-            if(reqnum.length>9){
-              $(".notif").html("9+");
-            } else {
-              $(".notif").html(reqnum.length)
-            }
-          }
-        }
-      });
-      }
-      request();
 
       var user = firebase.auth().currentUser;
       var username;

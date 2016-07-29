@@ -20,6 +20,10 @@ $(window).load(function(){
 });
 //turned it into a function so every time the memoryview open it updates the value
 function updateprof(id) {
+  $(".k").addClass("AddFriend")
+  $(".k").removeClass("requested")
+  $(".k").removeClass("friends2")
+  $(".k").html("Add")
   database.ref().child("users").child(id).once("value",function(userprof){
     var user = firebase.auth().currentUser;
     var curridu = user.uid;
