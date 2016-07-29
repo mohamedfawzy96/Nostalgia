@@ -1,5 +1,9 @@
 var idu22
 function updateprof(id) {
+  /*$(".k2").addClass("AddFriend")
+  $(".k2").removeClass("requested")
+  $(".k2").removeClass("friends2")
+  $(".k2").html("Add")*/
   idu22 = id
   $(".prof").css({"transform":"translateY(0)"})
 $(".ff33").show()
@@ -24,9 +28,9 @@ $(".ff33").show()
         if(first != "done"){
           database.ref().child("requests").child(first).once("value",function(reque){
             if(reque.child("to").val()==id){
-              $(".k").removeClass("AddFriend2")
-              $(".k").addClass("requested2")
-              $(".k").html("Requested")
+              $(".k2").removeClass("AddFriend2")
+              $(".k2").addClass("requested2")
+              $(".k2").html("Requested")
 
             }
 
@@ -42,9 +46,9 @@ $(".ff33").show()
 
 
       if(jQuery.inArray(id,userprof2.child("friends").val())!=-1){
-        $(".k").removeClass("AddFriend2")
-        $(".k").addClass("friends3")
-        $(".k").html("Friends")
+        $(".k2").removeClass("AddFriend2")
+        $(".k2").addClass("friends3")
+        $(".k2").html("Friends")
       }
 
 
@@ -68,9 +72,9 @@ $(".profcancel").click(function(){
 
 });
 $(document).on('tap', '.AddFriend2', function() {
-  $(".k").removeClass("AddFriend2")
-  $(".k").addClass("requested2")
-  $(".k").html("Requested")
+  $(".k2").removeClass("AddFriend2")
+  $(".k2").addClass("requested2")
+  $(".k2").html("Requested")
   var requestID = database.ref().child('requests').push();
   var From = firebase.auth().currentUser.uid;
   var to = idu22;

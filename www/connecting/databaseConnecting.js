@@ -95,9 +95,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     database.ref().child('users').child(userID).child('ReceivedRequests').on("child_added", function(requestKeySnap){
       alert(requestKeySnap.key);
       if(reqkey==requestKeySnap.val()){
-        database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').remove(function(){
-          //alert('removed');
-        });
+        database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').set("Done")
       }
     });
   });

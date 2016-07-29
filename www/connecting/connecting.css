@@ -1553,7 +1553,7 @@ background-color: #999}
 }
 .profcancel{
   position: relative;
-  height: 20%;
+  height: 15%;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1567,6 +1567,7 @@ background-color: #999}
     font-size: 4vw;
   font-weight: bold;
   color: #Ec4b57;
+  margin-top: 10px;
 
 
 
@@ -1671,6 +1672,10 @@ background-color: #999}
 
 }
 .k{
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.k2{
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
