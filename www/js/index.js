@@ -36,7 +36,7 @@
       //alert(username);
       if(username!=null){
 
-        window.location = "Home/home.html?somval="+"true";
+        //window.location = "Home/home.html?somval="+"true";
       }
     });
   };

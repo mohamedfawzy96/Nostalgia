@@ -1,3 +1,98 @@
+function updateprof(id) {
+  $(".prof").css({"transform":"translateY(0)"})
+$(".ff33").show()
+  database.ref().child("users").child(id).once("value",function(userprof){
+    var user = firebase.auth().currentUser;
+    var curridu = user.uid;
+    var profname
+    if(userprof.child("firstName").val() != null && userprof.child("lastName").val()!=null ){
+      profname = userprof.child("firstName").val()+" "+userprof.child("lastName").val()
+    }else{
+      profname = userprof.child("email").val()
+    }
+    $(".profname").html(profname)
+    $(".profuser").html(userprof.child("username").val())
+    $(".prof img").attr("src",userprof.child("profilephoto").val())
+    database.ref().child("users").child(curridu).once("value",function(userprof2){
+      var req = userprof2.child("SentRequests").val()
+      if(req != null){
+
+
+      req.forEach(function(first){
+        if(first != "done"){
+          database.ref().child("requests").child(first).once("value",function(reque){
+            if(reque.child("to").val()==id){
+              $(".k").removeClass("AddFriend2")
+              $(".k").addClass("requested2")
+              $(".k").html("Requested")
+
+            }
+
+          })
+
+        }
+
+
+
+      })
+      }
+
+
+
+      if(jQuery.inArray(id,userprof2.child("friends").val())!=-1){
+        $(".k").removeClass("AddFriend2")
+        $(".k").addClass("friends3")
+        $(".k").html("Friends")
+      }
+
+
+    })
+
+
+
+
+
+
+
+  })
+
+}
+$(".profcancel").click(function(){
+  $(".prof").css({"transform":"translateY(1000px)"})
+  $(".ff33").fadeOut()
+  $(".k").css({"opacity":"1"})
+
+
+
+});
+$(document).on('tap', '.AddFriend2', function() {
+  $(".k").removeClass("AddFriend2")
+  $(".k").addClass("requested2")
+  $(".k").html("Requested")
+  var requestID = database.ref().child('requests').push();
+  var From = firebase.auth().currentUser.uid;
+  var idu = $(this).attr("uid")
+  var to = idu;
+  var users = database.ref().child('users');
+  var request = new Request(From,to,false)
+  users.child(to).once("value",function(snapshot){
+    var num = snapshot.child("ReceivedRequests").numChildren()
+    var ID = (requestID+"").split("/").pop();
+    users.child(to).child("ReceivedRequests").child(num).set(ID+"");
+
+  });
+
+  users.child(From).once("value",function(snapshot){
+    var num = snapshot.child("SentRequests").numChildren();
+    var ID = (requestID+"").split("/").pop();
+    users.child(From).child("SentRequests").child(num).set(ID+"");
+
+  });
+
+  requestID.set(request);
+
+
+})
 $(function () {
   var ID;
   firebase.auth().onAuthStateChanged(function(user) {
@@ -93,14 +188,14 @@ var file;
     database.ref().child('users').child(ID+'').child('friends').once('value', function(snap) {
       friends = snap.val();
     }).then(function() {
-      if(friends.indexOf(uid) >= 0) {
-        var  FindHtml = "<li><div class=\"theUser\"><div class=\"userImage\"><img src="+url+" />"
+      if(friends != null && friends.indexOf(uid) >= 0) {
+        var  FindHtml = "<li uid="+uid+"><div class=\"theUser\"><div class=\"userImage\"><img src="+url+" />"
           +  "</div><div class=\"usernameOfuser\">"+ username +"</div></div>"
           +  "<div class=\"friends2\" uid = '"+uid+"'>Friends</div></li>"
         $(".searchView .content").append(FindHtml);
         requested();
       } else {
-        var  FindHtml = "<li><div class=\"theUser\"><div class=\"userImage\"><img src="+url+" />"
+        var  FindHtml = "<li uid="+uid+"><div class=\"theUser\"><div class=\"userImage\"><img src="+url+" />"
           +  "</div><div class=\"usernameOfuser\">"+ username +"</div></div>"
           +  "<div class=\"AddFriend k\" uid = '"+uid+"'>Add</div></li>"
         $(".searchView .content").append(FindHtml);
@@ -110,6 +205,13 @@ var file;
 
 
   }
+  $(document).on("tap",".requestsSent li",function(){
+    updateprof($(this).attr("uid"))
+    $(".k").css({"opacity":"0"})
+  })
+  $(document).on("tap",".person",function(){
+    updateprof($(this).attr("id"))
+  })
   function requested() {
     ID = firebase.auth().currentUser.uid;
     var users = database.ref().child('users');
@@ -119,13 +221,17 @@ var file;
       //alert(RequestID);
       if(RequestID !=null){
         RequestID.forEach(function(snap){
-          var Req2 = (snap+"").split(" ")[0]
-          database.ref().child('requests').child(Req2).once("value",function(snapshot3){
-            var uid2 = snapshot3.child("to").val()
-              $(".k[uid*="+uid2+"]").removeClass("AddFriend")
-              $(".k[uid*="+uid2+"]").html("Requested")
-              $(".k[uid*="+uid2+"]").addClass("requested")
-          });
+          if(snap != "done"){
+            var Req2 = (snap+"").split(" ")[0]
+            database.ref().child('requests').child(Req2).once("value",function(snapshot3){
+              var uid2 = snapshot3.child("to").val()
+                $(".k[uid*="+uid2+"]").removeClass("AddFriend")
+                $(".k[uid*="+uid2+"]").html("Requested")
+                $(".k[uid*="+uid2+"]").addClass("requested")
+            });
+
+          }
+
         });
       }
     });
@@ -213,6 +319,7 @@ var file;
 
     }).then(function() {
       var counterf = 0;
+      if(friends != null){
       friends.forEach(function(friend) {
         var ff;
         database.ref().child('users').child(friend).child('friends').once('value', function(ffriends) {
@@ -284,6 +391,7 @@ var file;
           }
         });
       });
+    }
     });
   });
 

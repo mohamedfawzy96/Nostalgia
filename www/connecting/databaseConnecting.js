@@ -48,8 +48,12 @@ firebase.auth().onAuthStateChanged(function(user) {
     database.ref().child('users').child(userID).once("value",function(user){
       var num = user.child("friends").numChildren();
       database.ref().child('users').child(userID).child("friends").child(num).set(uid);
+    });
+    database.ref().child('users').child(uid).once("value",function(user){
+      var num = user.child("friends").numChildren();
       database.ref().child('users').child(uid).child("friends").child(num).set(userID);
     });
+
     $("li[uid="+uid+"] .reject").css({"display":"none"})
     $("li[uid="+uid+"] .accept").css({"background-color":"#009688"});
     $("li[uid="+uid+"] .accept").html("Friends");
@@ -61,10 +65,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     database.ref().child('users').child(userID).child('ReceivedRequests').on("child_added", function(requestKeySnap){
       if(reqkey==requestKeySnap.val()){
-        database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').remove(function(){
-          //alert('removed');
-        });
-        database.ref().child('users').child(uid).child('SentRequests').child(requestKeySnap.key+'').remove();
+        database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').set("done")
+        database.ref().child('users').child(uid).child('SentRequests').child(requestKeySnap.key+'').set("done");
       }
     });
 
@@ -124,16 +126,20 @@ firebase.auth().onAuthStateChanged(function(user) {
     var username;
     var uid;
     var url;
-    database.ref().child('requests').child(id+'').once('value', function(requestSnap){
-      From = requestSnap.child("from").val();
-    }).then(function(){
-      database.ref().child('users').child(From+'').once("value",function(user3){
-        var username = user3.child("username").val();
-        var uid = user3.child("uid").val();
-        var url = user3.child('profilephoto').val();
-        AddRequets(username,url,uid,id);
+    if(id != "done"){
+      database.ref().child('requests').child(id+'').once('value', function(requestSnap){
+        From = requestSnap.child("from").val();
+      }).then(function(){
+        database.ref().child('users').child(From+'').once("value",function(user3){
+          var username = user3.child("username").val();
+          var uid = user3.child("uid").val();
+          var url = user3.child('profilephoto').val();
+          AddRequets(username,url,uid,id);
+        });
       });
-    });
+
+    }
+
   });
 });
 

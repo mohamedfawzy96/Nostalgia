@@ -915,7 +915,7 @@ body {
 }
 .Title h1{
   color: white;
-  font-size: 2em;
+  font-size: 8vw;
   text-align: center;
   letter-spacing: 5px;
 
@@ -927,6 +927,10 @@ body {
   width: 100%;
   height: 10%;
   margin-top: 7%;
+  font-family: futura;
+  font-size: 3vw;
+
+
 }
 .Subtitle h1{
   color: white;
@@ -994,19 +998,24 @@ body {
 }
 input{
   position: relative;
-  width: 200px;
+  width: 60vw;
   left: 50%;
-  margin-left: -100px;
+  margin-left: -30vw;
   background-color: rgba(0, 0, 0, 0) !important;
   border-radius: 0 !important;
   border: 0 !important;
   border-bottom: 2px solid #ec4b57 !important;
   color: white !important;
   letter-spacing: 2px;
-  font-size: 1.1em;
+  font-size: 4vw;
   z-index: 4;
 
 
+}
+button{
+  padding: 0;
+  margin: 0;
+  line-height: 0;
 }
 .footer{
   position: relative;
@@ -1035,6 +1044,7 @@ input{
   margin: 0 auto;
 
 }
+
 .forgot{
   position: relative;
   margin-top: 40px;
@@ -1067,8 +1077,8 @@ input{
 .go1 img{
 
   position: relative;
-  width: 38px;
-  height: 38px;
+  width: 12vw;
+  height: 12vw;
   left: 50%;
   margin-left: -19px;
 }
@@ -1093,13 +1103,17 @@ input{
 }
 #signin{
   position: relative;
-  height: 40px;
-  width: 100px;
+  height: 12vw;
+  width: 30vw;
   color: #ec4b57;
   background-color: rgba(0, 0, 0, 0.5);
   border: 3px solid #ec4b57;
   left: 50%;
-  margin-left: -50px;
+  margin-left: -15vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5vw;
 
 }
 

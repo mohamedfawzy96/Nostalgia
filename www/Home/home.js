@@ -39,6 +39,11 @@ $(function() {
     //alert('here');
     //alert($(this));
     imguid  = $(this).attr('id');
+    $(".photo").css({"height":"36vh"})
+    $(".memorychat").css({"top":"75vh"})
+    $(".expand img").css({"transform":"rotate(0)"})
+    $(".memchat").height(height2+"px")
+    $(".input22").css({"transform":"translateX(1000px)"})
 
     //alert(imguid)
     // UpdateImageView is in the memory.js it is instead of $(function(){})---> UpdateImageView(imageuid1)

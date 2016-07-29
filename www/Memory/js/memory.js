@@ -38,15 +38,18 @@ function updateprof(id) {
 
 
       req.forEach(function(first){
-        database.ref().child("requests").child(first).once("value",function(reque){
-          if(reque.child("to").val()==id){
-            $(".k").removeClass("AddFriend")
-            $(".k").addClass("requested")
-            $(".k").html("Requested")
+        if(first != "done"){
+          database.ref().child("requests").child(first).once("value",function(reque){
+            if(reque.child("to").val()==id){
+              $(".k").removeClass("AddFriend")
+              $(".k").addClass("requested")
+              $(".k").html("Requested")
 
-          }
+            }
 
-        })
+          })
+        }
+
 
 
       })
@@ -157,7 +160,7 @@ case 8:
       type1 = "Public"
 
     }
-    $('#owner').text(memorysnap.child('owner').val()+"shared a "+type1+" memory");
+    $('#owner').text(memorysnap.child('owner').val()+" shared a memory");
     $('#date').text(memorysnap.child("date").val());
     database.ref().child('usernames').child(memorysnap.child('owner').val()).once('value', function(useruidnow) {
       var useruidstr = useruidnow.val();
