@@ -128,27 +128,28 @@ $(function(){
 					memoryid: ((key +'').split("/").pop()),
 					type: "posted"
 				});
-				for (var i = 0; i < membersArray.length; i++) {
+				for (var i = 0; i < membersArray.length;) {
 					//alert(membersArray[i]);
 					key.child("members").child(i).set(membersArray[i]);
 					var index = membersArray[i];
-					var ref = database.ref().child("users").child(membersArray[i]).once('value',
-					function(memberToSnap){
+					var ref = database.ref().child("users").child(membersArray[i]).once('value', function(memberToSnap){
 						var key3 = (key +'').split("/").pop();
 						var notificationsnum;
-						database.ref().child("users").child(index).child("member").once('value',function(membersnapshot){
-								var num = membersnapshot.numChildren();
+						//database.ref().child("users").child(index).child("member").once('value', function(membersnapshot) {
+								var num = membersnapshot.child("member").numChildren();
 								database.ref().child("users").child(index).child("member").child(num).set(((key +'').split("/").pop()));
-							});
+								var num2 = memberpostedsnapshot.child("memberposted").numChildren();
+								database.ref().child("users").child(index).child("memberposted").child(num2).set(((key +'').split("/").pop()));
+							//});
 							notificationsnum = memberToSnap.child('notifications').numChildren();
 						}).then(function(){
-							database.ref().child("users").child(index).child("memberposted").once('value',function(memberpostedsnapshot){
-								var num2 = memberpostedsnapshot.numChildren();
-								database.ref().child("users").child(index).child("memberposted").child(num2).set(((key +'').split("/").pop()));
+							/*database.ref().child("users").child(index).child("memberposted").once('value', function(memberpostedsnapshot) {
+
 							}).then(function(){
 								alert("success");
-							});
+							});*/
 							database.ref().child('users').child(index).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
+							i++;
 						});
 
 					};

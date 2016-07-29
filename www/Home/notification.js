@@ -120,19 +120,31 @@ $(function() {
               url = photourlSnap.val();
             }).then(function() {
               console.log(url);
+              $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
+              +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
+              +    "<div class=\"filter5\">"
+              +    "</div>"
+              //+    "<img src=\""+icontype+"\" alt=\"\" />"
+              +  "</div>"
+              +  "<div class=\"whatHappen\">"
+              +    subjectname+ " <span class=\"color\">"+action+"</span> "+ str
+              +  "</div>"
+              + "</li>");
             });
             //url = "img/test.jpg";
+          } else {
+            $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
+            +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
+            +    "<div class=\"filter5\">"
+            +    "</div>"
+            +    "<img src=\""+icontype+"\" alt=\"\" />"
+            +  "</div>"
+            +  "<div class=\"whatHappen\">"
+            +    subjectname+ " <span class=\"color\">"+action+"</span> "+ str
+            +  "</div>"
+            + "</li>");
           }
-          $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
-          +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
-          +    "<div class=\"filter5\">"
-          +    "</div>"
-          +    "<img src=\""+icontype+"\" alt=\"\" />"
-          +  "</div>"
-          +  "<div class=\"whatHappen\">"
-          +    subjectname+ " <span class=\"color\">"+action+"</span> "+ str
-          +  "</div>"
-          + "</li>");
+
         });
       });
     });

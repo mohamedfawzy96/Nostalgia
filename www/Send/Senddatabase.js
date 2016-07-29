@@ -134,29 +134,6 @@ $("#file").change(function () {
 						type: "posted",
 						checked: "false"
 					});
-					for (var i = 0; i < membersArray.length; i++) {
-						//alert(membersArray[i]);
-						key.child("members").child(i).set(membersArray[i]);
-						var index = membersArray[i];
-						var notificationsnum;
-						var ref = database.ref().child("users").child(membersArray[i]).once('value',
-						function(memberToSnap){
-							var key3 = (key +'').split("/").pop();
-							database.ref().child("users").child(index).child("member").once('value',function(membersnapshot) {
-									var num = membersnapshot.numChildren();
-									database.ref().child("users").child(index).child("member").child(num).set(((key +'').split("/").pop()));
-								});
-								notificationsnum = memberToSnap.child('notifications').numChildren();
-							}).then(function(){
-								database.ref().child("users").child(index).child("memberposted").once('value',function(memberpostedsnapshot){
-									var num2 = memberpostedsnapshot.numChildren();
-									database.ref().child("users").child(index).child("memberposted").child(num2).set(((key +'').split("/").pop()));
-								}).then(function(){
-									alert("success");
-								});
-								database.ref().child('users').child(index).child('notifications').child(notificationsnum+'').set((notificationkey+'').split('/').pop());
-							});
-						};
 
 						users.child(user.uid).child('friends').on('child_added', function(friendsuidsnap){
 							var frienduid = friendsuidsnap.val();
@@ -181,7 +158,29 @@ $("#file").change(function () {
 									var num2 = postedsnapshot.numChildren();
 									users.child(user.uid).child("member").child(num2).set(key2);
 								}).then(function(){
-									window.location = "../Home/home.html";
+
+									var addmem = function(membersArray, i)	{
+										if(i<membersArray.length) {
+											key.child("members").child(i).set(membersArray[i]);
+											var index = membersArray[i];
+											var notificationsnum;
+											var ref = database.ref().child("users").child(membersArray[i]).once('value', function(memberToSnap){
+												var key3 = (key +'').split("/").pop();
+														var num = memberToSnap.child("member").numChildren();
+														database.ref().child("users").child(index).child("member").child(num).set(((key +'').split("/").pop()));
+														var num2 = memberToSnap.child("memberposted").numChildren();
+														database.ref().child("users").child(index).child("memberposted").child(num2).set(((key +'').split("/").pop()));
+													notificationsnum = memberToSnap.child('notifications').numChildren();
+												}).then(function() {
+													database.ref().child('users').child(index).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
+													addmem(membersArray, ++i);
+												});
+										} else {
+											alert('success')
+											window.location = "../Home/home.html";
+										}
+									};
+										addmem(membersArray,0);
 								});
 							});
 						});
@@ -221,29 +220,6 @@ $("#file").change(function () {
 						type: "posted",
 						checked: "false"
 					});
-					for (var i = 0; i < membersArray.length; i++) {
-						//alert(membersArray[i]);
-						key.child("members").child(i).set(membersArray[i]);
-						var index = membersArray[i];
-						var notificationsnum;
-						var ref = database.ref().child("users").child(membersArray[i]).once('value',
-						function(memberToSnap){
-							var key3 = (key +'').split("/").pop();
-							database.ref().child("users").child(index).child("member").once('value',function(membersnapshot) {
-									var num = membersnapshot.numChildren();
-									database.ref().child("users").child(index).child("member").child(num).set(((key +'').split("/").pop()));
-								});
-								notificationsnum = memberToSnap.child('notifications').numChildren();
-							}).then(function(){
-								database.ref().child("users").child(index).child("memberposted").once('value',function(memberpostedsnapshot){
-									var num2 = memberpostedsnapshot.numChildren();
-									database.ref().child("users").child(index).child("memberposted").child(num2).set(((key +'').split("/").pop()));
-								}).then(function(){
-									alert("success");
-								});
-								database.ref().child('users').child(index).child('notifications').child(notificationsnum+'').set((notificationkey+'').split('/').pop());
-							});
-						};
 
 						users.child(user.uid).child('friends').on('child_added', function(friendsuidsnap){
 							var frienduid = friendsuidsnap.val();
@@ -268,7 +244,28 @@ $("#file").change(function () {
 									var num2 = postedsnapshot.numChildren();
 									users.child(user.uid).child("member").child(num2).set(key2);
 								}).then(function(){
-									window.location = "../Home/home.html";
+									var addmem = function(membersArray, i)	{
+										if(i<membersArray.length) {
+											key.child("members").child(i).set(membersArray[i]);
+											var index = membersArray[i];
+											var notificationsnum;
+											var ref = database.ref().child("users").child(membersArray[i]).once('value', function(memberToSnap){
+												var key3 = (key +'').split("/").pop();
+														var num = memberToSnap.child("member").numChildren();
+														database.ref().child("users").child(index).child("member").child(num).set(((key +'').split("/").pop()));
+														var num2 = memberToSnap.child("memberposted").numChildren();
+														database.ref().child("users").child(index).child("memberposted").child(num2).set(((key +'').split("/").pop()));
+													notificationsnum = memberToSnap.child('notifications').numChildren();
+												}).then(function() {
+													database.ref().child('users').child(index).child('notifications').child(notificationsnum).set((notificationkey+'').split('/').pop());
+													addmem(membersArray, ++i);
+												});
+										} else {
+											alert('success');
+											window.location = "../Home/home.html";
+										}
+									};
+										addmem(membersArray,0);
 								});
 							});
 					});
