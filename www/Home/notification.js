@@ -110,43 +110,41 @@ $(function() {
           uidtoadd = notificationsnap.child('subject').val();
           break;
         }
-        //alert(type);
       }).then(function() {
-        database.ref().child('memories').child(uidtoadd).once('value', function(memorySnap){
-          url = memorySnap.child('url').val();
-        }).then(function(){
-          if(action=="accepted"){
-            database.ref().child('users').child(subject).child('profilephoto').once('value', function(photourlSnap) {
-              url = photourlSnap.val();
-            }).then(function() {
-              console.log(url);
-              $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
-              +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
-              +    "<div class=\"filter5\">"
-              +    "</div>"
-              //+    "<img src=\""+icontype+"\" alt=\"\" />"
-              +  "</div>"
-              +  "<div class=\"whatHappen\">"
-              +    subjectname+ " <span class=\"color\">"+action+"</span> "+ str
-              +  "</div>"
-              + "</li>");
-            });
-            //url = "img/test.jpg";
-          } else {
-            $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
-            +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
-            +    "<div class=\"filter5\">"
-            +    "</div>"
-            +    "<img src=\""+icontype+"\" alt=\"\" />"
-            +  "</div>"
-            +  "<div class=\"whatHappen\">"
-            +    subjectname+ " <span class=\"color\">"+action+"</span> "+ str
-            +  "</div>"
-            + "</li>");
-          }
+        setTimeout(function(){
+                if(action=="accepted"){
+                  database.ref().child('users').child(subject).child('profilephoto').once('value', function(photourlSnap) {
+                    url = photourlSnap.val();
+                  }).then(function() {
+                    $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
+                    +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
+                    +    "<div class=\"filter5\">"
+                    +    "</div>"
+                    +  "</div>"
+                    +  "<div class=\"whatHappen\">"
+                    +    subjectname+ " <span class=\"color\">"+action+"</span> "+ str
+                    +  "</div>"
+                    + "</li>");
+                  });
+                } else {
+                  database.ref().child('memories').child(uidtoadd).once('value', function(memorySnap){
+                    url = memorySnap.child('url').val();
+                  }).then(function(){
+                    $('#notificationscontent').prepend("<li key=\""+notificationKey+"\" checked=\""+checked+"\" class=\"notificationspecialclass\" type='"+action+"' uid='"+uidtoadd+"'>"
+                    +  "<div class=\"icon5\" style=\"background-image: url("+url+")\">"
+                    +    "<div class=\"filter5\">"
+                    +    "</div>"
+                    +    "<img src=\""+icontype+"\" alt=\"\" />"
+                    +  "</div>"
+                    +  "<div class=\"whatHappen\">"
+                    +    subjectname+ " <span class=\"color\">"+action+"</span> "+ str
+                    +  "</div>"
+                    + "</li>");
+                });
+              } }, 100);
 
-        });
       });
+
     });
 
     $(".notifications").fadeIn();

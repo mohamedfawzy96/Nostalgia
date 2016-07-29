@@ -55,6 +55,8 @@ $(function() {
 
   $(document).on('tap', '.box', function() {
     selectedimg = $(this).attr('rel');
+    $('#membersicon').attr('oldrel', $('#membersicon').attr('newrel'));
+     $('#membersicon').attr('newrel', selectedimg);
      imguid = $(this).attr('rel');
      $(".photo").css({"height":"36vh"})
      $(".memorychat").css({"top":"75vh"})
@@ -96,16 +98,34 @@ $(function() {
   <!--NOTE nw code-->
   var oncemembers = "false";
   $('#membersicon').click(function() {
-    if(oncemembers !="true") {
-      database.ref().child('memories').child(imguid).child('members').on('child_added', function(useruid) {
+
+    var newimguid = $(this).attr('newrel');
+    var oldimguid = $(this).attr('oldrel');
+    alert(newimguid+" : "+oldimguid)
+    if(oldimguid==newimguid) {
+      if(oncemembers !="true") {
+        $('#memberscontent').html("");
+        database.ref().child('memories').child(newimguid).child('members').on('child_added', function(useruid) {
+          database.ref().child('users').child(useruid.val()+'').once('value', function(userSnap) {
+              $('#memberscontent').append("<li rel=\""+useruid.val()+''+"\">"
+              + "<div id=\"user\"><div class=\"profilephoto\" style=\"background-image:url("+userSnap.child('profilephoto').val()+")\">"
+              + "</div><div class=\"name\">"+userSnap.child('username').val()+"</div></div></li>");
+          });
+        });
+        oncemembers = "true";
+      }
+    } else {
+      $('#memberscontent').html("");
+      oncemembers = "false";
+      database.ref().child('memories').child(newimguid).child('members').on('child_added', function(useruid) {
         database.ref().child('users').child(useruid.val()+'').once('value', function(userSnap) {
             $('#memberscontent').append("<li rel=\""+useruid.val()+''+"\">"
             + "<div id=\"user\"><div class=\"profilephoto\" style=\"background-image:url("+userSnap.child('profilephoto').val()+")\">"
             + "</div><div class=\"name\">"+userSnap.child('username').val()+"</div></div></li>");
         });
       });
-      oncemembers = "true";
     }
+
   });
 
   // moved the send to the home.js
