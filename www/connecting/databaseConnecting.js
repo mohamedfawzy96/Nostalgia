@@ -58,7 +58,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     $("li[uid="+uid+"] .accept").css({"background-color":"#009688"});
     $("li[uid="+uid+"] .accept").html("Friends");
     $("li[uid="+uid+"] .btnreq").removeClass("accept");
-    $(".btnAccept").prepend("<div class='btnreq' style='opacity:0'></div>");
+    $("li[uid="+uid+"] .btnAccept").prepend("<div class='btnreq' style='opacity:0'></div>");
 
 
 

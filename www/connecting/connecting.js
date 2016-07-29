@@ -1,4 +1,6 @@
+var idu22
 function updateprof(id) {
+  idu22 = id
   $(".prof").css({"transform":"translateY(0)"})
 $(".ff33").show()
   database.ref().child("users").child(id).once("value",function(userprof){
@@ -71,8 +73,7 @@ $(document).on('tap', '.AddFriend2', function() {
   $(".k").html("Requested")
   var requestID = database.ref().child('requests').push();
   var From = firebase.auth().currentUser.uid;
-  var idu = $(this).attr("uid")
-  var to = idu;
+  var to = idu22;
   var users = database.ref().child('users');
   var request = new Request(From,to,false)
   users.child(to).once("value",function(snapshot){

@@ -59,6 +59,8 @@ function updateprof(id) {
 
       if(jQuery.inArray(id,userprof2.child("friends").val())!=-1){
         $(".k").removeClass("AddFriend")
+        $(".k").removeClass("requested")
+
         $(".k").addClass("friends2")
         $(".k").html("Friends")
       }
