@@ -101,7 +101,7 @@ $(function() {
 
     var newimguid = $(this).attr('newrel');
     var oldimguid = $(this).attr('oldrel');
-    alert(newimguid+" : "+oldimguid)
+    //alert(newimguid+" : "+oldimguid)
     if(oldimguid==newimguid) {
       if(oncemembers !="true") {
         $('#memberscontent').html("");
