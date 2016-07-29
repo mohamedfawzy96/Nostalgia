@@ -1,9 +1,9 @@
 var idu22
 function updateprof(id) {
-  /*$(".k2").addClass("AddFriend")
-  $(".k2").removeClass("requested")
-  $(".k2").removeClass("friends2")
-  $(".k2").html("Add")*/
+  $(".k2").addClass("AddFriend2")
+  $(".k2").removeClass("requested2")
+  $(".k2").removeClass("friends3")
+  $(".k2").html("Add")
   idu22 = id
   $(".prof").css({"transform":"translateY(0)"})
 $(".ff33").show()
@@ -251,7 +251,7 @@ var file;
               var uid2 = snapshot3.child("to").val()
                 $(".k[uid*="+uid2+"]").removeClass("AddFriend2")
                 $(".k[uid*="+uid2+"]").html("Requested")
-                $(".k[uid*="+uid2+"]").addClass("requested2")
+                $(".k[uid*="+uid2+"]").addClass("requested")
             });
 
           }

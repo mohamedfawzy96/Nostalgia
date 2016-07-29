@@ -1365,6 +1365,8 @@ body {
   width: 100%;
   height: 90%;
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+
 
 
 
@@ -1393,8 +1395,8 @@ body {
   top: 50%;
   margin-top: -5px;
 
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
   z-index: 3;
 
 }
@@ -1423,7 +1425,7 @@ body {
   margin-top: -7px;
 }
 #title p{
-  font-size: 1.3em;
+  font-size: 5vw;
 
 }
 .card1{

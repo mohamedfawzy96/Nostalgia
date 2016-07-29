@@ -980,9 +980,11 @@ body {
 .mcaption1{
   height: auto;
   border: 0;
+  overflow: visible;
 }
 .mcaption1 .mtext{
   width: 90%;
+
 }
 .mcaption1 .micon{
 }

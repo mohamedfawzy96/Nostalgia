@@ -6,8 +6,10 @@ function checkreq(){
     var check = usernotif.child("requestsCheck").val()
     if(check!=null){
       if(notifarray != null){
+
         if(notifarray.length !=check ){
-          $(".notif").css({"display":"flex"})
+
+          $(".notif").css({"opacity":"1"})
           var num = notifarray.length - check
           if(num>9){
             $(".notif").html("9+")
@@ -79,6 +81,8 @@ $(function() {
     //alert('here');
     //alert($(this));
     imguid  = $(this).attr('id');
+    $('#membersicon').attr('oldrel', $('#membersicon').attr('newrel'));
+     $('#membersicon').attr('newrel', imguid);
     $(".photo").css({"height":"36vh"})
     $(".memorychat").css({"top":"75vh"})
     $(".expand img").css({"transform":"rotate(0)"})

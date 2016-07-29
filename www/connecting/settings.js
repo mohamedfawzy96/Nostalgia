@@ -11,7 +11,15 @@ $(function () {
   var firstname1;
   var Lastname1;
   var connected;
-
+$(".firstnameSet1").click(function(){
+  $("#firstnameSet input").trigger("select")
+})
+$(".usernameSet1").click(function(){
+  $("#usernameSet input").trigger("select")
+})
+$(".lastnameSet1").click(function(){
+  $("#lastnameSet input").trigger("select")
+})
 
   $("#settings").click(function(){
     $(".settingsView").css({"display":"block"});
@@ -37,7 +45,7 @@ $(function () {
       $profilephoto.attr("src",snapshot.child('profilephoto').val());
 
 
-      if(snapshot.child('facebook').val()=="true"){
+      if(snapshot.child('facebook').val()){
         $('.facebookC').html("Connected");
       } else {
         $('.facebookC').html("Disconnected");
@@ -46,6 +54,7 @@ $(function () {
   });
 
   $save.click(function() {
+    $(".filterspin").css({"display":"flex"})
     userInDatabase.once("value",function(user2){
       if(user2.child("username").val() != $username.val() ){
 
@@ -101,8 +110,9 @@ $(function () {
           }, function(error) {
               alert(error);
           }, function() {
-            alert("saved")
+            $(".filterspin").css({"display":"none"})
             userInDatabase.child('profilephoto').set(uploadTask.snapshot.downloadURL);
+            alert("saved")
 
           }
         )
@@ -122,7 +132,6 @@ $(function () {
 
 
 
-          alert("Saved")
     })
 
 

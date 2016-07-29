@@ -66,6 +66,10 @@ firebase.auth().onAuthStateChanged(function(user) {
     database.ref().child('users').child(userID).child('ReceivedRequests').on("child_added", function(requestKeySnap){
       if(reqkey==requestKeySnap.val()){
         database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').set("done")
+      }
+    });
+    database.ref().child('users').child(uid).child('SentRequests').on("child_added", function(requestKeySnap){
+      if(reqkey==requestKeySnap.val()){
         database.ref().child('users').child(uid).child('SentRequests').child(requestKeySnap.key+'').set("done");
       }
     });
