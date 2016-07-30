@@ -79,10 +79,14 @@ $(".lastnameSet1").click(function(){
 
       if(user2.child("firstName").val() != $firstname.val() ){
         userInDatabase.child('firstName').set($firstname.val());
+        $(".filterspin").css({"display":"none"})
+
         }
 
         if(user2.child("lastName").val() != $lastname.val() ){
           userInDatabase.child('lastName').set($lastname.val());
+          $(".filterspin").css({"display":"none"})
+
 
           }
           if(user2.child("profilephoto").val() != $profilephoto.attr("src") ){
