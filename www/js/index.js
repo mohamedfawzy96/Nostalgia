@@ -105,7 +105,9 @@ $(function(){
 
               } else {
                 database.ref().child('usernames').child(currusername+'').set(user.uid);
-                window.location = "Home/home.html?somval="+"true";
+                $('.explain').attr('useruid', (user.uid+''));
+                //window.location = "Home/home.html?somval="+"true";
+                $(".codeview").css({"transform":"translateX(0px)"})
               }
             });
           } else {

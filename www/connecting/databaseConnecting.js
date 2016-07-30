@@ -158,18 +158,13 @@ firebase.auth().onAuthStateChanged(function(user) {
       var num = snapshot.child("ReceivedRequests").numChildren()
       var ID = (requestID+"").split("/").pop();
       users.child(to).child("ReceivedRequests").child(num).set(ID+"");
-
     });
-
     users.child(From).once("value",function(snapshot){
       var num = snapshot.child("SentRequests").numChildren();
       var ID = (requestID+"").split("/").pop();
       users.child(From).child("SentRequests").child(num).set(ID+"");
-
     });
-
     requestID.set(request);
-
   });
 
 

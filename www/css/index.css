@@ -1264,6 +1264,7 @@ transition: all 0.5s ease-in-out;
   width: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  z-index: 100000000000;
 
 }
 .people li{
