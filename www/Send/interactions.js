@@ -79,7 +79,7 @@ $(".text").click(function(){
           });
     };
     $('.searchbtn').click(function() {
-      var username = $('#search').val();
+      var username = $('#search').val().toLowerCase();
       //alert(username);
       //alert($('.content li  .name').html())
       if(username=="") {

@@ -1111,17 +1111,18 @@ button{
 #signin{
   position: relative;
   height: 12vw;
-  width: 30vw;
+  width: 25vw;
   color: #ec4b57;
   background-color: rgba(0, 0, 0, 0.5);
   border: 3px solid #ec4b57;
   left: 50%;
-  margin-left: -15vw;
+  margin-left: -12.5vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3.5vw;
-
+  font-size: 5vw;
+border-radius: 20px;
+font-weight: bold;
 }
 
 /* Portrait layout (default) */
@@ -1154,7 +1155,7 @@ button{
 
 .codeview{
   position: absolute;
-  height: 25vh;
+  height: 30vh;
   width: 70vw;
   background-color: white;
   left: 50%;
