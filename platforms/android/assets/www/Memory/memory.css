@@ -951,9 +951,10 @@ body {
   top: 50%;
   margin-top: -50px;
   margin-left: 5px;
-  background-color: green;
+  background-color: #999;
   background-size: cover;
-  background-image: url("../Home/img/test.jpg");
+  box-shadow: 0px 0px 8px #888888;
+
 }
 .minfo{
   position: relative;
@@ -979,9 +980,11 @@ body {
 .mcaption1{
   height: auto;
   border: 0;
+  overflow: visible;
 }
 .mcaption1 .mtext{
   width: 90%;
+
 }
 .mcaption1 .micon{
 }

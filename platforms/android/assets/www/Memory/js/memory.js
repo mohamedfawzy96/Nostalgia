@@ -20,10 +20,20 @@ $(window).load(function(){
 });
 //turned it into a function so every time the memoryview open it updates the value
 function updateprof(id) {
+  $(".k").addClass("AddFriend")
+  $(".k").removeClass("requested")
+  $(".k").removeClass("friends2")
+  $(".k").html("Add")
   database.ref().child("users").child(id).once("value",function(userprof){
     var user = firebase.auth().currentUser;
     var curridu = user.uid;
-    $(".profname").html(userprof.child("email").val())
+    var profname
+    if(userprof.child("firstName").val() != null && userprof.child("lastName").val()!=null ){
+      profname = userprof.child("firstName").val()+" "+userprof.child("lastName").val()
+    }else{
+      profname = userprof.child("email").val()
+    }
+    $(".profname").html(profname)
     $(".profuser").html(userprof.child("username").val())
     $(".prof img").attr("src",userprof.child("profilephoto").val())
     database.ref().child("users").child(curridu).once("value",function(userprof2){
@@ -32,15 +42,18 @@ function updateprof(id) {
 
 
       req.forEach(function(first){
-        database.ref().child("requests").child(first).once("value",function(reque){
-          if(reque.child("to").val()==id){
-            $(".k").removeClass("AddFriend")
-            $(".k").addClass("requested")
-            $(".k").html("Requested")
+        if(first != "done"){
+          database.ref().child("requests").child(first).once("value",function(reque){
+            if(reque.child("to").val()==id){
+              $(".k").removeClass("AddFriend")
+              $(".k").addClass("requested")
+              $(".k").html("Requested")
 
-          }
+            }
 
-        })
+          })
+        }
+
 
 
       })
@@ -50,6 +63,8 @@ function updateprof(id) {
 
       if(jQuery.inArray(id,userprof2.child("friends").val())!=-1){
         $(".k").removeClass("AddFriend")
+        $(".k").removeClass("requested")
+
         $(".k").addClass("friends2")
         $(".k").html("Friends")
       }
@@ -144,11 +159,19 @@ case 8:
 
     $(".mimg img").attr("src",imgurl)
     $('#title p').text(memorysnap.child('owner').val());
-    $('#owner').text(memorysnap.child('owner').val()+" just shared a memory");
+    var type1
+    if(memorysnap.child('private').val()){
+      type1 = "private"
+    }else{
+      type1 = "Public"
+
+    }
+    $('#owner').text(memorysnap.child('owner').val()+" shared a memory");
     $('#date').text(memorysnap.child("date").val());
     database.ref().child('usernames').child(memorysnap.child('owner').val()).once('value', function(useruidnow) {
       var useruidstr = useruidnow.val();
       database.ref().child('users').child(useruidstr+'').once('value', function(userSnap) {
+        $('.mimgMemory').attr("id",useruidstr)
         $('.mimgMemory').css('background-image',"url(\""+userSnap.child('profilephoto').val()+"\")")
       })
     })

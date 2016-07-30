@@ -36,7 +36,7 @@
       //alert(username);
       if(username!=null){
 
-        window.location = "Home/home.html?somval="+"true";
+        //window.location = "Home/home.html?somval="+"true";
       }
     });
   };
@@ -73,27 +73,31 @@ $(function(){
 
 
     $('#signup').click(function(){
+      $(".filterspin").css({"display":"flex"})
+
       var email = $('#emailup').val();
       var password = $('#passwordup').val();
       var currusername = $('#usernameup').val();
+
+
       firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
-        alert('okaaaay!');
         firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-          alert('signed in');
           var user = firebase.auth().currentUser;
           if (user) {
-            alert('user exists and signed in '+user.email);
             var newuser = new User(user.email, user.uid, currusername, [], [], [], [], [], [], null);
 
             usersRef.child(user.uid).set(newuser);
+            usersRef.child(user.uid).child("profilephoto").set("https://firebasestorage.googleapis.com/v0/b/nostalgia-79c70.appspot.com/o/memories%2Fhttps%3A%2Fnostalgia-79c70.firebaseio.com%2Fkeys%2Fdefaullt.jpg?alt=media&token=2609e826-e96d-429c-8b99-474e8874bb60")
             database.ref().child('usernames').child(currusername).once('value', function(usernameSnap) {
               if(usernameSnap.val()){
-                alert(usernameSnap.key)
-                alert('that user name is taken');
                 usersRef.child(user.uid).remove();
                 user.delete().then(function() {
-                  // User deleted.
-                  alert('deleted user')
+                  $(".filterspin").hide()
+
+                  alert('Username is taken by another Accoount');
+
+
+
                 }, function(error) {
                   // An error happened.
                   alert(error)
@@ -101,30 +105,33 @@ $(function(){
 
               } else {
                 database.ref().child('usernames').child(currusername+'').set(user.uid);
-                window.location = "Home/home.html?somval="+"true";
+                $('.explain').attr('useruid', (user.uid+''));
+                //window.location = "Home/home.html?somval="+"true";
+                $(".codeview").css({"transform":"translateX(0px)"})
               }
             });
           } else {
             alert('null user!!');
           }
         }).catch(function(error) {
-        alert('first '+ error);
+          $(".filterspin").hide()
+
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert('msg ' + errorMessage);
+            alert(errorMessage);
             if (errorCode == 'auth/weak-password') {
-              alert('The password is too weak.');
+              //alert('The password is too weak.');
             } else {
               console.error(error);
             }
           });
       }).catch(function(error) {
-      alert('first '+ error);
+        $(".filterspin").hide()
+
           var errorCode = error.code;
           var errorMessage = error.message;
-          alert('msg ' + errorMessage);
+          alert(errorMessage);
           if (errorCode == 'auth/weak-password') {
-            alert('The password is too weak.');
           } else {
             console.error(error);
           }
@@ -134,14 +141,16 @@ $(function(){
     });
 
     $('#signin').click(function(){
-      alert('sign in y walaaa');
+      $(".filterspin").css({"display":"flex"})
+
+      //alert('sign in y walaaa');
       var email = $('#emailin').val();
       var password = $('#passwordin').val();
       firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-          alert('signed in');
+          //alert('signed in');
           var user = firebase.auth().currentUser;
           if (user) {
-            alert('user exists and signed in '+user.email);
+            //alert('user exists and signed in '+user.email);
             usersRef.on('value', function(snapshot){
               snapshot.forEach(function (childSnapshot){
                 //alert(childSnapshot.child("email").val());
@@ -149,7 +158,7 @@ $(function(){
                   var currUser = childSnapshot;
                   var currUserEmail = childSnapshot.child("email").val();
                   var currUserUid = childSnapshot.child("uid").val();
-                    alert('found your user '+currUserEmail+"/"+currUserUid);
+                    //alert('found your user '+currUserEmail+"/"+currUserUid);
                   }
                   else{
                     //alert('not this one '+childSnapshot.child("email").val());
@@ -161,10 +170,12 @@ $(function(){
             alert('null user!!');
           }
         }).catch(function(error) {
-        alert('first '+ error);
+          $(".filterspin").hide()
+
+        //alert('first '+ error);
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert('msg ' + errorMessage);
+            alert(errorMessage);
             if (errorCode == 'auth/weak-password') {
               alert('The password is too weak.');
             } else {
@@ -172,7 +183,21 @@ $(function(){
             }
           });
     });
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        //alert('signed in');
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var refreshToken = user.refreshToken;
+        var providerData = user.providerData;
+        //window.location = "Home/home.html?somval="+"true";
 
+      }
+    });
     function initApp() {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {

@@ -10,7 +10,24 @@ firebase.auth().onAuthStateChanged(function(user) {
   var username;
   database.ref().child('users').child(userID).once("value",function(user1) {
     username = user1.child('username').val();
-    var fullname = user1.child('firstName').val()+" "+user1.child('lastName').val();
+    var fullname
+    if(user1.child('firstName').val() != null && user1.child('lastName').val()!=null ){
+       fullname = user1.child('firstName').val()+" "+user1.child('lastName').val();
+
+
+    }else if(user1.child('firstName').val() != null){
+      fullname = user1.child('firstName').val();
+
+
+    }else if(user1.child('lastName').val() != null){
+      fullname = user1.child('lastName').val();
+
+
+    }else{
+      fullname=user1.child('email').val();
+
+    }
+
     $(".name").html(fullname);
     $("#title ").html(user1.child("username").val());
     //alert(user1.child('profilephoto').val());
@@ -31,23 +48,29 @@ firebase.auth().onAuthStateChanged(function(user) {
     database.ref().child('users').child(userID).once("value",function(user){
       var num = user.child("friends").numChildren();
       database.ref().child('users').child(userID).child("friends").child(num).set(uid);
+    });
+    database.ref().child('users').child(uid).once("value",function(user){
+      var num = user.child("friends").numChildren();
       database.ref().child('users').child(uid).child("friends").child(num).set(userID);
     });
+
     $("li[uid="+uid+"] .reject").css({"display":"none"})
     $("li[uid="+uid+"] .accept").css({"background-color":"#009688"});
     $("li[uid="+uid+"] .accept").html("Friends");
     $("li[uid="+uid+"] .btnreq").removeClass("accept");
-    $(".btnAccept").prepend("<div class='btnreq' style='opacity:0'></div>");
+    $("li[uid="+uid+"] .btnAccept").prepend("<div class='btnreq' style='opacity:0'></div>");
 
 
 
 
     database.ref().child('users').child(userID).child('ReceivedRequests').on("child_added", function(requestKeySnap){
       if(reqkey==requestKeySnap.val()){
-        database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').remove(function(){
-          //alert('removed');
-        });
-        database.ref().child('users').child(uid).child('SentRequests').child(requestKeySnap.key+'').remove();
+        database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').set("done")
+      }
+    });
+    database.ref().child('users').child(uid).child('SentRequests').on("child_added", function(requestKeySnap){
+      if(reqkey==requestKeySnap.val()){
+        database.ref().child('users').child(uid).child('SentRequests').child(requestKeySnap.key+'').set("done");
       }
     });
 
@@ -76,9 +99,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     database.ref().child('users').child(userID).child('ReceivedRequests').on("child_added", function(requestKeySnap){
       alert(requestKeySnap.key);
       if(reqkey==requestKeySnap.val()){
-        database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').remove(function(){
-          //alert('removed');
-        });
+        database.ref().child('users').child(userID).child('ReceivedRequests').child(requestKeySnap.key+'').set("Done")
       }
     });
   });
@@ -96,8 +117,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   // updating the number of requests
 
-  database.ref().child('users').child(userID).once("value",function(user){
-    $("#num").html(user.child("ReceivedRequests").numChildren());
+  database.ref().child('users').child(userID).on("value",function(user){
+    $("#num").html(user.child("ReceivedRequests").numChildren()-user.child("requestsCheck").val());
   });
 
 
@@ -107,16 +128,20 @@ firebase.auth().onAuthStateChanged(function(user) {
     var username;
     var uid;
     var url;
-    database.ref().child('requests').child(id+'').once('value', function(requestSnap){
-      From = requestSnap.child("from").val();
-    }).then(function(){
-      database.ref().child('users').child(From+'').once("value",function(user3){
-        var username = user3.child("username").val();
-        var uid = user3.child("uid").val();
-        var url = user3.child('profilephoto').val();
-        AddRequets(username,url,uid,id);
+    if(id != "done"){
+      database.ref().child('requests').child(id+'').once('value', function(requestSnap){
+        From = requestSnap.child("from").val();
+      }).then(function(){
+        database.ref().child('users').child(From+'').once("value",function(user3){
+          var username = user3.child("username").val();
+          var uid = user3.child("uid").val();
+          var url = user3.child('profilephoto').val();
+          AddRequets(username,url,uid,id);
+        });
       });
-    });
+
+    }
+
   });
 });
 
@@ -133,18 +158,13 @@ firebase.auth().onAuthStateChanged(function(user) {
       var num = snapshot.child("ReceivedRequests").numChildren()
       var ID = (requestID+"").split("/").pop();
       users.child(to).child("ReceivedRequests").child(num).set(ID+"");
-
     });
-
     users.child(From).once("value",function(snapshot){
       var num = snapshot.child("SentRequests").numChildren();
       var ID = (requestID+"").split("/").pop();
       users.child(From).child("SentRequests").child(num).set(ID+"");
-
     });
-
     requestID.set(request);
-
   });
 
 

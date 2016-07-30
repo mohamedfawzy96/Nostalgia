@@ -913,9 +913,16 @@ body {
   padding-top: 25%;
 
 }
+.Title img{
+  position: relative;
+  width: 85vw;
+  left: 50%;
+  margin-left: -42.5vw;
+}
+
 .Title h1{
   color: white;
-  font-size: 2em;
+  font-size: 8vw;
   text-align: center;
   letter-spacing: 5px;
 
@@ -927,6 +934,10 @@ body {
   width: 100%;
   height: 10%;
   margin-top: 7%;
+  font-family: futura;
+  font-size: 3vw;
+
+
 }
 .Subtitle h1{
   color: white;
@@ -994,19 +1005,24 @@ body {
 }
 input{
   position: relative;
-  width: 200px;
+  width: 60vw;
   left: 50%;
-  margin-left: -100px;
+  margin-left: -30vw;
   background-color: rgba(0, 0, 0, 0) !important;
   border-radius: 0 !important;
   border: 0 !important;
   border-bottom: 2px solid #ec4b57 !important;
   color: white !important;
   letter-spacing: 2px;
-  font-size: 1.1em;
+  font-size: 4vw;
   z-index: 4;
 
 
+}
+button{
+  padding: 0;
+  margin: 0;
+  line-height: 0;
 }
 .footer{
   position: relative;
@@ -1035,6 +1051,7 @@ input{
   margin: 0 auto;
 
 }
+
 .forgot{
   position: relative;
   margin-top: 40px;
@@ -1067,8 +1084,8 @@ input{
 .go1 img{
 
   position: relative;
-  width: 38px;
-  height: 38px;
+  width: 12vw;
+  height: 12vw;
   left: 50%;
   margin-left: -19px;
 }
@@ -1093,13 +1110,17 @@ input{
 }
 #signin{
   position: relative;
-  height: 40px;
-  width: 100px;
+  height: 12vw;
+  width: 30vw;
   color: #ec4b57;
   background-color: rgba(0, 0, 0, 0.5);
   border: 3px solid #ec4b57;
   left: 50%;
-  margin-left: -50px;
+  margin-left: -15vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5vw;
 
 }
 
@@ -1127,4 +1148,229 @@ input{
         margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
                                       /* offset horizontal: half of image width and text area width */
     }
+}
+
+
+
+.codeview{
+  position: absolute;
+  height: 25vh;
+  width: 70vw;
+  background-color: white;
+  left: 50%;
+  margin-left: -35vw;
+  top: 50%;
+  margin-top: -12.5vh;
+  z-index: 1000000000;
+  box-shadow: 0px 0px 10px black;
+  transform: translateX(1000px);
+  transition: all 0.5s ease-in-out;
+}
+.explain{
+  position: relative;
+  height: 20%;
+  padding: 20px;
+  font-size: 4vw;
+  font-family: futura;
+}
+.code{
+  position: relative;
+  width: 100%;
+}
+.code input{
+  color:black !important;
+}
+.codebtn{
+  position: relative;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  font-size: 4vw;
+  font-weight: bold;
+
+
+}
+.yes{
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ec4b57;
+}
+.no{
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:grey;
+}
+.people{
+  position: absolute;
+  height:80vh;
+  width: 80vw;
+  left: 50%;
+  margin-left: -40vw;
+  top: 50%;
+  margin-top: -40vh;
+  box-shadow: 0px 0px 10px black;
+z-index: 1000000;
+background-color: white;
+transform: translateX(1000px);
+transition: all 0.5s ease-in-out;
+
+
+
+}
+.peoplehead{
+  position: relative;
+  height: 10%;
+  box-shadow: 0px 0px 10px black;
+  display: flex;
+
+
+}
+.peopletext{
+  position: relative;
+  height: 100%;
+  width: 60%;
+  font-weight: bold;
+  font-size: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+}
+.peopledone{
+  position: absolute;
+  height: 100%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  left: 80%;
+  font-size: 3.5vw;
+  color: #ec4b57;
+
+
+}
+.peoplecontent{
+  position: relative;
+  height: 90%;
+  width: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  z-index: 100000000000;
+
+}
+.people li{
+  position: relative;
+  height: 12%;
+
+  list-style: none;
+  font-weight: 200;
+  letter-spacing: 2px;
+  padding-top: 10px;
+  color: #ec4b57;
+  padding-bottom: 10px;
+  border-bottom: 0.01px solid rgba(0, 0, 0, 0.3); !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.people li img{
+  position: relative;
+  height: 8vh;
+  width: 8vh;
+  border-radius: 50%;
+
+}
+.theUser{
+  display: flex;
+}
+.userImage{
+  position: relative;
+  height: 100%;
+  width: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+.usernameOfuser{
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  color: black;
+  font-weight: bold;
+  font-size: 4vw;
+
+}
+.AddFriend{
+  position: relative;
+  border: 3px solid;
+  color: #Ec4b57;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vw;
+  width: 15vw;
+  box-sizing: border-box;
+  margin-right: 10px;
+  font-weight: bold;
+  top: 50%;
+  margin-top: -5vw;
+
+}
+
+
+.friends2{
+  border: 3px solid #009688;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vw;
+  width: 25vw;
+  margin-left: -12.5vw;
+  box-sizing: border-box;
+  font-weight: bold;
+  background-color: #009688;
+  position: relative;
+  border: 3px solid;
+  top: 50%;
+  margin-top: -5vw;
+  margin-right: 10px;
+  font-weight: bold;
+
+}
+.requested{
+  position: relative;
+  border: 3px solid grey;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vw;
+  width: 30vw;
+  box-sizing: border-box;
+  top: 50%;
+  margin-top: -5vw;
+  margin-right: 10px;
+  font-weight: bold;
+  background-color: grey;
+
+}
+.k{
+  transition: all 0.5s ease-in-out;
 }
