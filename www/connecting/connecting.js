@@ -261,7 +261,7 @@ var file;
     });
   }
   $('#searchsubmit').click(function() {
-    var usernametosearch = $('#search').val();
+    var usernametosearch = $('#search').val().toLowerCase();
     $(".searchView .content").html("");
 
     if($('#searchsubmit').html()=="Cancel") {

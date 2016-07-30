@@ -1120,6 +1120,26 @@ hr{
   transition: all 0.2s ease-in-out;
 
 }
+.signout{
+  position: relative;
+  width: 25vw;
+  height: 12vw;
+  box-shadow: 0px 0px 20px #888888;
+  background-color: #EC4B57;
+  margin-top: 20px;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 4.3vw;
+    left: 50%;
+    margin-left: -12.5vw;
+    border-radius: 20px;
+
+}
 .request .icon{
   position: relative;
   height: 8vw;

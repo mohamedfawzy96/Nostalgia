@@ -153,7 +153,7 @@ $(function() {
     },50);
   });
 
-  $(document).on('click ', '.notificationspecialclass', function() {
+  $(document).on('tap ', '.notificationspecialclass', function() {
     database.ref().child('notifications').child($(this).attr('key')).child('checked').set("true");
     if($(this).attr('type')=="accepted"){
       alert('view profile!');

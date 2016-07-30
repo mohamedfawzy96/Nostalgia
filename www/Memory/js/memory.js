@@ -172,7 +172,7 @@ case 8:
       var useruidstr = useruidnow.val();
       database.ref().child('users').child(useruidstr+'').once('value', function(userSnap) {
         $('.mimgMemory').attr("id",useruidstr)
-        $('.mimgMemory').css('background-image',"url(\""+userSnap.child('profilephoto').val()+"\")")
+        $('.mimgMemory').attr('src',userSnap.child('profilephoto').val())
       })
     })
     if(memorysnap.child('caption').val()==""){

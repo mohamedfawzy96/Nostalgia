@@ -8,7 +8,7 @@ $(function(){
 firebase.auth().onAuthStateChanged(function(user) {
   var userID = firebase.auth().currentUser.uid;
   var username;
-  database.ref().child('users').child(userID).once("value",function(user1) {
+  database.ref().child('users').child(userID).on("value",function(user1) {
     username = user1.child('username').val();
     var fullname
     if(user1.child('firstName').val() != null && user1.child('lastName').val()!=null ){

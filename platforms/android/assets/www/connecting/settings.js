@@ -54,7 +54,6 @@ $(".lastnameSet1").click(function(){
   });
 
   $save.click(function() {
-    $(".filterspin").css({"display":"flex"})
     userInDatabase.once("value",function(user2){
       if(user2.child("username").val() != $username.val() ){
 
@@ -90,6 +89,8 @@ $(".lastnameSet1").click(function(){
 
           }
           if(user2.child("profilephoto").val() != $profilephoto.attr("src") ){
+            $(".filterspin").css({"display":"flex"})
+
             var keyss = database.ref().child('keys');
     				var imagekeydif = keyss.push()
             var file = document.getElementById('changepho').files[0];
