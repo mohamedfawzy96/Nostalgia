@@ -63,6 +63,13 @@ $(".newback").click(function(){
     $(".mfullScreen").css({"transform":"translateX(800px)"})
     $(".photo img").attr("src","")
     $(".photo img").css({"display":"none"})
+    $(".mimgMemory").attr("src","")
+    $("#owner").html("")
+    $("#date").html("")
+    $("#caption").html("")
+
+
+
 
     $(".photo filterpho2").css({"background-color":"rgba(0,0,0,0)"})
   }else{
@@ -97,6 +104,7 @@ $(".profcancel").click(function(){
 
 
 });
+
 var idu;
 $(document).on('tap', '#chattingbody2 li', function() {
   $(".prof").css({"transform":"translateY(0)"})

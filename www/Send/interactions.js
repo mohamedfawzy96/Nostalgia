@@ -4,7 +4,7 @@ var date = "Can't remember"
 var effectattr= "normal"
 var membersArray = new Array();
 var img = new Image;
-//document.addEventListener("deviceready", function(){
+document.addEventListener("deviceready", function(){
 
                           //login()
 
@@ -21,7 +21,7 @@ $(".photo img").attr("src",$(this).attr("rel"))
                                                              })
 
 
-$("#private").click(function(){
+$("#private").tap(function(){
   $("#private .rest").css({"transform":"translateY(50px)"})
   $("#private .rest").css({"opacity":"0"})
   setTimeout(function(){
@@ -44,7 +44,7 @@ $("#private").click(function(){
 
 
 
-$(".text").click(function(){
+$(".text").tap(function(){
         if($(this).html()=="Next"){
           if($(".photo img").attr("src")!=""){
             $(".choosePhoto").css({"transform":"translateX(-1000px)"})
@@ -78,7 +78,7 @@ $(".text").click(function(){
             });
           });
     };
-    $('.searchbtn').click(function() {
+    $('.searchbtn').tap(function() {
       var username = $('#search').val().toLowerCase();
       //alert(username);
       //alert($('.content li  .name').html())
@@ -121,7 +121,7 @@ $(".text").click(function(){
                           $(".content").append(html);
                           }
 
-                          $("#addMembers").click(function(){
+                          $("#addMembers").tap(function(){
                                                  $(".members").css({"transform":"translateY(0)"});
                                                  setTimeout(function(){
                                                             $(".text").html("Done")
@@ -158,7 +158,7 @@ $(".text").click(function(){
                           }
                           return str;
                           }
-                          $(".Dateoptions").click(function(){
+                          $(".Dateoptions").tap(function(){
                                                   $(".date").css({"transform":"translateX(1000px)"})
                                                   $(".filterB").fadeOut()
                                                   date = $(this).html()+""
@@ -184,7 +184,7 @@ $(".text").click(function(){
                                               })
 
 
-                          $(".back").click(function(){
+                          $(".back").tap(function(){
                                            if($(".text").html()=="Post"){
 
 
@@ -199,7 +199,7 @@ $(".text").click(function(){
 
 
                                            })
-                          $(".eff").click(function(){
+                          $(".eff").tap(function(){
                                           $(".eff").css({  "border":"0"})
                                           effectattr = $(this).children(".time").html()
 
@@ -225,4 +225,4 @@ $(".text").click(function(){
                                           })
 
 
-                        //  });
+                          });

@@ -68,6 +68,14 @@ function updateprof(id) {
         $(".k").addClass("friends2")
         $(".k").html("Friends")
       }
+      if(curridu == id){
+        $(".k").css({"opacity":"0"})
+
+      }else{
+        $(".k").css({"opacity":"1"})
+
+
+      }
 
 
     })
@@ -89,10 +97,19 @@ function UpdateImageView(imageuid1,oneTime){
   var imgurl="hello";
   var repostsnum = 0;
   var membersnum = 0;
+  $(".msend12").attr("imguid",imguid)
+
   database.ref().child("memories").child(imguid).once('value', function(memorysnap){
     imgurl = memorysnap.child("url").val();
     repostsnum = memorysnap.child("reposts").val();
     membersnum = memorysnap.child("members").numChildren();
+    if(memorysnap.child("members").val()==null){
+    $("#membersicon").attr("members","false")
+  }else{
+    $("#membersicon").attr("members","true")
+
+
+  }
     var effect2 = memorysnap.child("effect").val();
     var eff0 = effect2.indexOf("1990")
     var eff1 = effect2.indexOf("1980")

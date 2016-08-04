@@ -53,7 +53,7 @@ $(function() {
   });
 
 
-  $("#Search").click(function(){
+  $("#Search").tap(function(){
     var currentUserId2 = firebase.auth().currentUser.uid;
 
     database.ref().child("users").child(currentUserId2).on("value",function(usernotif){
@@ -97,7 +97,7 @@ $(function() {
           icontype = "../Memory/img/tag.svg";
           uidtoadd = notificationsnap.child('memoryid').val();
           break;
-          case "posted": str = "an old memory";
+          case "posted": str = "in an old memory";
           icontype = "../Memory/img/repost.svg";
           uidtoadd = notificationsnap.child('memoryid').val();
           break;
@@ -112,6 +112,9 @@ $(function() {
         }
       }).then(function() {
         setTimeout(function(){
+          if(action == "posted" ){
+            action = "Tagged you"
+          }
                 if(action=="accepted"){
                   database.ref().child('users').child(subject).child('profilephoto').once('value', function(photourlSnap) {
                     url = photourlSnap.val();
@@ -156,8 +159,15 @@ $(function() {
   $(document).on('tap ', '.notificationspecialclass', function() {
     database.ref().child('notifications').child($(this).attr('key')).child('checked').set("true");
     if($(this).attr('type')=="accepted"){
-      alert('view profile!');
+      alert('This user has accepted your Request!');
+
     } else {
+      $(".photo").css({"height":"36vh"})
+      $(".memorychat").css({"top":"75vh"})
+      $(".expand img").css({"transform":"rotate(0)"})
+      $(".memchat").height(height2+"px")
+      $(".input22").css({"transform":"translateX(1000px)"})
+
       UpdateImageView($(this).attr('uid'));
       $(".mphoto").fadeIn();
       $(".mphoto").addClass("maddedClass");

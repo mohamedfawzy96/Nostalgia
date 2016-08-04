@@ -1,26 +1,26 @@
-$("#doneEffects").click(function(){
+$("#doneEffects").tap(function(){
   $(".effects").fadeOut();
   $(".filter").fadeOut();
 });
 
-$("#doneMembers").click(function(){
+$("#doneMembers").tap(function(){
   $(".members").fadeOut();
   $(".filter").fadeOut();
 });
 
-$(".filter").click(function(){
+$(".filter").tap(function(){
   $(".effects").fadeOut();
   $(".Orginaldate1").fadeOut();
   $(".members").fadeOut();
   $(".filter").fadeOut();
 });
 
-$("#addMember").click(function(){
+$("#addMember").tap(function(){
   $(".members").fadeIn();
   $(".filter").fadeIn();
 });
 
-$(".time").click(function(){
+$(".time").tap(function(){
   $(".effects").fadeIn();
   $(".filter").fadeIn();
 });
@@ -29,12 +29,12 @@ $(".time").click(function(){
 
 
 
-$("#drop").click(function(){
+$("#drop").tap(function(){
   $(".Orginaldate1").fadeIn();
   $(".filter").fadeIn();
 });
 
-$(".listOfDates li").click(function(){
+$(".listOfDates li").tap(function(){
   $(".Orginaldate1").fadeOut();
   $(".filter").fadeOut();
   $("#drop").html($(this).html())

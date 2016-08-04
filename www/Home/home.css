@@ -20,6 +20,7 @@ body {
   margin: 0;
   }
 
+
 /* HTML5 display definitions
    ========================================================================== */
 /**
@@ -1642,4 +1643,16 @@ display: none;
 .card:active {
   background-color: #999
 
+}
+.nousertagged{
+  font-size: 4vw;
+  font-weight: bold;
+  color: grey
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }

@@ -51,12 +51,13 @@ var login2 = function () {
 function firstFb(){
     var currentUserId = firebase.auth().currentUser.uid;
     database.ref().child("users").child(currentUserId).once("value",function(user){
+      //alert("hi")
                                                             if(user.child("facebook").val()==true){
                                                             qs();
 
                                                             if(fromwhere == "true"){
                                                             //alert("hi")
-                                                            login()
+                                                            //login()
 
 
                                                             }
@@ -111,7 +112,14 @@ var getfb = function (i) {
                               var length = response.photos.data.length
                               if(i > length-1){
                               return
+
+
                               }
+                              if(i%5 == 0){
+                              var pos = $(".imgrecodiv").scrollLeft() + 300
+                              $(".imgrecodiv").scrollLeft(pos+"")
+                              }
+
                               facebookConnectPlugin.api( response.photos.data[length-i].id+"?fields=images", ["user_photos"],
                                                         function (response) { //alert(JSON.stringify(response))
                                                         //alert(response.images[0].source)
@@ -126,8 +134,24 @@ var getfb = function (i) {
 
 
                                                         },
-                                                        function (response) { alert(JSON.stringify(response)) });
+                                                        function (response) {
+                                                        alert(JSON.stringify(response))
+
+
+                                                        });
 
 
                               },
-                              function (response) { alert(JSON.stringify(response)) }); }
+                              function (response) {
+                              console.log(JSON.stringify(response));
+                              if(JSON.stringify(response).indexOf("error 5.")!=-1){
+                              login()
+                              getfb(1)
+                              }else{
+                              alert(JSON.stringify(response))
+
+                              }
+
+
+
+                              }); }

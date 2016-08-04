@@ -32,7 +32,7 @@ $(function() {
       }).then(function() {
         if(flag==true) {
           database.ref().child('code').child(codedata).child(usersnum).set(useruid);
-          $(".filterspin").hide();
+          //$(".filterspin").hide();
           $(".codeview").css({"transform":"translateX(-1000px)"})
           $(".people").css({"transform":"translateX(0)"})
           if(users.length>0) {
@@ -69,7 +69,7 @@ $(function() {
     }
   }
 
-  $(document).on('click tap', '.AddFriend', function() {
+  $(document).on('tap', '.AddFriend', function() {
     var requestID = database.ref().child('requests').push();
     var From = firebase.auth().currentUser.uid;
     var to = $(this).attr("uid");

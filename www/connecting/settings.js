@@ -52,9 +52,13 @@ $(".lastnameSet1").click(function(){
       }
     });
   });
+  var changed = false
 
   $save.click(function() {
+    alert("Saved")
+
     userInDatabase.once("value",function(user2){
+
       if(user2.child("username").val() != $username.val() ){
 
 
@@ -69,6 +73,7 @@ $(".lastnameSet1").click(function(){
               user = firebase.auth().currentUser;
 
               database.ref().child('usernames').child($username.val()).set(user.uid+'');
+              changed = true
             });
           });
 
@@ -79,14 +84,21 @@ $(".lastnameSet1").click(function(){
       if(user2.child("firstName").val() != $firstname.val() ){
         userInDatabase.child('firstName').set($firstname.val());
         $(".filterspin").css({"display":"none"})
+        changed = true
+
 
         }
 
         if(user2.child("lastName").val() != $lastname.val() ){
           userInDatabase.child('lastName').set($lastname.val());
           $(".filterspin").css({"display":"none"})
+          changed = true
 
 
+
+          }
+          if(changed){
+            alert("saved")
           }
           if(user2.child("profilephoto").val() != $profilephoto.attr("src") ){
             $(".filterspin").css({"display":"flex"})

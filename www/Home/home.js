@@ -45,7 +45,7 @@ $(function() {
   var selectedimg;
   var startindex;
   var endindex;
-  $("#connect").click(function() {
+  $("#connect").tap(function() {
     window.location = '../connecting/connecting.html'
   });
 
@@ -101,15 +101,30 @@ $(function() {
   });
   <!--NOTE nw code-->
   var oncemembers = "false";
-  $('#membersicon').click(function() {
+  $('#membersicon').tap(function() {
 
     var newimguid = $(this).attr('newrel');
     var oldimguid = $(this).attr('oldrel');
+    var yes = $(this).attr("members")
+
     //alert(newimguid+" : "+oldimguid)
     if(oldimguid==newimguid) {
       if(oncemembers !="true") {
         $('#memberscontent').html("");
+        $('#memberscontent').append("<div class='spinner3'></div>")
+      if(yes=="false"){
+        $('#memberscontent').find(".spinner3").hide()
+        $('#memberscontent').append("<li class='nousertagged'>No Tagged Users</li>")
+
+
+
+      }else{
+        $('#memberscontent').find(".spinner3").show()
+
+      }
         database.ref().child('memories').child(newimguid).child('members').on('child_added', function(useruid) {
+          $('#memberscontent').find(".spinner3").hide()
+
           database.ref().child('users').child(useruid.val()+'').once('value', function(userSnap) {
               $('#memberscontent').append("<li rel=\""+useruid.val()+''+"\">"
               + "<div id=\"user\"><div class=\"profilephoto\" style=\"background-image:url("+userSnap.child('profilephoto').val()+")\">"
@@ -120,8 +135,21 @@ $(function() {
       }
     } else {
       $('#memberscontent').html("");
+      $('#memberscontent').append("<div class='spinner3'></div>")
+      if(yes=="false"){
+        $('#memberscontent').find(".spinner3").hide()
+        $('#memberscontent').append("<li class='nousertagged'>No Tagged Users</li>")
+
+
+
+      }else{
+        $('#memberscontent').find(".spinner3").show()
+
+      }
       oncemembers = "false";
       database.ref().child('memories').child(newimguid).child('members').on('child_added', function(useruid) {
+        $('#memberscontent').find(".spinner3").hide()
+
         database.ref().child('users').child(useruid.val()+'').once('value', function(userSnap) {
             $('#memberscontent').append("<li rel=\""+useruid.val()+''+"\">"
             + "<div id=\"user\"><div class=\"profilephoto\" style=\"background-image:url("+userSnap.child('profilephoto').val()+")\">"
@@ -133,7 +161,8 @@ $(function() {
   });
 
   // moved the send to the home.js
-  $(".msend12").click(function(){
+  $(".msend12").tap(function(){
+    imguid = $(this).attr("imguid")
     var user = firebase.auth().currentUser;
     var users = database.ref().child("users");
     var username;
@@ -205,6 +234,7 @@ $(function() {
     var privonce = false;
     if(x==length1) {
       return;
+
     } else {
       var url1;
       var uid;
@@ -334,7 +364,7 @@ $(function() {
     });
 
 
-    $(".tab1").click(function(){
+    $(".tab1").tap(function(){
       $("#body2").css({"display":"none"});
 
     $("#body1").css({"display":"block"});
@@ -343,7 +373,7 @@ $(function() {
     $(".tab3").css({"border":"0"});
   });
 
-  $(".tab2").click(function(){
+  $(".tab2").tap(function(){
     $("#body1").css({"display":"none"});
 
     $("#body2").css({"display":"block"});
@@ -357,7 +387,7 @@ $(function() {
     }
   });
 
-  $(".tab3").click(function(){
+  $(".tab3").tap(function(){
     $("#body2").css({"display":"block"});
     $("#body1").css({"display":"none"});
     $("tab").css({"border":"0"});
@@ -392,7 +422,11 @@ $(function() {
       });
 
     });
-    setTimeout(function(){  $('#body2').append(str); }, 1000);
+    setTimeout(function(){  $('#body2').append(str);
+    var pos1 = $("#body2").scrollTop() +30
+    $("#body2").scrollTop(pos1)
+
+   }, 1000);
 
     if(feelitstart>=6) {
       feelitend = feelitstart-1;
@@ -406,6 +440,7 @@ $(function() {
         feelitstart = 0;
       }
     }
+
 
   }
   /*function getFeelIt2(){
@@ -513,8 +548,8 @@ $(function() {
 
   };
 
-  $("#sendimg").click(handleFileSelect);
-  $('#menu').click(function(){
+  $("#sendimg").tap(handleFileSelect);
+  $('#menu').tap(function(){
     /*firebase.auth().signOut().then(function() {
       console.log('Signed Out');
       //alert(firebase.auth().currentUser);

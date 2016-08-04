@@ -50,6 +50,14 @@ $(".ff33").show()
         $(".k2").addClass("friends3")
         $(".k2").html("Friends")
       }
+      if(curridu == id){
+        $(".k").css({"opacity":"0"})
+
+      }else{
+        $(".k").css({"opacity":"1"})
+
+
+      }
 
 
     })
@@ -229,6 +237,14 @@ var file;
 
 
   }
+  $(".signout").click(function(){
+    firebase.auth().signOut().then(function() {
+   console.log('Signed Out');
+   window.location = "../index.html";
+ }, function(error) {
+   console.error('Sign Out Error', error);
+ });
+  })
   $(document).on("tap",".requestsSent li",function(){
     updateprof($(this).attr("uid"))
     $(".k").css({"opacity":"0"})

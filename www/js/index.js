@@ -24,22 +24,35 @@
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
   //window.location = "Home/home.html";
-  var user = firebase.auth().currentUser;
-  //alert(user)
-  if(user){
-    var users = database.ref().child("users");
-    var username;
-    var userInDatabase = users.child(user.uid).child("username");
-    userInDatabase.once('value',function(snapshot){
-      username = snapshot.val();
-    }).then(function(){
-      //alert(username);
-      if(username!=null){
+  var signup = false
+  firebase.auth().onAuthStateChanged(function(user) {
+    var user = firebase.auth().currentUser;
+    //alert(user)
+    //alert(user.uid);
 
-        //window.location = "Home/home.html?somval="+"true";
-      }
-    });
-  };
+    if(user){
+      var users = database.ref().child("users");
+      var username;
+      var userInDatabase = users.child(user.uid).child("username");
+      userInDatabase.once('value',function(snapshot){
+        username = snapshot.val();
+      }).then(function(){
+        if(username!=null){
+          if(signup == false){
+            window.location = "Home/home.html?somval="+"true";
+
+          }
+        }
+      });
+    };
+
+      //alert(email)
+      //window.location = "Home/home.html?somval="+"true";
+
+      //window.location = "Home/home.html?somval="+"true";
+
+
+  });
 
 $(function(){
   //database.ref().child("users").child(currentUserId).child("firstfb").set(null)
@@ -73,11 +86,12 @@ $(function(){
 
 
     $('#signup').click(function(){
+      signup = true
       $(".filterspin").css({"display":"flex"})
 
       var email = $('#emailup').val();
       var password = $('#passwordup').val();
-      var currusername = $('#usernameup').val();
+      var currusername = $('#usernameup').val().toLowerCase();
 
 
       firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
@@ -183,21 +197,7 @@ $(function(){
             }
           });
     });
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        //alert('signed in');
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var refreshToken = user.refreshToken;
-        var providerData = user.providerData;
-        //window.location = "Home/home.html?somval="+"true";
 
-      }
-    });
     function initApp() {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -211,7 +211,9 @@ $(function(){
           var refreshToken = user.refreshToken;
           var providerData = user.providerData;
 
+
         } else {
+
           alert('not signed in');
         }
       });

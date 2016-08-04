@@ -13,7 +13,7 @@ $(function(){
 		$('#selectphoto').trigger('click');
 	});
 
-	effectid.click(function(){
+	effectid.tap(function(){
 		var id = $(this).attr("id")
 		effectattr = id
 		$(".effectselected1").removeClass("addedClasToeffect")
@@ -21,7 +21,7 @@ $(function(){
 	});
 
 	$('#selectphoto').click();
-	$('#done').click(finalize);
+	$('#done').tap(finalize);
 	$('#back').click(function(){
 		alert("d");
 	});
@@ -47,7 +47,7 @@ $(function(){
 	  $(".content").append(html);
 	};
 
-	$("#addMember").click(function(){
+	$("#addMember").tap(function(){
 		alert('d')
 		if($(this).attr("class")=="notonce"){
 			$(this).attr("class","once");
@@ -108,7 +108,6 @@ $(function(){
 					//alert(chkbx.prop("checked"));
 					alert($(this).attr('class'))
 					if($(this).attr('class')=="checked"){
-						alert($(this).attr('rel'));
 						membersArray.push($(this).attr('rel'));
 					}
 				});

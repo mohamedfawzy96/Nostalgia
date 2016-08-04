@@ -4,7 +4,7 @@
 	$('#file').trigger('click');
 
 });
-var facebook = false;
+var facebook = true;
 var ori = "none"
 
 
